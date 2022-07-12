@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MITycLibAPI">
+
+  <bannerLeft>
+    <name>MITycLibAPI</name>
+    <src>images/LogoMITyCLibAPI.png</src>
+  </bannerLeft>
+
+  <bannerRight>
+    <name>Avanza2</name>
+    <src>images/banner_avanza2.gif</src>
+  </bannerRight>
+
+  <publishDate position="none"/>
+
+  <version position="right"/>
+  
+  <body>
+    <links>
+    </links>
+
+    <breadcrumbs>
+      <item name="MITyCLibAPI" href="./index.html"/>
+    </breadcrumbs>
+
+    <menu name="MITyCLibAPI">
+      <item name="Introduccion" href="index.html"/>
+      <item name="FAQ" href="faq.html"/>
+    </menu>
+
+    <menu ref="reports"/>
+  </body>
+</project>

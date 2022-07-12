@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>it.eng.parer</groupId>
+  <artifactId>eng-mityclib</artifactId>
+  <version>1.0.3-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <scm>
+    <developerConnection>scm:git:https://github.com/RegioneER/parer.sacer.sec-provider.git</developerConnection>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/RegioneER/parer.sacer.parent</url>
+    </repository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/RegioneER/parer.sacer.parent</url>
+    </repository>
+    <repository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
+  </repositories>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <parent>
+    <groupId>it.eng.parer</groupId>
+    <artifactId>parer-pom</artifactId>
+    <version>3.0.17</version>
+  </parent>
+
+
+  <modules>
+    <module>eng-mityclib-api</module>
+    <module>eng-mityclib-tsa</module>
+    <module>eng-mityclib-xades</module>
+  </modules>
+</project>

@@ -1,0 +1,32 @@
+            ------
+            Introduccion
+            ------
+            Ministerio de Industria, Turismo y Comercio
+            ------
+             
+¿Qué es MITyCLibAPI?
+
+  MITyCLibAPI es una librería que sirve de base para el resto de componentes de 
+  firma del MITyC. Esta librería contiene la funcionalidad base común 
+  al resto de componentes así como las definiciones de los interfaces que permite la comunicacion,
+  extensibilidad y adaptacion de los componentes entre sí y con otros frameworks. 
+
+* Modulos
+  
+  Los modulos que componen esta librería son:
+
+  * Internacionalizacion: permite disponer de un sistema de internacionalizacion de mensajería que independiza de implementaciones concretas. Provee de los interfaces, factorías y una implementacion por defecto.
+
+  * Confianza: establece una base común para acceder a servicios de confianza, en base a una factoría de validadores de confianza.
+
+  * Almacenes de certificados: establece unas bases para el acceso y gestion de almacenes de certificados.
+
+  * Estados de certificados: establece las interfaces necesarias para la manipulacion de estados de certificados y su acceso/almacenamiento.
+
+  * Copia de ficheros con integridad: utilidad para asegurarse que ciertos ficheros de recursos son los provistos en la distribucion en uso.
+
+  * Ofuscacion: establece las interfaces y factorías para la gestion de informacion ofuscada. 
+
+  * Base64: utilidades para codificar y decodificar Base64.
+
+  

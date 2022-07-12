@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs xmlns="http://maven.apache.org/FML/1.0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/FML/1.0.1 http://maven.apache.org/xsd/fml-1.0.1.xsd"
+  title="Preguntas frecuentes"
+  toplink="false">
+
+  <part id="general">
+    <title>General</title>
+
+    <faq id="que-es-MITyCLibAPI">
+      <question>
+        ¿Qué es MITyCLibAPI?
+      </question>
+      <answer>
+        <p>MITyCLibAPI es una librería que sirve de base para el resto de modulos de 
+           los Componentes de firma del MITyC. Esta librería contiene la funcionalidad base común 
+           al resto de componentes así como las definiciones de los interfaces que permite la comunicacion,
+           extensibilidad y adaptacion de los componentes entre sí y con otros frameworks. 
+        </p>
+      </answer>
+    </faq>
+    <faq id="quien-debe-usarla">
+      <question>
+        ¿Quién debe usar MITyCLibAPI?
+      </question>
+      <answer>
+        <p>Aquellos integradores que necesiten utilizar alguna de las funcionalidades basicas
+           que aporta (internacionalizacion, copia con integridad, ofuscacion, etc.).</p>
+      </answer>
+    </faq>
+    <faq id="licencia-de-distribucion">
+      <question>
+        ¿Bajo qué licencia se distribuye?
+      </question>
+      <answer>
+        <p>Bajo licencia LGPL.</p>
+      </answer>
+    </faq>
+    <faq id="en-caso-de-error">
+      <question>
+        En caso de encontrar un error, ¿a quién debo dirigirme?
+      </question>
+      <answer>
+        <p>Al Centro de Tecnologías del Plan Avanza, mediante correo electronico en la direccion:</p>
+        <p><img alt="Email Centro de Tecnología del Plan Avanza" src="images/imagenEmail.png"/></p>
+      </answer>
+    </faq>
+  </part>
+
+  <part id="instalacion">
+
+    <title>Instalacion</title>
+
+    <faq id="requisitos">
+      <question>
+        Requisitos
+      </question>
+      <answer>
+        <p>Maquina virtual Java 1.5 o superior (disponible descarga en <a href="http://www.java.com">www.java.com</a>).</p>
+      </answer>
+    </faq>
+    <faq id="como-se-instala">
+      <question>
+        ¿Como se instala?
+      </question>
+      <answer>
+        <p>Incluyendo el Jar de la propia librería y todas sus <a href="dependencies.html">
+           dependencias</a> en el <i>Classpath</i> de la aplicacion que va a usar esta librería.</p>
+      </answer>
+    </faq>
+
+  </part>
+
+</faqs>

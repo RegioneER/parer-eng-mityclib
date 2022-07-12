@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+    <head> 
+        <!--
+		
+		  @(#)package.html  1.60 98/01/27
+		
+		 LICENCIA LGPL:
+		  
+		 Esta librería es Software Libre; Usted puede redistribuirlo y/o modificarlo
+		 bajo los términos de la GNU Lesser General Public License (LGPL)
+		 tal y como ha sido publicada por la Free Software Foundation; o
+		 bien la versión 2.1 de la Licencia, o (a su elección) cualquier versión posterior.
+		  
+		 Esta librería se distribuye con la esperanza de que sea útil, pero SIN NINGUNA
+		 GARANTÍA; tampoco las implícitas garantías de MERCANTILIDAD o ADECUACIÓN A UN
+		 PROPÓSITO PARTICULAR. Consulte la GNU Lesser General Public License (LGPL) para más
+		 detalles
+		  
+		 Usted debe recibir una copia de la GNU Lesser General Public License (LGPL)
+		 junto con esta librería; si no es así, escriba a la Free Software Foundation Inc.
+		 51 Franklin Street, 5º Piso, Boston, MA 02110-1301, USA.
+		 
+		--> 
+    </head> 
+    <body bgcolor="white"> 
+        <!-- Aquí una frase que describe el uso del paquete --> 
+        <p>Establece las interfaces necesarias para la manipulación de estados de certificados y su acceso/almacenamiento.</p> 
+        <!--  Aquí la descripción completa del paquete --> 
+        <p>Establece los interfaces y clases base para gestionar estados de certificados. Este módulo se divide en dos secciones principales: </p> 
+        <ul> 
+            <li>Recuperación de elementos almacenados: define la capa de abstracción relacionada con la recuperación de elementos de estados de certificados (y certificados) que se encuentran de manera distribuida en sistemas de almacenamiento genéricos (es decir, dependen de la arquitectura del sistema).</li> 
+            <li>Recuperación de estados de certificados: define la capa de abstracción relacionada con la gestión de estados de certificados.</li> 
+        </ul> 
+        <h3>Recuperación de elementos almacenados</h3> 
+        <p>La implementación de recuperadores de elementos de estado de certificados debe realizarse implementando el interfaz {@link es.mityc.javasign.certificate.IRecoverElements}. Mediante este interfaz se indica al recuperador identificadores del elemento buscado y la clase esperada como respuesta. Los errores esperados de recuperador son: </p> 
+        <ul> 
+            <li>No puede gestionar el tipo de dato esperado: deberá lanzar la excepción {@link es.mityc.javasign.certificate.UnknownElementClassException}.</li> 
+            <li>Con los datos provistos no encuentra el estado consultado: deberá lanzar la excepción {@link es.mityc.javasign.certificate.ElementNotFoundException}.</li> 
+        </ul> 
+        <p></p> 
+        <h4>Ejemplo de uso</h4> 
+        <pre>
+                        
+    public class ExampleRecoverOCSPElement {
+    (...)
+        public void method() {
+            // Instanciación o recuperación de recoverer
+            IRecoverElements recoverManager = (...);
+        Map
+            
+            <string, object>
+                
+                 props = new HashMap
+                
+                <string, object>
+                    
+                    ();
+        props.put(IRecoverElements.PROP_EMISSION_DATE, (... Date con la fecha de emisión de la respuesta OCSP buscada ...));
+        props.put(IRecoverElements.PROP_DIGEST_ALGORITHM, (... String con el algoritmo de hash de la respuesta OCSP buscada...));
+        props.put(IRecoverElements.PROP_DIGEST_VALUE, (... byte[] con el hash de la respuesta OCSP buscada ...));
+        props.put(IRecoverElements.PROP_ISSUER_NAME, (... X500Princial con el nombre del emisor de la respuesta OCSP buscada ...));
+        IOCSPCertStatus ocsp = null;
+        try {
+            ocsp = recoverManager.getElement(props, IOCSPCertStatus.class);
+        } catch (ElementNotFoundException ex) {
+            (... no se ha podido encontrar el elemento indicado ...)
+        } catch (UnknownElementClassException ex) {
+            (... no se reconoce el tipo de dato al que debe ajustarse la respuesta ...)
+        }
+            (...)
+        }
+    (...)
+    }
+                
+                </string,>
+            
+            </string,>
+        
+        </pre> 
+        <h3>Recuperación de estados de certificados</h3> 
+        <p>Si se implementa un consultar de estados de certificados se debe seguir las siguientes normas: </p> 
+        <ul> 
+            <li>El gestionador deberá implementar el interfaz {@link es.mityc.javasign.certificate.ICertStatusRecoverer}.</li> 
+            <li>
+                 Las respuestas obtenidas por el gestionador deberán implementar el interfaz {@link es.mityc.javasign.certificate.ICertStatus}. De manera especial, si estas respuestas se ajustan a protocolos conocidos deberán implementar además otros interfaces: 
+                <ul> 
+                    <li>OCSP: deberá implementar el interfaz {@link es.mityc.javasign.certificate.IOCSPCertStatus}</li> 
+                    <li>X.509 CRL: deberá implementar el interfaz {@link es.mityc.javasign.certificate.IX509CRLCertStatus}</li> 
+                </ul> 
+            </li> 
+        </ul> 
+        <p></p> 
+        <p>Para facilitar la labor de implementación se provee de una clase abstracta que puede servir de base de la clase que indica el tipo de estado: {@link es.mityc.javasign.certificate.AbstractCertStatus}.</p> 
+        <h4>Ejemplo de uso</h4> 
+        <pre>
+                        
+    public class ExampleCertStatus {
+    (...)
+        public void method(X509Certificate certificate) {
+            // Instanciación o recuperación de recoverer
+            ICertStatusRecoverer recoverer = (...);
+            try {
+                List
+            
+            <icertstatus>
+                
+                 results = recoverer.getCertStatus(certificate);
+                // El primer resultado es el del certificado consultado. En una comprobación debería tenerse en cuenta
+                // el estado de todos los certificados de la cadena.
+                ICertStatus certStatus = results.get(0);
+                switch(certStatus.getStatus()) {
+                    case valid:
+                        System.out.println("El certificado es válido");
+                        break;
+                    case revoked:
+                        System.out.println("El certificado está revocado");
+                        System.out.println("Fecha de revocación: " + certStatus.getRevokedInfo().getRevokedDate());
+                        break;
+                    default:
+                        System.out.println("Se desconoce el estado del certificado. Pruebe con otro validador.");
+                }
+            } catch (CertStatusException ex) {
+                (... no se ha podido consultar el estado ...)
+            }
+            (...)
+        }
+    (...)
+    }
+            
+            </icertstatus>
+        
+        </pre>  
+    </body>
+</html>

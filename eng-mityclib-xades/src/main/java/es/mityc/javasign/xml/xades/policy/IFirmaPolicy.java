@@ -1,0 +1,55 @@
+/**
+ * LICENCIA LGPL:
+ * 
+ * Esta librería es Software Libre; Usted puede redistribuirlo y/o modificarlo
+ * bajo los términos de la GNU Lesser General Public License (LGPL)
+ * tal y como ha sido publicada por la Free Software Foundation; o
+ * bien la version 2.1 de la Licencia, o (a su eleccion) cualquier version posterior.
+ * 
+ * Esta librería se distribuye con la esperanza de que sea útil, pero SIN NINGUNA
+ * GARANTÍA; tampoco las implícitas garantías de MERCANTILIDAD o ADECUACIoN A UN
+ * PROPoSITO PARTICULAR. Consulte la GNU Lesser General Public License (LGPL) para mas
+ * detalles
+ * 
+ * Usted debe recibir una copia de la GNU Lesser General Public License (LGPL)
+ * junto con esta librería; si no es así, escriba a la Free Software Foundation Inc.
+ * 51 Franklin Street, 5º Piso, Boston, MA 02110-1301, USA.
+ * 
+ */
+package es.mityc.javasign.xml.xades.policy;
+
+import org.w3c.dom.Element;
+
+import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
+import es.mityc.firmaJava.libreria.xades.errores.PolicyException;
+
+/**
+ * Interfaz que han de implementar las clases que añadan policies que gestiona el manager de policies.
+ * 
+ * Ademas los escritores de policies deben tener un constructor por defecto sin parametros.
+ *
+ * @author Ministerio de Industria, Turismo y Comercio
+ * 
+ * @version 1.0
+ */
+public interface IFirmaPolicy {
+
+    /**
+     * Este método debera encargarse escribir la policy.
+     * 
+     * @param signNode
+     *            nodo raíz (de firma) de la firma en la que se quiere escribir la política
+     * @param namespaceDS
+     *            Namespace de xmlDSig
+     * @param namespaceXAdES
+     *            namespace de XAdES
+     * @param schema
+     *            esquema de XAdEs
+     * 
+     * @throws lanza
+     *             una excepcion si no puede escribir la policy.
+     */
+    public void writePolicyNode(Element signNode, String namespaceDS, String namespaceXAdES, XAdESSchemas schema)
+            throws PolicyException;
+
+}
