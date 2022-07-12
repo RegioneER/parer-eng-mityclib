@@ -41,7 +41,7 @@
         <p></p> 
         <h4>Ejemplo de uso</h4> 
         <pre>
-                        
+                                                
     public class ExampleRecoverOCSPElement {
     (...)
         public void method() {
@@ -49,11 +49,19 @@
             IRecoverElements recoverManager = (...);
         Map
             
+            
+            
             <string, object>
+                
+                
                 
                  props = new HashMap
                 
+                
+                
                 <string, object>
+                    
+                    
                     
                     ();
         props.put(IRecoverElements.PROP_EMISSION_DATE, (... Date con la fecha de emisión de la respuesta OCSP buscada ...));
@@ -73,9 +81,15 @@
     (...)
     }
                 
+                
+                
                 </string,>
             
+            
+            
             </string,>
+        
+        
         
         </pre> 
         <h3>Recuperación de estados de certificados</h3> 
@@ -94,7 +108,7 @@
         <p>Para facilitar la labor de implementación se provee de una clase abstracta que puede servir de base de la clase que indica el tipo de estado: {@link es.mityc.javasign.certificate.AbstractCertStatus}.</p> 
         <h4>Ejemplo de uso</h4> 
         <pre>
-                        
+                                                
     public class ExampleCertStatus {
     (...)
         public void method(X509Certificate certificate) {
@@ -103,7 +117,11 @@
             try {
                 List
             
+            
+            
             <icertstatus>
+                
+                
                 
                  results = recoverer.getCertStatus(certificate);
                 // El primer resultado es el del certificado consultado. En una comprobación debería tenerse en cuenta
@@ -128,7 +146,11 @@
     (...)
     }
             
+            
+            
             </icertstatus>
+        
+        
         
         </pre>  
     </body>
