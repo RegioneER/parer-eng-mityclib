@@ -1,9 +1,8 @@
-/**/nb-configuration.xml
-/**/target/
-/**/.settings
-/.directory
-/target/
+target
 .project
-/**/.classpath
-/**/.project
-.vscode/
+.vscode
+.project
+.classpath
+.idea
+.iml
+nbproject
