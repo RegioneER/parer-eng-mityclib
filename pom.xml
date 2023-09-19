@@ -2,10 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.eng.parer</groupId>
   <artifactId>eng-mityclib</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.2</version>
   <packaging>pom</packaging>
   <scm>
     <developerConnection>scm:git:https://github.com/RegioneER/parer-eng-mityclib.git</developerConnection>
+    <tag>eng-mityclib-1.0.2</tag>
   </scm>
 
   <repositories>
