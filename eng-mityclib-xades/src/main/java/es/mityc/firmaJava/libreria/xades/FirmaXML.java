@@ -1,23 +1,18 @@
-/**
- * LICENCIA LGPL:
- * 
- * Esta librerÃ­a es Software Libre; Usted puede redistribuirlo y/o modificarlo
- * bajo los tÃ©rminos de la GNU Lesser General Public License (LGPL)
- * tal y como ha sido publicada por la Free Software Foundation; o
- * bien la versiÃ³n 2.1 de la Licencia, o (a su elecciÃ³n) cualquier versiÃ³n posterior.
- * 
- * Esta librerÃ­a se distribuye con la esperanza de que sea Ãºtil, pero SIN NINGUNA
- * GARANTÃ�A; tampoco las implÃ­citas garantÃ­as de MERCANTILIDAD o ADECUACIÃ“N A UN
- * PROPÃ“SITO PARTICULAR. Consulte la GNU Lesser General Public License (LGPL) para mÃ¡s
- * detalles
- * 
- * Usted debe recibir una copia de la GNU Lesser General Public License (LGPL)
- * junto con esta librerÃ­a; si no es asÃ­, escriba a la Free Software Foundation Inc.
- * 51 Franklin Street, 5Âº Piso, Boston, MA 02110-1301, USA o consulte
- * <http://www.gnu.org/licenses/>.
+/*
+ * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright 2008 Ministerio de Industria, Turismo y Comercio
- * 
+ * Copyright (C) 2023 Regione Emilia-Romagna
+ * <p/>
+ * This program is free software: you can redistribute it and/or modify it under the terms of
+ * the GNU Affero General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ * <p/>
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public License for more details.
+ * <p/>
+ * You should have received a copy of the GNU Affero General Public License along with this program.
+ * If not, see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades;
