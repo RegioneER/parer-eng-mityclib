@@ -3,14 +3,14 @@
 	<parent>
 		<groupId>it.eng.parer</groupId>
 		<artifactId>eng-mityclib</artifactId>
-		<version>1.0.3-SNAPSHOT</version>
+		<version>1.0.2</version>
 	</parent>
 	<artifactId>eng-mityclib-tsa</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>it.eng.parer</groupId>
 			<artifactId>eng-mityclib-api</artifactId>
-			<version>1.0.3-SNAPSHOT</version>			
+			<version>1.0.2</version>			
 		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
