@@ -3,19 +3,19 @@
 	<parent>
 		<groupId>it.eng.parer</groupId>
 		<artifactId>eng-mityclib</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>eng-mityclib-xades</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>it.eng.parer</groupId>
 			<artifactId>eng-mityclib-tsa</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>it.eng.parer</groupId>
 			<artifactId>eng-mityclib-api</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
