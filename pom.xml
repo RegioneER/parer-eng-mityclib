@@ -19,6 +19,21 @@
     <artifactId>parer-pom</artifactId>
     <version>6.4.0</version>
   </parent>
+
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/RegioneER/parer-eng-mityclib</url>
+    </repository>      
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/RegioneER/parer-framework-parerpom</url>
+    </repository>
+  </repositories>
  
   <modules>
   	<module>eng-mityclib-api</module>
