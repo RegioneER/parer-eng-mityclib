@@ -23,7 +23,7 @@ import java.net.URI;
  * Estructura para la validacion de políticas de firma
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -110,7 +110,7 @@ public class PolicyResult {
 
     /**
      * Get clase validadora de la policy
-     * 
+     *
      * @return Instancia al validador de la policy
      */
     public IValidacionPolicy getPolicyVal() {
@@ -119,7 +119,7 @@ public class PolicyResult {
 
     /**
      * Set clase validadora de la policy
-     * 
+     *
      * @param Instancia
      *            del validador de la policy
      */

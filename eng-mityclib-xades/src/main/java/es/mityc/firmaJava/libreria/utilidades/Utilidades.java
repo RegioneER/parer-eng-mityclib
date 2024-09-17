@@ -37,9 +37,9 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
 
 /**
  * Diversas funciones de utilidades para el desarrollo
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class Utilidades { // implements ConstantesXADES
@@ -73,7 +73,7 @@ public class Utilidades { // implements ConstantesXADES
     /**
      * Este metodo recupera via URLConnection el fichero ubicado en la URL pasada como parametro. Devuelve un objeto
      * tipo FileInputStream
-     * 
+     *
      * @return
      */
     public static InputStream getInputStreamFromURL(String _url) throws Exception {
@@ -148,10 +148,10 @@ public class Utilidades { // implements ConstantesXADES
 
     /**
      * Codifica un array de bytes a Hexadecimal
-     * 
+     *
      * @param byte[]
      *            Datos a codificar
-     * 
+     *
      * @return String Datos codificados en hexadecimal
      */
     public static String binary2String(byte[] data) {
@@ -167,10 +167,10 @@ public class Utilidades { // implements ConstantesXADES
 
     /**
      * Compara dos arrays de bytes para ver si tienen el mismo contenido.
-     * 
+     *
      * @param data1
      * @param data2
-     * 
+     *
      * @return <code>true</code> si tienen el mismo contenido, <code>false</code> en cualquier otro caso
      */
     public static boolean isEqual(byte[] data1, byte[] data2) {
@@ -196,10 +196,10 @@ public class Utilidades { // implements ConstantesXADES
      * <p>
      * Basada en la clase StringEscapeUtils de commons-lang pero sin cambiar los caracteres unicode.
      * </p>
-     * 
+     *
      * @param str
      *            cadena a escapar
-     * 
+     *
      * @return
      */
     public static String escapeXML(String str) {

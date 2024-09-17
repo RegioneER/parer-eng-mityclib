@@ -30,9 +30,9 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * <p>
  * Indica un conjunto de transformadas XPath.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class XPathTransformData implements ITransformData {
@@ -43,7 +43,7 @@ public class XPathTransformData implements ITransformData {
      * <p>
      * Incluye el path indicado para la transformada.
      * </p>
-     * 
+     *
      * @param path
      */
     public void addPath(String path) {

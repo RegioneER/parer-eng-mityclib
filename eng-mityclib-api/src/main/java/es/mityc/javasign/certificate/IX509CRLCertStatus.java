@@ -23,9 +23,9 @@ import java.security.cert.X509CRL;
  * <p>
  * Interfaz que han de cumplir los objetos que recojan informacion de estado de un certificado en forma CRL.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IX509CRLCertStatus extends ICertStatus {
@@ -34,7 +34,7 @@ public interface IX509CRLCertStatus extends ICertStatus {
      * <p>
      * Devuelve la CRL que contiene el estado del certificado en su forma X509CRL.
      * </p>
-     * 
+     *
      * @return X509CRL que contiene la CRL
      */
     X509CRL getX509CRL();

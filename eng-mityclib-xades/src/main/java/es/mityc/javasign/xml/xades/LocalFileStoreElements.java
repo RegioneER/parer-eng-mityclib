@@ -56,7 +56,7 @@ import es.mityc.javasign.i18n.II18nManager;
 
 /**
  * Almacena los elementos de una firma XAdES-C/XAdES-X en el disco duro.
- * 
+ *
  * <br/>
  * <br/>
  * Basa el almacenamiento en el calculo de la huella Adler32 del objeto a almacenar. Calcula el CRC del elemento y crea
@@ -66,9 +66,9 @@ import es.mityc.javasign.i18n.II18nManager;
  * <li>OCSP: ocsp-&lt;CRC&gt;.ocs</li>
  * <li>CRL: crl-&lt;CRC&gt;.crl</li>
  * </ul>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class LocalFileStoreElements implements IStoreElements, IRecoverElements {
@@ -191,7 +191,7 @@ public class LocalFileStoreElements implements IStoreElements, IRecoverElements 
      * </ul>
      * </li>
      * </ul>
-     * 
+     *
      * @see es.mityc.javasign.xml.xades.IStoreElements#storeCertAndStatus(java.security.cert.X509Certificate,
      *      es.mityc.firmaJava.certificates.status.ICertStatusElement)
      */
@@ -256,7 +256,7 @@ public class LocalFileStoreElements implements IStoreElements, IRecoverElements 
 
     /**
      * Recupera certificados, respuestas OCSP y CRLs en funcion de los datos provistos.
-     * 
+     *
      * <br/>
      * <br/>
      * Este almacenador de elementos es capaz de responder a las propiedades:
@@ -272,7 +272,7 @@ public class LocalFileStoreElements implements IStoreElements, IRecoverElements 
      * <li>X509CRL: elemento crl</li>
      * <li>IOCSP: elemento ocsp</li>
      * </ul>
-     * 
+     *
      * @see es.mityc.javasign.certificate.IRecoverElements#getElement(java.util.Map, java.lang.Class)
      */
     @SuppressWarnings("unchecked")

@@ -23,9 +23,9 @@ import java.security.cert.X509Certificate;
  * <p>
  * Interfaz que han de implementar las respuestas de los validadores de certificados.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface ICertStatus {
@@ -44,7 +44,7 @@ public interface ICertStatus {
      * <p>
      * Devuelve el estado del certificado consultado.
      * </p>
-     * 
+     *
      * @return uno de los estados del enumerado que se ajuste al estado del certificado
      */
     CERT_STATUS getStatus();
@@ -53,7 +53,7 @@ public interface ICertStatus {
      * <p>
      * Devuelve el certificado sobre el que se realizo la consulta de estado.
      * </p>
-     * 
+     *
      * @return Certificado consultado
      */
     X509Certificate getCertificate();
@@ -62,7 +62,7 @@ public interface ICertStatus {
      * <p>
      * Devuelve el estado del certificado en su forma original.
      * </p>
-     * 
+     *
      * @return array de bytes con la forma original del estado del certificado
      */
     byte[] getEncoded();
@@ -71,7 +71,7 @@ public interface ICertStatus {
      * <p>
      * Devuelve informacion sobre la revocacion del certificado.
      * </p>
-     * 
+     *
      * @return Informacion de revocacion del certificado, <code>null</code> si no esta revocado
      */
     RevokedInfo getRevokedInfo();

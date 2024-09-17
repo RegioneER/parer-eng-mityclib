@@ -26,9 +26,9 @@ import java.util.Locale;
  * <p>
  * Permite optimizar el acceso a internacionalizadores cacheando un manager de un diccionario con el locale relativo.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 class ManagerCached {
@@ -41,7 +41,7 @@ class ManagerCached {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param manager
      *            Manager de internacionalizacion
      * @param i18nLocale
@@ -56,10 +56,10 @@ class ManagerCached {
      * <p>
      * Devuelve si el locale indicado es el mismo que el del manager cacheado.
      * </p>
-     * 
+     *
      * @param otherLocale
      *            Localizador a comparar
-     * 
+     *
      * @return <code>true</code> si es el mismo locale, <code>false</code> en otro caso
      */
     public boolean isSameLocale(final Locale otherLocale) {
@@ -76,7 +76,7 @@ class ManagerCached {
      * <p>
      * Devuelve el manager asociado a esta caché.
      * </p>
-     * 
+     *
      * @return internacionalizador
      */
     public II18nManager getI18nCached() {

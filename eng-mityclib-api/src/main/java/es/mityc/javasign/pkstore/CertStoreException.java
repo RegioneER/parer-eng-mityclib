@@ -23,9 +23,9 @@ import es.mityc.javasign.exception.SignMITyCException;
  * <p>
  * Excepcion lanzada en los accesos con problemas a los almacenes de certificados.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class CertStoreException extends SignMITyCException {
@@ -46,7 +46,7 @@ public class CertStoreException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -58,7 +58,7 @@ public class CertStoreException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -70,7 +70,7 @@ public class CertStoreException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

@@ -27,9 +27,9 @@ import org.w3c.dom.NodeList;
  * <p>
  * Lista de nodos.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class SimpleNodeList implements NodeList {

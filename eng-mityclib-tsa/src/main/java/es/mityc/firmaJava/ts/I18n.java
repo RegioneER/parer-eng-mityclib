@@ -24,9 +24,9 @@ import java.util.ResourceBundle;
  * <p>
  * Clase que permite la internacionalizacion de las cadenas de texto de la aplicacion.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class I18n implements ConstantesTSA {
@@ -38,10 +38,10 @@ public class I18n implements ConstantesTSA {
      * <p>
      * Obtiene el valor de una cadena definida para el idioma por defecto configurado.
      * </p>
-     * 
+     *
      * @param key
      *            Clave que identifica la cadena de texto
-     * 
+     *
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(final String key) {
@@ -52,12 +52,12 @@ public class I18n implements ConstantesTSA {
      * <p>
      * Obtiene el valor de una cadena definida para el idioma pasado por parametro en el Locale.
      * </p>
-     * 
+     *
      * @param key
      *            Clave que identifica la cadena de texto
      * @param locale
      *            Locale del idioma del cual queremos la traduccion
-     * 
+     *
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(final String key, final Locale locale) {
@@ -68,7 +68,7 @@ public class I18n implements ConstantesTSA {
      * <p>
      * Obtiene el Locale que se utiliza en ese momento.
      * </p>
-     * 
+     *
      * @return Locale que se utiliza en ese momento
      */
     public static Locale getLocale() {
@@ -79,7 +79,7 @@ public class I18n implements ConstantesTSA {
      * <p>
      * Asigna el Locale que se utilizara en las traducciones.
      * </p>
-     * 
+     *
      * @param _locale
      *            Locale que se utilizara en las traducciones
      */
@@ -91,7 +91,7 @@ public class I18n implements ConstantesTSA {
      * <p>
      * Asigna el Locale que se utilizara en las traducciones.
      * </p>
-     * 
+     *
      * @param country
      *            Pais
      * @param dialect

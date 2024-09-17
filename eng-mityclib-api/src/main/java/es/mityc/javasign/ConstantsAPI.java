@@ -21,9 +21,9 @@ package es.mityc.javasign;
  * <p>
  * Clase de constantes de la librería base.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public final class ConstantsAPI {

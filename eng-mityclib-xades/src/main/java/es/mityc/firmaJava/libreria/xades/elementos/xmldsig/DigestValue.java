@@ -26,9 +26,9 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
- * 
+ *
  *          TODO: incluir metodo para devolver y aceptar el resultado en binario (codificar/decodificar base64)
  */
 public class DigestValue extends AbstractXDsigElement {

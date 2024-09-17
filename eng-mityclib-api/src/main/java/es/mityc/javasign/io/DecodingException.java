@@ -23,9 +23,9 @@ import java.io.IOException;
  * <p>
  * Excepcion lanzada cuando se produce un error en la decodificacion de datos.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DecodingException extends IOException {
@@ -42,7 +42,7 @@ public class DecodingException extends IOException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */

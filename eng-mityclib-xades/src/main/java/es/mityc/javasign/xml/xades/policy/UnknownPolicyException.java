@@ -19,7 +19,7 @@ package es.mityc.javasign.xml.xades.policy;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class UnknownPolicyException extends PolicyException {

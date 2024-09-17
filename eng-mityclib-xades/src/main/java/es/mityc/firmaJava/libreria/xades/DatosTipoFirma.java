@@ -19,7 +19,7 @@ package es.mityc.firmaJava.libreria.xades;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DatosTipoFirma {
@@ -33,7 +33,7 @@ public class DatosTipoFirma {
 
     /**
      * Almacena informacion referente al tipo de firma XAdES obtenido
-     * 
+     *
      * @param tipoFirma
      *            .- Indica el nivel de firma (XAdES-BES, XAdES-T, etc...)
      * @param esXAdES_EPES

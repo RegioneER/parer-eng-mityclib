@@ -22,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -32,7 +32,7 @@ public class PKCS12Error extends Exception {
 
     /**
      * Crea una nueva instancia de un error PKCS12
-     * 
+     *
      * @param causa
      *            causa del error
      */
@@ -43,7 +43,7 @@ public class PKCS12Error extends Exception {
 
     /**
      * Crea una nueva instancia de un error PKCS12
-     * 
+     *
      * @param e
      *            excepcion
      */

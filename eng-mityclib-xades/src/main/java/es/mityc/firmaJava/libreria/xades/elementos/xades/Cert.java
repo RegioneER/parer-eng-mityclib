@@ -29,7 +29,7 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class Cert extends CertIDType {
@@ -53,7 +53,7 @@ public class Cert extends CertIDType {
      * @param digestValue
      * @param issuerName
      * @param serialNumber
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     public Cert(XAdESSchemas schema, String digestMethod, byte[] digestValue, String issuerName,

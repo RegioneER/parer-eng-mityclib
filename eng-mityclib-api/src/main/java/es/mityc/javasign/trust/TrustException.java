@@ -23,9 +23,9 @@ import es.mityc.javasign.exception.SignMITyCException;
  * <p>
  * Base de las excepciones lanzadas cuando hay problemas de confianza.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TrustException extends SignMITyCException {
@@ -46,7 +46,7 @@ public class TrustException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -58,7 +58,7 @@ public class TrustException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Excepcion que causa esta otra excepcion
      */
@@ -70,7 +70,7 @@ public class TrustException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

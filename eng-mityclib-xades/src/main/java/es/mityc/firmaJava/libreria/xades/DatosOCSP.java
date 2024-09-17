@@ -34,7 +34,7 @@ import es.mityc.firmaJava.trust.ConfianzaEnum;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -53,7 +53,7 @@ public class DatosOCSP {
 
     /**
      * Almacena informacion referente a una consulta OCSP
-     * 
+     *
      * @param responderId
      *            .- Identificador del emisor de la respuesta OCSP
      * @param fechaConsulta

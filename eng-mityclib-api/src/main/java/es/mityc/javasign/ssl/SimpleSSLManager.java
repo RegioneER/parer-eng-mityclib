@@ -24,9 +24,9 @@ import javax.net.ssl.TrustManager;
  * <p>
  * Gestion de la pasarela SSL de comunicacion del cliente TS.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class SimpleSSLManager implements ISSLManager {
@@ -42,7 +42,7 @@ public class SimpleSSLManager implements ISSLManager {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param trustManager
      *            gestionador de la confianza
      * @param keyManager
@@ -57,7 +57,7 @@ public class SimpleSSLManager implements ISSLManager {
      * <p>
      * Establece el gestionador de errores en las comunicaciones SSL.
      * </p>
-     * 
+     *
      * @param errorMng
      *            Manager de errores
      */
@@ -69,9 +69,9 @@ public class SimpleSSLManager implements ISSLManager {
      * <p>
      * Devuelve el manager de errores establecido.
      * </p>
-     * 
+     *
      * @return manager de errores
-     * 
+     *
      * @see es.mityc.javasign.ssl.ISSLManager#getSSLErrorManager()
      */
     public ISSLErrorManager getSSLErrorManager() {
@@ -82,9 +82,9 @@ public class SimpleSSLManager implements ISSLManager {
      * <p>
      * Devuelve el gestionador de autenticacion de este punto.
      * </p>
-     * 
+     *
      * @return gestionador de autenticacion
-     * 
+     *
      * @see es.mityc.javasign.ssl.ISSLManager#getKeyManager()
      */
     public KeyManager getKeyManager() {
@@ -95,9 +95,9 @@ public class SimpleSSLManager implements ISSLManager {
      * <p>
      * Devuelve el gestionador de confianza del otro punto.
      * </p>
-     * 
+     *
      * @return gestionador de confianza
-     * 
+     *
      * @see es.mityc.javasign.ssl.ISSLManager#getTrustManager()
      */
     public TrustManager getTrustManager() {

@@ -21,21 +21,21 @@ import java.util.Locale;
 
 /**
  * Interfaz que ha de implementar una factoría de managers de internacionalizacion.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface II18nFactory {
 
     /**
      * Devuelve una instancia de un manager de internacionalizacion.
-     * 
+     *
      * @param dictionary
      *            Clave que identifica el diccionario
      * @param locale
      *            Localizacion de la que se quiere el diccionario
-     * 
+     *
      * @return Instancia del manager de internacionalizacion
      */
     II18nManager getI18nManager(String dictionary, Locale locale);

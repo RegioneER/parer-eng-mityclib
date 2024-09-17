@@ -27,7 +27,7 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * Clase con utilidades para el tratamiento de fechas
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class UtilidadFechas {
@@ -37,10 +37,10 @@ public class UtilidadFechas {
 
     /**
      * Parsea el contenido de una cadena del tipo xsd:DateTime en una fecha
-     * 
+     *
      * @param fecha
      *            Cadena con la fecha en formato xsd:DateTime
-     * 
+     *
      * @return Date con la fecha, <code>null</code> si la fecha no se puede convertir
      */
     public static Date parseaFechaXML(final String fecha) {
@@ -86,10 +86,10 @@ public class UtilidadFechas {
 
     /**
      * Formatea una fecha para que se ajuste al tipo xsd:DateTime
-     * 
+     *
      * @param fecha
      *            Fecha a formatear
-     * 
+     *
      * @return Fecha con el formato xsd:DateTime
      */
     public static String formatFechaXML(final Date fecha) {

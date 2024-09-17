@@ -21,7 +21,7 @@ package es.mityc.firmaJava.libreria.xades.errores;
  * Excepcion general en el XML
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -37,7 +37,7 @@ public class XMLError extends Exception {
 
     /**
      * Crea una instancia de XMLError con el detalle de mensaje especificado
-     * 
+     *
      * @param msg
      *            El detalle mensaje
      */

@@ -19,9 +19,9 @@ package es.mityc.firmaJava.libreria.xades;
 
 /**
  * Resultados posibles en una validacion de firma electronica
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 

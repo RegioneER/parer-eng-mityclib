@@ -23,9 +23,9 @@ import java.security.cert.X509Certificate;
  * <p>
  * PassHandler que no da acceso a ninguna contraseña.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.1
  */
 public class NullPassStorePK implements IPassStoreKS {
@@ -33,14 +33,14 @@ public class NullPassStorePK implements IPassStoreKS {
      * <p>
      * Devuelve una contraseña vacía en cualquier consulta.
      * </p>
-     * 
+     *
      * @param certificate
      *            Certificado al que se accede
      * @param alias
      *            alias al que se accede
-     * 
+     *
      * @return Contraseña vacía
-     * 
+     *
      * @see es.mityc.javasign.pkstore.IPassStoreKS#getPassword(java.security.cert.X509Certificate, java.lang.String)
      */
     public char[] getPassword(final X509Certificate certificate, final String alias) {

@@ -44,9 +44,9 @@ import org.bouncycastle.tsp.TimeStampTokenInfo;
  * <p>
  * Clase encargada de validar sellos de tiempo.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TSValidator {
@@ -55,14 +55,14 @@ public class TSValidator {
      * <p>
      * Este método valida el Sello de Tiempo.
      * </p>
-     * 
+     *
      * @param binarioaSellar
      *            fichero binario a validar
      * @param sellodeTiempo
      *            El Sello de Tiempo se ingresa en formato binario
-     * 
+     *
      * @return TSValidacion Valores TSA
-     * 
+     *
      * @throws NoSuchAlgorithmException
      * @throws TSPException
      * @throws IOException

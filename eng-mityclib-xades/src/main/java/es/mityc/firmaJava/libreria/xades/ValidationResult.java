@@ -24,7 +24,7 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class ValidationResult {
@@ -42,7 +42,7 @@ public class ValidationResult {
 
     /**
      * Obtener el valor de log
-     * 
+     *
      * @return
      */
     public ArrayList getLog() {
@@ -51,7 +51,7 @@ public class ValidationResult {
 
     /**
      * Establece el valor de log
-     * 
+     *
      * @param log
      */
     public void setLog(ArrayList log) {
@@ -60,7 +60,7 @@ public class ValidationResult {
 
     /**
      * Obtener el valor de validado
-     * 
+     *
      * @return
      */
     public boolean isValidate() {
@@ -69,7 +69,7 @@ public class ValidationResult {
 
     /**
      * Devuelve el valor de validado
-     * 
+     *
      * @param validado
      */
     public void setValidate(boolean validado) {
@@ -85,7 +85,7 @@ public class ValidationResult {
 
     /**
      * Esta clase devuelve todos los logs insertados
-     * 
+     *
      * @return
      */
     public String writeLog() {

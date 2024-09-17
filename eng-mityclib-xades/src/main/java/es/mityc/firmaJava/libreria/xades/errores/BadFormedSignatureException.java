@@ -21,7 +21,7 @@ package es.mityc.firmaJava.libreria.xades.errores;
  * Excepcion en la implementacion de un esquema XAdES
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -34,7 +34,7 @@ public class BadFormedSignatureException extends XMLError {
 
     /**
      * Crea una instancia de BadFormedSignatureException con el detalle de mensaje especificado
-     * 
+     *
      * @param msg
      *            El detalle mensaje
      */

@@ -41,37 +41,37 @@ import es.mityc.javasign.i18n.II18nManager;
  * <p>
  * Factoría que gestiona las instancias de validadores de confianza.
  * </p>
- * 
+ *
  * <p>
  * Esta factoría sirve como punto de entrada para obtener managers de confianza. Se utiliza bajo el patron singleton,
  * permitiendo ser superpuesta por otra factoría de managers de confianza si se define un fichero de propiedades en
  * <code>META-INF/trust/trustservices.properties</code> con la especificacion:
- * 
+ *
  * <pre>
  * # Propiedad que indica la clase que hara de factoría de servicios de confianza
  * services.trust.factory.class=
  * </pre>
- * 
+ *
  * .
  * </p>
- * 
+ *
  * <p>
  * El modo de uso de la factoría estandar es parametrizar el fichero de propiedades <code>trust/trust.properties</code>
  * con el formato:
- * 
+ *
  * <pre>
  * # Fichero de configuracion de los validadores de confianza disponibles
  * # Se debe emparejar una clave con el nombre de la clase que implementa TrustAbstract y que realizara las labores de validador
  * # Formato:
  * #   &lt;clave&gt;=&lt;clase&gt;
  * </pre>
- * 
+ *
  * indicando parejas de claves y clases asociadas. Cuando se solicite a la factoría una clave identificativa del manager
  * de confianza se instanciara el indicado según la parametrizacion.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TrustFactory {
@@ -117,7 +117,7 @@ public class TrustFactory {
      * <p>
      * Si no esta disponible el de contexto devuelve el propio de la clase.
      * </p>
-     * 
+     *
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
@@ -179,7 +179,7 @@ public class TrustFactory {
      * <p>
      * Devuelve una instancia del manager de confianza.
      * </p>
-     * 
+     *
      * @return instancia de factoría de clases comprobadoras de confianza
      */
     public static TrustFactory getInstance() {
@@ -261,7 +261,7 @@ public class TrustFactory {
      * <p>
      * Una factoría que quiera sustituir a esta debera implementar este método devolviendo una instancia de sí misma.
      * </p>
-     * 
+     *
      * @return una instancia de esta factoría de clases comprobadoras de confianza
      */
     protected static TrustFactory newInstance() {
@@ -272,7 +272,7 @@ public class TrustFactory {
      * <p>
      * Establece la factoría por defecto para obtener los validadores de confianza.
      * </p>
-     * 
+     *
      * @param factory
      *            Factoría que se quiere utilizar para generar los validadores de confianza
      */
@@ -282,13 +282,13 @@ public class TrustFactory {
 
     /**
      * Devuelve el nombre de la clase en funcion de la clave.
-     * 
+     *
      * Este método se debe sobreescribir si se quiere una factoría que mantenga su propio sistema de seleccion de clases
      * de validadores de confianza.
-     * 
+     *
      * @param key
      *            identificador del manager de confianza que se busca
-     * 
+     *
      * @return Nombre de la clase que implementa la clase de validador de confianza
      */
     protected String getClassname(final String key) {
@@ -302,10 +302,10 @@ public class TrustFactory {
     /**
      * Devuelve el validador de confianza asociado a la clave indicada. Funciona como una factory que instancia un nuevo
      * validador en cada llamada.
-     * 
+     *
      * @param key
      *            Clave para identificar al validador
-     * 
+     *
      * @return Una instancia del validador de confianza o <code>null</code> si no hay ninguno asociado o no se puede
      *         instanciar.
      */

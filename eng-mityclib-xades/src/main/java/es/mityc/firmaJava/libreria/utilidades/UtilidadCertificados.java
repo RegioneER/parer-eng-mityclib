@@ -17,7 +17,7 @@
 
 /**
  * <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright 2008 Ministerio de Industria, Turismo y Comercio
  *
  */
@@ -49,7 +49,7 @@ import org.bouncycastle.jce.X509Principal;
  * Conjunto de utilidades para el tratamiento genérico de certificados.
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class UtilidadCertificados {
@@ -65,10 +65,10 @@ public class UtilidadCertificados {
 
     /**
      * Recupera los CertPath's de certificados que pueda encontrar en el listado de certificados provistos.
-     * 
+     *
      * @param certificates
      *            Listado de certificados
-     * 
+     *
      * @return ArrayList con los CertPath's que se han podido construir
      */
     public static ArrayList<CertPath> getCertPaths(Iterable<X509Certificate> certificates) {
@@ -85,10 +85,10 @@ public class UtilidadCertificados {
 
     /**
      * Recupera los CertPath's de certificados que pueda encontrar en el listado de certificados provistos.
-     * 
+     *
      * @param certificates
      *            Listado de certificados
-     * 
+     *
      * @return ArrayList con los CertPath's que se han podido construir
      */
     public static ArrayList<ArrayList<X509Certificate>> getCertPathsArray(Iterable<X509Certificate> certificates) {
@@ -187,10 +187,10 @@ public class UtilidadCertificados {
 
     /**
      * Relaciona los certificados indicados entre si (si existe alguna relacion)
-     * 
+     *
      * @param nodo1
      * @param nodo2
-     * 
+     *
      *            TODOLARGO: permitir establecer políticas de severidad a la hora de buscar las relaciones entre los
      *            certificados. Estas políticas pueden ser por ejemplo que se compruebe que un certificado ha firmado al
      *            otro, que campos opcionales sean exigidos como presentes, que alguno de los certificados de las
@@ -238,9 +238,9 @@ public class UtilidadCertificados {
 
     /**
      * Convierte una sucesion de nodos enlazados en un CertPath
-     * 
+     *
      * @param nodo
-     * 
+     *
      * @return
      */
     public static CertPath convertCertPath(ArrayList<X509Certificate> certs) {
@@ -256,9 +256,9 @@ public class UtilidadCertificados {
 
     /**
      * Convierte una sucesion de nodos enlazados en un CertPath
-     * 
+     *
      * @param nodo
-     * 
+     *
      * @return
      */
     private static ArrayList<X509Certificate> convertCertPathArray(NTo1Link<X509Certificate> nodo) {
@@ -272,10 +272,10 @@ public class UtilidadCertificados {
 
     /**
      * Obtiene el nombre común
-     * 
+     *
      * @param dname
      *            X500Principal Directory name del que se obtiene el nombre común
-     * 
+     *
      * @return String CN obtenido
      */
     public static String getCN(X500Principal dname) {
@@ -304,12 +304,12 @@ public class UtilidadCertificados {
      * <p>
      * Compara dos nombres X500 para ver si son iguales (independientemente del orden de las partículas.
      * </p>
-     * 
+     *
      * @param prin1
      *            Nombre
      * @param prin2
      *            Nombre
-     * 
+     *
      * @return
      */
     public static boolean isSameName(X500Principal prin1, X500Principal prin2) {

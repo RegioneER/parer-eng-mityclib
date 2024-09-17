@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
  * <p>
  * Manager para la internacionalizacion que permite sobreescritura de frases.
  * </p>
- * 
+ *
  * <p>
  * Obtiene el diccionario buscando un fichero de propiedades con el mismo nombre que el diccionario la ruta de recursos
  * <code>/i18n/dictionaries</code> y con el tipo de Locale indicado. No se recarga si hay un cambio de Locale.
@@ -34,9 +34,9 @@ import java.util.ResourceBundle;
  * También busca un diccionario con el mismo nombre pero añadiéndole el sufijo <code>_add</code>. En caso de existir
  * buscara las claves en ese fichero antes que en el fichero base.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class I18nAddendumManager extends I18nDefaultManager {
@@ -53,15 +53,15 @@ public class I18nAddendumManager extends I18nDefaultManager {
      * provisto como un recurso dependiente del locale (@see {@link ResourceBundle}) y añadiéndole el sufijo
      * <code>add</code>.
      * </p>
-     * 
+     *
      * @param dictionary
      *            Nombre del diccionario que se asocia al manager
      * @param specificLocale
      *            locale específico en el que se quiere el diccionario
-     * 
+     *
      * @throws DictionaryUnknownException
      *             Lanzada cuando no se encuentra el diccionario indicado
-     * 
+     *
      * @see es.mityc.javasign.i18n.II18nManager#init(java.lang.String, java.util.Locale)
      */
     @Override
@@ -81,10 +81,10 @@ public class I18nAddendumManager extends I18nDefaultManager {
      * <p>
      * Busca el mensaje en el addenudum en primer lugar. Si no lo encuentra lo busca en el diccionario base.
      * </p>
-     * 
+     *
      * @param key
      *            clave del mensaje
-     * 
+     *
      * @return Mensaje recuperado
      */
     @Override

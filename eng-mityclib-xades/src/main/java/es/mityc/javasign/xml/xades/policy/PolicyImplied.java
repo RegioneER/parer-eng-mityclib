@@ -25,9 +25,9 @@ import es.mityc.firmaJava.libreria.xades.errores.PolicyException;
 
 /**
  * Escribe la política implícita en el nodo de firma indicado, sustituyendo la política previa indicada (si la hay).
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class PolicyImplied implements IFirmaPolicy {
@@ -37,7 +37,7 @@ public class PolicyImplied implements IFirmaPolicy {
     }
 
     /**
-     * 
+     *
      * @see es.mityc.javasign.xml.xades.policy.IFirmaPolicy#writePolicyNode(org.w3c.dom.Element, java.lang.String,
      *      java.lang.String, es.mityc.firmaJava.libreria.xades.XAdESSchemas)
      */

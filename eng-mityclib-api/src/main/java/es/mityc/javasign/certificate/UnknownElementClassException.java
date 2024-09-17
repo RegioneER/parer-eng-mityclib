@@ -23,9 +23,9 @@ import es.mityc.javasign.exception.SignMITyCException;
  * <p>
  * Lanzada cuando se pide un tipo de elemento desconocido para un {@link IRecoverElements}.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class UnknownElementClassException extends SignMITyCException {
@@ -43,7 +43,7 @@ public class UnknownElementClassException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -55,7 +55,7 @@ public class UnknownElementClassException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -67,7 +67,7 @@ public class UnknownElementClassException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

@@ -24,9 +24,9 @@ package es.mityc.javasign.bridge;
  * <p>
  * Errores específicos deben implementarse como nuevas excepciones hijas de esta.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class InvalidSignatureException extends Exception {
@@ -44,7 +44,7 @@ public class InvalidSignatureException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -56,7 +56,7 @@ public class InvalidSignatureException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -68,7 +68,7 @@ public class InvalidSignatureException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

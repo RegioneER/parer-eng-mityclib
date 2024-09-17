@@ -26,9 +26,9 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * Interfaz que ha de cumplir una implementacion de un elemento del esquema xades
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class AbstractXADESElement extends AbstractXDsigElement {
@@ -58,7 +58,7 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
 
     /**
      * Este elemento lo pueden hacer público los elementos
-     * 
+     *
      * @see es.mityc.firmaJava.libreria.xades.elementos.xmldsig.AbstractXDsigElement#createElement(org.w3c.dom.Document,
      *      java.lang.String)
      */
@@ -69,13 +69,13 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
 
     /**
      * Este elemento lo pueden hacer público los elementos
-     * 
+     *
      * @param doc
      * @param namespaceXDsig
      * @param namespaceXAdES
-     * 
+     *
      * @return
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     protected Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
@@ -86,7 +86,7 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
 
     /**
      * Este metodo lo puede hacer público los tipos
-     * 
+     *
      * @see es.mityc.firmaJava.libreria.xades.elementos.xmldsig.AbstractXDsigElement#addContent(org.w3c.dom.Document,
      *      org.w3c.dom.Element, java.lang.String)
      */
@@ -97,12 +97,12 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
 
     /**
      * Este metodo lo puede hacer público los tipos.
-     * 
+     *
      * @param doc
      * @param element
      * @param namespaceXAdES
      * @param namespaceXDsig
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     protected void addContent(Element element, String namespaceXAdES, String namespaceXDsig)

@@ -27,14 +27,14 @@ import java.io.InputStream;
  * Implementacion de {@link FilterInputStream} que permite filtrar los datos de entrada mediante un decodificador que
  * implemente el interfaz {@link IDecoder}.
  * </p>
- * 
+ *
  * <p>
  * Basado en el <i>stream</i> {@link java.util.zip.InflaterInputStream}, adaptado para permitir una forma mas general de
  * decodificacion.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DecoderInputStream extends FilterInputStream {
@@ -59,7 +59,7 @@ public class DecoderInputStream extends FilterInputStream {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param in
      *            InputStream desde donde se leeran los datos codificados
      * @param dec
@@ -73,7 +73,7 @@ public class DecoderInputStream extends FilterInputStream {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param in
      *            InputStream desde donde se leeran los datos codificados
      * @param dec
@@ -96,7 +96,7 @@ public class DecoderInputStream extends FilterInputStream {
      * <p>
      * Check to make sure that this stream has not been closed.
      * </p>
-     * 
+     *
      * @throws IOException
      *             launched with Stream closed
      */
@@ -113,9 +113,9 @@ public class DecoderInputStream extends FilterInputStream {
 
     /**
      * Reads a byte of uncompressed data. This method will block until enough input is available for decompression.
-     * 
+     *
      * @return the byte read, or -1 if end of compressed input is reached
-     * 
+     *
      * @exception IOException
      *                if an I/O error has occurred
      */
@@ -126,16 +126,16 @@ public class DecoderInputStream extends FilterInputStream {
 
     /**
      * Reads encoded data into an array of bytes. This method will block until some input can be decoded.
-     * 
+     *
      * @param b
      *            the buffer into which the data is read
      * @param off
      *            the start offset of the data
      * @param len
      *            the maximum number of bytes read
-     * 
+     *
      * @return the actual number of bytes read, or -1 if the end of the encoded input is reached
-     * 
+     *
      * @exception IOException
      *                if an I/O error has occurred
      *                <ul>
@@ -176,11 +176,11 @@ public class DecoderInputStream extends FilterInputStream {
      * blocking.
      *
      * @return 1 before EOF and 0 after EOF.
-     * 
+     *
      * @exception IOException
      *                if an I public int available() throws IOException { ensureOpen(); if (reachEOF) { return 0; } else
      *                { return 1; } }
-     * 
+     *
      *                /** buffer interno para calcular el skip.
      */
     private byte[] tempBuffer = new byte[DEFAULT_BUFFER_SIZE];
@@ -192,12 +192,12 @@ public class DecoderInputStream extends FilterInputStream {
      * <p>
      * Could throw {@link IllegalArgumentException} if n &lt; 0.
      * </p>
-     * 
+     *
      * @param n
      *            the number of bytes to skip
-     * 
+     *
      * @return the actual number of bytes skipped.
-     * 
+     *
      * @exception IOException
      *                if an I/O error has occurred
      */
@@ -225,7 +225,7 @@ public class DecoderInputStream extends FilterInputStream {
 
     /**
      * Closes this input stream and releases any system resources associated with the stream.
-     * 
+     *
      * @exception IOException
      *                if an I/O error has occurred
      */
@@ -238,9 +238,9 @@ public class DecoderInputStream extends FilterInputStream {
 
     /**
      * Fills input buffer with more data to decoded.
-     * 
+     *
      * @return bytes filled
-     * 
+     *
      * @exception IOException
      *                if an I/O error has occurred
      */
@@ -259,7 +259,7 @@ public class DecoderInputStream extends FilterInputStream {
      *
      * @return a <code>boolean</code> indicating if this stream type supports the <code>mark</code> and
      *         <code>reset</code> methods.
-     * 
+     *
      * @see java.io.InputStream#mark(int)
      * @see java.io.InputStream#reset()
      */
@@ -275,7 +275,7 @@ public class DecoderInputStream extends FilterInputStream {
      *
      * @param readlimit
      *            the maximum limit of bytes that can be read before the mark position becomes invalid.
-     * 
+     *
      * @see java.io.InputStream#reset()
      */
     public synchronized void mark(final int readlimit) {
@@ -291,7 +291,7 @@ public class DecoderInputStream extends FilterInputStream {
      *
      * @exception IOException
      *                if this method is invoked.
-     * 
+     *
      * @see java.io.InputStream#mark(int)
      * @see java.io.IOException
      */

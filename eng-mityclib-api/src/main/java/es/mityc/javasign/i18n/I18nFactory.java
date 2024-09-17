@@ -37,16 +37,16 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * Factoría para la obtencion de los managers de mensajes locales.
  * </p>
- * 
+ *
  * <p>
  * En primer lugar busca el fichero de configuracion i18n/i18n.properties que haya por encima en el classpath para la
  * configuracion del comportamiento de la factoría de internacionalizacion. Este fichero ha de cumplir el formato:
- * 
+ *
  * <pre>
  * # Clase factoría encargada de generar los manager de internacionalizacion (si
  * # no se indica factory se utilizara el de por defecto).
  * i18n.factory.class=
- * 
+ *
  * # Si se deja la factoría por defecto:
  * # 	Clase manager que gestionara las entradas de idioma (debe implementar el
  * #    interfaz II18nManager)
@@ -55,13 +55,13 @@ import org.apache.commons.logging.LogFactory;
  * # 	(opcional, si no se indica se utilizara el locale por defecto del sistema)
  * i18n.locale.default=
  * </pre>
- * 
+ *
  * La clase indicada en la propiedad <code>i18n.factory.class</code> debe tener un método newInstance() estatico que
  * debe devolver un objeto de tipo II18nFactory. Este método sera el consultado para obtener la nueva factoría.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class I18nFactory {
@@ -172,7 +172,7 @@ public class I18nFactory {
      * <p>
      * Si no esta disponible el de contexto devuelve el propio de la clase.
      * </p>
-     * 
+     *
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
@@ -199,7 +199,7 @@ public class I18nFactory {
      * <p>
      * Carga la factoría de managers de internacionalizacion.
      * </p>
-     * 
+     *
      * @param rb
      *            Properties que contiene las propiedades de configuracion
      */
@@ -247,7 +247,7 @@ public class I18nFactory {
      * <p>
      * Carga la clase encargada de la internacionalizacion.
      * </p>
-     * 
+     *
      * @param classname
      *            Nombre de la clase
      */
@@ -281,7 +281,7 @@ public class I18nFactory {
      * <p>
      * Carga el locale indicado en el fichero de configuracion.
      * </p>
-     * 
+     *
      * @param rb
      *            Propiedades donde se encuentra configurado el locale
      */
@@ -318,10 +318,10 @@ public class I18nFactory {
      * <p>
      * Devuelve el manager configurado con el diccionario indicado.
      * </p>
-     * 
+     *
      * @param dictionary
      *            Clave que identifica el diccionario que se desea cargar
-     * 
+     *
      * @return Manager con el diccionario indicado. Si se ha dejado la factoría por defecto devuelve un manager del tipo
      *         Dumb si no se puede encontrar el diccionario.
      */
@@ -333,12 +333,12 @@ public class I18nFactory {
      * <p>
      * Devuelve el manager que gestiona el diccionario en el locale indicado.
      * </p>
-     * 
+     *
      * @param dictionary
      *            Clave que define el diccionario que se pide
      * @param specificLocale
      *            Locale del que se requiere el diccionario, <code>null</code> si no hay Locale preferido
-     * 
+     *
      * @return Manager con el diccionario indicado. Si se ha dejado la factoría por defecto devuelve un manager del tipo
      *         Dumb si no se puede encontrar el diccionario.
      */
@@ -366,12 +366,12 @@ public class I18nFactory {
      * ({@link I18nDefaultManager}). Si tiene problemas en la instanciacion del manager configurado devolvera un manager
      * {@link I18nDumbManager}.
      * </p>
-     * 
+     *
      * @param dictionary
      *            Diccionario que debe gestionar el manager
      * @param specificLocale
      *            Locale específico (<code>null</code> si no se especifica Locale)
-     * 
+     *
      * @return Manager instanciado e inicializado, I18nDumbManager si ha tenido problemas para encontrar el manager (ver
      *         {@link I18nDumbManager}).
      */
@@ -413,7 +413,7 @@ public class I18nFactory {
 
     /**
      * Establece un nuevo <code>Locale</code> para la peticion de diccionarios.
-     * 
+     *
      * @param newLocale
      *            Nuevo <code>Locale</code> que se aplicara al pedir nuevos diccionarios.
      */
@@ -427,12 +427,12 @@ public class I18nFactory {
      * <p>
      * Incluye parametros en un mensaje.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje a dar formato
      * @param varargs
      *            Parametros a incluir en el mensaje
-     * 
+     *
      * @return Mensaje con los parametros incluidos
      */
     private static String getFormatedMessage(final String message, final Object... varargs) {

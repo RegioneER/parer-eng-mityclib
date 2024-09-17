@@ -24,9 +24,9 @@ package es.mityc.javasign.bridge;
  * <p>
  * El texto de la excepcion es la causa de la revocacion (si se puede obtener).
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class RevokedCertificateException extends InvalidCertificateException {
@@ -44,7 +44,7 @@ public class RevokedCertificateException extends InvalidCertificateException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -56,7 +56,7 @@ public class RevokedCertificateException extends InvalidCertificateException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -68,7 +68,7 @@ public class RevokedCertificateException extends InvalidCertificateException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

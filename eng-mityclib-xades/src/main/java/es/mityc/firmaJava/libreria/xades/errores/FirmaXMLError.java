@@ -21,7 +21,7 @@ package es.mityc.firmaJava.libreria.xades.errores;
  * Excepciones en la firma o validacion del XML
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -35,7 +35,7 @@ public class FirmaXMLError extends Exception {
 
     /**
      * Crea una nueva instancia de FirmaXMLError con el mensaje de detalle.
-     * 
+     *
      * @param msg
      *            El mensaje de detalle.
      */
@@ -45,7 +45,7 @@ public class FirmaXMLError extends Exception {
 
     /**
      * Crea una nueva instancia de FirmaXMLError con la Excepcion especificada.
-     * 
+     *
      * @param e
      *            Exception
      */

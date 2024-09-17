@@ -23,9 +23,9 @@ import org.apache.xml.security.transforms.Transform;
  * <p>
  * Sirve de wrapper para las Transform asociadas a un Reference.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TransformProxy {
@@ -51,7 +51,7 @@ public class TransformProxy {
     /**
      * <p>
      * Construye un wrapper con la transformada indicada
-     * 
+     *
      * @param ref
      *            Referencia
      */
@@ -63,7 +63,7 @@ public class TransformProxy {
      * <p>
      * Devuelve la representacion URI de la transformada.
      * </p>
-     * 
+     *
      * @return URI de la transformada
      */
     public String getURI() {
@@ -74,10 +74,10 @@ public class TransformProxy {
      * <p>
      * Indica si la transformada es de canonicalizacion.
      * </p>
-     * 
+     *
      * @param trans
      *            Transformada
-     * 
+     *
      * @return true si es una canonicalizacion
      */
     public static boolean isCanonicalization(TransformProxy trans) {

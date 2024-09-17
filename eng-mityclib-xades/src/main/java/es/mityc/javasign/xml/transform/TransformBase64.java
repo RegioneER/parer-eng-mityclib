@@ -23,9 +23,9 @@ import es.mityc.javasign.xml.xades.TransformProxy;
  * <p>
  * Transformada de conversion de base64 a binario.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TransformBase64 extends Transform {

@@ -23,9 +23,9 @@ import es.mityc.firmaJava.libreria.utilidades.UtilidadFicheros;
 
 /**
  * Representa un objeto externo (en forma de fichero) al XML que debe ser firmado.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ExternFileToSign extends AbstractObjectToSign {

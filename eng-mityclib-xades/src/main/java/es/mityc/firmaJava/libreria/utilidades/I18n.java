@@ -26,7 +26,7 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * Clase que permite la internacionalizacion de las cadenas de texto de la aplicacion
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class I18n {
@@ -36,10 +36,10 @@ public class I18n {
 
     /**
      * Obtiene el valor de una cadena definida para el idioma por defecto configurado
-     * 
+     *
      * @param clave
      *            Clave que identifica la cadena de texto
-     * 
+     *
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(String clave) {
@@ -48,12 +48,12 @@ public class I18n {
 
     /**
      * Obtiene el valor de una cadena definida para el idioma pasado por parametro en el Locale
-     * 
+     *
      * @param clave
      *            Clave que identifica la cadena de texto
      * @param locale
      *            Locale del idioma del cual queremos la traduccion
-     * 
+     *
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(String clave, Locale locale) {
@@ -62,7 +62,7 @@ public class I18n {
 
     /**
      * Obtiene el Locale que se utiliza en ese momento
-     * 
+     *
      * @return Locale que se utiliza en ese momento
      */
     public static Locale getLocale() {
@@ -71,7 +71,7 @@ public class I18n {
 
     /**
      * Asigna el Locale que se utilizara en las traducciones
-     * 
+     *
      * @param locale
      *            Locale que se utilizara en las traducciones
      */
@@ -83,7 +83,7 @@ public class I18n {
 
     /**
      * Asigna el Locale que se utilizara en las traducciones
-     * 
+     *
      * @param pais
      *            Pais
      * @param dialecto

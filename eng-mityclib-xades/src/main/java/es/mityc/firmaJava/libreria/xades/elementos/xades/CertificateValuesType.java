@@ -30,7 +30,7 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class CertificateValuesType extends AbstractXADESElement {
@@ -88,10 +88,10 @@ public class CertificateValuesType extends AbstractXADESElement {
 
     /**
      * Busca en el listado de certificados si hay alguno certificado con esa id y lo devuelve.
-     * 
+     *
      * @param id
      *            identificador a buscar
-     * 
+     *
      * @return devuelve el nodo certificado con esa id si lo encuentra, <code>null</code> en otro caso
      */
     public EncapsulatedX509Certificate getEncapsulatedX509CertificateById(String id) {

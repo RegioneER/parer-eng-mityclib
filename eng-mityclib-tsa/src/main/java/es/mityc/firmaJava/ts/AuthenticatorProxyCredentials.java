@@ -30,7 +30,7 @@ import org.apache.commons.httpclient.NTCredentials;
  * </p>
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class AuthenticatorProxyCredentials extends NTCredentials {

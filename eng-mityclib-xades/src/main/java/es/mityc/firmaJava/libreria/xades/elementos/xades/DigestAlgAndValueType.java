@@ -31,9 +31,9 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * Clase para manejar nodos del tipo DigestAlgAndValueType
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class DigestAlgAndValueType extends AbstractXADESElement {

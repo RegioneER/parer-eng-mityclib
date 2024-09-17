@@ -24,9 +24,9 @@ import java.io.IOException;
  * <p>
  * Implementa el interfaz {@link IWriter} sobre un array de bytes.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ByteArrayWrittable implements IWriter {
@@ -47,7 +47,7 @@ public class ByteArrayWrittable implements IWriter {
      * <p>
      * Escribe nuevos datos en el buffer de escritura.
      * </p>
-     * 
+     *
      * @param b
      *            array de bytes que contiene los datos que hay que escribir
      * @param off
@@ -63,10 +63,10 @@ public class ByteArrayWrittable implements IWriter {
      * <p>
      * Asegura que los datos que estan en bufferes temporales se guarden.
      * </p>
-     * 
+     *
      * @throws IOException
      *             Lanzada cuando no se han podido asegurar los datos
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#flush()
      */
     public void flush() throws IOException {
@@ -77,7 +77,7 @@ public class ByteArrayWrittable implements IWriter {
      * <p>
      * Limpia el buffer vaciandolo.
      * </p>
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#reset()
      */
     public void reset() {
@@ -88,9 +88,9 @@ public class ByteArrayWrittable implements IWriter {
      * <p>
      * Devuelve el número de bytes disponibles en el buffer.
      * </p>
-     * 
+     *
      * @return número de bytes disponibles en el buffer interno
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#size()
      */
     public int size() {
@@ -101,9 +101,9 @@ public class ByteArrayWrittable implements IWriter {
      * <p>
      * Devuelve en un array de bytes los datos acumulados.
      * </p>
-     * 
+     *
      * @return array de bytes disponible en el buffer
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#toByteArray()
      */
     public byte[] toByteArray() {

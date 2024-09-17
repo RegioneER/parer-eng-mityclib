@@ -41,15 +41,15 @@ import es.mityc.javasign.i18n.II18nManager;
  * <p>
  * Manager que gestiona las instancias de validadores de policies.
  * </p>
- * 
+ *
  * <p>
  * Obtiene los managers disponibles para la validacion de políticas a través de los ficheros de configuracion
  * disponibles en "<code>META-INF/xades/policy.properties</code>".
  * </p>
- * 
+ *
  * <p>
  * Los ficheros de propiedades han de cumplir el formato:
- * 
+ *
  * <pre>
  * # En este fichero se indica qué clases son las encargadas de validar policies
  * # específicas
@@ -58,16 +58,16 @@ import es.mityc.javasign.i18n.II18nManager;
  * # donde clave puede ser cualquier string que no contenga un codigo especial
  * # (por ejemplo un hash en hexadecimal de la policy), y clase es la clase
  * # que implementa el interfaz es.mityc.firmaJava.policy.IValidacionPolicy en
- * # el caso de un validador de políticas y el interfaz 
+ * # el caso de un validador de políticas y el interfaz
  * # es.mityc.firmaJava.policy.IFirmaPolicy en el caso de un escritor de
  * # políticas
  * </pre>
  * </p>
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
- * 
+ *
  *          TODO: implementar mecanismo para la búsqueda de los managers mediante el identificador y no únicamente por
  *          la clave textual.
  */
@@ -77,9 +77,9 @@ public class PoliciesManager {
      * <p>
      * Clave para buscar el manager asociado a esa política.
      * </p>
-     * 
+     *
      * @author Ministerio de Industria, Turismo y Comercio
-     * 
+     *
      * @version 1.0
      */
     public class PolicyKey {
@@ -90,7 +90,7 @@ public class PoliciesManager {
 
         /**
          * Constructor.
-         * 
+         *
          * @param uri
          *            Uri identificativa de la política
          * @param hash
@@ -106,12 +106,12 @@ public class PoliciesManager {
      * <p>
      * Crea una nueva instancia de una clave identificadora de política.
      * </p>
-     * 
+     *
      * @param uri
      *            Uri que identifica la política
      * @param hash
      *            Clave textual que identifica la política
-     * 
+     *
      * @return Clave identificadora para buscar una política
      */
     public PolicyKey newPolicyKey(URI uri, String hash) {
@@ -202,7 +202,7 @@ public class PoliciesManager {
 
     /**
      * Devuelve una instancia del manager de policies.
-     * 
+     *
      * @return
      */
     public static PoliciesManager getInstance() {
@@ -215,13 +215,13 @@ public class PoliciesManager {
     /**
      * Devuelve el validador de policy asociado a la clave indicada. Funciona como una factory que instancia un nuevo
      * validador en cada llamada.
-     * 
+     *
      * @param clave
      *            Clave que tiene asociada un validador
-     * 
+     *
      * @return Una instancia del validador de policy asociado o <code>null</code> si no hay ninguno asociado o no se
      *         puede instanciar.
-     * 
+     *
      *         TODO: permitir funcionar a la factory en varios modos de trabajo (instanciador, cache, singleton,
      *         instanciador propio del validador)
      */
@@ -232,15 +232,15 @@ public class PoliciesManager {
     /**
      * Devuelve el validador de policy asociado a la clave indicada. Funciona como una factory que instancia un nuevo
      * validador en cada llamada.
-     * 
+     *
      * @param clave
      *            Clave que tiene asociada un validador
      * @param defaultManager
      *            indica si se debe devolver un PolicyManager que informe sobre la política aunque sea desconocida
-     * 
+     *
      * @return Una instancia del validador de policy asociado o <code>null</code> si no hay ninguno asociado o no se
      *         puede instanciar.
-     * 
+     *
      *         TODO: permitir funcionar a la factory en varios modos de trabajo (instanciador, cache, singleton,
      *         instanciador propio del validador)
      */
@@ -299,13 +299,13 @@ public class PoliciesManager {
     /**
      * Devuelve el escritor de policy asociado a la clave indicada. Funciona como una factory que instancia un nuevo
      * escritor en cada llamada.
-     * 
+     *
      * @param clave
      *            Clave que tiene asociada un escritor
-     * 
+     *
      * @return Una instancia del escritor de policy asociado o <code>null</code> si no hay ninguno asociado o no se
      *         puede instanciar.
-     * 
+     *
      *         TODO: permitir funcionar a la factory en varios modos de trabajo (instanciador, cache, singleton,
      *         instanciador propio del escritor)
      */

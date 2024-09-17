@@ -20,9 +20,9 @@ package es.mityc.firmaJava.libreria.xades;
 import es.mityc.javasign.certificate.ICertStatus;
 
 /**
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 

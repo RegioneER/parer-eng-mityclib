@@ -19,9 +19,9 @@ package es.mityc.firmaJava.trust;
 
 /**
  * Estados de confianza de un elemento.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public enum ConfianzaEnum {

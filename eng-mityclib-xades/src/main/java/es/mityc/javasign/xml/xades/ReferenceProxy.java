@@ -36,9 +36,9 @@ import org.w3c.dom.Element;
  * <p>
  * Clase proxy para trabajar con un elemento Reference de XMLSec.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ReferenceProxy {
@@ -50,7 +50,7 @@ public class ReferenceProxy {
      * <p>
      * Construye una instancia proxy a un Reference.
      * </p>
-     * 
+     *
      * @param ref
      *            referencia
      */
@@ -62,7 +62,7 @@ public class ReferenceProxy {
      * <p>
      * Devuelve la Id del nodo Reference.
      * </p>
-     * 
+     *
      * @return id
      */
     public String getID() {
@@ -73,7 +73,7 @@ public class ReferenceProxy {
      * <p>
      * Devuelve la URI señalada por la Reference.
      * </p>
-     * 
+     *
      * @return URI
      */
     public String getURI() {
@@ -84,7 +84,7 @@ public class ReferenceProxy {
      * <p>
      * Devuelve un listado de las transformadas aplicadas al nodo.
      * </p>
-     * 
+     *
      * @return
      */
     public List<TransformProxy> getTransforms() {
@@ -112,7 +112,7 @@ public class ReferenceProxy {
      * <p>
      * Devuelve la informacion en binario del contenido indicado en la referencia.
      * </p>
-     * 
+     *
      * @return byte[] con los datos, <code>null</code> si se produce un error en el acceso
      */
     public byte[] getBytes() {
@@ -131,7 +131,7 @@ public class ReferenceProxy {
      * <p>
      * Escribe el contenido del nodo referenciado en un stream de salida.
      * </p>
-     * 
+     *
      * @param os
      *            Stream de salida
      */
@@ -148,7 +148,7 @@ public class ReferenceProxy {
      * <p>
      * Devuelve el Element que representa al Reference.
      * </p>
-     * 
+     *
      * @return Element
      */
     public Element getElement() {

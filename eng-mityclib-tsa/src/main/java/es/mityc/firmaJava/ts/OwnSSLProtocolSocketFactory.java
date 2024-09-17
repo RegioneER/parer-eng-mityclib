@@ -43,15 +43,15 @@
  *
  * Alternatively, the contents of this file may be used under the
  * terms of the GNU Lesser General Public License Version 2 or later
- * (the "LGPL"), in which case the provisions of the LGPL are 
+ * (the "LGPL"), in which case the provisions of the LGPL are
  * applicable instead of those above.  See terms of LGPL at
  * <http://www.gnu.org/copyleft/lesser.txt>.
- * If you wish to allow use of your version of this file only under 
+ * If you wish to allow use of your version of this file only under
  * the terms of the LGPL and not to allow others to use your version
- * of this file under the Apache Software License, indicate your 
- * decision by deleting the provisions above and replace them with 
- * the notice and other provisions required by the LGPL.  If you do 
- * not delete the provisions above, a recipient may use your version 
+ * of this file under the Apache Software License, indicate your
+ * decision by deleting the provisions above and replace them with
+ * the notice and other provisions required by the LGPL.  If you do
+ * not delete the provisions above, a recipient may use your version
  * of this file under either the Apache Software License or the LGPL.
  */
 package es.mityc.firmaJava.ts;
@@ -117,12 +117,12 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
 
     /**
      * Constructor for OwnSSLProtocolSocketFactory.
-     * 
+     *
      * @param ssl
      *            Gestionador de la autenticacion y confianza de la comunicacion SSL
-     * 
+     *
      *            Code sample:
-     * 
+     *
      *            <blockquote> Protocol stricthttps = new Protocol( "https", new OwnSSLProtocolSocketFactory(true),
      *            443);
      *
@@ -182,7 +182,7 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      * The controller thread attempts to create a new socket within the given limit of time. If socket constructor does
      * not return until the timeout expires, the controller terminates and throws an {@link ConnectTimeoutException}
      * </p>
-     * 
+     *
      * @param host
      *            the host name/IP
      * @param port
@@ -193,9 +193,9 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      *            the port on the local machine
      * @param params
      *            {@link HttpConnectionParams Http connection parameters}
-     * 
+     *
      * @return Socket a new socket
-     * 
+     *
      * @throws IOException
      *             if an I/O error occurs while creating the socket
      * @throws UnknownHostException
@@ -263,7 +263,7 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      *
      * @param socket
      *            a <code>SSLSocket</code> value
-     * 
+     *
      * @exception SSLPeerUnverifiedException
      *                If there are problems obtaining the server certificates from the SSL session, or the server host
      *                name does not match with the "Common Name" in the server certificates SubjectDN.
@@ -333,7 +333,7 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      *
      * @param dn
      *            a X.500 distinguished name.
-     * 
+     *
      * @return the value of the "Common Name" field.
      */
     private String getCN(String dn) {

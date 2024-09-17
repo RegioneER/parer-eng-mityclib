@@ -19,9 +19,9 @@ package es.mityc.javasign;
 
 /**
  * Clase de constantes de la librería
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ConstantsXAdES {

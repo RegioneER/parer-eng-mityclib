@@ -54,13 +54,13 @@ import es.mityc.javasign.utils.OSTool.OS;
  * <p>
  * Utilidad para el copiado de ficheros con integridad.
  * </p>
- * 
+ *
  * <p>
  * Esta librería accede a un fichero de propiedades donde se relaciona una clave con un conjunto de recursos. Bajo
  * peticion puede copiar esos recursos a un lugar físico. En caso de ya existir comprueba la integridad de esos ficheros
  * y si no la cumple procede a su sustitucion.
  * </p>
- * 
+ *
  * <h3>Formato del fichero de propiedades</h3>
  * <p>
  * En primer lugar se asocia un conjunto de ficheros a una clave. Cuando se indique que se quiere copiar la clave
@@ -107,7 +107,7 @@ import es.mityc.javasign.utils.OSTool.OS;
  * </ul>
  * </p>
  * <h3>Ejemplo</h3>
- * 
+ *
  * <pre>
  * windows5.explorer=CSPBridge
  * file.CSPBridge.name=DLLFirmaVC.dll
@@ -121,9 +121,9 @@ import es.mityc.javasign.utils.OSTool.OS;
  * 64bits indicando la partícula <code>_64</code> detras del nombre de SO. V.G.:
  * <code>windows6_64.explorer=CSPBridge</code>
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class CopyFilesTool {
@@ -198,9 +198,9 @@ public class CopyFilesTool {
      * <p>
      * Cada tipo concreto de integridad debera tener una clase que extienda de esta.
      * </p>
-     * 
+     *
      * @author Ministerio de Industria, Turismo y Comercio
-     * 
+     *
      * @version 1.0
      */
     private abstract class CRCInfo {
@@ -208,10 +208,10 @@ public class CopyFilesTool {
          * <p>
          * Procesa la cadena indicada para obtener el valor CRC que se espera.
          * </p>
-         * 
+         *
          * @param value
          *            Cadena que tiene el valor CRC esperado
-         * 
+         *
          * @throws CopyFileException
          *             Lanzada si la cadena no se ajusta al CRC que admite esta clase
          */
@@ -221,7 +221,7 @@ public class CopyFilesTool {
          * <p>
          * Devuelve el tipo de CRC implementado.
          * </p>
-         * 
+         *
          * @return tipo del enumerado {@link CrcIntegrityEnum} que implementa
          */
         protected abstract CrcIntegrityEnum getCrcType();
@@ -230,12 +230,12 @@ public class CopyFilesTool {
          * <p>
          * Chequea que el fichero indicado tenga el crc esperado.
          * </p>
-         * 
+         *
          * @param file
          *            Fichero que se quiere comprobar
-         * 
+         *
          * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code> en otro caso
-         * 
+         *
          * @throws CopyFileException
          *             Lanzada si no ha podido calcular el crc del fichero
          */
@@ -246,9 +246,9 @@ public class CopyFilesTool {
      * <p>
      * Implementacion del calculo de CRC mediante Adler32.
      * </p>
-     * 
+     *
      * @author Ministerio de Industria, Turismo y Comercio
-     * 
+     *
      * @version 1.0
      */
     private class Adler32Info extends CRCInfo {
@@ -259,13 +259,13 @@ public class CopyFilesTool {
          * <p>
          * Procesa la cadena indicada recuperando el valor numérico Int32 que señala un CRC Adler32.
          * </p>
-         * 
+         *
          * @param value
          *            Cadena que tiene el valor CRC esperado en forma de número int32
-         * 
+         *
          * @throws CopyFileException
          *             Lanzada si la cadena no se ajusta al CRC que admite esta clase
-         * 
+         *
          * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#processValue(java.lang.String)
          */
         @Override
@@ -282,9 +282,9 @@ public class CopyFilesTool {
          * <p>
          * Devuelve el tipo Adler32.
          * </p>
-         * 
+         *
          * @return CrcIntegrityEnum.ADLER32
-         * 
+         *
          * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#getCrcType()
          */
         @Override
@@ -296,7 +296,7 @@ public class CopyFilesTool {
          * <p>
          * Devuelve el crc esperado.
          * </p>
-         * 
+         *
          * @return crc esperado
          */
         public long getCrcValue() {
@@ -307,15 +307,15 @@ public class CopyFilesTool {
          * <p>
          * Chequea que el fichero indicado tenga el crc Adler32 esperado.
          * </p>
-         * 
+         *
          * @param file
          *            Fichero que se quiere comprobar
-         * 
+         *
          * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code> en otro caso
-         * 
+         *
          * @throws CopyFileException
          *             Lanzada si no ha podido calcular el crc del fichero
-         * 
+         *
          * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#checkFile(java.io.File)
          */
         @Override
@@ -346,9 +346,9 @@ public class CopyFilesTool {
      * <p>
      * Implementacion del calculo de CRC mediante SHA-2.
      * </p>
-     * 
+     *
      * @author Ministerio de Industria, Turismo y Comercio
-     * 
+     *
      * @version 1.0
      */
     private class SHA2Info extends CRCInfo {
@@ -359,13 +359,13 @@ public class CopyFilesTool {
          * <p>
          * Procesa la cadena indicada recuperando el valor numérico Int32 que señala un CRC Adler32.
          * </p>
-         * 
+         *
          * @param value
          *            Cadena que tiene el valor CRC esperado en forma de número int32
-         * 
+         *
          * @throws CopyFileException
          *             Lanzada si la cadena no se ajusta al CRC que admite esta clase
-         * 
+         *
          * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#processValue(java.lang.String)
          */
         @Override
@@ -378,9 +378,9 @@ public class CopyFilesTool {
          * <p>
          * Devuelve el tipo SHA-2.
          * </p>
-         * 
+         *
          * @return CrcIntegrityEnum.SHA2
-         * 
+         *
          * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#getCrcType()
          */
         @Override
@@ -392,7 +392,7 @@ public class CopyFilesTool {
          * <p>
          * Devuelve el crc esperado.
          * </p>
-         * 
+         *
          * @return crc esperado
          */
         public String getCrcValue() {
@@ -403,15 +403,15 @@ public class CopyFilesTool {
          * <p>
          * Chequea que el fichero indicado tenga el crc SHA-2 esperado.
          * </p>
-         * 
+         *
          * @param file
          *            Fichero que se quiere comprobar
-         * 
+         *
          * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code> en otro caso
-         * 
+         *
          * @throws CopyFileException
          *             Lanzada si no ha podido calcular el crc del fichero
-         * 
+         *
          * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#checkFile(java.io.File)
          */
         @Override
@@ -447,7 +447,7 @@ public class CopyFilesTool {
      * Crea una instancia de la herramienta de copia de ficheros tomando como fuente de la informacion el recurso de
      * propiedades indicado.
      * </p>
-     * 
+     *
      * @param fileProperties
      *            Nombre del recurso que contiene las propiedades de los ficheros que puede copiar
      */
@@ -460,7 +460,7 @@ public class CopyFilesTool {
      * Crea una instancia de la herramienta de copia de ficheros tomando como fuente de la informacion el recurso de
      * propiedades indicado.
      * </p>
-     * 
+     *
      * @param fileProperties
      *            Nombre del recurso que contiene las propiedades de los ficheros que puede copiar
      * @param cl
@@ -475,7 +475,7 @@ public class CopyFilesTool {
      * <p>
      * Carga el recurso de propiedades indicado.
      * </p>
-     * 
+     *
      * @param fileProperties
      *            nombre del recurso que contiene las propiedades
      */
@@ -517,7 +517,7 @@ public class CopyFilesTool {
      * <p>
      * Si no esta disponible el de contexto devuelve el propio de la clase.
      * </p>
-     * 
+     *
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
@@ -553,7 +553,7 @@ public class CopyFilesTool {
      * <li>so</li>
      * </ul>
      * </p>
-     * 
+     *
      * @param so
      *            Nombre del sistema operativo
      * @param version
@@ -562,7 +562,7 @@ public class CopyFilesTool {
      *            Arquitectura (32 o 64 bits)
      * @param addendum
      *            sufijo que se busca
-     * 
+     *
      * @return Propiedad que se haya encontrado mas completa
      */
     private String getKeyOS(final String so, final String version, final String arch, final String addendum) {
@@ -583,10 +583,10 @@ public class CopyFilesTool {
      * <p>
      * Devuelve un valor de cadena aunque la cadena esté nulificada.
      * </p>
-     * 
+     *
      * @param varargs
      *            Cadenas a concatenar
-     * 
+     *
      * @return las cadenas concatenadas, cambiando las cadenas nulificadas por cadenas vacías
      */
     private String addStrings(String... varargs) {
@@ -604,7 +604,7 @@ public class CopyFilesTool {
      * Comprueba si hay ficheros relacionados con el sistema operativo y si los hay, comprueba si es necesario volver a
      * copiarlos (comprobando su integridad).
      * </p>
-     * 
+     *
      * <p>
      * Para buscar los ficheros relacionados con el sistema operativo compone un nombre dependiente del sistema
      * operativo y le añade el addendum indicado. Sistemas operativos que busca:
@@ -614,16 +614,16 @@ public class CopyFilesTool {
      * <li>Mac OS X</li>
      * </ul>
      * </p>
-     * 
+     *
      * @param dir
      *            Directorio donde se copiaran los ficheros (si su valor en null se copiara al directorio temporal)
      * @param addendum
      *            Nombre de la clave que identifica los ficheros que se copiaran.
      * @param updateLibraryPath
      *            indica si se debe actualizar la variable LibraryPath de java con la ubicacion de los ficheros copiados
-     * 
+     *
      * @return devuelve el directorio donde se hizo la copia de los recursos
-     * 
+     *
      * @throws CopyFileException
      *             si no existe la clave indicada o algunos de los ficheros como recurso
      */
@@ -667,10 +667,10 @@ public class CopyFilesTool {
      * <p>
      * Comprueba si la propiedad indicada esta disponible.
      * </p>
-     * 
+     *
      * @param prop
      *            Nombre de la propiedad
-     * 
+     *
      * @return <code>true</code> si la propiedad existe con algún valor asignado, <code>false</code> en otro caso
      */
     private boolean hasProp(final String prop) {
@@ -687,7 +687,7 @@ public class CopyFilesTool {
      * <p>
      * Esta variable permite indicar donde se encuentran las librerías JNI de usuario que se van a utilizar.
      * </p>
-     * 
+     *
      * @param path
      *            Nueva ruta a incluir
      */
@@ -716,12 +716,12 @@ public class CopyFilesTool {
      * Comprueba si hay ficheros relacionados con la clave indicada y si los hay, comprueba si es necesario volver a
      * copiarlos (comprobando su integridad).
      * </p>
-     * 
+     *
      * @param dir
      *            Directorio donde se copiaran los ficheros
      * @param clave
      *            Clave donde se agrupan los ficheros que se comprobaran/copiaran
-     * 
+     *
      * @throws CopyFileException
      *             si no existe la clave indicada o algunos de los ficheros como recurso
      */
@@ -773,12 +773,12 @@ public class CopyFilesTool {
      * <p>
      * Devuelve el CRC indicado para calcular la integridad de este fichero.
      * </p>
-     * 
+     *
      * @param fichero
      *            nombre del fichero
-     * 
+     *
      * @return CRCInfo con los datos del CRC configurado
-     * 
+     *
      * @throws CopyFileException
      *             Si no hay ningun CRC disponible o esta mal configurado
      */
@@ -817,7 +817,7 @@ public class CopyFilesTool {
      * El recurso es de nuevo copiado si se detecta que su longitud ha cambiado o el CRC no se corresponde con el
      * esperado.
      * </p>
-     * 
+     *
      * @param dir
      *            Directorio donde se buscara/copiara el fichero
      * @param fichero
@@ -828,7 +828,7 @@ public class CopyFilesTool {
      *            valor CRC que debería tener el fichero
      * @param size
      *            Tamaño en bytes que debería tener el fichero
-     * 
+     *
      * @throws CopyFileException
      *             Excepcion lanzada si no ha podido sustituir el fichero debido a problemas de acceso al sistema de
      *             ficheros o de recursos
@@ -886,16 +886,16 @@ public class CopyFilesTool {
      * <p>
      * Comprueba si el fichero indicado es íntegro.
      * </p>
-     * 
+     *
      * @param file
      *            Fichero del que hay que comprobar la integridad
      * @param crcValue
      *            Valor CRC que se espera que el fichero cumpla
      * @param size
      *            Tamaño esperado del fichero en bytes
-     * 
+     *
      * @return <code>true</code> si el fichero se ajusta a las condiciones esperadas, <code>false</code> en otro caso
-     * 
+     *
      * @throws IOException
      *             <ul>
      *             <li>{@link IOException} lanzada si ocurre algún error en el acceso al fichero indicado</li>
@@ -924,10 +924,10 @@ public class CopyFilesTool {
      * <p>
      * Convierte un array de bytes en su representacion de texto hexadecimal correspondiente.
      * </p>
-     * 
+     *
      * @param data
      *            array de bytes a convertir
-     * 
+     *
      * @return cadena de texto hexadecimal
      */
     private String toHexString(final byte[] data) {

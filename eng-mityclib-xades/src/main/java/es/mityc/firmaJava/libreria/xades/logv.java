@@ -26,9 +26,9 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
 
 /**
  * Esquemas de firma XAdES
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0 beta
  */
 public class logv {

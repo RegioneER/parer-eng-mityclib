@@ -20,25 +20,25 @@ package es.mityc.javasign.xml.resolvers;
 /**
  * Este interfaz permite la obtencion del hash de informacion para ser firmada que permanece privada a la librería de
  * firma.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IPrivateData {
 
     /**
      * Obtiene el digest del elemento utilizando el algoritmo de hashing indicado.
-     * 
+     *
      * @param name
      *            Nombre del elemento del que se quiere calcular el hashing
      * @param baseURI
      *            Ruta base del elemento
      * @param algName
      *            Nombre del algoritmo de hashing
-     * 
+     *
      * @return Digest calculado de la informacion privada
-     * 
+     *
      * @throws ResourceDataException
      *             lanzada cuando no se puede acceder a la informacion por alguna razon
      */
@@ -46,12 +46,12 @@ public interface IPrivateData {
 
     /**
      * Indica si esta implementacion puede acceder a la informacion indicada para calcular su digest
-     * 
+     *
      * @param name
      *            Nombre del elemento
      * @param baseURI
      *            Ruta base del elemento
-     * 
+     *
      * @return <code>true<code> si puede calcular su digest, <code>false</code> en otro caso
      */
     public boolean canDigest(String name, String baseURI);

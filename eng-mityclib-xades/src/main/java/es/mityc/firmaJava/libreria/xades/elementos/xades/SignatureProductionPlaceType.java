@@ -126,7 +126,7 @@ public class SignatureProductionPlaceType extends AbstractXADESElement {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see es.mityc.firmaJava.libreria.xades.elementos.AbstractXMLElement#equals(java.lang.Object)
      */
     @Override
@@ -161,7 +161,7 @@ public class SignatureProductionPlaceType extends AbstractXADESElement {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see es.mityc.firmaJava.libreria.xades.elementos.AbstractXMLElement#load(org.w3c.dom.Element)
      */
     @Override

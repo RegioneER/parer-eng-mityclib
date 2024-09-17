@@ -19,9 +19,9 @@ package es.mityc.firmaJava.libreria.xades;
 
 /**
  * Tipos de firma XML reconocidas
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 

@@ -23,9 +23,9 @@ import java.io.IOException;
  * <p>
  * Interfaz que debe implementar la clase que inyecte datos en un {@link ByteArrayWrittableInputStream}.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IWriter {
@@ -34,7 +34,7 @@ public interface IWriter {
      * <p>
      * Vacía los buffers intermedios.
      * </p>
-     * 
+     *
      * @throws IOException
      *             si hay algún problema en el vaciado
      */
@@ -44,7 +44,7 @@ public interface IWriter {
      * <p>
      * Devuelve un array de bytes con el contenido escrito.
      * </p>
-     * 
+     *
      * @return byte[] con el contenido escrito
      */
     byte[] toByteArray();
@@ -60,7 +60,7 @@ public interface IWriter {
      * <p>
      * Devuelve el tamaño actual del contenido escrito.
      * </p>
-     * 
+     *
      * @return tamaño en bytes del contenido actual
      */
     int size();

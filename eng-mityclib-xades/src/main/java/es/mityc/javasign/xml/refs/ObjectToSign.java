@@ -23,9 +23,9 @@ import es.mityc.firmaJava.libreria.xades.elementos.xades.ObjectIdentifier;
 
 /**
  * Contiene un objeto que se firmara e informacion de apoyo.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ObjectToSign {
@@ -40,7 +40,7 @@ public class ObjectToSign {
 
     /**
      * Permite pasar un objeto a firmar, junto con la informacion sobre dicho objeto a firmar.
-     * 
+     *
      * @param objectToSign
      *            .- Objeto a firmar
      * @param desc

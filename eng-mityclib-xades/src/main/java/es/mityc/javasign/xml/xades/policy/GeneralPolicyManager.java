@@ -65,9 +65,9 @@ import es.mityc.javasign.xml.xades.policy.PolicyResult.DownloadPolicy;
  * política que se ha aplicado a la firma. Este validador marcara la política como desconocida pero permite obtener
  * informacion y/o documentacion sobre la política.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class GeneralPolicyManager implements IValidacionPolicy {
@@ -82,7 +82,7 @@ public class GeneralPolicyManager implements IValidacionPolicy {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see es.mityc.firmaJava.policy.IValidacionPolicy#getIdentidadPolicy()
      */
     public String getIdentidadPolicy() {
@@ -91,7 +91,7 @@ public class GeneralPolicyManager implements IValidacionPolicy {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see es.mityc.firmaJava.policy.IValidacionPolicy#validaPolicy(org.w3c.dom.Element,
      * es.mityc.firmaJava.libreria.xades.ResultadoValidacion)
      */

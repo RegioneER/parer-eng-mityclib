@@ -21,9 +21,9 @@ package es.mityc.firmaJava.ts;
  * <p>
  * Clase encargada de gestionar los errores producidos en TSCliente.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TSClienteError extends Exception {
@@ -41,7 +41,7 @@ public class TSClienteError extends Exception {
      * <p>
      * Crea una nueva instancia de TSClienteError.
      * </p>
-     * 
+     *
      * @param mensaje
      *            Valor del mensaje
      */
@@ -53,7 +53,7 @@ public class TSClienteError extends Exception {
      * <p>
      * Crea una nueva instancia de TSClienteError.
      * </p>
-     * 
+     *
      * @param causa
      *            Excepcion original
      */
@@ -65,7 +65,7 @@ public class TSClienteError extends Exception {
      * <p>
      * Crea una nueva instancia de TSClienteError.
      * </p>
-     * 
+     *
      * @param mensaje
      *            Valor del mensaje
      * @param causa
@@ -79,7 +79,7 @@ public class TSClienteError extends Exception {
      * <p>
      * Devuelve una descripcion corta de la excepcion.
      * </p>
-     * 
+     *
      * @return "Nombre de la clase":"Mensaje de la excepcion"
      */
     public String toString() {

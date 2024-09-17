@@ -29,9 +29,9 @@ import es.mityc.javasign.xml.transform.Transform;
 
 /**
  * Interfaz para señalar las clases que representan objetos a ser firmados
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class AbstractObjectToSign {
@@ -43,7 +43,7 @@ public abstract class AbstractObjectToSign {
      * <p>
      * Incluye la transformada indicada para que se aplique en el objeto a firmar.
      * </p>
-     * 
+     *
      * @param t
      *            transformada
      */
@@ -70,7 +70,7 @@ public abstract class AbstractObjectToSign {
      * <p>
      * Devuelve el listado de transformadas que se quieren aplicar al objeto.
      * </p>
-     * 
+     *
      * @return lista de transformadas
      */
     @SuppressWarnings("unchecked")
@@ -82,7 +82,7 @@ public abstract class AbstractObjectToSign {
      * <p>
      * Devuelve una URI que sirve para indicar donde se encuentra el objeto a ser firmado.
      * </p>
-     * 
+     *
      * @return URI de referencia
      */
     public abstract String getReferenceURI();
@@ -94,7 +94,7 @@ public abstract class AbstractObjectToSign {
      * <p>
      * Este método debera ser sobreescrito por las clases hijas que quieran devolver un tipo específico.
      * </p>
-     * 
+     *
      * @return devuelve <code>null</code>
      */
     public String getType() {
@@ -108,10 +108,10 @@ public abstract class AbstractObjectToSign {
      * <p>
      * Este método debera ser sobreescrito por las clases hijas que quieran incluir nuevos objetos de firma.
      * </p>
-     * 
+     *
      * @param doc
      *            Document en el que iran los objetos
-     * 
+     *
      * @return devuelve una lista vacía
      */
     public List<ObjectContainer> getObjects(Document doc) {
@@ -125,7 +125,7 @@ public abstract class AbstractObjectToSign {
      * <p>
      * Este método debera ser sobreescrito por las clases hijas que quieran incluir Resolver extra.
      * </p>
-     * 
+     *
      * @return devuelve <code>null</code>
      */
     public MITyCResourceResolver getResolver() {

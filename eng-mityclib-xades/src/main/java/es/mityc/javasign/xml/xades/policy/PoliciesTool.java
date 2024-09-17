@@ -32,9 +32,9 @@ import es.mityc.firmaJava.libreria.xades.errores.PolicyException;
  * <p>
  * Utilidad para facilitar la gestion de algunas tareas relacionadas con políticas.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class PoliciesTool {
@@ -43,12 +43,12 @@ public class PoliciesTool {
      * <p>
      * Inserta un nodo de política.
      * </p>
-     * 
+     *
      * <p>
      * Busca el lugar correspondiente donde debería ir la política en la firma e incluye el nodo con los datos
      * indicados. Si ya existe un nodo de política lo sustituye (solo puede haber una política por firma).
      * </p>
-     * 
+     *
      * @param signNode
      *            Nodo que tiene la firma en la que se quiere insertar el nodo de política
      * @param namespaceDS
@@ -59,7 +59,7 @@ public class PoliciesTool {
      *            Version de esquema XAdES
      * @param spi
      *            Nodo de política
-     * 
+     *
      * @throws PolicyException
      *             Lanazada cuando no se encuentra donde colocar la política o surge algún problema al insertar el nodo
      */

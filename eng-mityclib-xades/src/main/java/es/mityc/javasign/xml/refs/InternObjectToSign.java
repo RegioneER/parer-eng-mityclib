@@ -21,9 +21,9 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
 
 /**
  * Representa un objeto interior al XML pero exterior a la firma (ds:signature) que se quiere firmar.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class InternObjectToSign extends AbstractObjectToSign {
@@ -34,7 +34,7 @@ public class InternObjectToSign extends AbstractObjectToSign {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param id
      *            Identidad del nodo a firmar
      */

@@ -23,7 +23,7 @@ import org.w3c.dom.Element;
  * Clase para indicar nombres de elementos
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class NombreNodo {

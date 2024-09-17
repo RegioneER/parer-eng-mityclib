@@ -23,9 +23,9 @@ import java.net.URI;
  * <p>
  * Guarda informacion extra sobre codificacion y MIME de un objeto.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ExtraObjectData {
@@ -39,7 +39,7 @@ public class ExtraObjectData {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param mimeType
      *            Tipo mime del objeto
      * @param encoding

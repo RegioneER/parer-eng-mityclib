@@ -28,9 +28,9 @@ import sun.security.action.GetPropertyAction;
 
 /**
  * Se tomo como base la clase URLEncoder.java del paquete java.net de SUN Microsystems, Inc.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -116,10 +116,10 @@ public final class URIEncoder {
      *
      * @param s
      *            <code>String</code> to be translated.
-     * 
+     *
      * @deprecated The resulting string may vary depending on the platform's default encoding. Instead, use the
      *             encode(String,String) method to specify the encoding.
-     * 
+     *
      * @return the translated <code>String</code>.
      */
     @Deprecated
@@ -148,14 +148,14 @@ public final class URIEncoder {
      *            <code>String</code> to be translated.
      * @param enc
      *            The name of a supported <a href="../lang/package-summary.html#charenc">character encoding</a>.
-     * 
+     *
      * @return the translated <code>String</code>.
-     * 
+     *
      * @exception UnsupportedEncodingException
      *                If the named encoding is not supported
-     * 
+     *
      * @see URLDecoder#decode(java.lang.String, java.lang.String)
-     * 
+     *
      * @since 1.4
      */
     public static String encode(String s, String enc) throws UnsupportedEncodingException {
@@ -238,12 +238,12 @@ public final class URIEncoder {
 
     /**
      * Devuelve la ruta relativa de un objeto con respecto a una direccion base
-     * 
+     *
      * @param base
      *            ruta absoluta base
      * @param object
      *            ruta absoluta del objeto
-     * 
+     *
      * @return ruta relativa
      */
     public static String relativize(String base, String object) {

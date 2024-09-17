@@ -115,7 +115,7 @@ import es.mityc.javasign.xml.xades.policy.PoliciesManager;
  * Clase principal para la firma de documentos XML
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class FirmaXML {
@@ -151,7 +151,7 @@ public class FirmaXML {
      * <p>
      * Establece la TSA que se utilizarÃ¡ para obtener los sellos de tiempo en caso de ser necesario.
      * </p>
-     * 
+     *
      * @param url
      *            ruta de la TSA
      */
@@ -163,7 +163,7 @@ public class FirmaXML {
      * <p>
      * Establece el namespace que se aplicarÃ¡ a los nodos de XML Signature.
      * </p>
-     * 
+     *
      * @param namespace
      *            Namespace aplicado a XMLSig
      */
@@ -175,7 +175,7 @@ public class FirmaXML {
      * <p>
      * Establece el Locale del sistema antiguo de internacionalizaciÃ³n.
      * </p>
-     * 
+     *
      * @param locale
      *            LocalizaciÃ³n a aplicar
      */
@@ -186,7 +186,7 @@ public class FirmaXML {
     /**
      * AÃ±ade una instancia encargada de resolver los accesos a elementos firmados en la firma cuyo contenido es
      * privado.
-     * 
+     *
      * @param resolver
      *            objeto que implementa la interfaz IPrivateDate para el acceso a elementos privados
      */
@@ -196,7 +196,7 @@ public class FirmaXML {
 
     /**
      * AÃ±ade una instancia encargada de resolver accesos a informaciÃ³n.
-     * 
+     *
      * @param resolver
      *            resolver
      */
@@ -210,7 +210,7 @@ public class FirmaXML {
     /**
      * AÃ±ade una instancia encargada de resolver los accesos a elementos firmados en la firma que requieran un acceso
      * especial.
-     * 
+     *
      * @param resolver
      *            objeto que implementa la interfaz IResourceData para el acceso a elementos
      */
@@ -234,7 +234,7 @@ public class FirmaXML {
 
     /**
      * Firma un fichero XML
-     * 
+     *
      * @param pk
      *            Clave privada del certificado firmante
      * @param firmaCertificado
@@ -243,10 +243,10 @@ public class FirmaXML {
      *            Fichero XML a firmar
      * @param directorioPerfil
      *            Directorio de configuracion de Firefox
-     * 
+     *
      * @throws java.lang.Exception
      *             En caso de error
-     * 
+     *
      * @return Array de bytes con el XML firmado
      */
     public boolean signFile(X509Certificate firmaCertificado, DataToSign xml, IPKStoreManager storeManager,
@@ -867,7 +867,7 @@ public class FirmaXML {
 
     /**
      * Este mÃ©todo realiza la implementaciÃ³n de la firma XADES-BES
-     * 
+     *
      * @param doc
      *            Documento de firma
      * @param firmaID
@@ -876,9 +876,9 @@ public class FirmaXML {
      *            Certificado que realiza la firma
      * @param elementoPrincipalFirma
      *            Elemento principal del nodo de firma
-     * 
+     *
      * @return Documento de firma con formato XADES-BES
-     * 
+     *
      * @throws Exception
      */
     private Document addXades(Document doc, String firmaID, X509Certificate firmaCertificado,
@@ -1169,16 +1169,16 @@ public class FirmaXML {
 
     /**
      * Este mÃ©todo aÃ±ade la implementaciÃ³n para XADES-T
-     * 
+     *
      * @param doc
      *            Documento de firma con formato XADES-BES
      * @param firmaID
      *            Identificador del nodo de firma
      * @param selloTiempo
      *            Respuesta del servidor TSA con el sello de tiempo en formato binario
-     * 
+     *
      * @return Documento de firma con formato XADES-T
-     * 
+     *
      * @throws Exception
      */
     private Document addXadesT(Element firma, String firmaID, byte[] selloTiempo) throws AddXadesException {
@@ -1288,7 +1288,7 @@ public class FirmaXML {
 
     /**
      * Este mÃ©todo aÃ±ade la implementacion para XADES-C
-     * 
+     *
      * @param doc
      *            Documento de firma con formato XADES-T
      * @param tiempoRespuesta
@@ -1297,9 +1297,9 @@ public class FirmaXML {
      *            Valor del OCSPResponse
      * @param certRefs
      *            Cadena de CertificaciÃ³n del certificado de firma
-     * 
+     *
      * @return Documento de firma con formato XADES-C
-     * 
+     *
      * @throws Exception
      */
     private Document addXadesC(Element firma,
@@ -1583,12 +1583,12 @@ public class FirmaXML {
      * 1.2.2 y 1.3.2. Los elementos sobre los que se calcula el sello son los siguientes: - SignatureValue -
      * SignatureTimestamp - CompleteCertificateRefs - CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2:
      * - AttributeCertificateRefs - AttributeRevocationRefs
-     * 
+     *
      * @param Element
      *            UnsignedSignatureProperties Nodo a partir del cual se aÃ±ade el nodo SigAndRefsTimeStamp
-     * 
+     *
      * @return Documento de firma con formato XADES-X
-     * 
+     *
      * @throws AddXadesException
      *             En caso de error
      */
@@ -1739,12 +1739,12 @@ public class FirmaXML {
      * 1.1.1, 1.2.2 y 1.3.2. Los elementos sobre los que se calcula el sello son los siguientes: -
      * CompleteCertificateRefs - CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2: -
      * AttributeCertificateRefs - AttributeRevocationRefs
-     * 
+     *
      * @param Element
      *            UnsignedSignatureProperties Nodo a partir del cual se aÃ±ade el nodo RefsOnlyTimeStamp
-     * 
+     *
      * @return Documento de firma con formato XADES-X
-     * 
+     *
      * @throws AddXadesException
      *             En caso de error
      */
@@ -1891,14 +1891,14 @@ public class FirmaXML {
 
     /**
      * Este metodo aÃ±ade la implementacion para XADES-XL
-     * 
+     *
      * @param doc
      *            Documento de firma con formato XADES-X
      * @param valorCertificado
      * @param valorRevocacion
-     * 
+     *
      * @return Documento de firma con formato XADES-XL
-     * 
+     *
      * @throws Exception
      */
     private Document addXadesXL(Element firma, ArrayList<RespYCerts> respuestas, XAdESSchemas schema)
@@ -2087,7 +2087,7 @@ public class FirmaXML {
 
     /**
      * Contrafirma una firma segÃºn esquema XAdES
-     * 
+     *
      * @param firmaCertificado
      * @param xml
      * @param storeManager
@@ -2095,9 +2095,9 @@ public class FirmaXML {
      * @param esquemaOrigen
      * @param destino
      * @param nombreArchivo
-     * 
+     *
      * @return
-     * 
+     *
      * @throws Exception
      */
     public void countersignFile(X509Certificate firmaCertificado, DataToSign xml, IPKStoreManager storeManager,
@@ -2141,7 +2141,7 @@ public class FirmaXML {
 
     /**
      * Contrafirma una firma segÃºn esquema XAdES
-     * 
+     *
      * @param pk
      *            .- Clave privada del certificado
      * @param certificadoFirma
@@ -2314,7 +2314,7 @@ public class FirmaXML {
 
     /**
      * Sube el nivel XAdES de un InputStream de firma y lo guarda en la direcciÃ³n indicada
-     * 
+     *
      * @param InputStream
      *            Stream que contiene la firma
      * @param EnumFormatoFirma
@@ -2361,7 +2361,7 @@ public class FirmaXML {
 
     /**
      * Sube el nivel XAdES de un archivo de firma y lo sobreescribe
-     * 
+     *
      * @param File
      *            archivo que contiene la firma
      * @param EnumFormatoFirma
@@ -2755,12 +2755,12 @@ public class FirmaXML {
 
     /**
      * Este mÃ©todo se encarga de insertar las URIs de XADES-C en la firma
-     * 
+     *
      * @param doc,
      *            Documento con la firma xml
      * @param listaArchivos,
      *            Lista de nombres de la respuestaOCSP y el path de certificaciÃ³n
-     * 
+     *
      * @return Document doc, Documento firmado con las nuevas URIÂ´s
      */
     public Document addURIXadesC(Element firma, ArrayList<NombreElementos> listaArchivos, String baseUri)
@@ -2900,7 +2900,7 @@ public class FirmaXML {
 
     /**
      * Este mÃ©todo se encarga de guardar los archivos OCSP
-     * 
+     *
      * @return un ArrayList con la lista de archivos guardados
      */
     public ArrayList<NombreElementos> saveOCSPFiles(ArrayList<RespYCerts> respuesta, IStoreElements storer) {

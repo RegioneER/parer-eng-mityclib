@@ -64,7 +64,7 @@ import es.mityc.firmaJava.ts.ConstantesTSA;
  * </ol>
  * Special thanks to Jim Kellerman at <a href="http://www.powerset.com/">http://www.powerset.com/</a> for contributing
  * the new Base64 dialects.</li>
- * 
+ *
  * <li>v2.1 - Cleaned up javadoc comments and unused variables and methods. Added some convenience methods for reading
  * and writing to and from files.</li>
  * <li>v2.0.2 - Now specifies UTF-8 encoding in places where the code fails on systems with other encodings (like
@@ -97,7 +97,7 @@ import es.mityc.firmaJava.ts.ConstantesTSA;
  *
  * @author Robert Harder
  * @author rob@iharder.net
- * 
+ *
  * @version 2.2.1
  */
 // implements ConstantesTSA
@@ -360,9 +360,9 @@ public final class Base64 {
      *            the array to convert
      * @param numSigBytes
      *            the number of significant bytes in your array
-     * 
+     *
      * @return four byte array in Base64 notation.
-     * 
+     *
      * @since 1.5.1
      */
     private static byte[] encode3to4(byte[] b4, byte[] threeBytes, int numSigBytes, int options) {
@@ -393,9 +393,9 @@ public final class Base64 {
      *            the array to hold the conversion
      * @param destOffset
      *            the index where output will be put
-     * 
+     *
      * @return the <var>destination</var> array
-     * 
+     *
      * @since 1.3
      */
     private static byte[] encode3to4(byte[] source, int srcOffset, int numSigBytes, byte[] destination, int destOffset,
@@ -451,9 +451,9 @@ public final class Base64 {
      *
      * @param serializableObject
      *            The object to encode
-     * 
+     *
      * @return The Base64-encoded object
-     * 
+     *
      * @since 1.4
      */
     public static String encodeObject(Serializable serializableObject) {
@@ -465,7 +465,7 @@ public final class Base64 {
      * serialized or there is another error, the method will return <tt>null</tt>.
      * <p>
      * Valid options:
-     * 
+     *
      * <pre>
      *   GZIP: gzip-compresses object before encoding it.
      *   DONT_BREAK_LINES: don't break lines at 76 characters
@@ -480,12 +480,12 @@ public final class Base64 {
      *            The object to encode
      * @param options
      *            Specified options
-     * 
+     *
      * @return The Base64-encoded object
-     * 
+     *
      * @see Base64#GZIP
      * @see Base64#DONT_BREAK_LINES
-     * 
+     *
      * @since 2.0
      */
     public static String encodeObject(Serializable serializableObject, int options) {
@@ -556,7 +556,7 @@ public final class Base64 {
      *
      * @param source
      *            The data to convert
-     * 
+     *
      * @since 1.4
      */
     public static String encodeBytes(byte[] source) {
@@ -567,7 +567,7 @@ public final class Base64 {
      * Encodes a byte array into Base64 notation.
      * <p>
      * Valid options:
-     * 
+     *
      * <pre>
      *   GZIP: gzip-compresses object before encoding it.
      *   DONT_BREAK_LINES: don't break lines at 76 characters
@@ -583,10 +583,10 @@ public final class Base64 {
      *            The data to convert
      * @param options
      *            Specified options
-     * 
+     *
      * @see Base64#GZIP
      * @see Base64#DONT_BREAK_LINES
-     * 
+     *
      * @since 2.0
      */
     public static String encodeBytes(byte[] source, int options) {
@@ -602,7 +602,7 @@ public final class Base64 {
      *            Offset in array where conversion should begin
      * @param len
      *            Length of data to convert
-     * 
+     *
      * @since 1.4
      */
     public static String encodeBytes(byte[] source, int off, int len) {
@@ -613,7 +613,7 @@ public final class Base64 {
      * Encodes a byte array into Base64 notation.
      * <p>
      * Valid options:
-     * 
+     *
      * <pre>
      *   GZIP: gzip-compresses object before encoding it.
      *   DONT_BREAK_LINES: don't break lines at 76 characters
@@ -635,10 +635,10 @@ public final class Base64 {
      *            Specified options
      * @param options
      *            alphabet type is pulled from this (standard, url-safe, ConstantesTSA.ORDERED)
-     * 
+     *
      * @see Base64#GZIP
      * @see Base64#DONT_BREAK_LINES
-     * 
+     *
      * @since 2.0
      */
     public static String encodeBytes(byte[] source, int off, int len, int options) {
@@ -761,7 +761,7 @@ public final class Base64 {
      * <p>
      * This is the lowest level of the decoding methods with all possible parameters.
      * </p>
-     * 
+     *
      *
      * @param source
      *            the array to convert
@@ -773,9 +773,9 @@ public final class Base64 {
      *            the index where output will be put
      * @param options
      *            alphabet type is pulled from this (standard, url-safe, ConstantesTSA.ORDERED)
-     * 
+     *
      * @return the number of decoded bytes converted
-     * 
+     *
      * @since 1.3
      */
     private static int decode4to3(byte[] source, int srcOffset, byte[] destination, int destOffset, int options) {
@@ -850,9 +850,9 @@ public final class Base64 {
      *            The offset of where to begin decoding
      * @param len
      *            The length of characters to decode
-     * 
+     *
      * @return decoded data
-     * 
+     *
      * @since 1.3
      */
     public static byte[] decode(byte[] source, int off, int len, int options) {
@@ -910,9 +910,9 @@ public final class Base64 {
      *
      * @param s
      *            the string to decode
-     * 
+     *
      * @return the decoded data
-     * 
+     *
      * @since 1.4
      */
     public static byte[] decode(String s) {
@@ -926,9 +926,9 @@ public final class Base64 {
      *            the string to decode
      * @param options
      *            encode options such as ConstantesTSA.URL_SAFE
-     * 
+     *
      * @return the decoded data
-     * 
+     *
      * @since 1.4
      */
     public static byte[] decode(String s, int options) {
@@ -1004,9 +1004,9 @@ public final class Base64 {
      *
      * @param encodedObject
      *            The Base64 data to decode
-     * 
+     *
      * @return The decoded and deserialized object
-     * 
+     *
      * @since 1.5
      */
     public static Object decodeToObject(String encodedObject) {
@@ -1054,7 +1054,7 @@ public final class Base64 {
      *            byte array of data to encode in base64 form
      * @param filename
      *            Filename for saving encoded data
-     * 
+     *
      * @return <tt>true</tt> if successful, <tt>false</tt> otherwise
      *
      * @since 2.1
@@ -1094,7 +1094,7 @@ public final class Base64 {
      *            Base64-encoded data as a string
      * @param filename
      *            Filename for saving decoded data
-     * 
+     *
      * @return <tt>true</tt> if successful, <tt>false</tt> otherwise
      *
      * @since 2.1
@@ -1129,7 +1129,7 @@ public final class Base64 {
      *
      * @param filename
      *            Filename for reading encoded data
-     * 
+     *
      * @return decoded byte array or null if unsuccessful
      *
      * @since 2.1
@@ -1188,7 +1188,7 @@ public final class Base64 {
      *
      * @param filename
      *            Filename for reading binary data
-     * 
+     *
      * @return base64-encoded string or null if unsuccessful
      *
      * @since 2.1
@@ -1239,7 +1239,7 @@ public final class Base64 {
      *            Input file
      * @param outfile
      *            Output file
-     * 
+     *
      * @since 2.2
      */
     public static void encodeFileToFile(String infile, String outfile) {
@@ -1268,7 +1268,7 @@ public final class Base64 {
      *            Input file
      * @param outfile
      *            Output file
-     * 
+     *
      * @since 2.2
      */
     public static void decodeFileToFile(String infile, String outfile) {
@@ -1297,7 +1297,7 @@ public final class Base64 {
      * and encode/decode to/from Base64 notation on the fly.
      *
      * @see Base64
-     * 
+     *
      * @since 1.3
      */
     public static class InputStream extends FilterInputStream {
@@ -1317,7 +1317,7 @@ public final class Base64 {
          *
          * @param in
          *            the <tt>java.io.InputStream</tt> from which to read data.
-         * 
+         *
          * @since 1.3
          */
         public InputStream(java.io.InputStream in) {
@@ -1328,7 +1328,7 @@ public final class Base64 {
          * Constructs a {@link Base64.InputStream} in either ENCODE or DECODE mode.
          * <p>
          * Valid options:
-         * 
+         *
          * <pre>
          *   ENCODE or DECODE: Encode or Decode as data is read.
          *   DONT_BREAK_LINES: don't break lines at 76 characters
@@ -1343,11 +1343,11 @@ public final class Base64 {
          *            the <tt>java.io.InputStream</tt> from which to read data.
          * @param options
          *            Specified options
-         * 
+         *
          * @see Base64#ENCODE
          * @see Base64#DECODE
          * @see Base64#DONT_BREAK_LINES
-         * 
+         *
          * @since 2.0
          */
         public InputStream(java.io.InputStream in, int options) {
@@ -1367,7 +1367,7 @@ public final class Base64 {
          * Reads enough of the input stream to convert to/from Base64 and returns the next byte.
          *
          * @return next byte
-         * 
+         *
          * @since 1.3
          */
         public int read() throws java.io.IOException {
@@ -1482,9 +1482,9 @@ public final class Base64 {
          *            offset for array
          * @param len
          *            max number of bytes to read into array
-         * 
+         *
          * @return bytes read into array or -1 if end of stream is encountered.
-         * 
+         *
          * @since 1.3
          */
         public int read(byte[] dest, int off, int len) throws java.io.IOException {
@@ -1515,7 +1515,7 @@ public final class Base64 {
      * and encode/decode to/from Base64 notation on the fly.
      *
      * @see Base64
-     * 
+     *
      * @since 1.3
      */
     public static class OutputStream extends FilterOutputStream {
@@ -1536,7 +1536,7 @@ public final class Base64 {
          *
          * @param out
          *            the <tt>java.io.OutputStream</tt> to which data will be written.
-         * 
+         *
          * @since 1.3
          */
         public OutputStream(java.io.OutputStream out) {
@@ -1547,7 +1547,7 @@ public final class Base64 {
          * Constructs a {@link Base64.OutputStream} in either ENCODE or DECODE mode.
          * <p>
          * Valid options:
-         * 
+         *
          * <pre>
          *   ENCODE or DECODE: Encode or Decode as data is read.
          *   ConstantesTSA.DONT_BREAK_LINES: don't break lines at 76 characters
@@ -1561,11 +1561,11 @@ public final class Base64 {
          *            the <tt>java.io.OutputStream</tt> to which data will be written.
          * @param options
          *            Specified options.
-         * 
+         *
          * @see Base64#ENCODE
          * @see Base64#DECODE
          * @see Base64#ConstantesTSA.DONT_BREAK_LINES
-         * 
+         *
          * @since 1.3
          */
         public OutputStream(java.io.OutputStream out, int options) {
@@ -1590,7 +1590,7 @@ public final class Base64 {
          *
          * @param theByte
          *            the byte to write
-         * 
+         *
          * @since 1.3
          */
         public void write(int theByte) throws java.io.IOException {
@@ -1645,7 +1645,7 @@ public final class Base64 {
          *            offset for array
          * @param len
          *            max number of bytes to read into array
-         * 
+         *
          * @since 1.3
          */
         public void write(byte[] theBytes, int off, int len) throws java.io.IOException {

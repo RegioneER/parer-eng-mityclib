@@ -21,9 +21,9 @@ package es.mityc.javasign.trust;
  * <p>
  * Lanzada cuando algún elemento criptografico ha sido alterado.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class FakedTrustException extends NotTrustedException {
@@ -44,7 +44,7 @@ public class FakedTrustException extends NotTrustedException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -56,7 +56,7 @@ public class FakedTrustException extends NotTrustedException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Excepcion responsable de lanzar esta otra
      */
@@ -68,7 +68,7 @@ public class FakedTrustException extends NotTrustedException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

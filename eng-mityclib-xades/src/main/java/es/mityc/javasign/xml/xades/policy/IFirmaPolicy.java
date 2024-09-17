@@ -24,18 +24,18 @@ import es.mityc.firmaJava.libreria.xades.errores.PolicyException;
 
 /**
  * Interfaz que han de implementar las clases que añadan policies que gestiona el manager de policies.
- * 
+ *
  * Ademas los escritores de policies deben tener un constructor por defecto sin parametros.
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IFirmaPolicy {
 
     /**
      * Este método debera encargarse escribir la policy.
-     * 
+     *
      * @param signNode
      *            nodo raíz (de firma) de la firma en la que se quiere escribir la política
      * @param namespaceDS
@@ -44,7 +44,7 @@ public interface IFirmaPolicy {
      *            namespace de XAdES
      * @param schema
      *            esquema de XAdEs
-     * 
+     *
      * @throws lanza
      *             una excepcion si no puede escribir la policy.
      */

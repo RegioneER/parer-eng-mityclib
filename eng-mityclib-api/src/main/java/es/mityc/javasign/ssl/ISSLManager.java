@@ -24,9 +24,9 @@ import javax.net.ssl.TrustManager;
  * <p>
  * Interfaz que han de cumplir los gestionadores de las conexiones SSL del cliente.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface ISSLManager {
@@ -35,7 +35,7 @@ public interface ISSLManager {
      * <p>
      * Devuelve el gestionador de confianza del otro peer de la conexion.
      * </p>
-     * 
+     *
      * @return gestor de confianza
      */
     TrustManager getTrustManager();
@@ -44,7 +44,7 @@ public interface ISSLManager {
      * <p>
      * Devuelve el gestionador de la autenticacion por parte de este peer de la conexion.
      * </p>
-     * 
+     *
      * @return gestionador de las claves
      */
     KeyManager getKeyManager();
@@ -53,7 +53,7 @@ public interface ISSLManager {
      * <p>
      * Devuelve el gestionador ante errores en el establecimiento del SSL.
      * </p>
-     * 
+     *
      * @return gestionador de errores, <code>null</code> si no se desea ninguno
      */
     ISSLErrorManager getSSLErrorManager();

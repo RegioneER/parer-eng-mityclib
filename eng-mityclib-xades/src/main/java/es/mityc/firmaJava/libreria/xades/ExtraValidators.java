@@ -25,7 +25,7 @@ import es.mityc.javasign.xml.xades.policy.IValidacionPolicy;
 
 /**
  * Esta clase contiene los validadores adicionales que se utilizaran al validar la firma XAdES.
- * 
+ *
  * <br/>
  * <br/>
  * Estos validadores contemplan la validacion de:
@@ -36,9 +36,9 @@ import es.mityc.javasign.xml.xades.policy.IValidacionPolicy;
  * <li>Confianza: comprueban que los elementos de la firma sean de entidades de confianza (certificados de firma,
  * respuestas de estados de certificados, sellos de tiempo, etc).</li>
  * </ul>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ExtraValidators {

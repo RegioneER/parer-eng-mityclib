@@ -45,7 +45,7 @@ public class CRLRef extends CRLRefType {
      * @param schema
      * @param method
      * @param crl
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     public CRLRef(XAdESSchemas schema, String method, X509CRL crl) throws InvalidInfoNodeException {
@@ -56,7 +56,7 @@ public class CRLRef extends CRLRefType {
      * @param schema
      * @param method
      * @param crlFile
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     public CRLRef(XAdESSchemas schema, String method, File crlFile) throws InvalidInfoNodeException {

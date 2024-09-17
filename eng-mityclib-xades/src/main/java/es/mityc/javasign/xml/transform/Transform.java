@@ -24,9 +24,9 @@ import org.w3c.dom.NodeList;
  * <p>
  * Guarda informacion sobre una transformada que se va a aplicar a un objeto a firmar.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class Transform {
@@ -40,7 +40,7 @@ public class Transform {
      * <p>
      * Construye una transformada general con el algoritmo indicado.
      * </p>
-     * 
+     *
      * @param alg
      *            Algoritmo de la transformada
      * @param extraData
@@ -56,7 +56,7 @@ public class Transform {
      * <p>
      * Establece el generador de los nodos de informacion extra.
      * </p>
-     * 
+     *
      * @param extraData
      */
     protected void setTransformData(ITransformData extraData) {
@@ -67,7 +67,7 @@ public class Transform {
      * <p>
      * Devuelve el algoritmo de la transformada.
      * </p>
-     * 
+     *
      * @return the algorithm
      */
     public String getAlgorithm() {
@@ -78,10 +78,10 @@ public class Transform {
      * <p>
      * Devuelve el listado de nodos de informacion extra que necesita la transformada.
      * </p>
-     * 
+     *
      * @param doc
      *            Documento en el que ira la transformada
-     * 
+     *
      * @return listado de nodos
      */
     public NodeList getExtraData(Document doc) {

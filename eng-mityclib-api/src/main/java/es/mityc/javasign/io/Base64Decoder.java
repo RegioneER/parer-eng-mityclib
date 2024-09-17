@@ -21,12 +21,12 @@ package es.mityc.javasign.io;
  * <p>
  * Decodificador de tramas base64 basado en la clase <code>java.utils.prefs.Base64</code>.
  * </p>
- * 
+ *
  * <p>
  * Implementa la interfaz {@link IDecoder} para permitir su uso en <i>streams</i> de entrada, pudiendo decodificar al
  * vuelo en pequeños bloques de lectura.
  * </p>
- * 
+ *
  * <p>
  * Hay que tener en cuenta que base64 se dispone en bloques de 4 elementos. Debido a que el bloque obtenido para
  * decodificar puede no ajustarse a ese tamaño, el decodificador mantiene un pequeño buffer para los elementos que
@@ -34,11 +34,11 @@ package es.mityc.javasign.io;
  * {@link #isIncomplete()} la existencia de datos que no se han podido decodificar (es decir, que la trama base64 no
  * finalizaba correctamente).
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
- * 
+ *
  * @see es.mityc.javasign.io.IDecoder
  */
 public class Base64Decoder implements IDecoder {
@@ -69,7 +69,7 @@ public class Base64Decoder implements IDecoder {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param onlyCountMode
      *            Indica si se debe iniciar el decoder solo contando bytes sin decodificar
      */
@@ -90,7 +90,7 @@ public class Base64Decoder implements IDecoder {
      * <p>
      * Devuelve la cantidad de bytes que se han obtenido en binario desde el último reseteo.
      * </p>
-     * 
+     *
      * @return cantidad de bytes contados
      */
     public long getCount() {
@@ -101,14 +101,14 @@ public class Base64Decoder implements IDecoder {
      * <p>
      * Añade el buffer indicado al ya existente.
      * </p>
-     * 
+     *
      * @param data
      *            array con los nuevos datos
      * @param pos
      *            posicion del array desde la que se incluyen los datos
      * @param len
      *            cantidad de bytes que hay que añadir
-     * 
+     *
      * @see es.mityc.javasign.io.IDecoder#addInput(byte[], int, int)
      */
     public void addInput(final byte[] data, final int pos, final int len) {
@@ -136,19 +136,19 @@ public class Base64Decoder implements IDecoder {
      * Lanzara una excepcion {@link ArrayIndexOutOfBoundsException} si los datos de acceso al buffer de escritura son
      * incorrectos.
      * </p>
-     * 
+     *
      * @param data
      *            Array en el que escribir los datos
      * @param off
      *            Posicion a partir de la cual escribir
      * @param len
      *            Cantidad de bytes maximo que se puede escribir
-     * 
+     *
      * @return Cantidad de bytes que se han decodificado
-     * 
+     *
      * @throws DecodingException
      *             Si la cantidad de datos a leer es demasiado
-     * 
+     *
      * @see es.mityc.javasign.io.IDecoder#decode(byte[], int, int)
      */
     public int decode(final byte[] data, final int off, final int len) throws DecodingException {
@@ -198,22 +198,22 @@ public class Base64Decoder implements IDecoder {
      * <p>
      * Modified from java.utils.prefs.Base64.
      * </p>
-     * 
+     *
      * @param s
      *            base64 string
      * @param data
      *            binary result
      * @param off
      *            offset to write in data
-     * 
+     *
      * @return bytes writed in data
-     * 
+     *
      * @author Josh Bloch
-     * 
+     *
      * @version 1.5, 12/19/03
-     * 
+     *
      * @see java.util.prefs.Preferences
-     * 
+     *
      * @since 1.4
      */
     private static int base64ToByteArray(final String s, byte[] data, final int off) {
@@ -264,14 +264,14 @@ public class Base64Decoder implements IDecoder {
     /**
      * Translates the specified character, which is assumed to be in the "Base 64 Alphabet" into its equivalent 6-bit
      * positive integer.
-     * 
+     *
      * @param c
      *            character
      * @param alphaToInt
      *            alphabet
-     * 
+     *
      * @return translated character
-     * 
+     *
      * @throw IllegalArgumentException or ArrayOutOfBoundsException if c is not in the Base64 Alphabet.
      */
     private static int base64toInt(final char c, final byte[] alphaToInt) {
@@ -297,9 +297,9 @@ public class Base64Decoder implements IDecoder {
      * <p>
      * Indica que se ha quedado sin datos en el buffer para seguir decodificando.
      * </p>
-     * 
+     *
      * @return <code>true</code> si necesita mas datos, <code>false</code> en otro caso
-     * 
+     *
      * @see es.mityc.javasign.io.IDecoder#needsInput()
      */
     public boolean needsInput() {
@@ -310,10 +310,10 @@ public class Base64Decoder implements IDecoder {
      * <p>
      * Indica que han quedado datos en los buffers internos.
      * </p>
-     * 
+     *
      * @return <code>true</code> si quedan bytes sin haber sido decoficados en el buffer, <code>false</code> en otro
      *         caso
-     * 
+     *
      * @see es.mityc.javasign.io.IDecoder#isIncomplete()
      */
     public boolean isIncomplete() {

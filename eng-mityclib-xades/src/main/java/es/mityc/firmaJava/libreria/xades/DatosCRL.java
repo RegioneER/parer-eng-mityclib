@@ -24,7 +24,7 @@ import es.mityc.firmaJava.trust.ConfianzaEnum;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -41,7 +41,7 @@ public class DatosCRL {
 
     /**
      * Almacena informacion referente a una lista de revocacion de certificados
-     * 
+     *
      * @param issuer
      *            .- Emisor de la CRL
      * @param fechaEmision

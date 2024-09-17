@@ -30,7 +30,7 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class IssuerSerial extends X509IssuerSerialType {
@@ -65,7 +65,7 @@ public class IssuerSerial extends X509IssuerSerialType {
 
     /**
      * Este elemento lo pueden hacer público los elementos
-     * 
+     *
      * @see es.mityc.firmaJava.libreria.xades.elementos.xmldsig.AbstractXDsigElement#createElement(org.w3c.dom.Document,
      *      java.lang.String)
      */
@@ -76,13 +76,13 @@ public class IssuerSerial extends X509IssuerSerialType {
 
     /**
      * Este elemento lo pueden hacer público los elementos
-     * 
+     *
      * @param doc
      * @param namespaceXDsig
      * @param namespaceXAdES
-     * 
+     *
      * @return
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
@@ -134,11 +134,11 @@ public class IssuerSerial extends X509IssuerSerialType {
     }
 
     /**
-     * 
+     *
      * @param element
      * @param namespaceXAdES
      * @param namespaceXDsig
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     public void addContent(Element element, String namespaceXAdES, String namespaceXDsig)

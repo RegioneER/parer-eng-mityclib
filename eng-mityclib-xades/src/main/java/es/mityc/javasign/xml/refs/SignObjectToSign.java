@@ -27,9 +27,9 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * Este objeto solo debe utilizarse en una firma XAdES 1.3.2 o superior. Si es esta firmando mediante un XAdES 1.1.1 o
  * 1.2.2 se recomienda utilizar la clase {@link InternObjectToSign}.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class SignObjectToSign extends InternObjectToSign {
@@ -38,7 +38,7 @@ public class SignObjectToSign extends InternObjectToSign {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param id
      *            identidad que tiene la firma contrafirmada
      */
