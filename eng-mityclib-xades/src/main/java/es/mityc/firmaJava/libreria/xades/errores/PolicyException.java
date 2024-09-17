@@ -21,7 +21,7 @@ package es.mityc.firmaJava.libreria.xades.errores;
  * Excepcion para indicar que hay un error en la validacion de una policy
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 

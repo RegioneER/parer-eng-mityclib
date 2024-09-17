@@ -44,9 +44,9 @@ import es.mityc.firmaJava.libreria.xades.errores.FirmaXMLError;
 
 /**
  * Conjunto de utilidades para tratar todos xml.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 
@@ -67,7 +67,7 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del documento, y que se ajusten
      * al namespace.
-     * 
+     *
      * @param doc
      *            documento en el que se buscaran los hijos (en cualquier profundidad)
      * @param ns
@@ -75,9 +75,9 @@ public class UtilidadTratarNodo {
      *            que el nodo raiz)
      * @param nombreHijos
      *            nombre del tag de los hijos que se buscaran
-     * 
+     *
      * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Document doc, String ns, String nombreHijos,
@@ -88,10 +88,10 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
      * al namespace.
-     * 
+     *
      * Equivalente a la ejecucion: <blockquote> obtenerByteNodo(Element padre, String ns, String nombreHijos, true)
      * </blockquote>
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos (en cualquier profundidad)
      * @param ns
@@ -99,9 +99,9 @@ public class UtilidadTratarNodo {
      *            que el nodo padre)
      * @param nombreHijos
      *            nombre del tag de los hijos que se buscaran
-     * 
+     *
      * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Element padre, String ns, String nombreHijos,
@@ -112,7 +112,7 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
      * al namespace.
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos (en la profundidad indicada entre 1 y 5)
      * @param ns
@@ -122,9 +122,9 @@ public class UtilidadTratarNodo {
      *            nombre del tag de los hijos que se buscaran
      * @param requerido
      *            Si el valor es <code>true</code> y no se encuentra ningún hijo lanzara excepcion
-     * 
+     *
      * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Element padre, String ns, String nombreHijos, boolean requerido,
@@ -195,7 +195,7 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
      * al namespace.
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
      * @param ns
@@ -206,9 +206,9 @@ public class UtilidadTratarNodo {
      * @param tope
      *            Elemento en el que se para la búsqueda (no se incluira en el array de bytes), <code>null</code> si no
      *            se quiere tope
-     * 
+     *
      * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Element padre, String ns, String nombreHijos, Element tope)
@@ -281,7 +281,7 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
      * al namespace.
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
      * @param nombreHijos
@@ -289,9 +289,9 @@ public class UtilidadTratarNodo {
      * @param tope
      *            Elemento en el que se para la búsqueda (no se incluira en el array de bytes), <code>null</code> si no
      *            se quiere tope
-     * 
+     *
      * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Element padre, ArrayList<NombreNodo> nombreHijos, Element tope)
@@ -356,7 +356,7 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan antes
      * del elemento tope.
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
      * @param tope
@@ -364,7 +364,7 @@ public class UtilidadTratarNodo {
      *            quiere tope
      * @param nombreHijo
      *            Namespace y localname de los hijos que se buscaran
-     * 
+     *
      * @return listado con los elementos encontrados
      */
     public static ArrayList<Element> obtenerNodos(Element padre, Element tope, NombreNodo nombreHijo) {
@@ -394,7 +394,7 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan antes
      * del elemento tope.
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
      * @param tope
@@ -402,9 +402,9 @@ public class UtilidadTratarNodo {
      *            quiere tope
      * @param nombreHijos
      *            listado de Namespace y localname de los hijos que se buscaran
-     * 
+     *
      * @return listado con los elementos encontrados
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static ArrayList<Element> obtenerNodos(Element padre, Element tope, ArrayList<NombreNodo> nombreHijos)
@@ -434,10 +434,10 @@ public class UtilidadTratarNodo {
 
     /**
      * Devuelve un array de bytes con el contenido de los elementos indicados (tras una canonalizacion estandar).
-     * 
+     *
      * @param nodos
      *            listado de elementos
-     * 
+     *
      * @return array de bytes
      */
     public static byte[] obtenerByteNuevo(ArrayList<Element> nodos, CanonicalizationEnum canonicalization)
@@ -468,10 +468,10 @@ public class UtilidadTratarNodo {
 
     /**
      * Devuelve un array de bytes con el contenido de los elementos indicados (tras una canonalizacion estandar).
-     * 
+     *
      * @param nodos
      *            listado de elementos
-     * 
+     *
      * @return array de bytes
      */
     public static byte[] obtenerByte(Element nodo, CanonicalizationEnum canonicalization) throws FirmaXMLError {
@@ -509,10 +509,10 @@ public class UtilidadTratarNodo {
 
     /**
      * Devuelve un array de bytes con el contenido de los elementos indicados (tras una canonalizacion estandar).
-     * 
+     *
      * @param nodos
      *            listado de elementos
-     * 
+     *
      * @return array de bytes
      */
     public static byte[] obtenerByte(ArrayList<Element> nodos, CanonicalizationEnum canonicalization)
@@ -563,10 +563,10 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve un listado con las ID de los elementos. Si no encuentra un atributo que sea ID, busca entre los
      * atributos alguno que tenga la <i>forma</i> de ID.
-     * 
+     *
      * @param elementos
      *            listado con los elementos de los cuales obtener las IDs
-     * 
+     *
      * @return
      */
     public static ArrayList<String> obtenerIDs(ArrayList<Element> elementos) {
@@ -600,9 +600,9 @@ public class UtilidadTratarNodo {
 
     /**
      * Busca en una lista de nodos un elemento que tenga un atributo con nombre <b>Id</b> con el valor especificado
-     * 
+     *
      * @param id
-     * 
+     *
      * @return
      */
     public static Element getElementById(NodeList list, String id) {
@@ -626,10 +626,10 @@ public class UtilidadTratarNodo {
 
     /**
      * Explora el elemento y sus hijos para obtener un elemento que tenga la Id indicada
-     * 
+     *
      * @param el
      * @param id
-     * 
+     *
      * @return
      */
     private static Element exploreElementById(Element el, String id) {
@@ -655,10 +655,10 @@ public class UtilidadTratarNodo {
 
     /**
      * Busca un nodo que tenga la Id indicada. Busca la id en cualquier atributo que tenga la forma Id, ID, o id.
-     * 
+     *
      * @param doc
      * @param id
-     * 
+     *
      * @return el elemento con la id indicada, <code>null</code> si no hay ningún elemento con esa id.
      */
     public static Element getElementById(Document doc, String id) {
@@ -682,10 +682,10 @@ public class UtilidadTratarNodo {
     /**
      * Busca un nodo que tenga la Id indicada que sea hijo del nodo indicado. Busca la id en cualquier atributo que
      * tenga la forma Id, ID, o id.
-     * 
+     *
      * @param doc
      * @param id
-     * 
+     *
      * @return el elemento con la id indicada, <code>null</code> si no hay ningún elemento con esa id.
      */
     public static Element getElementById(Element padre, String id) {
@@ -705,12 +705,12 @@ public class UtilidadTratarNodo {
      * <p>
      * Comprueba si el nodo hijo indicado es hijo del nodo padre indicado.
      * </p>
-     * 
+     *
      * @param child
      *            Elemento hijo
      * @param parent
      *            Elemento que se comprueba si es el padre
-     * 
+     *
      * @return <code>true</code> si el hijo es hijo del padre
      */
     public static boolean isChildNode(Element child, Element parent) {
@@ -725,14 +725,14 @@ public class UtilidadTratarNodo {
      * <p>
      * Comprueba si el nodo hijo indicado no es hijo de un nodo padre que se ajuste al tipo de nodo indicado.
      * </p>
-     * 
+     *
      * @param child
      *            Elemento hijo
      * @param parent
      *            Tipo de elemento que se comprueba si es el padre
      * @param top
      *            Tope de elemento padre del que no se pasara buscando padres
-     * 
+     *
      * @return <code>true</code> si el hijo es hijo del padre
      */
     public static boolean isChildNode(Element child, NombreNodo parent, Element top) {
@@ -748,10 +748,10 @@ public class UtilidadTratarNodo {
 
     /**
      * Genera una nueva ID que no esté siendo usada en el documento
-     * 
+     *
      * @param doc
      * @param prefix
-     * 
+     *
      * @return
      */
     public static String newID(Document doc, String prefix) {
@@ -764,7 +764,7 @@ public class UtilidadTratarNodo {
     /**
      * Método para obtener el primer nodo de tipo Element hijo del nodo dado. En la búsqueda se excluyen los nodos de
      * texto "vacíos" (con caracteres de retorno de carro o espacios), los nodos Attribute y los nodos de comentario
-     * 
+     *
      * @param Element
      *            .- Nodo padre en el que buscar el primer hijo de tipo Element
      */
@@ -790,7 +790,7 @@ public class UtilidadTratarNodo {
     /**
      * Método para obtener el primer nodo de tipo Element vecino del nodo dado. En la búsqueda se excluyen nodos de
      * texto "vacíos" (con caracteres de retorno de carro o espacios), los nodos Attribute y los nodos de comentario
-     * 
+     *
      * @param Element
      *            .- Nodo en el que buscar su primer vecino de tipo Element
      */
@@ -815,9 +815,9 @@ public class UtilidadTratarNodo {
 
     /**
      * Obtiene todos los hijos de tipo Element de un determinado nodo
-     * 
+     *
      * @param nodo
-     * 
+     *
      * @return
      */
     public static ArrayList<Element> getElementChildNodes(Element nodo, boolean strict) {
@@ -840,16 +840,16 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan dentro
      * del límite establecido por tope.
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos, nietos, bisnietos, etc... según el nivel de profundidad
      * @param tope
      *            int Numero de niveles de profundidad para la búsqueda mínimo 1 y maximo 5.
      * @param nombreHijos
      *            Namespace y localname de los hijos que se buscaran
-     * 
+     *
      * @return listado con los elementos encontrados
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static ArrayList<Element> obtenerNodos(Element padre, int tope, NombreNodo nombreHijos)
@@ -941,16 +941,16 @@ public class UtilidadTratarNodo {
     /**
      * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan dentro
      * del límite establecido por tope.
-     * 
+     *
      * @param padre
      *            nodo padre del que se buscaran los hijos, nietos, bisnietos, etc... según el nivel de profundidad
      * @param tope
      *            int Numero de niveles de profundidad para la búsqueda mínimo 1 y maximo 5.
      * @param nombreHijos
      *            localname de los hijos que se buscaran
-     * 
+     *
      * @return listado con los elementos encontrados
-     * 
+     *
      * @throws FirmaXMLError
      */
     public static ArrayList<Element> obtenerNodos(Element padre, int tope, String nombreHijos) throws FirmaXMLError {
@@ -1041,7 +1041,7 @@ public class UtilidadTratarNodo {
      * Escribe el documento a un flujo de salida. Este método es la exposicion pública de un método de la libreria
      * XMLSec de Apache. Este método no añade el preambulo de XML
      * </p>
-     * 
+     *
      * @param document
      *            El documento a salvar
      * @param outputStream
@@ -1056,7 +1056,7 @@ public class UtilidadTratarNodo {
      * Escribe el documento a un flujo de salida. Este método es la exposicion pública de un método de la libreria
      * XMLSec de Apache.
      * </p>
-     * 
+     *
      * @param document
      *            El documento a salvar
      * @param outputStream

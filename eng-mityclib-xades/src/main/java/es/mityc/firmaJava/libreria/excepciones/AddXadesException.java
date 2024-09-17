@@ -19,7 +19,7 @@ package es.mityc.firmaJava.libreria.excepciones;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 

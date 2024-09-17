@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public enum EncodingEnum {

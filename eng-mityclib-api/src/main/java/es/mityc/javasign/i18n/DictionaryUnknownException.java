@@ -21,9 +21,9 @@ package es.mityc.javasign.i18n;
  * <p>
  * Lanzada cuando se produce un error al acceder al sistema de internacionalizacion.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DictionaryUnknownException extends Exception {
@@ -44,7 +44,7 @@ public class DictionaryUnknownException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -56,7 +56,7 @@ public class DictionaryUnknownException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -68,7 +68,7 @@ public class DictionaryUnknownException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

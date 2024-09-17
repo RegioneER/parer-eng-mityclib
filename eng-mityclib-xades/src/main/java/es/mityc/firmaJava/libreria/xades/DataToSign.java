@@ -37,7 +37,7 @@ import es.mityc.javasign.xml.xades.LocalFileStoreElements;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DataToSign {
@@ -91,7 +91,7 @@ public class DataToSign {
      * <p>
      * La recomendacion del estandar es que el XML a firmar esté en UTF-8 (valor que toma este campo por defecto).
      * </p>
-     * 
+     *
      * @param _encoding
      *            Codificacion del xml
      */
@@ -106,7 +106,7 @@ public class DataToSign {
      * <p>
      * Por defecto devuelve UTF-8.
      * </p>
-     * 
+     *
      * @return codificacion del XML
      */
     public String getXMLEncoding() {
@@ -117,7 +117,7 @@ public class DataToSign {
      * <p>
      * Establece el tipo de XAdES-X que se quiere aplicar en la firma.
      * </p>
-     * 
+     *
      * @param _xadesXType
      *            Tipo de XAdES-X
      */
@@ -132,7 +132,7 @@ public class DataToSign {
      * <p>
      * Por defecto el tipo es el 1.
      * </p>
-     * 
+     *
      * @return tipo de XAdES-X
      */
     public XADES_X_TYPES getXAdESXType() {
@@ -141,7 +141,7 @@ public class DataToSign {
 
     /**
      * Devuelve el nodo padre que se ha configurado para que contenga la firma.
-     * 
+     *
      * @return nodo padre configurado, <code>null</code> si se quiere que la firme cuelgue del nodo raíz
      */
     public String getParentSignNode() {
@@ -150,7 +150,7 @@ public class DataToSign {
 
     /**
      * Establece la identidad del nodo padre que se quiere que contenga la firma.
-     * 
+     *
      * @param parentNode
      *            ID del nodo que se quiere configurar, <code>null</code> si se quiere que se cuelgue del nodo raíz
      */
@@ -160,9 +160,9 @@ public class DataToSign {
 
     /**
      * Devuelve el formato de firma XAdES que se quiere aplicar en la firma. Por defecto se tiene establecido XAdES-BES.
-     * 
+     *
      * @return
-     * 
+     *
      * @see es.mityc.firmaJava.configuracion.EnumFormatoFirma
      */
     public EnumFormatoFirma getXadesFormat() {
@@ -171,9 +171,9 @@ public class DataToSign {
 
     /**
      * Establece el formato de firma XAdES que se quiere aplicar a la firma
-     * 
+     *
      * @param xadesFormat
-     * 
+     *
      * @see es.mityc.firmaJava.configuracion.EnumFormatoFirma
      */
     public void setXadesFormat(EnumFormatoFirma xadesFormat) {
@@ -182,7 +182,7 @@ public class DataToSign {
 
     /**
      * Indica si la firma ha de llevar política. Por defecto se tiene establecido que no se añade política.
-     * 
+     *
      * @return
      */
     public boolean hasPolicy() {
@@ -191,7 +191,7 @@ public class DataToSign {
 
     /**
      * Devuelve la clave de la política que se quiere aplicar a la firma (<code>null</code> si se quiere la implícita).
-     * 
+     *
      * @return
      */
     public String getPolicyKey() {
@@ -200,7 +200,7 @@ public class DataToSign {
 
     /**
      * Establece si se quiere incluir una política en la firma
-     * 
+     *
      * @param addPolicy
      *            <b>true</b> si se quiere incluir política, <b>false</b> si no
      */
@@ -210,12 +210,12 @@ public class DataToSign {
 
     /**
      * Clave identificativa de la política que se quiere incluir.
-     * 
+     *
      * <br/>
      * <br/>
      * Las claves disponibles dependeran de los modulos disponibles de políticas de firma (por ejemplo MITyCLibPolicy).
      * Para política implícita se debe utilizar <code>null</code>.
-     * 
+     *
      * @param policyKey
      */
     public void setPolicyKey(String policyKey) {
@@ -225,7 +225,7 @@ public class DataToSign {
     /**
      * Establece cual sera la instancia encargada de almacenar los elementos externos a una firma XAdES-X/XAdES-X
      * (certificados y estados).
-     * 
+     *
      * @param storer
      */
     public void setElementsStorer(IStoreElements storer) {
@@ -264,7 +264,7 @@ public class DataToSign {
 
     /**
      * Establece el documento que se quiere firmar
-     * 
+     *
      * @param doc
      */
     public void setDocument(Document doc) {

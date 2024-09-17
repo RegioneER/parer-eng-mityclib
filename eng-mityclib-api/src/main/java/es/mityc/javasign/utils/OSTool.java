@@ -28,7 +28,7 @@ import es.mityc.javasign.ConstantsAPI;
  * </p>
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public final class OSTool {
@@ -144,7 +144,7 @@ public final class OSTool {
          * <p>
          * Constructor.
          * </p>
-         * 
+         *
          * @param osname
          *            Familia del sistema operativo
          * @param osversion
@@ -165,7 +165,7 @@ public final class OSTool {
          * <p>
          * Indica si el sistema operativo pertenece a la familia Windows.
          * </p>
-         * 
+         *
          * @return <code>true</code> si es de la familia Windows, <code>false</code> en otro caso
          */
         public boolean isWindows() {
@@ -179,7 +179,7 @@ public final class OSTool {
          * <p>
          * Indica si el sistema operativo pertenece a la familia Linux.
          * </p>
-         * 
+         *
          * @return <code>true</code> si es de la familia Linux, <code>false</code> en otro caso
          */
         public boolean isLinux() {
@@ -193,7 +193,7 @@ public final class OSTool {
          * <p>
          * Indica si el sistema operativo pertenece a la familia Mac OS X.
          * </p>
-         * 
+         *
          * @return <code>true</code> si es de la familia Mac OS X, <code>false</code> en otro caso
          */
         public boolean isMacOsX() {
@@ -207,7 +207,7 @@ public final class OSTool {
          * <p>
          * Indica si el kernel del sistema operativo es de 32 bits.
          * </p>
-         * 
+         *
          * @return <code>true</code> si el kernel es de 32 bits, <code>false</code> en otro caso
          */
         public boolean is32bits() {
@@ -221,7 +221,7 @@ public final class OSTool {
          * <p>
          * Indica si el kernel del sistema operativo es de 64 bits.
          * </p>
-         * 
+         *
          * @return <code>true</code> si el kernel es de 64 bits, <code>false</code> en otro caso
          */
         public boolean is64bits() {
@@ -235,7 +235,7 @@ public final class OSTool {
          * <p>
          * Devuelve la version del sistema operativo dentro de la familia.
          * </p>
-         * 
+         *
          * @return Cadena con la version del sistema operativo
          */
         public String getVersion() {
@@ -246,7 +246,7 @@ public final class OSTool {
          * <p>
          * Devuelve una cadena descriptiva del sistema operativo descrito por el enumerado.
          * </p>
-         * 
+         *
          * @return cadena descriptiva del SO
          */
         @Override
@@ -270,7 +270,7 @@ public final class OSTool {
      * <p>
      * Comprueba si el windows es de 64 bits.
      * </p>
-     * 
+     *
      * @return <code>true</code> si el windows es reconocido de 64bits, <code>false</code> en otro caso
      */
     private static boolean isWindows64bits() {
@@ -291,7 +291,7 @@ public final class OSTool {
      * <p>
      * Comprueba si el Mac OS X es de 64 bits.
      * </p>
-     * 
+     *
      * @return <code>true</code> si el Mac OS X es reconocido de 64bits, <code>false</code> en otro caso
      */
     private static boolean isMacosx64bits() {
@@ -312,7 +312,7 @@ public final class OSTool {
      * <p>
      * Comprueba si la maquina virtual es de 64 bits.
      * </p>
-     * 
+     *
      * @return <code>true</code> si la propiedad <code>sun.arch.data.model</code>
      */
     private static boolean isSun64bits() {
@@ -328,7 +328,7 @@ public final class OSTool {
      * <p>
      * Recupera el número de versios mayor de windows.
      * </p>
-     * 
+     *
      * @return en la version <code>major.minor</code> de windows devuelve <code>major</code>
      */
     private static int getWindowsMajorVersion() {
@@ -345,7 +345,7 @@ public final class OSTool {
      * <p>
      * Recupera el sustema operativo en el que se ejecuta la maquina virtual.
      * </p>
-     * 
+     *
      * @return enumerado SO con el sistema operativo detectado
      */
     public static OS askSO() {
@@ -441,7 +441,7 @@ public final class OSTool {
      * <p>
      * Devuelve el sistema operativo en el que se ejecuta la aplicacion.
      * </p>
-     * 
+     *
      * @return elemento del enumerado con los datos del sistema operativo
      */
     public static OS getSO() {
@@ -461,7 +461,7 @@ public final class OSTool {
      * <p>
      * Indica si la clase se esta ejecutando desde un plugin (applet, jsdl, etc).
      * </p>
-     * 
+     *
      * @return <code>true</code> si se esta ejecutando desde un plugin, <code>false</code> en otro caso
      */
     public static boolean isPlugin() {
@@ -472,13 +472,14 @@ public final class OSTool {
      * <p>
      * Indica si el sistema operativo en el que se ejecuta la clase es Linux.
      * </p>
-     * 
+     *
      * @return <code>true</code> si el sistema operativo es Linux, <code>false</code> en otro caso
-     * 
+     *
      * @deprecated Utilizar el enumerado OS obtenido a través de {@link OSTool#getSO()}
-     * 
+     *
      * @see es.mityc.javasign.utils.OSTool#getSO()
      */
+    @Deprecated
     public static boolean isOSLinux() {
         if (System.getProperty(OS_NAME).toLowerCase().startsWith(LINUX)) {
             return true;
@@ -490,13 +491,14 @@ public final class OSTool {
      * <p>
      * Indica si el sistema operativo en el que se ejecuta la clase es Windows.
      * </p>
-     * 
+     *
      * @return <code>true</code> si el sistema operativo es Windows, <code>false</code> en otro caso
-     * 
+     *
      * @deprecated Utilizar el enumerado OS obtenido a través de {@link OSTool#getSO()}
-     * 
+     *
      * @see es.mityc.javasign.utils.OSTool#getSO()
      */
+    @Deprecated
     public static boolean isOSWindows() {
         if (System.getProperty(OS_NAME).toLowerCase().startsWith(WIN)) {
             return true;
@@ -508,7 +510,7 @@ public final class OSTool {
      * <p>
      * Devuelve el directorio raíz del usuario.
      * </p>
-     * 
+     *
      * @return directorio raíz del usuario
      */
     public static String getUserHome() {
@@ -526,7 +528,7 @@ public final class OSTool {
      * <p>
      * Devuelve el nombre del usuario.
      * </p>
-     * 
+     *
      * @return Nombre del usuario
      */
     public static String getUserName() {
@@ -537,11 +539,12 @@ public final class OSTool {
      * <p>
      * Devuelve el separador de ficheros.
      * </p>
-     * 
+     *
      * @return caracter de separacion de ficheros
-     * 
+     *
      * @deprecated utilizar File.Separator;
      */
+    @Deprecated
     public static String getFileSeparator() {
         if (isOSWindows()) {
             return System.getProperty(FILE_SEPARATOR).replace('\\', '/');
@@ -554,7 +557,7 @@ public final class OSTool {
      * <p>
      * Devuelve el directorio temporal.
      * </p>
-     * 
+     *
      * @return directorio temporal
      */
     public static String getTempDir() {
@@ -565,7 +568,7 @@ public final class OSTool {
      * <p>
      * Devuelve el directorio Home.
      * </p>
-     * 
+     *
      * @return directorio Home
      */
     public static String getHomeDir() {

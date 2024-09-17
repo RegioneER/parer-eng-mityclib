@@ -71,7 +71,7 @@ public class NoticeReferenceType extends AbstractXADESElement {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see es.mityc.firmaJava.libreria.xades.elementos.AbstractXMLElement#equals(java.lang.Object)
      */
     @Override

@@ -17,7 +17,7 @@
 
 /**
  * <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright 2008 Ministerio de Industria, Turismo y Comercio
  *
  */
@@ -31,7 +31,7 @@ import java.util.Iterator;
  * Clase para enlazar objetos del tipo (0..n) -> (0..1)
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
@@ -58,7 +58,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
 
     /**
      * Establece el dato
-     * 
+     *
      * @param obj
      *            dato que se enlaza, <code>null</code> si no hay ninguno
      */
@@ -68,7 +68,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
 
     /**
      * Devuelve el dato que se enlaza
-     * 
+     *
      * @return
      */
     public E getData() {
@@ -77,7 +77,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
 
     /**
      * Añade un nuevo enlace hacia este objeto
-     * 
+     *
      * @param node
      */
     public void addPrev(NTo1Link<E> node) {
@@ -88,7 +88,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
 
     /**
      * Devuelve un <code>Iterator</code> a los elementos que enlazan a este elemento.
-     * 
+     *
      * @return iterator a elementos que enlazan a este elemento, <code>null</code> si no hay ninguno
      */
     public Iterator<NTo1Link<E>> getPrevs() {
@@ -99,7 +99,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
 
     /**
      * Devuelve el número de elementos que enlazan a este elemento
-     * 
+     *
      * @return
      */
     public int getNumPrevs() {
@@ -110,7 +110,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
 
     /**
      * Establece el enlace hacia el siguiente elemento.
-     * 
+     *
      * @param node
      *            Siguiente elemento, <code>null</code> si no se quiere enlazar ningún elemento
      */
@@ -120,7 +120,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
 
     /**
      * Devuelve el siguiente elemento
-     * 
+     *
      * @return
      */
     public NTo1Link<E> getNext() {

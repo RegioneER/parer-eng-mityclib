@@ -6,3 +6,9 @@ target
 .idea
 .iml
 nbproject
+/**/.settings
+/**/.classpath
+/**/.project
+/**/.settings/
+.settings/
+

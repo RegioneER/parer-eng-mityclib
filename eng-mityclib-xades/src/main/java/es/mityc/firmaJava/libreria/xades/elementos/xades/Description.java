@@ -22,7 +22,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class Description extends AbstractXadesStringElement {

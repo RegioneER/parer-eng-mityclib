@@ -43,9 +43,9 @@ import es.mityc.javasign.i18n.II18nManager;
  * <p>
  * Dialogo para la peticion de contraseña de acceso a un dispositivo seguro.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 
@@ -84,7 +84,7 @@ class PINDialog {
      * <p>
      * Crea el dialogo y lo inicializa.
      * </p>
-     * 
+     *
      * @param owner
      *            Frame padre del dialogo
      */
@@ -182,7 +182,7 @@ class PINDialog {
      * <p>
      * Establece un título para la ventana de peticion de contraseña.
      * </p>
-     * 
+     *
      * @param newTitle
      *            Nuevo título
      */
@@ -194,7 +194,7 @@ class PINDialog {
      * <p>
      * Establece el mensaje de peticion de PIN.
      * </p>
-     * 
+     *
      * @param newMessage
      *            Nuevo mensaje
      */
@@ -206,7 +206,7 @@ class PINDialog {
      * <p>
      * Establece el icono que sera mostrado junto con el mensaje de peticion de PIN.
      * </p>
-     * 
+     *
      * @param icon
      *            Icono a mostrar.
      */
@@ -218,7 +218,7 @@ class PINDialog {
      * <p>
      * Establece el icono que sera mostrado junto con el mensaje de peticion de PIN.
      * </p>
-     * 
+     *
      * @param isVisible
      *            <code>false</code> para hacer el boton invisible
      */
@@ -240,7 +240,7 @@ class PINDialog {
      * <p>
      * Hace visible el dialogo de consulta.
      * </p>
-     * 
+     *
      * @param flag
      *            si es <code>true</code> inicializa los valores introducidos previamente
      */
@@ -256,7 +256,7 @@ class PINDialog {
      * <p>
      * Devuelve la última contraseña introducida en el dialogo.
      * </p>
-     * 
+     *
      * @return Contraseña
      */
     public char[] getPassword() {
@@ -276,7 +276,7 @@ class PINDialog {
      * <p>
      * Indica si la última accion en el dialogo fue la de cancelar el intento de acceso.
      * </p>
-     * 
+     *
      * @return <code>true</code> si el último intento se cancelo, <code>false</code> en otro caso
      */
     public boolean isCancelado() {
@@ -287,7 +287,7 @@ class PINDialog {
      * <p>
      * Devuelve el ancho del dialogo.
      * </p>
-     * 
+     *
      * @return el ancho del dialogo
      */
     public int getWidth() {
@@ -302,7 +302,7 @@ class PINDialog {
      * <p>
      * Devuelve el alto del dialogo.
      * </p>
-     * 
+     *
      * @return el alto del dialogo
      */
     public int getHeight() {
@@ -317,7 +317,7 @@ class PINDialog {
      * <p>
      * Coloca la esquina superior izquierda del dialogo en las coordenadas (x,y).
      * </p>
-     * 
+     *
      * @param x
      *            Coordenada horizontal expresada en pixels
      * @param y

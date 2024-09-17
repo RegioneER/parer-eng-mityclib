@@ -26,9 +26,9 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * Elemento DigestMethod (rfc 3275 4.3.3.5).
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DigestMethod extends AbstractXDsigElement {

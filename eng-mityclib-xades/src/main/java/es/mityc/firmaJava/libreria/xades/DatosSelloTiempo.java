@@ -27,7 +27,7 @@ import es.mityc.firmaJava.trust.ConfianzaEnum;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -46,7 +46,7 @@ public class DatosSelloTiempo {
 
     /**
      * Almacena informacion referente al sello de tiempo de una firma
-     * 
+     *
      * @param java.util.Date
      *            fecha .- Fecha del sello de tiempo
      * @param String

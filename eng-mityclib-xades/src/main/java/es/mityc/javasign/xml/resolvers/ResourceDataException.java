@@ -21,9 +21,9 @@ import es.mityc.javasign.xml.XmlException;
 
 /**
  * Esta excepcion se lanza cuando se produce algún error al intentar calcular el digest de informacion privada
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ResourceDataException extends XmlException {

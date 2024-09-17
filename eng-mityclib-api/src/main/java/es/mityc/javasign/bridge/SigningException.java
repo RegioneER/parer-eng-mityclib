@@ -21,9 +21,9 @@ package es.mityc.javasign.bridge;
  * <p>
  * Excepcion lanzada cuando se produce un error en la accion de firmar un documento.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class SigningException extends Exception {
@@ -41,7 +41,7 @@ public class SigningException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -53,7 +53,7 @@ public class SigningException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -65,7 +65,7 @@ public class SigningException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

@@ -24,7 +24,7 @@ import java.util.Map;
  * Interfaz que ha de implementar la clase que gestione la recuperacion de elementos relacionados con certificados y sus
  * estados.
  * </p>
- * 
+ *
  * <p>
  * Se recomienda que los localizadores respondan a los elementos mas comunes de identificacion de elementos:
  * <ul>
@@ -37,9 +37,9 @@ import java.util.Map;
  * <li><code>digest.value</code>: (byte[]) valor del digest del elemento (crl y ocsp)</li>
  * </ul>
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IRecoverElements {
@@ -63,16 +63,16 @@ public interface IRecoverElements {
      * <p>
      * Recupera un elemento del tipo especificado según los datos indicados.
      * </p>
-     * 
+     *
      * @param <T>
      *            Tipo de elemento devuelto
      * @param props
      *            Conjunto de propiedades utilizadas para identificar el elemento que se quiere recuperar
      * @param elementClass
      *            Tipo de objeto que se espera como respuesta de la consulta
-     * 
+     *
      * @return Objeto del tipo indicado si se ha conseguido encontrar el elemento
-     * 
+     *
      * @throws ElementNotFoundException
      *             lanzada cuando no se encuentra el elemento pedido con los datos provistos
      * @throws UnknownElementClassException

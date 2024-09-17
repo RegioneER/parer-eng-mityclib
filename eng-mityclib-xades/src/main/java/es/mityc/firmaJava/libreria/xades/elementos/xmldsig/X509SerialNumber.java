@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class X509SerialNumber extends AbstractXDsigIntegerElement {

@@ -23,9 +23,9 @@ import es.mityc.javasign.xml.xades.TransformProxy;
  * <p>
  * Transformada de canonicalizacion.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TransformC14NWithComm extends Transform {

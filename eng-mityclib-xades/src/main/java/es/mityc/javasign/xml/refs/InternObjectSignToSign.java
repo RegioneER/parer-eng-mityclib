@@ -28,9 +28,9 @@ import es.mityc.firmaJava.libreria.utilidades.UtilidadTratarNodo;
 
 /**
  * Representa un objeto que se quiere añadir como un objeto (ds:object) de la firma.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class InternObjectSignToSign extends AbstractObjectToSign {

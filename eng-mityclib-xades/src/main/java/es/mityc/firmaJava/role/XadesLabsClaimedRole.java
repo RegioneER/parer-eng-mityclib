@@ -60,7 +60,7 @@ public class XadesLabsClaimedRole implements IClaimedRole {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see es.mityc.firmaJava.role.IClaimedRole#createClaimedRoleContent(org.w3c.dom.Document)
      */
     public Node createClaimedRoleContent(Document doc) {

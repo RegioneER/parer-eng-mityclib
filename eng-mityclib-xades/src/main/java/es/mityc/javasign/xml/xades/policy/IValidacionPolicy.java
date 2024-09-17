@@ -23,30 +23,30 @@ import es.mityc.firmaJava.libreria.xades.ResultadoValidacion;
 
 /**
  * Interfaz que han de implementar los validadores de policies que gestiona el manager de policies.
- * 
+ *
  * Ademas los validadores de policies deben tener un constructor por defecto sin parametros.
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IValidacionPolicy {
 
     /**
      * Este método debera encargarse de validar que la firma cumple la policy implementada.
-     * 
+     *
      * @param nodoFirma
      *            nodo raíz (de firma) de la firma que se esta validando
      * @param resultadoValidacion
      *            resultado de la validacion de una firma
-     * 
+     *
      * @return devuelve el resultado de la validacion de la policy
      */
     public PolicyResult validaPolicy(Element nodoFirma, final ResultadoValidacion resultadoValidacion);
 
     /**
      * Devuelve una cadena que sirve para identificar la policy
-     * 
+     *
      * @return identificacion de la policy
      */
     public String getIdentidadPolicy();

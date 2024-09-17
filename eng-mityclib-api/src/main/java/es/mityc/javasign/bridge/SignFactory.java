@@ -35,7 +35,7 @@ import es.mityc.javasign.i18n.II18nManager;
  * <p>
  * Factoría para los facades de servicios de firma.
  * </p>
- * 
+ *
  * <p>
  * Mediante esta factoría, bajo patron singleton, se instancia los facades que dan servicio de firma. Estos facades
  * deberan contar con un constructor sin parametros que sera el llamado para generar la instancia que se entregara.
@@ -43,15 +43,15 @@ import es.mityc.javasign.i18n.II18nManager;
  * <p>
  * Los facades a instanciar se configuran mediante un fichero de propiedades (<code>bridge/sign.properties</code>), a
  * través de su propiedad <code>facade.sign.class</code> en la cual se indica la clase facade:
- * 
+ *
  * <pre>
  * # Indica la clase que implementa el interfaz ISignFacade que dara los servicios de firma
  * facade.sign.class=
  * </pre>
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public final class SignFactory {
@@ -100,7 +100,7 @@ public final class SignFactory {
      * <p>
      * Si no esta disponible el de contexto devuelve el propio de la clase.
      * </p>
-     * 
+     *
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
@@ -132,7 +132,7 @@ public final class SignFactory {
 
     /**
      * Devuelve una instancia la factoría de facades de servicios de firma.
-     * 
+     *
      * @return Instancia de la factoría
      */
     public static SignFactory getInstance() {
@@ -146,7 +146,7 @@ public final class SignFactory {
      * <p>
      * Devuelve el facade configurado para dar servicios de firma.
      * </p>
-     * 
+     *
      * @return Una instancia del validador de policy asociado o <code>null</code> si no hay ninguno asociado o no se
      *         puede instanciar.
      */

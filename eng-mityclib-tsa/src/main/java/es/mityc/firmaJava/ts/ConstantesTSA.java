@@ -19,7 +19,7 @@ package es.mityc.firmaJava.ts;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 

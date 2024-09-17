@@ -24,7 +24,7 @@ import java.net.PasswordAuthentication;
  * Authenticator que devuelve el usuario y contraseña configurados en cualquier circunstancia.
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0 beta
  */
 public class SimpleAuthenticator extends Authenticator {

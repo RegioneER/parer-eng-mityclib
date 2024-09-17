@@ -26,14 +26,14 @@ import java.io.InputStream;
  * Implementa un {@link InputStream} equivalente a {@link ByteArrayInputStream} pero que permite escribir en el array
  * del que se alimenta durante su uso.
  * </p>
- * 
+ *
  * <p>
  * Permite asociar un escritor general para ir llenando el array interno. El escritor general ha de implementar el
  * interfaz {@link IWriter}.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ByteArrayWrittableInputStream extends InputStream {
@@ -47,7 +47,7 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param wrt
      *            Escritor que se utilizara para rellenar el buffer
      */
@@ -60,12 +60,12 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * <p>
      * Lee del buffer de lectura. Si se vacía lo cambia al buffer de escritura y éste lo resetea.
      * </p>
-     * 
+     *
      * @return byte leido del buffer
-     * 
+     *
      * @throws IOException
      *             lanzada cuando se produce un error al leer del buffer
-     * 
+     *
      * @see java.io.InputStream#read()
      */
     @Override
@@ -82,7 +82,7 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * <p>
      * Actualiza los buffers de escritura y lectura con los últimos bytes escritos por el {@link IWriter} asociado.
      * </p>
-     * 
+     *
      * @throws IOException
      *             Lanzada si se produce un error al actualizar el buffer
      */
@@ -96,7 +96,7 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * <p>
      * Vacía el contenido del {@link IWriter} asociado en el array interno.
      * </p>
-     * 
+     *
      * @throws IOException
      *             Lanzada si se produce un error al asegurar el contenido interno
      */
@@ -108,17 +108,17 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * <p>
      * Indica si se pueden recuperar mas bytes del buffer interno.
      * </p>
-     * 
+     *
      * <p>
      * Comprueba en primer lugar si todavía quedan disponibles bytes en el buffer interno, y si no es el caso, consulta
      * al {@link IWriter} asociado a ver si ya se han producido mas datos.
      * </p>
-     * 
+     *
      * @return Númer de bytes disponibles en el buffer intermedio
-     * 
+     *
      * @throws IOException
      *             Lanzada si se produce un error al acceder al contenido interno
-     * 
+     *
      * @see java.io.InputStream#available()
      */
     @Override

@@ -31,9 +31,9 @@ import es.mityc.javasign.utils.Base64Coder;
  * <p>
  * Contiene los datos que identifican a un OCSP Responder.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class OCSPResponderID {
@@ -48,9 +48,9 @@ public abstract class OCSPResponderID {
      * <p>
      * Identifica a un OCSP responder mediante un nombre (X500 Name).
      * </p>
-     * 
+     *
      * @author Ministerio de Industria, Turismo y Comercio
-     * 
+     *
      * @version 1.0
      */
     public static class OCSPResponderIDName extends OCSPResponderID {
@@ -61,7 +61,7 @@ public abstract class OCSPResponderID {
          * <p>
          * Construye un identificador de OCSP Responder por nombre.
          * </p>
-         * 
+         *
          * @param name
          *            Nombre del respodner
          */
@@ -74,12 +74,12 @@ public abstract class OCSPResponderID {
          * <p>
          * Compara los campos internos de la respuesta.
          * </p>
-         * 
+         *
          * @param arg0
          *            Objeto con el que comparar si son el mismo OCSP Responder
-         * 
+         *
          * @return <code>true</code> si es un responder con el mismo X500Name, <code>false</code> en otro caso
-         * 
+         *
          * @see es.mityc.javasign.certificate.OCSPResponderID#equals(java.lang.Object)
          */
         @Override
@@ -100,9 +100,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve el hashCode del nombre del responder.
          * </p>
-         * 
+         *
          * @return hashCode
-         * 
+         *
          * @see java.lang.Object#hashCode()
          */
         @Override
@@ -114,9 +114,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve un objeto X500Principal como dato de identificacion.
          * </p>
-         * 
+         *
          * @return X500Principal con el nombre del responder
-         * 
+         *
          * @see es.mityc.javasign.certificate.OCSPResponderID#getIdentifierData()
          */
         @Override
@@ -128,9 +128,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve array de bytes de texto del responder.
          * </p>
-         * 
+         *
          * @return identificador
-         * 
+         *
          * @see java.lang.Object#toString()
          */
         @Override
@@ -144,9 +144,9 @@ public abstract class OCSPResponderID {
      * <p>
      * Identifica a un OCSP responder mediante el hash de su clave privada.
      * </p>
-     * 
+     *
      * @author Ministerio de Industria, Turismo y Comercio
-     * 
+     *
      * @version 1.0
      */
     public static class OCSPResponderIDHash extends OCSPResponderID {
@@ -157,7 +157,7 @@ public abstract class OCSPResponderID {
          * <p>
          * Construye un identificador de OCSP Responder por hash.
          * </p>
-         * 
+         *
          * @param hash
          *            hash de la clave pública del responder
          */
@@ -170,12 +170,12 @@ public abstract class OCSPResponderID {
          * <p>
          * Compara los campos internos de la respuesta.
          * </p>
-         * 
+         *
          * @param arg0
          *            Objeto con el que comparar si son el mismo OCSP Responder
-         * 
+         *
          * @return <code>true</code> si es un responder con el mismo hash, <code>false</code> en otro caso
-         * 
+         *
          * @see es.mityc.javasign.certificate.OCSPResponderID#equals(java.lang.Object)
          */
         @Override
@@ -192,9 +192,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve como hashCode el del hash de la clave privada.
          * </p>
-         * 
+         *
          * @return hashCode
-         * 
+         *
          * @see java.lang.Object#hashCode()
          */
         @Override
@@ -210,9 +210,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve un objeto byte[] como dato de identificacion.
          * </p>
-         * 
+         *
          * @return byte[] con el hash de la clave pública del responder
-         * 
+         *
          * @see es.mityc.javasign.certificate.OCSPResponderID#getIdentifierData()
          */
         @Override
@@ -224,9 +224,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve array de bytes de texto del responder.
          * </p>
-         * 
+         *
          * @return identificador
-         * 
+         *
          * @see java.lang.Object#toString()
          */
         @Override
@@ -239,9 +239,9 @@ public abstract class OCSPResponderID {
      * <p>
      * Identifica a un OCSP responder mediante una clave.
      * </p>
-     * 
+     *
      * @author Ministerio de Industria, Turismo y Comercio
-     * 
+     *
      * @version 1.0
      */
     public static class OCSPResponderIDUnknown extends OCSPResponderID {
@@ -252,7 +252,7 @@ public abstract class OCSPResponderID {
          * <p>
          * Construye un identificador de OCSP Responder desconocido.
          * </p>
-         * 
+         *
          * @param id
          *            identificador en textual del responder
          */
@@ -274,12 +274,12 @@ public abstract class OCSPResponderID {
          * <li>OCSPResponderIDUnknown: compara los identificadores</li>
          * </ul>
          * </p>
-         * 
+         *
          * @param arg0
          *            Objeto con el que comparar si son el mismo OCSP Responder
-         * 
+         *
          * @return <code>true</code> si es un responder con la misma identificacion, <code>false</code> en otro caso
-         * 
+         *
          * @see es.mityc.javasign.certificate.OCSPResponderID#equals(java.lang.Object)
          */
         @Override
@@ -320,9 +320,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve el hashCode de la cadena identificadora.
          * </p>
-         * 
+         *
          * @return hashCode
-         * 
+         *
          * @see java.lang.Object#hashCode()
          */
         @Override
@@ -334,9 +334,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve un objeto String como dato de identificacion.
          * </p>
-         * 
+         *
          * @return String con el identificador del responder
-         * 
+         *
          * @see es.mityc.javasign.certificate.OCSPResponderID#getIdentifierData()
          */
         @Override
@@ -348,9 +348,9 @@ public abstract class OCSPResponderID {
          * <p>
          * Devuelve el identificador de texto del responder.
          * </p>
-         * 
+         *
          * @return identificador
-         * 
+         *
          * @see java.lang.Object#toString()
          */
         @Override
@@ -363,7 +363,7 @@ public abstract class OCSPResponderID {
      * <p>
      * Construye una instancia del objeto indicando su tipo.
      * </p>
-     * 
+     *
      * @param type
      *            tipo de responder
      */
@@ -375,10 +375,10 @@ public abstract class OCSPResponderID {
      * <p>
      * Crea un identificado de OCSP responder por nombre.
      * </p>
-     * 
+     *
      * @param name
      *            Nombre X500 del responder
-     * 
+     *
      * @return identificador
      */
     public static OCSPResponderID getOCSPResponderID(final X500Principal name) {
@@ -389,10 +389,10 @@ public abstract class OCSPResponderID {
      * <p>
      * Crea un identificador de OCSP responder por hash de clave pública.
      * </p>
-     * 
+     *
      * @param data
      *            hash de la clave pública del responder
-     * 
+     *
      * @return identificador
      */
     public static OCSPResponderID getOCSPResponderID(final byte[] data) {
@@ -403,10 +403,10 @@ public abstract class OCSPResponderID {
      * <p>
      * Crea un identificador de OCSP responder.
      * </p>
-     * 
+     *
      * @param id
      *            cadena identificativa del responder
-     * 
+     *
      * @return identificador
      */
     public static OCSPResponderID getOCSPresponderID(final String id) {
@@ -420,7 +420,7 @@ public abstract class OCSPResponderID {
      * <p>
      * Si se desconoce el tipo de responder se devuelve <code>null</code>.
      * </p>
-     * 
+     *
      * @return Tipo de responder de este objeto, <code>null</code> si es desconocido
      */
     public TYPE_RESPONDER getTypeResponderID() {
@@ -431,7 +431,7 @@ public abstract class OCSPResponderID {
      * <p>
      * Devuelve los datos de identificacion.
      * </p>
-     * 
+     *
      * @return Instancia que contiene datos de identificacion
      */
     public abstract Object getIdentifierData();
@@ -440,9 +440,9 @@ public abstract class OCSPResponderID {
      * <p>
      * Cadena descriptiva del OCSPResponder.
      * </p>
-     * 
+     *
      * @return tipo de responder
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override

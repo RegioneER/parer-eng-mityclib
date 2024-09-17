@@ -24,9 +24,9 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * <p>
  * Indica que se debe firmar el contenido completo del XML.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class AllXMLToSign extends AbstractObjectToSign {

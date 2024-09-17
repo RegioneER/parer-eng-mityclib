@@ -26,9 +26,9 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
- * 
+ *
  *          TODO: incluir el tratamiento de la informacion en base6binary
  */
 public class EncapsulatedPKIDataType extends AbstractXADESElement {

@@ -31,7 +31,7 @@ import es.mityc.firmaJava.libreria.xades.errores.FirmaXMLError;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class UtilidadXadesX {
@@ -53,14 +53,14 @@ public class UtilidadXadesX {
      * necesarios son los siguientes: - SignatureValue - SignatureTimestamp - CompleteCertificateRefs -
      * CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2: - AttributeCertificateRefs -
      * AttributeRevocationRefs
-     * 
+     *
      * @param esquemaXADES
      * @param firma
      * @param nodoSigAndRefs
-     * 
+     *
      * @return ArrayList<Element> Coleccion de nodos para el calculo del sello de tiempo de tipo 1 (implícito)
      *         SigAndRefsTimeStamp
-     * 
+     *
      * @throws BadFormedSignatureException
      *             Si no existe, o existe mas de un nodo, o no se corresponde con el esquema, según sea el caso
      * @throws FirmaXMLError
@@ -241,13 +241,13 @@ public class UtilidadXadesX {
      * funcion del esquema XAdES de firma, a partir del nodo RefsOnly proporcionado, que actúa como tope Los nodos
      * necesarios son los siguientes: - CompleteCertificateRefs - CompleteRevocationRefs Opcionalmente en el esquema
      * 1.2.2 y 1.3.2: - AttributeCertificateRefs - AttributeRevocationRefs
-     * 
+     *
      * @param esquemaXADES
      * @param firma
      * @param nodoRefsOnly
-     * 
+     *
      * @return ArrayList<Element> Coleccion de nodos para el calculo del sello de tiempo
-     * 
+     *
      * @throws BadFormedSignatureException
      *             Si no existe, o existe mas de un nodo, o no se corresponde con el esquema, según sea el caso
      * @throws FirmaXMLError

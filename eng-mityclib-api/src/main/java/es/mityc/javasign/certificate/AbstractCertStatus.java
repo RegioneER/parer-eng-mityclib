@@ -23,9 +23,9 @@ import java.security.cert.X509Certificate;
  * <p>
  * Base abstracta con metodología común para las clases que recogen estados de certificados.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class AbstractCertStatus implements ICertStatus {
@@ -41,9 +41,9 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * <p>
      * Certificado consultado.
      * </p>
-     * 
+     *
      * @return X509Certificate consultado
-     * 
+     *
      * @see es.mityc.javasign.certificate.ICertStatus#getCertificate()
      */
     public X509Certificate getCertificate() {
@@ -57,9 +57,9 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * <p>
      * La forma binaria depende de la especificacion del estado de certificado que se implementa.
      * </p>
-     * 
+     *
      * @return byte[] con el contenido en binario del estado
-     * 
+     *
      * @see es.mityc.javasign.certificate.ICertStatus#getEncoded()
      */
     public abstract byte[] getEncoded();
@@ -68,9 +68,9 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * <p>
      * Informacion sobre la revocacion del certificado (si el estado es revocado).
      * </p>
-     * 
+     *
      * @return datos de revocacion, <code>null</code> si no esta revocado
-     * 
+     *
      * @see es.mityc.javasign.certificate.ICertStatus#getRevokedInfo()
      */
     public RevokedInfo getRevokedInfo() {
@@ -81,9 +81,9 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * <p>
      * Estado del certificado.
      * </p>
-     * 
+     *
      * @return estado del certificado según el enumerado {@link es.mityc.javasign.certificate.ICertStatus.CERT_STATUS}
-     * 
+     *
      * @see es.mityc.javasign.certificate.ICertStatus#getStatus()
      */
     public CERT_STATUS getStatus() {
@@ -94,7 +94,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * <p>
      * Establece el estado del certificado.
      * </p>
-     * 
+     *
      * @param status
      *            Estado del certificado según el enumerado
      *            {@link es.mityc.javasign.certificate.ICertStatus.CERT_STATUS}
@@ -107,7 +107,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * <p>
      * Establece informacion sobre el motivo de revocacion del certificado.
      * </p>
-     * 
+     *
      * @param ri
      *            Informacion de revocacion
      */
@@ -119,7 +119,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * <p>
      * Establece el certificado sobre el que se realiza la consulta de estado.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado consultado
      */

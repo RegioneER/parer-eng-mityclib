@@ -23,9 +23,9 @@ import java.util.Date;
  * <p>
  * Almacena informacion sobre el estado de revocacion de un certificado.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class RevokedInfo {
@@ -39,7 +39,7 @@ public class RevokedInfo {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param reason
      *            Motivo de la revocacion
      * @param date
@@ -54,7 +54,7 @@ public class RevokedInfo {
      * <p>
      * Devuelve el motivo de revocacion.
      * </p>
-     * 
+     *
      * @return Object que indica el motivo de revocacion
      */
     public Object getRevokedReason() {
@@ -65,7 +65,7 @@ public class RevokedInfo {
      * <p>
      * Devuelve la fecha de revocacion.
      * </p>
-     * 
+     *
      * @return fecha de revocacion
      */
     public Date getRevokedDate() {
@@ -76,9 +76,9 @@ public class RevokedInfo {
      * <p>
      * Clona el objeto y la fecha, pero no el motivo de revocacion.
      * </p>
-     * 
+     *
      * @return clonado del objeto
-     * 
+     *
      * @see java.lang.Object#clone()
      */
     @Override

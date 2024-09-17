@@ -30,9 +30,9 @@ import org.bouncycastle.tsp.TSPAlgorithms;
  * <p>
  * Clase con los algortimos de codificacion permitidos para el sellado de tiempo.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TSPAlgoritmos {
@@ -41,7 +41,7 @@ public class TSPAlgoritmos {
      * <p>
      * Devuelve una lista de algoritmos de sellado de tiempo aceptados.
      * </p>
-     * 
+     *
      * @return Lista de algoritmos
      */
     public static Set<String> getPermitidos() {
@@ -54,10 +54,10 @@ public class TSPAlgoritmos {
      * <p>
      * Resuelve el nombre del algortimo de digest a partir del OID.
      * </p>
-     * 
+     *
      * @param oid
      *            OID del algortimo buscado
-     * 
+     *
      * @return Nopmbre del algoritmo, o el OID proveído en caso de no poder ser resuelto
      */
     public static String getAlgName(final String oid) {
@@ -82,10 +82,10 @@ public class TSPAlgoritmos {
      * <p>
      * Resuelve el OID del algoritmo de Digest a partir del nombre.
      * </p>
-     * 
+     *
      * @param algoritmo
      *            Nombre del algoritmo buscado
-     * 
+     *
      * @return El OID del algoritmo, o <code>null</code> si no pudo resolverse
      */
     public static String getOID(final String algoritmo) {
@@ -129,10 +129,10 @@ public class TSPAlgoritmos {
 
     /**
      * Devuelve el algoritmo de digest asociado con el OID de algoritmo de digest indicado.
-     * 
+     *
      * @param oid
      *            Cadena de texto con el OID del algoritmo
-     * 
+     *
      * @return MessageDigest del OID indicado, o <code>null</code> si no se dispone de un algoritmo de digest asociado
      *         al OID indicado.
      */
@@ -153,7 +153,7 @@ public class TSPAlgoritmos {
      * <p>
      * Devuelve un array con los valores permitidos de algoritmos de Digest.
      * </p>
-     * 
+     *
      * @return Array de Strings con os valores permitidos
      */
     public static String[] getValoresPermitidos() {

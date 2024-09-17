@@ -26,9 +26,9 @@ import org.w3c.dom.Attr;
 /**
  * Este ResourceResolverSpi permite acceder a informacion de un elemento a través de un interfaz propio para poder
  * realizar una firma XML.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class XAdESResourceResolverSpi extends MITyCResourceResolver {

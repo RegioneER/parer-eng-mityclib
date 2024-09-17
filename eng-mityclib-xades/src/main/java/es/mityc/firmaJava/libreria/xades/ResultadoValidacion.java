@@ -28,7 +28,7 @@ import es.mityc.javasign.certificate.ICertStatus;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 
@@ -49,7 +49,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Crea una nueva instancia de ValidationResult()
-     * 
+     *
      * Los datos que contiene son: boolean validado.- Estado de validez de la firma ResultadoEnum resultado.- Estructura
      * de datos de resultado de validacion String log .- AlmacÃ©n de mensajes a mostrar en cliente String nivelValido .-
      * Mensaje con el Ãºltimo nivel XAdES valido EnumFormatoFirma EnumNivel.- Nivel XAdES de la firma (sin validar)
@@ -69,7 +69,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getLog() {
@@ -77,7 +77,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @param log
      */
     public void setLog(String log) {
@@ -85,7 +85,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @return
      */
     public boolean isValidate() {
@@ -93,7 +93,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @param validado
      */
     public void setValidate(boolean validado) {
@@ -117,7 +117,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @return
      */
     public String getNivelValido() {
@@ -125,7 +125,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @param log
      */
     public void setNivelValido(String nivelValido) {
@@ -133,7 +133,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @return
      */
     public DatosFirma getDatosFirma() {
@@ -141,7 +141,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @param datosFirma
      */
     public void setDatosFirma(DatosFirma datosFirma) {
@@ -150,7 +150,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Ãšltimo nivel validado
-     * 
+     *
      * @return EnumNivel
      */
     public EnumFormatoFirma getEnumNivel() {
@@ -159,7 +159,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Ãšltimo nivel validado
-     * 
+     *
      * @param enumNivel
      */
     public void setEnumNivel(EnumFormatoFirma enumNivel) {
@@ -168,7 +168,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Devuelve la URI de base del XML de firma
-     * 
+     *
      * @return URI
      */
     public URI getBaseURI() {
@@ -177,7 +177,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Establece la URI de base del XML de firma
-     * 
+     *
      * @param URI
      */
     public void setBaseURI(URI baseURI) {
@@ -186,7 +186,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Devuelve la lista de nodos (externos a la firma) firmados
-     * 
+     *
      * @return ArrayList<String> .- ArrayList de URIs
      */
     public ArrayList<String> getFirmados() {
@@ -202,7 +202,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Array de resultados de validacion de las firmas que contrafirman a Ã©sta
-     * 
+     *
      * @return ArrayList<ResultadoValidacion>
      */
     public ArrayList<ResultadoValidacion> getContrafirmadoPor() {
@@ -211,7 +211,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Establece el array de resultados de validacion de las firmas que contrafirman a Ã©sta
-     * 
+     *
      * @param ArrayList<ResultadoValidacion>
      */
     public void setContrafirmadoPor(ArrayList<ResultadoValidacion> contrafirmadoPor) {
@@ -220,7 +220,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * AÃ±ade al array de resultados de validacion de las firmas que contrafirman a Ã©sta otro resultado de validacion
-     * 
+     *
      * @param ResultadoValidacion
      */
     public void addContrafirmadoPor(ResultadoValidacion contrafirmadoPor) {
@@ -230,7 +230,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Recupera el estado del certificado de firma.
-     * 
+     *
      * @return Estado del certificado de firma, o <code>null</code> si no se ha obtenido.
      */
     public ICertStatus getCertStatus() {
@@ -239,7 +239,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
 
     /**
      * Establece el estado del certificado firmante.
-     * 
+     *
      * @param certStatus
      *            Estado del certificado firmante, <code>null</code> si no se ha obtenido
      */

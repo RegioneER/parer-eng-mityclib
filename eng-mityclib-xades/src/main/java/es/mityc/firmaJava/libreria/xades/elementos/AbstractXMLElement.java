@@ -27,7 +27,7 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class AbstractXMLElement {
@@ -38,11 +38,11 @@ public abstract class AbstractXMLElement {
 
     /**
      * Incluye la informacion de este nodo al elemento indicado. Implementado por los tipos.
-     * 
+     *
      * @param doc
-     * 
+     *
      * @return
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     protected void addContent(Element element) throws InvalidInfoNodeException {
@@ -51,7 +51,7 @@ public abstract class AbstractXMLElement {
 
     /**
      * Devuelve el arbol de nodos que representa este elemento. Implementado por los elementos finales.
-     * 
+     *
      * @param doc
      *            Documento donde se agregara el elemento
      */
@@ -61,10 +61,10 @@ public abstract class AbstractXMLElement {
 
     /**
      * Lee la informacion del nodo
-     * 
+     *
      * @param element
      *            elemento del que cuelga la informacion
-     * 
+     *
      * @throws InvalidInfoNodeException
      *             lanzada cuando la estructura de nodos leída es invalida
      */
@@ -72,24 +72,24 @@ public abstract class AbstractXMLElement {
 
     /**
      * Compara otro objeto similar a ver si contienen la misma informacion
-     * 
+     *
      * @param obj
      *            Objeto que ha de ser de la misma clase
-     * 
+     *
      * @return <code>true</code> si contienen la misma informacion, <code>false</code> en cualquier otro caso
      */
     public abstract boolean equals(Object obj);
 
     /**
      * Comprueba que el elemento indicado tiene el namespaceURI y el nombre esperados
-     * 
+     *
      * @param element
      *            Elemento que chequear
      * @param namespaceURI
      *            NamespaceURI esperado
      * @param name
      *            Nombre esperado
-     * 
+     *
      * @throws InvalidInfoNodeException
      *             Se lanza cuando no se cumple lo esperado
      */
@@ -102,14 +102,14 @@ public abstract class AbstractXMLElement {
 
     /**
      * Comprueba si el elemento indicado tiene el nombre esperado
-     * 
+     *
      * @param element
      *            Elemento que chequear
      * @param namespaceURI
      *            NamespaceURI esperado
      * @param name
      *            Nombre esperado
-     * 
+     *
      * @return
      */
     protected boolean isElementName(Element element, String namespaceURI, String name) {
@@ -121,9 +121,9 @@ public abstract class AbstractXMLElement {
 
     /**
      * Indica si el nodo pasado es o no del tipo al que se le hace la consulta
-     * 
+     *
      * @param node
-     * 
+     *
      * @return
      */
     protected boolean isThisNode(Node node) {
@@ -132,9 +132,9 @@ public abstract class AbstractXMLElement {
 
     /**
      * Convierte el nodo indicado a un elemento
-     * 
+     *
      * @param node
-     * 
+     *
      * @return <code>null<code> si el nodo indicado no es un Element
      */
     protected Element nodeToElement(Node node) {

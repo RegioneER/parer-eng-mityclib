@@ -24,18 +24,18 @@ import java.security.cert.X509Certificate;
  * <p>
  * Clase base para las clases encargadas de realizar labores de confianza.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class TrustAbstract {
 
     /**
      * Devuelve una instancia del validador.
-     * 
+     *
      * Este método tiene que ser sobreescrito por la clase que extienda el validador.
-     * 
+     *
      * @return Instancia del validador
      */
     public static TrustAbstract getInstance() {
@@ -46,10 +46,10 @@ public abstract class TrustAbstract {
      * <p>
      * Indica si el objeto indicado es catalogado como de confianza.
      * </p>
-     * 
+     *
      * @param data
      *            Objeto del que comprobar su confianza
-     * 
+     *
      * @throws TrustException
      *             lanzada cuando el objeto no es de confianza o ha ocurrido algún error al intentar comprobarlo:
      *             <ul>
@@ -64,12 +64,12 @@ public abstract class TrustAbstract {
      * <p>
      * Devuelve la cadena de certificados correspondiente al certificado parametrizado.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado del cual se va a reconstruir su cadena
-     * 
+     *
      * @return Cadena de certificados correspondiente
-     * 
+     *
      * @throws UnknownTrustException
      *             Si no se dispone de la ruta de certificacion
      */

@@ -29,7 +29,7 @@ import org.w3c.dom.Document;
  * Fachada de servicios relacionados con firma electronica que ha de implementar el sistema de firma electronica
  * utilizado.
  * </p>
- * 
+ *
  * <p>
  * Estos servicios son:
  * <ul>
@@ -38,14 +38,14 @@ import org.w3c.dom.Document;
  * <li>Firma electronica</li>
  * <li>Validacion de firma electronica</li>
  * </ul>
- * 
+ *
  * <p>
  * La clase que implemente el interfaz debera tener disponible un constructor sin parametros para ser instanciado por la
  * factoría.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface ISignFacade {
@@ -54,10 +54,10 @@ public interface ISignFacade {
      * <p>
      * Inicializa el facade con propiedades de comportamiento que pueden ser requeridas para su correcto funcionamiento.
      * </p>
-     * 
+     *
      * @param props
      *            Conjunto de propiedades necesarias para que el facade puede inicializarse
-     * 
+     *
      * @throws ConfigurationException
      *             lanzada cuando falta algún parametro de configuracion necesario para el facade
      */
@@ -67,7 +67,7 @@ public interface ISignFacade {
      * <p>
      * Consigue la lista de certificados para firmar disponibles en el almacén de certificados.
      * </p>
-     * 
+     *
      * @return Lista de certificados obtenida
      */
     List<X509Certificate> getSignCertificates();
@@ -76,10 +76,10 @@ public interface ISignFacade {
      * <p>
      * Comprueba la validez del certificado indicado.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado a validar
-     * 
+     *
      * @throws InvalidCertificateException
      *             lanzada cuando el certificado es invalido, desconocido o se ha tenido alguna dificultad en la
      *             validacion
@@ -90,14 +90,14 @@ public interface ISignFacade {
      * <p>
      * Firma el documento XML indicado utilizando el certificado.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado con el que realizar la firma
      * @param doc
      *            documento con el que realizar la firma
-     * 
+     *
      * @return devuelve el documento con la firma incluida
-     * 
+     *
      * @throws SigningException
      *             lanzada cuando se produce un error al intentar realizar la firma.
      */
@@ -107,12 +107,12 @@ public interface ISignFacade {
      * <p>
      * Valida una firma XML.
      * </p>
-     * 
+     *
      * @param doc
      *            Documento XML con la firma a validar
-     * 
+     *
      * @return Mapa con un conjunto de informacion sobre la firma
-     * 
+     *
      * @throws InvalidSignatureException
      *             lanzada cuando la firma es invalida
      */

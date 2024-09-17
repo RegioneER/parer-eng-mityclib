@@ -23,9 +23,9 @@ import java.security.cert.X509Certificate;
  * <p>
  * Interfaz para comunicar de errores encontrados en la verificacion de la conexion SSL.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface ISSLErrorManager {
@@ -37,12 +37,12 @@ public interface ISSLErrorManager {
      * <p>
      * El certificado del servidor y el nombre del host no coinciden.
      * </p>
-     * 
+     *
      * @param actualHost
      *            Nombre resuelto del peer
      * @param certServer
      *            Certificado obtenido del servidor
-     * 
+     *
      * @return <code>true</code> si se debe continuar, <code>false</code> si se debe parar el establecimiento del SSL
      */
     boolean continueErrorPeer(String actualHost, X509Certificate certServer);

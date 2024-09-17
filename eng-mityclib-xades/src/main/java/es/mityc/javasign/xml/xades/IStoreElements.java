@@ -24,16 +24,16 @@ import es.mityc.javasign.certificate.ICertStatus;
 /**
  * Interfaz que ha de implementar la clase que gestione el almacenamiento de elementos de una firma XAdES externos a la
  * firma (certificados, respuestas OCSP y CRLs) para los casos de firmas con elementos externos (XAdES-C y XAdES-X).
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IStoreElements {
 
     /**
      * Inicializa el almacenador de elementos indicandole cual es la URI base de la firma
-     * 
+     *
      * @param baseURI
      */
     public void init(String baseURI);
@@ -41,10 +41,10 @@ public interface IStoreElements {
     /**
      * Indica cual es el certificado y el status del certificado que hay que almacenar. Se espera de vuelta el nombre
      * que se le ha asignado a los dos elementos para referenciarlos en la firma XAdES.
-     * 
+     *
      * @param certificate
      * @param certStatus
-     * 
+     *
      * @return
      *         <ul>
      *         <li>String[0]: Nombre del elemento certificado</li>

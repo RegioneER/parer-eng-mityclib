@@ -48,9 +48,9 @@ import es.mityc.javasign.ssl.ISSLManager;
  * <p>
  * Clase encargada de generar sellos de tiempo.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TSCliente {
@@ -70,7 +70,7 @@ public class TSCliente {
      * <p>
      * Crea una nueva instancia de TSCliente.
      * </p>
-     * 
+     *
      * @param nombreServidor
      *            Nombre del servidor
      * @param algoritmoHash
@@ -99,7 +99,7 @@ public class TSCliente {
      * <p>
      * Establece un gestionador de las conexiones SSL para el cliente.
      * </p>
-     * 
+     *
      * @param sslmanager
      *            Gestionador de las conexiones SSL
      */
@@ -112,12 +112,12 @@ public class TSCliente {
      * <p>
      * Este mÃ©todo genera el Sello de Tiempo.
      * </p>
-     * 
+     *
      * @param binarioaSellar
      *            fichero binario que se va a sellar
-     * 
+     *
      * @return TimeStampToken en formato binario
-     * 
+     *
      * @throws TSClienteError
      *             En caso de error
      */
@@ -243,7 +243,7 @@ public class TSCliente {
      * <p>
      * Ejemplo de validacion del sello de tiempo.
      * </p>
-     * 
+     *
      * @param args
      *            No se admiten argumentos
      */

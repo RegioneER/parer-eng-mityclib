@@ -35,7 +35,7 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * Clase de utilidades para el DNIe
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class UtilidadDNIe { // implements ConstantesXADES
@@ -54,12 +54,12 @@ public class UtilidadDNIe { // implements ConstantesXADES
 
     /**
      * Obtiene el nombre común
-     * 
+     *
      * @param cert
      *            X509Certificate Certificado del cual se obtiene el nombre
      * @param tipo
      *            Tipo de certificado
-     * 
+     *
      * @return String CN obtenido
      */
     public static String getCN(X509Certificate cert, SUBJECT_OR_ISSUER tipo) {
@@ -126,10 +126,10 @@ public class UtilidadDNIe { // implements ConstantesXADES
 
     /**
      * Convierte un java.util.Date a DateFormat.SHORT,new Locale("ES","es")
-     * 
+     *
      * @param date
      *            Fecha a convertir
-     * 
+     *
      * @return String en formato DateFormat.SHORT,new Locale("ES","es")
      */
     public static String convertDate(Date date) {
@@ -141,10 +141,10 @@ public class UtilidadDNIe { // implements ConstantesXADES
 
     /**
      * Obtiene el numero de DNI del Subject del certificado
-     * 
+     *
      * @param subjectDN
      *            Subject del certificado
-     * 
+     *
      * @return Numero del DNI
      */
     public static final String giveMeDNINumber(String subjectDN) {
@@ -172,10 +172,10 @@ public class UtilidadDNIe { // implements ConstantesXADES
 
     /**
      * Comprueba si es un certificado de DNIe
-     * 
+     *
      * @param emisorDN
      *            Emisor del certificado
-     * 
+     *
      * @return Verdadero si lo es, Falso en caso contrario
      */
     public static final boolean isCertDNIe(String emisorDN) {

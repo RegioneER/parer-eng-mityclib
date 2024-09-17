@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * Excepcion general del lado del cliente
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class ClienteError extends Exception {
@@ -38,7 +38,7 @@ public class ClienteError extends Exception {
 
     /**
      * Crea una nueva instancia de ClienteError con el mensaje de detalle
-     * 
+     *
      * @param msg
      *            Detalle del mensaje
      */
@@ -49,7 +49,7 @@ public class ClienteError extends Exception {
 
     /**
      * Crea una nueva instancia de ClienteError
-     * 
+     *
      * @param msg
      *            Excepcion a propagar
      */
@@ -65,7 +65,7 @@ public class ClienteError extends Exception {
 
     /**
      * Este método obtiene el mensaje
-     * 
+     *
      * @return mensaje Obtiene el mensaje
      */
     public String getMessage() {

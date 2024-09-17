@@ -63,12 +63,12 @@ public class UtilidadFicheros {
      * <p>
      * Devuelve la ruta a un fichero relativa a la base indicada.
      * </p>
-     * 
+     *
      * @param baseUri
      *            Base sobre la que se relativiza la ruta
      * @param file
      *            Fichero del que se calcula la ruta
-     * 
+     *
      * @return ruta relativizada
      */
     public static String relativizeRute(String baseUri, File file) {

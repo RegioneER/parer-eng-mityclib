@@ -102,7 +102,7 @@ public class SigPolicyQualifier extends AbstractXADESElement {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see es.mityc.firmaJava.libreria.xades.elementos.AbstractXMLElement#load(org.w3c.dom.Element)
      */
     @Override

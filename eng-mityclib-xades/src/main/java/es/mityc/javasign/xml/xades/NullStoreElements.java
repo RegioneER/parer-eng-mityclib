@@ -28,9 +28,9 @@ import es.mityc.javasign.certificate.UnknownElementClassException;
 /**
  * Con esta clase se indica que no se debe intentar recuperar ni guardar ninguno de los elementos relacionados con los
  * certificados de una firma.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class NullStoreElements implements IStoreElements, IRecoverElements {

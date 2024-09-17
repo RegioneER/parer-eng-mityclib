@@ -23,21 +23,21 @@ import java.util.Locale;
  * <p>
  * Interfaz que han de implementar los managers de internacionalizacion.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface II18nManager {
 
     /**
      * Inicializa el manager con el diccionario indicado.
-     * 
+     *
      * @param dictionary
      *            diccionario que debera gestionar el manager
      * @param locale
      *            Locale establecido (<code>null</code> si no se especifica ninguno)
-     * 
+     *
      * @throws DictionaryUnknownException
      *             cuando se desconoce el diccionario indicado
      */
@@ -47,10 +47,10 @@ public interface II18nManager {
      * <p>
      * Devuelve el mensaje identificado por la clave proporcionada según el diccionario gestionado por el manager.
      * </p>
-     * 
+     *
      * @param message
      *            clave que identifica el mensaje
-     * 
+     *
      * @return mensaje recuperado
      */
     String getLocalMessage(String message);
@@ -60,12 +60,12 @@ public interface II18nManager {
      * Devuelve el mensaje compuesto identificado por la clave proporcionada según el diccionario gestionado por el
      * manager.
      * </p>
-     * 
+     *
      * @param message
      *            clave que identifica el mensaje
      * @param varargs
      *            variables que se deben insertar en el mensaje compuesto
-     * 
+     *
      * @return mensaje recuperado con las variables indicadas incrustadas
      */
     String getLocalMessage(String message, Object... varargs);

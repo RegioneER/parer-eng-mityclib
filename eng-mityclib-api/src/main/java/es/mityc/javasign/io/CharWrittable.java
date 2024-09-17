@@ -24,9 +24,9 @@ import java.io.IOException;
  * <p>
  * Implementa el interfaz {@link IWriter} sobre una cadena de caracteres.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class CharWrittable implements IWriter {
@@ -47,7 +47,7 @@ public class CharWrittable implements IWriter {
      * <p>
      * Escribe nuevos datos en el buffer de escritura.
      * </p>
-     * 
+     *
      * @param c
      *            array de caracteres a escribir
      * @param off
@@ -63,10 +63,10 @@ public class CharWrittable implements IWriter {
      * <p>
      * Asegura el contenido del buffer interno.
      * </p>
-     * 
+     *
      * @throws IOException
      *             Lanzada cuando se produce un error al asegurar el buffer interno
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#flush()
      */
     public void flush() throws IOException {
@@ -77,7 +77,7 @@ public class CharWrittable implements IWriter {
      * <p>
      * Inicializa el objeto vaciando los buffers internos.
      * </p>
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#reset()
      */
     public void reset() {
@@ -88,9 +88,9 @@ public class CharWrittable implements IWriter {
      * <p>
      * Devuelve la cantidad de datos disponibles en el buffer interno.
      * </p>
-     * 
+     *
      * @return número de bytes disponibles
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#size()
      */
     public int size() {
@@ -101,9 +101,9 @@ public class CharWrittable implements IWriter {
      * <p>
      * Devuelve un array con los datos disponibles en el buffer interno.
      * </p>
-     * 
+     *
      * @return array con los datos disponibles
-     * 
+     *
      * @see es.mityc.javasign.io.IWriter#toByteArray()
      */
     public byte[] toByteArray() {

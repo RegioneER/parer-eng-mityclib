@@ -22,9 +22,9 @@ package es.mityc.javasign.bridge;
  * Excepcion para indicar que hay errores en la configuracion indicada al Facade (ausencia de propiedades, valores no
  * esperados, etc).
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ConfigurationException extends Exception {
@@ -42,7 +42,7 @@ public class ConfigurationException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -54,7 +54,7 @@ public class ConfigurationException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -66,7 +66,7 @@ public class ConfigurationException extends Exception {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

@@ -37,9 +37,9 @@ import es.mityc.javasign.xml.transform.Transform;
  * Este tipo de objetos delega la seguridad e integridad del contenido en el gestionador de la informacion privada, que
  * sera el responsable de asegurar que no se produce ningún ataque sobre la informacon.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class UnknownExternObjectToSign extends AbstractObjectToSign {
@@ -63,7 +63,7 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public IPrivateData getDigester() {

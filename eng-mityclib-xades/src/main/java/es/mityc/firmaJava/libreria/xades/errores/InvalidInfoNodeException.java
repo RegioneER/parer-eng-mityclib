@@ -19,9 +19,9 @@ package es.mityc.firmaJava.libreria.xades.errores;
 
 /**
  * Excepcion lanzada cuando un nodo no contiene la estructura y la informacion esperada
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class InvalidInfoNodeException extends XMLError {

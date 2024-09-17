@@ -30,9 +30,9 @@ import javax.swing.JPanel;
  * Mediante la implementacion de este interfaz se obtiene acceso a la manipulacion de los certificados disponibles en el
  * almacén de certificados.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IPKStoreMaintainer {
@@ -41,7 +41,7 @@ public interface IPKStoreMaintainer {
      * <p>
      * Inicializa el acceso al almacén.
      * </p>
-     * 
+     *
      * @throws CertStoreException
      *             lanzada si hay algún problema en el acceso al almacén
      */
@@ -51,10 +51,10 @@ public interface IPKStoreMaintainer {
      * <p>
      * Introduce un certificado de confianza en el almacén de certificados.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado de confianza
-     * 
+     *
      * @throws CertStoreException
      *             si hay algún problema en el acceso al almacén
      */
@@ -68,10 +68,10 @@ public interface IPKStoreMaintainer {
      * Si el certificado que se intenta eliminar no es un certificado de confianza, sino de firma, no se debera
      * eliminar.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado de confianza a eliminar
-     * 
+     *
      * @throws CertStoreException
      *             si hay algún problema en el acceso al almacén
      */
@@ -81,14 +81,14 @@ public interface IPKStoreMaintainer {
      * <p>
      * Importa un certificado de firma (incluye clave privada) en el almacén.
      * </p>
-     * 
+     *
      * @param pk
      *            Clave privada a importar
      * @param cert
      *            Certificado asociado a la clave pública relacionada con la clave privada importada
      * @param password
      *            Contraseña que se aplicara a la clave privada en el almacén
-     * 
+     *
      * @throws CertStoreException
      *             lanzada si hay algún problema en la importacion de la clave privada y certificado
      */
@@ -99,10 +99,10 @@ public interface IPKStoreMaintainer {
      * Elimina un certificado del almacén de certificados que esté asociado a una clave privada, junto con la clave
      * privada.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado asociado a una clave privada a eliminar
-     * 
+     *
      * @throws CertStoreException
      *             lanzada si hay algún problema en la eliminacion del certificado y de la clave privada
      */
@@ -112,10 +112,10 @@ public interface IPKStoreMaintainer {
      * <p>
      * Actualiza el certificado asociado a una clave privada, reemplazando el anterior asociado.
      * </p>
-     * 
+     *
      * @param cert
      *            certificado actual
-     * 
+     *
      * @throws CertStoreException
      *             lanzada si hay algún problema en la actualizacion del certificado
      */
@@ -125,10 +125,10 @@ public interface IPKStoreMaintainer {
      * <p>
      * Indica si un certificado se puede borrar del almacén de certificados.
      * </p>
-     * 
+     *
      * @param cert
      *            .- Certificado a consultar
-     * 
+     *
      * @return .- <code>true</code> si el certificado el borrable
      */
     boolean isDeletable(X509Certificate cert);
@@ -137,7 +137,7 @@ public interface IPKStoreMaintainer {
      * <p>
      * Devuelve el panel de configuracion propio de la implementacion del almacén.
      * </p>
-     * 
+     *
      * @return Panel de configuracion del almacén.
      */
     JPanel getPreferencesPanel();

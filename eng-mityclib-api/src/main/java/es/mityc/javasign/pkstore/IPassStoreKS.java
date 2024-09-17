@@ -23,9 +23,9 @@ import java.security.cert.X509Certificate;
  * <p>
  * Interfaz para acceder a las contraseñas pedidas cuando se accede a la clave asociada a un certificado.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IPassStoreKS {
@@ -35,12 +35,12 @@ public interface IPassStoreKS {
      * Se llama a este método cuando el {@link IPKStoreManager} intenta acceder a la clave privada asociada a un
      * certificado contenido en el KeyStore.
      * </p>
-     * 
+     *
      * @param certificate
      *            Certificado que tiene la clave
      * @param alias
      *            Alias del certificado
-     * 
+     *
      * @return Se debe devolver la contraseña de acceso a la clave
      */
     char[] getPassword(X509Certificate certificate, String alias);

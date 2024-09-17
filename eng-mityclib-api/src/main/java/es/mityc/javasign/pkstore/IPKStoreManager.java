@@ -27,9 +27,9 @@ import java.util.List;
  * <p>
  * Interfaz para la manipulacion de claves públicas/privadas y certificados en un ambiente de firma digital.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 
@@ -40,10 +40,10 @@ public interface IPKStoreManager {
      * Provider que permite el acceso a funciones criptograficas relacionadas con los certificados (PK) disponibles en
      * el almacén.
      * </p>
-     * 
+     *
      * @param cert
      *            Certificado para el que se necesita acceso al provider
-     * 
+     *
      * @return Provider que define sus servicios
      */
     Provider getProvider(X509Certificate cert);
@@ -52,9 +52,9 @@ public interface IPKStoreManager {
      * <p>
      * Obtiene un listado de los certificados del almacén que pueden realizar labores de firma.
      * </p>
-     * 
+     *
      * @return los certificados como un listado de X509Certificate
-     * 
+     *
      * @throws CertStoreException
      *             si hay algún problema en el acceso al almacén
      */
@@ -64,9 +64,9 @@ public interface IPKStoreManager {
      * <p>
      * Obtiene un listado de los certificados de las entidades de confianza disponibles en el almacén.
      * </p>
-     * 
+     *
      * @return los certificados como un listado de X509Certificate
-     * 
+     *
      * @throws CertStoreException
      *             si hay algún problema en el acceso al almacén
      */
@@ -76,12 +76,12 @@ public interface IPKStoreManager {
      * <p>
      * Obtiene la cadena de certificados asociada al certificado indicado.
      * </p>
-     * 
+     *
      * @param certificate
      *            Certificado del que se quiere la cadena
-     * 
+     *
      * @return CertPath construido con los certificados del almacén
-     * 
+     *
      * @throws CertStoreException
      *             si hay algún problema en el acceso al almacén de certificados o el almacén no contiene el certificado
      *             indicado
@@ -92,12 +92,12 @@ public interface IPKStoreManager {
      * <p>
      * Devuelve la clave privada que tiene el almacén asociado al certificado indicado.
      * </p>
-     * 
+     *
      * @param certificate
      *            Certificado del que se quiere la clave privada
-     * 
+     *
      * @return PrivateKey relacionada con el certificado (puede ser una clase proxy)
-     * 
+     *
      * @throws CertStoreException
      *             si hay algún problema en el acceso al almacén de certificados o no hay clave privada asociada
      */

@@ -19,9 +19,9 @@ package es.mityc.firmaJava.libreria.xades;
 
 /**
  * Esquemas de firma XAdES
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0 beta
  */
 

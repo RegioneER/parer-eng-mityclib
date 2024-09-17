@@ -48,20 +48,20 @@ public class UtilidadXadesA {
     /**
      * Devuelve un array de bytes con los nodos involucrados en un sello de tiempo XAdES A. Los nodos a incluir
      * requeridos ya deben estar creados. En caso contrario, se devuelve un BadFormedSignatureException.
-     * 
+     *
      * Según esquema, punto 7.7, los nodos a agregar, si existen, en el caso no distribuido son: - Todos los nodos
      * Reference, por orden de aparicion - El nodo SignedInfo - El nodo Signaturevalue - El nodo KeyInfo (Hasta aqui,
      * son elementos propios del esquema XmlSignature)
-     * 
+     *
      * - El nodo SignatureTimeStamp (XAdES T) - Los nodos CounterSignature (No se podran modificar ni agregar mas) - El
      * nodo CompleteCertificateRefs (XAdES C) - El nodo CompleteRevocationRefs - El nodo AttributeCertificateRefs - El
      * nodo AttributeRevocationRefs - El nodo SigAndRefsTimeStamp o RefsOnlyTimeStamp (XAdES X) - El nodo
      * CertificateValues (XAdES XL) REQUERIDO - El nodo RevocationValues (XAdES XL) REQUERIDO - El nodo
      * AttrAuthoritiesCertValues (Condicionado) - El nodo AttributeRevocationValues (Condicionado) - Los nodos
      * ArchiveTimeStamp previos al actual (Hasta aqui, son elementos propios del esquema XAdES)
-     * 
+     *
      * - Cualquier ds:Object no referenciado en <ds:Reference> (Se trata de nodos extra, fuera de esquema)
-     * 
+     *
      * @param String
      *            esquemaURI .- Es la URI del esquema XAdES empleado
      * @param Element
@@ -69,7 +69,7 @@ public class UtilidadXadesA {
      * @param Element
      *            selloA.- En caso de validar un sello de tiempo A, no se deben incluir nodos a partir del validado (y
      *            quitando el validado). Para incluir todo, pasar un null.
-     * 
+     *
      * @return byte[] .- Array de bytes concatenados de los nodos de entrada del sello (Véase lista superior).
      */
     public static byte[] obtenerListadoXadesA(String esquemaURI, XMLSignature xmlSig, Element selloA)
@@ -398,14 +398,14 @@ public class UtilidadXadesA {
 
     /**
      * Recoge la canonicalizacion de un nodo, si esta presente. En caso contrario devuelve el parametro "porDefecto".
-     * 
+     *
      * @param nodo
      *            .- Nodo a leer
      * @param porDefecto
      *            .- Canonicalizacion por defecto
-     * 
+     *
      * @return CanonicalizationEnum .- Canonicalizacion obtenida
-     * 
+     *
      * @throws FirmaXMLError
      *             .- En caso de que la canonicalizacion obtenida no se pueda leer
      */
@@ -433,13 +433,13 @@ public class UtilidadXadesA {
     /**
      * Listado completo de identificadores de los nodos involucrados en un sello de tiempo XAdES-A según los esquemas
      * 1.1.1 y 1.2.2
-     * 
+     *
      * @param esquemaURI
      * @param xmlSig
      * @param selloA
-     * 
+     *
      * @return
-     * 
+     *
      * @throws BadFormedSignatureException
      * @throws FirmaXMLError
      * @throws XMLSecurityException
@@ -745,9 +745,9 @@ public class UtilidadXadesA {
     /**
      * Listado de Includes del sello XAdES-A, según el esquema 1.3.2, caso distribuido. (No comparten el mismo padre que
      * el nodo de firma, son URIs externas).
-     * 
+     *
      * Los nodos a referenciar son los siguientes, por orden:
-     * 
+     *
      * - SignatureTimeStamp, cuantos existan. - CounterSignature, cuantos existan. - CompleteCertificateRefs, si existe.
      * - CompleteRevocationRefs, si existe. - AttributeCertificateRefs, si existe. - AttributeRevocationRefs, si existe.
      * - SigAndRefsTimeStamp, cuantos existan. - RefsOnlyTimeStamp, cuantos existan. - CertificateValues. Se debe añadir

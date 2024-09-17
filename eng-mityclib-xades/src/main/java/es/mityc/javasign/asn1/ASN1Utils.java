@@ -37,9 +37,9 @@ import es.mityc.javasign.i18n.II18nManager;
  * <p>
  * Conjunto de utilidades para el tratamiento de campos ASN.1.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ASN1Utils {
@@ -61,10 +61,10 @@ public class ASN1Utils {
      * <p>
      * Obtiene la informacion sobre la identidad de un responder de OCSP mediante una estructura ASN.1.
      * </p>
-     * 
+     *
      * @param responder
      *            Bloque ASN.1 que contiene la informacion del responder
-     * 
+     *
      * @return objeto con los datos del responder, <code>null</code> si no se ha podido formar
      */
     public static OCSPResponderID getResponderID(ResponderID responder) {

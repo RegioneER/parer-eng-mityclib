@@ -24,9 +24,9 @@ import org.w3c.dom.Attr;
 
 /**
  * Este ResourceResolverSpi permite acceder a informaciÃ³n privada obtiendo su digest para poder realizar una firma XML.
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ResolverPrivateData extends MITyCResourceResolver {

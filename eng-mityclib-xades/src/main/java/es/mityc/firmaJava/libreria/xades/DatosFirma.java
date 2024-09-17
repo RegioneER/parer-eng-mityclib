@@ -27,7 +27,7 @@ import es.mityc.javasign.xml.xades.policy.PolicyResult;
 
 /**
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 
@@ -52,7 +52,7 @@ public class DatosFirma {
 
     /**
      * Almacena informacion referente a una validacion de Firma
-     * 
+     *
      * @param cadenaFirma
      *            .- Cadena de certificados utilizados en la firma
      * @param esCadenaConfianza
@@ -77,7 +77,7 @@ public class DatosFirma {
      *            .- Identificador del nodo que contiene el valor de la firma
      * @param contraFirma.-
      *            ArrayList de String que contiene los identificadores de los nodos firmados por ésta firma
-     * 
+     *
      * @parma datosFicherosFirmados .- ArrayList que contiene los datos asociados a los ficheros firmados
      */
     public DatosFirma(CertPath cadenaFirma, ConfianzaEnum esCAdenaConfianza, DatosTipoFirma tipoFirma,
@@ -193,7 +193,7 @@ public class DatosFirma {
 
     /**
      * Devuleve el identificador del nodo SignatureValue
-     * 
+     *
      * @return String
      */
     public String getSigValueId() {
@@ -232,7 +232,7 @@ public class DatosFirma {
      * <p>
      * Devuelve un listado con los datos de los nodos firmados que no son intrínsecos de la firma.
      * </p>
-     * 
+     *
      * @return ArrayList con los datos de los nodos
      */
     public List<DatosNodosFirmados> getDatosNodosNoSignFirmados() {
@@ -259,7 +259,7 @@ public class DatosFirma {
      * <p>
      * Incluye datos sobre el nodo firmado indicado.
      * </p>
-     * 
+     *
      * @param datosNodo
      *            Datos del nodo firmado
      */
@@ -274,10 +274,10 @@ public class DatosFirma {
      * <p>
      * Busca los datos que hay sobre el nodo firmado indicado.
      * </p>
-     * 
+     *
      * @param id
      *            identidad del nodo Reference que apunta al nodo firmado
-     * 
+     *
      * @return Datos del nodo firmado
      */
     public DatosNodosFirmados getDatosNodoFimadoByReferenceId(String id) {
@@ -297,10 +297,10 @@ public class DatosFirma {
      * <p>
      * Busca los datos que hay sobre el nodo firmado indicado.
      * </p>
-     * 
+     *
      * @param id
      *            identidad del nodo al que apunta el Reference
-     * 
+     *
      * @return Datos del nodo firmado
      */
     public DatosNodosFirmados getDatosNodoFimadoById(String id) {

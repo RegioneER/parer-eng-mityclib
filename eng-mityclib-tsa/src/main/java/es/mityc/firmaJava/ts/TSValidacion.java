@@ -29,9 +29,9 @@ import org.bouncycastle.tsp.TimeStampToken;
  * <p>
  * Estructura de datos para la validacion de un sello de tiempo.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TSValidacion {
@@ -63,7 +63,7 @@ public class TSValidacion {
      * <p>
      * devuelve la fecha extraida del sello de tiempo.
      * </p>
-     * 
+     *
      * @return Fecha extraía del sello, o <code>null</code> si no existe
      */
     public String getFecha() {
@@ -74,7 +74,7 @@ public class TSValidacion {
      * <p>
      * Almacena la fecha extraida del sello.
      * </p>
-     * 
+     *
      * @param fecha
      *            Fecha a almacenar
      */
@@ -86,7 +86,7 @@ public class TSValidacion {
      * <p>
      * Devuelve la fecha almacenada en formato Date.
      * </p>
-     * 
+     *
      * @return Fecha almacenada, o <code>null</code> si no existe
      */
     public Date getFechaDate() {
@@ -97,7 +97,7 @@ public class TSValidacion {
      * <p>
      * Almacena la fecha extraída del sello de tiempo en formato Date.
      * </p>
-     * 
+     *
      * @param fechaDate
      *            Fecha a almacenar
      */
@@ -109,7 +109,7 @@ public class TSValidacion {
      * <p>
      * Devuelve el emisor X500 extraído del sello.
      * </p>
-     * 
+     *
      * @return Valor almacenado del emisor del sello, o <code>null</code> si no existe
      */
     public X500Principal getEmisor() {
@@ -120,7 +120,7 @@ public class TSValidacion {
      * <p>
      * Almacena el emisor extraído del sello de tiempo.
      * </p>
-     * 
+     *
      * @param emisor
      *            Emisor X500 del sello de tiempo
      */
@@ -132,7 +132,7 @@ public class TSValidacion {
      * <p>
      * Devuelve el valor de digest extraído del sello de tiempo.
      * </p>
-     * 
+     *
      * @return El valor de digest almacenado, o <code>null</code> si no existe
      */
     public String getFirmaDigest() {
@@ -143,7 +143,7 @@ public class TSValidacion {
      * <p>
      * Almacena el valor de Digest extraído del sello de tiempo.
      * </p>
-     * 
+     *
      * @param firmaDigest
      *            Valor de Digest extraído
      */
@@ -155,7 +155,7 @@ public class TSValidacion {
      * <p>
      * Devuelve la precision extraída del sello de tiempo.
      * </p>
-     * 
+     *
      * @return Precision almacenada, o <code>null</code> si no existe
      */
     public GenTimeAccuracy getPrecision() {
@@ -165,7 +165,7 @@ public class TSValidacion {
     /**
      * <p>
      * Almacena la precision extraída del sello de tiempo
-     * 
+     *
      * @param precision
      *            Precision a almacenar
      */
@@ -177,7 +177,7 @@ public class TSValidacion {
      * <p>
      * Devuelve la precision extraída del sello de tiempo en formato Long.
      * </p>
-     * 
+     *
      * @return Valor de la precision almacenada, o <code>0</code> si no existe
      */
     public long getPrecisionLong() {
@@ -188,7 +188,7 @@ public class TSValidacion {
      * <p>
      * Almacena la precision extraída del sello de tiempo en formato Long.
      * </p>
-     * 
+     *
      * @param precisionLong
      *            Precision extraida del sello de tiempo
      */
@@ -200,7 +200,7 @@ public class TSValidacion {
      * <p>
      * Indica si los datos extraídos se corresponden con un sello de tiempo.
      * </p>
-     * 
+     *
      * @return <code>true</code> si se corresponde
      */
     public boolean isRespuesta() {
@@ -211,7 +211,7 @@ public class TSValidacion {
      * <p>
      * Establece si la respuesta procesada esta bien formada.
      * </p>
-     * 
+     *
      * @param respuesta
      *            <code>true</code> si esta bien formada
      */
@@ -223,7 +223,7 @@ public class TSValidacion {
      * <p>
      * Devuelve el sello de tiempo extraído en formato BigInteger.
      * </p>
-     * 
+     *
      * @return Valor del sello, o <code>null</code> si no existe
      */
     public BigInteger getSello() {
@@ -234,7 +234,7 @@ public class TSValidacion {
      * <p>
      * Almacena el sello de tiempo en formato BigInteger.
      * </p>
-     * 
+     *
      * @param sello
      *            Sello a almacenar
      */
@@ -246,7 +246,7 @@ public class TSValidacion {
      * <p>
      * Devuelve el nombre del algoritmo empleado en el sello de tiempo.
      * </p>
-     * 
+     *
      * @return Nombre del algoritmo de Digest, o <code>null</code> si no existe
      */
     public String getSelloAlg() {
@@ -257,7 +257,7 @@ public class TSValidacion {
      * <p>
      * Almacena el nombre del algoritmo empleado en el sello de tiempo.
      * </p>
-     * 
+     *
      * @param selloAlg
      *            Nombre del algoritmo de Digest
      */
@@ -269,7 +269,7 @@ public class TSValidacion {
      * <p>
      * Devuelve el valor de Digest extraído del sello de tiempo.
      * </p>
-     * 
+     *
      * @return Valor de Digest, o <code>null</code> si no existe
      */
     public String getSelloDigest() {
@@ -280,7 +280,7 @@ public class TSValidacion {
      * <p>
      * Establece el valor de Digest extraído del sello de tiempo.
      * <p>
-     * 
+     *
      * @param selloDigest
      *            Valor de Digest
      */
@@ -292,7 +292,7 @@ public class TSValidacion {
      * <p>
      * Devuelve el token extraído del sello de tiempo.
      * </p>
-     * 
+     *
      * @return Tst extraído, o <code>null</code> si no existe
      */
     public TimeStampToken getTst() {
@@ -303,7 +303,7 @@ public class TSValidacion {
      * <p>
      * Almacena el token extraído del sello de tiempo.
      * </p>
-     * 
+     *
      * @param tst
      *            Tst a almacenar
      */

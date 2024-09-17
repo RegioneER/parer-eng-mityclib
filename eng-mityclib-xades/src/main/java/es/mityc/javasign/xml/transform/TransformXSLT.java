@@ -32,9 +32,9 @@ import es.mityc.javasign.xml.xades.TransformProxy;
  * <p>
  * Transformada que aplica transformaciones XSLT.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TransformXSLT extends Transform implements ITransformData {
@@ -76,10 +76,10 @@ public class TransformXSLT extends Transform implements ITransformData {
      * <p>
      * Establece la hoja de estilo de esta transformada.
      * </p>
-     * 
+     *
      * @param stylesheet
      *            Hoja de estilo
-     * 
+     *
      * @throws IllegalArgumentException
      *             si el elemento no se corresponde con una hoja de estilo
      */

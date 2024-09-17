@@ -25,9 +25,9 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 
 /**
  * Interfaz que ha de cumplir una implementacion de un elemento del esquema XDsig
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class AbstractXDsigElement extends AbstractXMLElement {
@@ -40,12 +40,12 @@ public abstract class AbstractXDsigElement extends AbstractXMLElement {
 
     /**
      * Este método pueden hacerlo público los elementos finales.
-     * 
+     *
      * @param doc
      * @param namespace
-     * 
+     *
      * @return
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     protected Element createElement(Document doc, String namespaceXDsig) throws InvalidInfoNodeException {
@@ -55,11 +55,11 @@ public abstract class AbstractXDsigElement extends AbstractXMLElement {
 
     /**
      * Este método pueden hacerlo público los tipos.
-     * 
+     *
      * @param doc
      * @param element
      * @param namespace
-     * 
+     *
      * @throws InvalidInfoNodeException
      */
     protected void addContent(Element element, String namespaceXDsig) throws InvalidInfoNodeException {

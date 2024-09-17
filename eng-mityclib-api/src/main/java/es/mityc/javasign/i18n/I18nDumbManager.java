@@ -23,13 +23,13 @@ import java.util.Locale;
  * <p>
  * Manager devuelto cuando no se dispone de un diccionario asociado.
  * </p>
- * 
+ *
  * <p>
  * Esta clase evita que se produzcan errores en ejecucion si no se controlan errores al instanciar el manager.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class I18nDumbManager implements II18nManager {
@@ -54,12 +54,12 @@ public class I18nDumbManager implements II18nManager {
      * <p>
      * Inicializa el diccionario con el nombre del diccionario que se ha pedido.
      * </p>
-     * 
+     *
      * @param dictionary
      *            Nombre del diccionario que no se ha encontrado
      * @param locale
      *            Localizador con el que se inicializa el manager
-     * 
+     *
      * @throws DictionaryUnknownException
      *             No se lanza nunca
      */
@@ -74,12 +74,12 @@ public class I18nDumbManager implements II18nManager {
      * <p>
      * Devuelve un mensaje de aviso de que el diccionario no se encuentra disponible.
      * </p>
-     * 
+     *
      * @param message
      *            Clave del mensaje que se quiere internacionalizar
-     * 
+     *
      * @return mensaje de aviso del error
-     * 
+     *
      * @see es.mityc.javasign.i18n.II18nManager#getLocalMessage(java.lang.String)
      */
     public String getLocalMessage(final String message) {
@@ -90,14 +90,14 @@ public class I18nDumbManager implements II18nManager {
      * <p>
      * Devuelve un mensaje de aviso de que el diccionario no se encuentra disponible.
      * </p>
-     * 
+     *
      * @param message
      *            Clave del mensaje que se quiere internacionalizar
      * @param varargs
      *            variables que se quieren introducir en el mensaje
-     * 
+     *
      * @return mensaje de aviso del error
-     * 
+     *
      * @see es.mityc.javasign.i18n.II18nManager#getLocalMessage(java.lang.String, java.lang.Object[])
      */
     public String getLocalMessage(final String message, final Object... varargs) {

@@ -23,9 +23,9 @@ import org.apache.xml.security.utils.resolver.ResourceResolverSpi;
  * <p>
  * Wrapper para ocultar implementacion de XMLSec.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public abstract class MITyCResourceResolver extends ResourceResolverSpi {

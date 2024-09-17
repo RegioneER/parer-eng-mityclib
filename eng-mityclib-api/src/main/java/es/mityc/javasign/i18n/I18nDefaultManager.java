@@ -29,14 +29,14 @@ import org.apache.commons.logging.LogFactory;
  * <p>
  * Manager por defecto para la internacionalizacion.
  * </p>
- * 
+ *
  * <p>
  * Obtiene el diccionario buscando un fichero de propiedades con el mismo nombre que el diccionario la ruta de recursos
  * <code>/i18n/dictionaries</code> y con el tipo de Locale indicado. No se recarga si hay un cambio de Locale.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class I18nDefaultManager implements II18nManager {
@@ -72,15 +72,15 @@ public class I18nDefaultManager implements II18nManager {
      * Busca el diccionario indicado en la ruta <code>i18n/dictionaries</code> siguiendo el nombre del diccionario
      * provisto como un recurso dependiente del locale (@see {@link ResourceBundle}).
      * </p>
-     * 
+     *
      * @param dictionary
      *            Nombre del diccionario que se asocia al manager
      * @param specificLocale
      *            locale específico en el que se quiere el diccionario
-     * 
+     *
      * @throws DictionaryUnknownException
      *             Lanzada cuando no se encuentra el diccionario indicado
-     * 
+     *
      * @see es.mityc.javasign.i18n.II18nManager#init(java.lang.String, java.util.Locale)
      */
     public void init(final String dictionary, final Locale specificLocale) throws DictionaryUnknownException {
@@ -101,13 +101,13 @@ public class I18nDefaultManager implements II18nManager {
      * <p>
      * Devuelve el mensaje con la clave indicada disponible en el diccionario actual.
      * </p>
-     * 
+     *
      * @param message
      *            clave del mensaje que se quiere recuperar
-     * 
+     *
      * @return Mensaje recuperado del diccionario, <code>null</code> si no hay mensaje asociado a la clave o no hay
      *         diccionario
-     * 
+     *
      * @see es.mityc.javasign.i18n.II18nManager#getLocalMessage(java.lang.String)
      */
     public String getLocalMessage(final String message) {
@@ -126,10 +126,10 @@ public class I18nDefaultManager implements II18nManager {
      * <p>
      * Busca el mensaje en el diccionario actual disponible.
      * </p>
-     * 
+     *
      * @param key
      *            clave del mensaje
-     * 
+     *
      * @return Mensaje recuperado
      */
     protected String findMessage(final String key) {
@@ -143,12 +143,12 @@ public class I18nDefaultManager implements II18nManager {
      * <p>
      * Formatea un mensaje con los datos provistos.
      * </p>
-     * 
+     *
      * @param message
      *            mensaje que sigue el formato indicado en {@link MessageFormat}
      * @param varargs
      *            objetos que hay que insertar en el mensaje
-     * 
+     *
      * @return Mensaje con los objetos insertados
      */
     private static String getFormatedMessage(final String message, final Object... varargs) {
@@ -160,15 +160,15 @@ public class I18nDefaultManager implements II18nManager {
      * <p>
      * Devuelve el mensaje con la clave indicada disponible en el diccionario actual.
      * </p>
-     * 
+     *
      * @param message
      *            clave del mensaje que se quiere recuperar
      * @param varargs
      *            objetos que hay que insertar en el mensaje
-     * 
+     *
      * @return Mensaje recuperado del diccionario, <code>null</code> si no hay mensaje asociado a la clave o no hay
      *         diccionario
-     * 
+     *
      * @see es.mityc.javasign.i18n.II18nManager#getLocalMessage(java.lang.String, java.lang.Object[])
      */
     public String getLocalMessage(final String message, final Object... varargs) {

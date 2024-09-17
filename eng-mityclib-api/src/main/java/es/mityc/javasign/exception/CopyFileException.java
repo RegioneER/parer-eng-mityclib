@@ -21,9 +21,9 @@ package es.mityc.javasign.exception;
  * <p>
  * Lanzada cuando se dan errores en la copia de recursos.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class CopyFileException extends SignMITyCException {
@@ -44,7 +44,7 @@ public class CopyFileException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -56,7 +56,7 @@ public class CopyFileException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Causa de la excepcion
      */
@@ -68,7 +68,7 @@ public class CopyFileException extends SignMITyCException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

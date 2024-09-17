@@ -21,9 +21,9 @@ package es.mityc.javasign.trust;
  * <p>
  * Lanzada cuando no se confía en un elemento.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class NotTrustedException extends TrustException {
@@ -44,7 +44,7 @@ public class NotTrustedException extends TrustException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      */
@@ -56,7 +56,7 @@ public class NotTrustedException extends TrustException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param cause
      *            Excepcion responsable de lanzar esta otra
      */
@@ -68,7 +68,7 @@ public class NotTrustedException extends TrustException {
      * <p>
      * Constructor.
      * </p>
-     * 
+     *
      * @param message
      *            Mensaje de error
      * @param cause

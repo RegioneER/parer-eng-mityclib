@@ -40,9 +40,9 @@ import es.mityc.javasign.xml.xades.TransformProxy;
 
 /**
  * Almacena datos extra incluidos en la firma sobre el formato de los nodos firmados
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DatosNodosFirmados {
@@ -100,7 +100,7 @@ public class DatosNodosFirmados {
      * <p>
      * Intenta recuperar el identificador de este elemento basandose en la ruta indicada en el reference.
      * </p>
-     * 
+     *
      * @return id del nodo
      */
     public String getId() {
@@ -114,7 +114,7 @@ public class DatosNodosFirmados {
      * <p>
      * Devuelve la Id del nodo Reference que apunta a este nodo firmado.
      * </p>
-     * 
+     *
      * @return id del nodo reference
      */
     public String getIdReference() {
@@ -125,7 +125,7 @@ public class DatosNodosFirmados {
      * <p>
      * Devuelve el Element que representa al Reference.
      * </p>
-     * 
+     *
      * @return Element
      */
     public Element getElementReference() {
@@ -168,7 +168,7 @@ public class DatosNodosFirmados {
      * <p>
      * Devuelve la URI señalada por la Reference.
      * </p>
-     * 
+     *
      * @return URI
      */
     public String getURI() {
@@ -179,7 +179,7 @@ public class DatosNodosFirmados {
      * <p>
      * Devuelve un listado de las transformadas aplicadas al nodo.
      * </p>
-     * 
+     *
      * @return
      */
     public List<TransformProxy> getTransforms() {
@@ -194,7 +194,7 @@ public class DatosNodosFirmados {
      * Las únicas transformadas que supone que no modifican al contenido original (de una manera significativa) son las
      * de canonicalizacion y la enveloped.
      * </p>
-     * 
+     *
      * @return <code>true</code> si existe alguna transformada que no sea enveloped o de canonicalizacion
      */
     public boolean canBeModifiedByTransforms() {
@@ -215,7 +215,7 @@ public class DatosNodosFirmados {
      * <p>
      * Devuelve los bytes del contenido firmado (si esta disponible).
      * </p>
-     * 
+     *
      * @return contenido del nodo en bytes
      */
     public byte[] getNodoFirmadoBytes() {
@@ -226,10 +226,10 @@ public class DatosNodosFirmados {
      * <p>
      * Escribe el contenido firmado en un stream de salida.
      * </p>
-     * 
+     *
      * @param os
      *            stream de salida
-     * 
+     *
      * @throws IOException
      *             lanzada si ocurre algún error durante la escritura del contenido
      */
@@ -244,7 +244,7 @@ public class DatosNodosFirmados {
      * <p>
      * Uno nodo &lt;ds:object&gt; se considerara externo (a menos que contenga informacion XAdES).
      * </p>
-     * 
+     *
      * @return <code>true</code> si es un nodo con informacion de firma
      */
     public boolean isSignInternal() {
@@ -275,7 +275,7 @@ public class DatosNodosFirmados {
      * Indica que la informacion firmada en el reference es informacion <i>detached</i> (no disponible dentro de la
      * firma).
      * </p>
-     * 
+     *
      * @return <code>true</code> si los datos son externos al xml que contiene la firma
      */
     public boolean isExternalData() {

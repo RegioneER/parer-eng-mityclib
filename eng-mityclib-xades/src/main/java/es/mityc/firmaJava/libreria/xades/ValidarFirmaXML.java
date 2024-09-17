@@ -140,9 +140,9 @@ import es.mityc.javasign.xml.xades.policy.PolicyResult.StatusValidation;
 
 /**
  * Clase para la validacion de la firmas XADES en los esquemas 1.1.1, 1.2.2, y 1.3.2 Aggiunto schema 1.3.1
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class ValidarFirmaXML { // implements ConstantesXADES
@@ -198,7 +198,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
     /**
      * Establece cual sera el encargado de gestionar la obtencion de los elementos externos de la firma relacionados con
      * certificados y estados de certificados
-     * 
+     *
      * @param recoverManager
      */
     public void setRecoverElements(IRecoverElements recoverManager) {
@@ -207,7 +207,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Añade una instancia encargada de resolver los accesos a elementos firmados en la firma cuyo contenido es privado.
-     * 
+     *
      * @param resolver
      *            objeto que implementa la interfaz IPrivateDate para el acceso a elementos privados
      */
@@ -217,7 +217,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Añade una instancia encargada de resolver accesos a informacion.
-     * 
+     *
      * @param resolver
      *            resolver
      */
@@ -231,7 +231,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
     /**
      * Añade una instancia encargada de resolver los accesos a elementos firmados en la firma que requieran un acceso
      * especial.
-     * 
+     *
      * @param resolver
      *            objeto que implementa la interfaz IResourceData para el acceso a elementos
      */
@@ -241,16 +241,16 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Valida la firma XML
-     * 
+     *
      * @param firmaParaValidar
      *            fichero con la firma XADES para validar
      * @param policies
      *            lista de validadores de policies que se aplicaran en la validacion (<code>null</code> si no hay
      *            policies a aplicar).
-     * 
+     *
      * @return ValidationResult Este objeto indica si la firma es valida o no, y en este último caso indica la razon por
      *         la cual la firma no es valida
-     * 
+     *
      * @throws FirmaXMLError
      *             Si la firma no es valida
      */
@@ -289,9 +289,9 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * @param bFirmaParaValidar
-     * 
+     *
      * @return
-     * 
+     *
      * @throws FirmaXMLError
      */
     public List<ResultadoValidacion> validar(byte[] bFirmaParaValidar, ExtraValidators validators)
@@ -459,7 +459,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
      * <p>
      * Establece el Locale del sistema antiguo de internacionalizacion.
      * </p>
-     * 
+     *
      * @param locale
      *            Localizacion a aplicar
      */
@@ -475,7 +475,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
      * Por defecto todas las versiones de esquema XAdES se intentan validar. Si no se quiere admitir una version de
      * XAdES se ha de desactivar.
      * </p>
-     * 
+     *
      * @param schema
      *            Esquema XAdES
      * @param activate
@@ -493,17 +493,17 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Valida la firma XML
-     * 
+     *
      * @param firmaParaValidar
      *            firchero con la firma XADES para validar
      * @param path
      *            ruta donde se encuentran los ficheros de complemento de informacion (para XADES-C)
      * @param policies
      *            lista de validadores de policies que se han de aplicar en la validacion
-     * 
+     *
      * @return ValidationResult Este objeto indica si la firma es valida o no, y en este último caso indica la razon por
      *         la cual la firma no es valida
-     * 
+     *
      * @throws FirmaXMLError
      *             Si la firma no es valida
      */
@@ -1150,10 +1150,10 @@ public class ValidarFirmaXML { // implements ConstantesXADES
                                        * else { // No se encuentra el segundo sello de tiempo correspondiente al nivel
                                        * XAdES-X log.error(I18n.getResource(ConstantesXADES
                                        * .LIBRERIAXADES_VALIDARFIRMA_ERROR106));
-                                       * 
+                                       *
                                        * logv.error(I18n.getResource(ConstantesXADES
                                        * .LIBRERIAXADES_VALIDARFIRMA_ERROR106));
-                                       * 
+                                       *
                                        * resultado.setLog(I18n.getResource( ConstantesXADES
                                        * .LIBRERIAXADES_VALIDARFIRMA_ERROR107)); esValido = false; }
                                        */
@@ -1325,10 +1325,10 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Busca si la firma tiene indicada alguna política y la añade al listado de políticas a validar.
-     * 
+     *
      * @param policies
      *            listas de políticas a validar
-     * 
+     *
      * @return
      */
     private void buscaXadesEpes(EstructuraFirma estructuraFirma) {
@@ -1444,7 +1444,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Mecanismo para proporcionar informacion mediante DataObjectFormat
-     * 
+     *
      * @param estructuraFirma
      */
     private void getDataObjectFormat(Document doc, EstructuraFirma estructuraFirma) {
@@ -1537,7 +1537,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Valida XAdES-BES.
-     * 
+     *
      * @return true Si la fecha de firma es anterior a la actual, si el certificado firmante es el que aparece en el
      *         nodo SigningCertificate y si existe al menos un nodo Reference con una URI apuntando al nodo
      *         SignedProperties. y dicho nodo contiene un attributo de tipo Type con un valor dependiente del esquema
@@ -1567,20 +1567,20 @@ public class ValidarFirmaXML { // implements ConstantesXADES
          * tiempo del nivel XXXX es posterior a la // actual resultado .setLog(I18n
          * .getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR170)); LOGGER.error(I18n
          * .getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR170));
-         * 
+         *
          * logv.error(I18n .getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR170));
-         * 
+         *
          * return false; }
-         * 
+         *
          * // Se valida que la fecha de firma quede dentro del periodo de // validez del certificado de firma
          * X509Certificate cert = cadenaCertificados.get(0); Date notAfter = cert.getNotAfter(); Date notBefore =
          * cert.getNotBefore(); if (fechaFirma.after(notAfter) || fechaFirma.before(notBefore)) { esValido = false; //
          * La fecha de firma no esta dentro del periodo de validez del // certificado firmante resultado .setLog(I18n
          * .getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR159)); LOGGER.error(I18n
          * .getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR159));
-         * 
+         *
          * logv.error(I18n .getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR159));
-         * 
+         *
          * return false; } }
          */
 
@@ -2000,7 +2000,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Valida el sello de tiempo correspondiente a la firma XADES-T
-     * 
+     *
      * @return Falso si el sello no esta bien formado o si la firma no se corresponde con el elemento de firma del
      *         documento
      */
@@ -2330,7 +2330,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
     /**
      * Valida el sello de tiempo de tipo 1 implícito correspondiente a la firma XADES-X de los esquemas 1.1.1, 1.2.2 y
      * 1.3.2
-     * 
+     *
      * @return Falso si el sello de tiempo no esta bien formado o si la firma no se corresponde con los elementos
      *         combinados del documento. Los elementos son los siguientes: - SignatureValue - SignatureTimestamp -
      *         CompleteCertificateRefs - CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2: -
@@ -2365,7 +2365,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
     /**
      * Valida el sello de tiempo de tipo 2 explícito correspondiente a la firma XADES-X de los esquemas 1.1.1, 1.2.2 y
      * 1.3.2
-     * 
+     *
      * @return Falso si el sello de tiempo no esta bien formado o si la firma no se corresponde con los elementos
      *         combinados del documento. Los elementos son los siguientes: - CompleteCertificateRefs -
      *         CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2: - AttributeCertificateRefs -
@@ -2400,7 +2400,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Valida el sello de tiempo de correspondiente a la firma XADES-X de los esquemas 1.1.1, 1.2.2 y 1.3.2
-     * 
+     *
      * @return Falso si el sello de tiempo no esta bien formado o si la firma no se corresponde con los elementos
      *         combinados del documento.
      */
@@ -2786,9 +2786,9 @@ public class ValidarFirmaXML { // implements ConstantesXADES
      * Posteriormente se sacan los certificados .cer y se valida su encadenamiento, y se chequean contra los nodos
      * Finalmente se valida que cada uno de los certificados esté asociado a una respuestaOCSP con estado good y ninguna
      * a revoked
-     * 
+     *
      * @return Falso si no se corresponden los dos valores
-     * 
+     *
      * @throws FirmaXMLError
      *             Si no puede calcular el digest de los certificados almacenados
      */
@@ -4314,11 +4314,11 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Valida el sello de tiempo correspondiente al nivel XAdES-A
-     * 
+     *
      * @param estructuraFirma
-     * 
+     *
      * @return boolean.- true Si el sello de tiempo es valido, false en caso contrario
-     * 
+     *
      * @throws Exception
      */
     private boolean validaXadesA(EstructuraFirma estructuraFirma) throws Exception {
@@ -4563,10 +4563,10 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Busca en CertificateValues un certificado encapsulado con el mismo issuer y serial Number que el parametrizado
-     * 
+     *
      * @param certIssuer
      * @param serialNumber
-     * 
+     *
      * @return Si se encontro coincidencia, se devuelve el elemento EncapsulatedX509Certificate. En caso contrario, un
      *         valor nulo
      */
@@ -4621,12 +4621,12 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Busca en RevocationValues una respuesta OCSP encapsulada que de el mismo valor de digest
-     * 
+     *
      * @param digest
      *            .- Digest que debe resultar del nodo a buscar
      * @param method
      *            .- Algoritmo a utilizar para el calculo del digest
-     * 
+     *
      * @return Si se encontro coincidencia, se devuelve el elemento EncapsulatedOCSPValue. En caso contrario, un valor
      *         nulo
      */
@@ -4733,12 +4733,12 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Busca en RevocationValues una CRL encapsulada con el mismo digest
-     * 
+     *
      * @param digest
      *            .- Digest que debe resultar del nodo a buscar
      * @param method
      *            .- Algoritmo a utilizar para el calculo del digest
-     * 
+     *
      * @return Si se encontro coincidencia, se devuelve el elemento EncapsulatedCRLValue. En caso contrario, un valor
      *         nulo
      */
@@ -4843,7 +4843,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Indica el tipo de firma que tiene el documento
-     * 
+     *
      * @return El nombre del tipo de firma
      */
     private DatosTipoFirma tipoFirma(EstructuraFirma estructuraFirma) throws BadFormedSignatureException {
@@ -5119,7 +5119,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
     /**
      * Saca del nodo SigningTime los datos de la fecha de firma. Si falla el parseo de la firma porque no tiene un
      * formato correcto devuelve un nulo
-     * 
+     *
      * @return Date fechaFirma
      */
 
@@ -5169,7 +5169,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Obtiene los roles del nodo ClaimedRoles
-     * 
+     *
      * @return ArrayList<String> roles
      */
     private ArrayList<String> obtenerRoles(EstructuraFirma estructuraFirma) {
@@ -5198,7 +5198,7 @@ public class ValidarFirmaXML { // implements ConstantesXADES
     /**
      * Saca del nodo QualifyingProperties el esquema. Devuelve nulo si no esta en la lista de esquemas que se pueden
      * validar.
-     * 
+     *
      * @return String esquema
      */
     private EstructuraFirma obtenerEsquema(Element firma) {
@@ -5268,10 +5268,10 @@ public class ValidarFirmaXML { // implements ConstantesXADES
 
     /**
      * Obtiene la cadena de certificados buscando en los nodos KeyInfo, CertificateValues y CompleteCertificateRefs
-     * 
+     *
      * @param Element
      *            firma.- Firma a validar
-     * 
+     *
      * @return boolean.- En caso de error se devuelve un false
      */
     private boolean obtenerCadenaCertificados(EstructuraFirma estructuraFirma) {

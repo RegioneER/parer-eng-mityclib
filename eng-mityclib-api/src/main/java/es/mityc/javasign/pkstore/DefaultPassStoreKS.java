@@ -32,9 +32,9 @@ import es.mityc.javasign.i18n.II18nManager;
  * Proporciona un mecanismo por defecto para mostrar una ventana que pida al usuario la contraseña de acceso a un
  * certificado ubicado en un dispositivo seguro.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class DefaultPassStoreKS implements IPassStoreKS {
@@ -56,12 +56,12 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * Muestra una ventana de dialogo para que el usuario introduzca una contraseña de acceso a un certificado ubicado
      * en un dispositivo seguro.
      * </p>
-     * 
+     *
      * @param certificate
      *            Certificado al que se accede
      * @param alias
      *            Alias del certificado al que se accede
-     * 
+     *
      * @return contraseña (PIN)
      */
     public char[] getPassword(final X509Certificate certificate, final String alias) {
@@ -92,7 +92,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * Este método se mantiene para facilitar la gestion de hijos sobre la informacion a mostrar. Sobreescribiéndolo se
      * puede preparar un dialogo adecuado al caso.
      * </p>
-     * 
+     *
      * @param icon
      *            Icono a mostrar.
      */
@@ -104,7 +104,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * <p>
      * Establece el icono que sera mostrado junto con el mensaje de peticion de PIN.
      * </p>
-     * 
+     *
      * @param isVisible
      *            <code>false</code> para hacer el boton invisible
      */
@@ -120,7 +120,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * Este método se mantiene para facilitar la gestion de hijos sobre la informacion a mostrar. Sobreescribiéndolo se
      * puede preparar un título de ventana relacionado con los datos provistos.
      * </p>
-     * 
+     *
      * @param certificate
      *            certificado del que se pide el acceso
      * @param alias
@@ -134,7 +134,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * <p>
      * Permite indicar un título a la ventana de peticion de contraseña.
      * </p>
-     * 
+     *
      * @param title
      *            Título de la ventana
      */
@@ -146,7 +146,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * <p>
      * Devuelve el título configurado para la ventana de peticion de contraseña.
      * </p>
-     * 
+     *
      * @return Título de la ventana
      */
     public String getTitle() {
@@ -157,7 +157,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * <p>
      * Establece el mensaje de introduccion de PIN.
      * </p>
-     * 
+     *
      * @param message
      *            nuevo mensage
      */
@@ -169,7 +169,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * <p>
      * Devuelve el mensaje de PIN introducido.
      * </p>
-     * 
+     *
      * @return mensaje de PIN
      */
     public String getPINMessage() {

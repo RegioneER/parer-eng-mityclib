@@ -23,9 +23,9 @@ import java.util.Date;
  * <p>
  * Interfaz que han de cumplir los objetos que recojan informacion de estado de un certificado en forma OCSP.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface IOCSPCertStatus extends ICertStatus {
@@ -42,7 +42,7 @@ public interface IOCSPCertStatus extends ICertStatus {
      * <p>
      * Devuelve una cadena que identifica al OCSP Responder que genera la respuesta.
      * </p>
-     * 
+     *
      * @return Cadena que identifica al OCSP Responder
      */
     String getResponderID();
@@ -51,7 +51,7 @@ public interface IOCSPCertStatus extends ICertStatus {
      * <p>
      * Devuelve el tipo de OCSP responder que ha generado la respuesta.
      * </p>
-     * 
+     *
      * @return Tipo de OCSP responder
      */
     TYPE_RESPONDER getResponderType();
@@ -60,7 +60,7 @@ public interface IOCSPCertStatus extends ICertStatus {
      * <p>
      * Devuelve la fecha de la respuesta.
      * </p>
-     * 
+     *
      * @return fecha de generacion de la respuesta
      */
     Date getResponseDate();

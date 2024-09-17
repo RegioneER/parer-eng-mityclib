@@ -24,9 +24,9 @@ import org.w3c.dom.NodeList;
  * <p>
  * Interfaz que deben cumplir los generadores de la informacion de apoyo de las transformdas.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public interface ITransformData {
@@ -35,10 +35,10 @@ public interface ITransformData {
      * <p>
      * Devuelve un listado de nodos de informacion necesaria para la transformada.
      * </p>
-     * 
+     *
      * @param doc
      *            Documento donde se incrustan los nodos
-     * 
+     *
      * @return Listado de nodos de informacion, <code>null</code> si no hay nodos que añadir
      */
     NodeList getExtraData(Document doc);

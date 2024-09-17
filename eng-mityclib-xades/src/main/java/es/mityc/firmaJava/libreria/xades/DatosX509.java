@@ -23,9 +23,9 @@ import javax.security.auth.x500.X500Principal;
 
 /**
  * Clase encargada de almacenar informacion referida a los certificados X509Certificate
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 

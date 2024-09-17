@@ -43,7 +43,7 @@ import es.mityc.javasign.i18n.II18nManager;
  * Funciones de utilidades varias
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 public class UtilidadFirmaElectronica { // implements ConstantesXADES
@@ -76,10 +76,10 @@ public class UtilidadFirmaElectronica { // implements ConstantesXADES
 
     /**
      * Decodifica una cadena a UTF-8
-     * 
+     *
      * @param input
      *            Cadena a decodificar
-     * 
+     *
      * @return cadena en UTF-8
      */
     public static String decodeUTF(byte[] input) {
@@ -139,9 +139,9 @@ public class UtilidadFirmaElectronica { // implements ConstantesXADES
      * @param listaCertificadosTemp
      *            Lista de certificados temporales
      * @param emisorDN
-     * 
+     *
      * @return
-     * 
+     *
      *         TODO: revisar este método y reconstruirlo decentemente
      */
     public static List<X509Certificate> filtraCertificados(List<X509Certificate> listaCertificadosTemp,
@@ -171,10 +171,10 @@ public class UtilidadFirmaElectronica { // implements ConstantesXADES
     }
 
     /**
-     * 
+     *
      * @param listaCertificadosTemp
      *            Lista de certificados temporales
-     * 
+     *
      * @return
      */
     public static List<X509Certificate> filtraDNIe(List<X509Certificate> listaCertificadosTemp) {
@@ -295,10 +295,10 @@ public class UtilidadFirmaElectronica { // implements ConstantesXADES
 
     /**
      * Devuelve el MessageDigest asociado a la uri (según la rfc 3275 y la rfc 4051).
-     * 
+     *
      * @param uri
      *            Uri que define el algoritmo de digest (según las rfc 3275 y 4051).
-     * 
+     *
      * @return MessageDigest asociado o null si no hay ninguno disponible para el algoritmo indicado.
      */
     public static MessageDigest getMessageDigest(String uri) {

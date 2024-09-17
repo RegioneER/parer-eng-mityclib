@@ -23,9 +23,9 @@ import es.mityc.javasign.xml.xades.TransformProxy;
  * <p>
  * Transformada de XPath 2.
  * </p>
- * 
+ *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 1.0
  */
 public class TransformXPath2 extends Transform {
@@ -42,7 +42,7 @@ public class TransformXPath2 extends Transform {
      * <p>
      * Incluye un path en los paths que aplicara esta transformada.
      * </p>
-     * 
+     *
      * @param path
      */
     public void addPath(String path) {

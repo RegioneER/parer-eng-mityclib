@@ -21,7 +21,7 @@ package es.mityc.firmaJava.libreria.utilidades;
  * Convierte Array de bytes a Hexadecimal
  *
  * @author Ministerio de Industria, Turismo y Comercio
- * 
+ *
  * @version 0.9 beta
  */
 
@@ -32,11 +32,11 @@ public class ByteArrayAHex {
 
     /**
      * Devuelve la cadena en Hexadecimal
-     * 
+     *
      * @param buf
      * @param i
      * @param longitud
-     * 
+     *
      * @return
      */
     public static final String hexString(byte[] buf, int i, int longitud) {
@@ -50,9 +50,9 @@ public class ByteArrayAHex {
 
     /**
      * Devuelve la cadena en hexadecimal
-     * 
+     *
      * @param buf
-     * 
+     *
      * @return
      */
     public static final String hexString(byte[] buf) {
@@ -60,9 +60,9 @@ public class ByteArrayAHex {
     }
 
     /**
-     * 
+     *
      * @param n
-     * 
+     *
      * @return
      */
     public static byte fromHexNibble(char n) {
@@ -75,7 +75,7 @@ public class ByteArrayAHex {
 
     /**
      * Convierte una cadena de digitos hexadecimales a un array de bytes
-     * 
+     *
      * @param hex
      */
     public static byte[] fromHexString(String hex) {
