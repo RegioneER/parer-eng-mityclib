@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades;
@@ -39,8 +35,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.xml.security.Init;
 import org.apache.xml.security.algorithms.JCEMapper;
 import org.apache.xml.security.signature.ObjectContainer;
@@ -120,7 +116,7 @@ import es.mityc.javasign.xml.xades.policy.PoliciesManager;
  */
 public class FirmaXML {
 
-    private static Log log = LogFactory.getLog(FirmaXML.class);
+    private static Logger log = LoggerFactory.getLogger(FirmaXML.class);
     private static II18nManager i18n = I18nFactory.getI18nManager(ConstantsXAdES.LIB_NAME);
 
     String profileDirectory = ConstantesXADES.CADENA_VACIA;
@@ -149,14 +145,14 @@ public class FirmaXML {
 
     /**
      * <p>
-     * Establece la TSA que se utilizarÃ¡ para obtener los sellos de tiempo en caso de ser necesario.
+     * Establece la TSA que se utilizarÃ¡ para obtener los sellos de tiempo en caso de ser
+     * necesario.
      * </p>
      *
-     * @param url
-     *            ruta de la TSA
+     * @param url ruta de la TSA
      */
     public void setTSA(String url) {
-        this.servidorTSA = url;
+	this.servidorTSA = url;
     }
 
     /**
@@ -164,11 +160,10 @@ public class FirmaXML {
      * Establece el namespace que se aplicarÃ¡ a los nodos de XML Signature.
      * </p>
      *
-     * @param namespace
-     *            Namespace aplicado a XMLSig
+     * @param namespace Namespace aplicado a XMLSig
      */
     public void setDefaultNSXmlSig(String namespace) {
-        this.xmldsigNS = namespace;
+	this.xmldsigNS = namespace;
     }
 
     /**
@@ -176,52 +171,49 @@ public class FirmaXML {
      * Establece el Locale del sistema antiguo de internacionalizaciÃ³n.
      * </p>
      *
-     * @param locale
-     *            LocalizaciÃ³n a aplicar
+     * @param locale LocalizaciÃ³n a aplicar
      */
     public void setLocale(String locale) {
-        I18n.setLocale(locale, locale.toUpperCase());
+	I18n.setLocale(locale, locale.toUpperCase());
     }
 
     /**
-     * AÃ±ade una instancia encargada de resolver los accesos a elementos firmados en la firma cuyo contenido es
-     * privado.
+     * AÃ±ade una instancia encargada de resolver los accesos a elementos firmados en la firma cuyo
+     * contenido es privado.
      *
-     * @param resolver
-     *            objeto que implementa la interfaz IPrivateDate para el acceso a elementos privados
+     * @param resolver objeto que implementa la interfaz IPrivateDate para el acceso a elementos
+     *                 privados
      */
     public void addResolver(IPrivateData resolver) {
-        addResolver(new ResolverPrivateData(resolver));
+	addResolver(new ResolverPrivateData(resolver));
     }
 
     /**
      * AÃ±ade una instancia encargada de resolver accesos a informaciÃ³n.
      *
-     * @param resolver
-     *            resolver
+     * @param resolver resolver
      */
     public void addResolver(MITyCResourceResolver resolver) {
-        if (resolvers == null) {
-            resolvers = new ArrayList<ResourceResolverSpi>();
-        }
-        resolvers.add(resolver);
+	if (resolvers == null) {
+	    resolvers = new ArrayList<ResourceResolverSpi>();
+	}
+	resolvers.add(resolver);
     }
 
     /**
-     * AÃ±ade una instancia encargada de resolver los accesos a elementos firmados en la firma que requieran un acceso
-     * especial.
+     * AÃ±ade una instancia encargada de resolver los accesos a elementos firmados en la firma que
+     * requieran un acceso especial.
      *
-     * @param resolver
-     *            objeto que implementa la interfaz IResourceData para el acceso a elementos
+     * @param resolver objeto que implementa la interfaz IResourceData para el acceso a elementos
      */
     public void addResolver(IResourceData resolver) {
-        addResolver(new XAdESResourceResolverSpi(resolver));
+	addResolver(new XAdESResourceResolverSpi(resolver));
     }
 
-    public void sign2Stream(X509Certificate firmaCertificado, DataToSign xml, IPKStoreManager storeManager,
-            OutputStream salida) throws Exception {
-        PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
-        signFile(firmaCertificado, xml, pk, salida, storeManager.getProvider(firmaCertificado));
+    public void sign2Stream(X509Certificate firmaCertificado, DataToSign xml,
+	    IPKStoreManager storeManager, OutputStream salida) throws Exception {
+	PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
+	signFile(firmaCertificado, xml, pk, salida, storeManager.getProvider(firmaCertificado));
     }
 
     // public Document sign2Doc(
@@ -235,42 +227,41 @@ public class FirmaXML {
     /**
      * Firma un fichero XML
      *
-     * @param pk
-     *            Clave privada del certificado firmante
-     * @param firmaCertificado
-     *            Certificado firmante
-     * @param xml
-     *            Fichero XML a firmar
-     * @param directorioPerfil
-     *            Directorio de configuracion de Firefox
+     * @param pk               Clave privada del certificado firmante
+     * @param firmaCertificado Certificado firmante
+     * @param xml              Fichero XML a firmar
+     * @param directorioPerfil Directorio de configuracion de Firefox
      *
-     * @throws java.lang.Exception
-     *             En caso de error
+     * @throws java.lang.Exception En caso de error
      *
      * @return Array de bytes con el XML firmado
      */
-    public boolean signFile(X509Certificate firmaCertificado, DataToSign xml, IPKStoreManager storeManager,
-            String destino, String nombreArchivo) throws Exception {
-        PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
-        return signFile(firmaCertificado, xml, pk, destino, nombreArchivo, storeManager.getProvider(firmaCertificado));
+    public boolean signFile(X509Certificate firmaCertificado, DataToSign xml,
+	    IPKStoreManager storeManager, String destino, String nombreArchivo) throws Exception {
+	PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
+	return signFile(firmaCertificado, xml, pk, destino, nombreArchivo,
+		storeManager.getProvider(firmaCertificado));
     }
 
-    private void signFile(X509Certificate certificadoFirma, DataToSign xml, PrivateKey pk, OutputStream salida,
-            Provider provider) throws Exception {
+    private void signFile(X509Certificate certificadoFirma, DataToSign xml, PrivateKey pk,
+	    OutputStream salida, Provider provider) throws Exception {
 
-        Object[] res = signFile(certificadoFirma, xml, pk, provider);
+	Object[] res = signFile(certificadoFirma, xml, pk, provider);
 
-        if (res[1] != null)
-            throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_43));
+	if (res[1] != null)
+	    throw new ClienteError(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_43));
 
-        try {
-            XMLUtils.outputDOM((Document) res[0], salida, true);
-        } catch (Throwable t) {
-            if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
-            else
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
-        }
+	try {
+	    XMLUtils.outputDOM((Document) res[0], salida, true);
+	} catch (Throwable t) {
+	    if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
+	    else
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
+	}
     }
 
     // private Document sign2Doc(X509Certificate certificadoFirma, DataToSign xml,
@@ -281,7 +272,8 @@ public class FirmaXML {
     // return doc;
     // }
     //
-    // private Document sign2Doc(X509Certificate certificadoFirma, DataToSign xml, String nodoRaizXml,
+    // private Document sign2Doc(X509Certificate certificadoFirma, DataToSign xml, String
+    // nodoRaizXml,
     // PrivateKey pk, Provider provider) throws Exception {
     // Object[] res = signFile(certificadoFirma, xml, nodoRaizXml, pk, provider);
     //
@@ -289,574 +281,628 @@ public class FirmaXML {
     // return doc;
     // }
 
-    private boolean signFile(X509Certificate certificadoFirma, DataToSign xml, PrivateKey pk, String destino,
-            String nombreArchivo, Provider provider) throws Exception {
-        if (destino == null || nombreArchivo == null) {
-            // No se proporcionaron los datos de firma
-            throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_31));
-        }
+    private boolean signFile(X509Certificate certificadoFirma, DataToSign xml, PrivateKey pk,
+	    String destino, String nombreArchivo, Provider provider) throws Exception {
+	if (destino == null || nombreArchivo == null) {
+	    // No se proporcionaron los datos de firma
+	    throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_31));
+	}
 
-        Object[] res = signFile(certificadoFirma, xml, pk, provider);
+	Object[] res = signFile(certificadoFirma, xml, pk, provider);
 
-        // // Si se firma XADES-C exclusivamente, se guardan las respuestaOCSP y los certificados
-        // // con un nombre asociado al fichero de firma y en la misma ruta temporal
-        Document doc = (Document) res[0];
-        // if (res[1] != null) {
-        // doc = addURIXadesC(doc, saveOCSPFiles((ArrayList<RespYCerts>)res[1], destino, nombreArchivo),
-        // xml.getBaseURI());
-        // }
+	// // Si se firma XADES-C exclusivamente, se guardan las respuestaOCSP y los certificados
+	// // con un nombre asociado al fichero de firma y en la misma ruta temporal
+	Document doc = (Document) res[0];
+	// if (res[1] != null) {
+	// doc = addURIXadesC(doc, saveOCSPFiles((ArrayList<RespYCerts>)res[1], destino,
+	// nombreArchivo),
+	// xml.getBaseURI());
+	// }
 
-        // Se guarda la firma en su destino
-        File fichero = new File(destino + nombreArchivo);
-        FileOutputStream f = new FileOutputStream(fichero);
+	// Se guarda la firma en su destino
+	File fichero = new File(destino + nombreArchivo);
+	FileOutputStream f = new FileOutputStream(fichero);
 
-        try {
-            XMLUtils.outputDOM(doc, f, true);
-        } catch (Throwable t) {
-            if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
-            else
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
-        } finally {
-            f.close();
-        }
+	try {
+	    XMLUtils.outputDOM(doc, f, true);
+	} catch (Throwable t) {
+	    if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
+	    else
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
+	} finally {
+	    f.close();
+	}
 
-        return true;
+	return true;
     }
 
-    public Object[] signFile(X509Certificate certificadoFirma, DataToSign dataToSign, PrivateKey pk, Provider provider)
-            throws Exception {
+    public Object[] signFile(X509Certificate certificadoFirma, DataToSign dataToSign, PrivateKey pk,
+	    Provider provider) throws Exception {
 
-        ArrayList<RespYCerts> respuestas = new ArrayList<RespYCerts>();
+	ArrayList<RespYCerts> respuestas = new ArrayList<RespYCerts>();
 
-        // String nodosCadenaParaFirma = null;
-        // if (nodoParaFirmaXml == null){
-        // nodosCadenaParaFirma = configuracion.getValor(ConstantesXADES.XML_NODE_TO_SIGN);
-        // }else{
-        // nodosCadenaParaFirma = nodoParaFirmaXml;
-        // }
-        // StringTokenizer stTok = new StringTokenizer(nodosCadenaParaFirma, ConstantesXADES.COMA);
-        // String[] nodosParaFirma = new String[stTok.countTokens()];
-        // int aa = 0;
-        // boolean valor = stTok.hasMoreElements();
-        // while(valor){
-        // nodosParaFirma[aa] = ((String)stTok.nextElement()).trim();
-        // aa++;
-        // valor = stTok.hasMoreElements();
-        // }
+	// String nodosCadenaParaFirma = null;
+	// if (nodoParaFirmaXml == null){
+	// nodosCadenaParaFirma = configuracion.getValor(ConstantesXADES.XML_NODE_TO_SIGN);
+	// }else{
+	// nodosCadenaParaFirma = nodoParaFirmaXml;
+	// }
+	// StringTokenizer stTok = new StringTokenizer(nodosCadenaParaFirma, ConstantesXADES.COMA);
+	// String[] nodosParaFirma = new String[stTok.countTokens()];
+	// int aa = 0;
+	// boolean valor = stTok.hasMoreElements();
+	// while(valor){
+	// nodosParaFirma[aa] = ((String)stTok.nextElement()).trim();
+	// aa++;
+	// valor = stTok.hasMoreElements();
+	// }
 
-        Init.init();
+	Init.init();
 
-        Document doc = dataToSign.getDocument();
-        if (doc == null) {
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	Document doc = dataToSign.getDocument();
+	if (doc == null) {
+	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-            dbf.setNamespaceAware(true);
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            db.setErrorHandler(new IgnoreAllErrorHandler());
-            try {
-                InputStream is = dataToSign.getInputStream();
-                if (is != null) {
-                    InputSource isour = new InputSource(is);
-                    String encoding = dataToSign.getXMLEncoding();
-                    isour.setEncoding(encoding);
-                    doc = db.parse(isour);
-                } else {
-                    doc = db.newDocument();
-                }
-            } catch (IOException ex) {
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_50));
-            }
-        }
+	    dbf.setNamespaceAware(true);
+	    DocumentBuilder db = dbf.newDocumentBuilder();
+	    db.setErrorHandler(new IgnoreAllErrorHandler());
+	    try {
+		InputStream is = dataToSign.getInputStream();
+		if (is != null) {
+		    InputSource isour = new InputSource(is);
+		    String encoding = dataToSign.getXMLEncoding();
+		    isour.setEncoding(encoding);
+		    doc = db.parse(isour);
+		} else {
+		    doc = db.newDocument();
+		}
+	    } catch (IOException ex) {
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_50));
+	    }
+	}
 
-        // Se toman las variables de configuraciÃ³n de DataToSign
-        XAdESSchemas esquemaTemp = dataToSign.getEsquema();
-        if (esquemaTemp != null) {
-            xadesSchema = esquemaTemp.getSchemaUri(); // configuracion.getValor(ConstantesXADES.XADES_SCHEMA);
-        } else {
-            xadesSchema = XAdESSchemas.XAdES_132.getSchemaUri();
-        }
+	// Se toman las variables de configuraciÃ³n de DataToSign
+	XAdESSchemas esquemaTemp = dataToSign.getEsquema();
+	if (esquemaTemp != null) {
+	    xadesSchema = esquemaTemp.getSchemaUri(); // configuracion.getValor(ConstantesXADES.XADES_SCHEMA);
+	} else {
+	    xadesSchema = XAdESSchemas.XAdES_132.getSchemaUri();
+	}
 
-        String algTemp = dataToSign.getAlgDigestTSA();
-        if (algTemp != null)
-            algoritmoTSA = algTemp;
-        else
-            algoritmoTSA = ConstantesTSA.SHA1;
+	String algTemp = dataToSign.getAlgDigestTSA();
+	if (algTemp != null)
+	    algoritmoTSA = algTemp;
+	else
+	    algoritmoTSA = ConstantesTSA.SHA1;
 
-        String algDigestXML = (dataToSign.getAlgDigestXmlDSig() != null) ? dataToSign.getAlgDigestXmlDSig()
-                : UtilidadFirmaElectronica.DIGEST_ALG_SHA1;
-        // Consulta si puede resolver el algoritmo antes de continuar. Si no puede, lanza excepciÃ³n
-        if (JCEMapper.translateURItoJCEID(algDigestXML) == null) {
-            throw new SignMITyCException(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_1, algDigestXML));
-        }
+	String algDigestXML = (dataToSign.getAlgDigestXmlDSig() != null)
+		? dataToSign.getAlgDigestXmlDSig()
+		: UtilidadFirmaElectronica.DIGEST_ALG_SHA1;
+	// Consulta si puede resolver el algoritmo antes de continuar. Si no puede, lanza excepciÃ³n
+	if (JCEMapper.translateURItoJCEID(algDigestXML) == null) {
+	    throw new SignMITyCException(
+		    i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_1, algDigestXML));
+	}
 
-        XMLSignature.setDefaultPrefix(Constants.SignatureSpecNS, xmldsigNS);
-        XMLSignature firma = new XMLSignature(doc, dataToSign.getBaseURI(), XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1);
-        firma.setId(UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNATURE_NODE_ID));
-        firma.getSignedInfo().setId(UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNED_INFO_NODE_ID));
-        if (resolvers != null) {
-            Iterator<ResourceResolverSpi> it = resolvers.iterator();
-            while (it.hasNext()) {
-                firma.addResourceResolver(it.next());
-            }
-        }
+	XMLSignature.setDefaultPrefix(Constants.SignatureSpecNS, xmldsigNS);
+	XMLSignature firma = new XMLSignature(doc, dataToSign.getBaseURI(),
+		XMLSignature.ALGO_ID_SIGNATURE_RSA_SHA1);
+	firma.setId(UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNATURE_NODE_ID));
+	firma.getSignedInfo()
+		.setId(UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNED_INFO_NODE_ID));
+	if (resolvers != null) {
+	    Iterator<ResourceResolverSpi> it = resolvers.iterator();
+	    while (it.hasNext()) {
+		firma.addResourceResolver(it.next());
+	    }
+	}
 
-        firma.setXPathNamespaceContext(xmldsigNS, ConstantesXADES.SCHEMA_DSIG);
-        EnumFormatoFirma tipoFirma = dataToSign.getXadesFormat();
-        boolean xadesActivo = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_BES) >= 0);
+	firma.setXPathNamespaceContext(xmldsigNS, ConstantesXADES.SCHEMA_DSIG);
+	EnumFormatoFirma tipoFirma = dataToSign.getXadesFormat();
+	boolean xadesActivo = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_BES) >= 0);
 
-        if (xadesActivo) {
-            firma.setXPathNamespaceContext(xadesNS, xadesSchema);
-        }
+	if (xadesActivo) {
+	    firma.setXPathNamespaceContext(xadesNS, xadesSchema);
+	}
 
-        Element elementoPrincipal = null;
-        // TODO: permitir utilizar cadenas XPATH para indicar el nodo que contendrÃ¡ la firma
-        if (!dataToSign.isEnveloped()) {
-            doc.appendChild(firma.getElement());
-        } else {
-            String nodoRaizXml = dataToSign.getParentSignNode();
-            if (nodoRaizXml == null) { // Si no se indicÃ³, se toma el primero del documento
-                elementoPrincipal = doc.getDocumentElement();// (Element) doc.getFirstChild();
-            } else { // SÃ­ se indicÃ³
-                NodeList nodos = doc.getElementsByTagName(nodoRaizXml);
-                if (nodos.getLength() != 0) // Si se encuentra el/los nodos se toma el primero
-                    elementoPrincipal = (Element) nodos.item(0);
-                else { // Si no se encuentra el nodo, se realiza la busqueda con un identificador en lugar de TagName
-                    Node nodo = UtilidadTratarNodo.getElementById(doc, nodoRaizXml);
-                    if (nodo != null) // Si se encuentra el nodo, se toma como nodo padre de la firma
-                        elementoPrincipal = (Element) nodo;
-                    else
-                        throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_2));
-                }
-            }
-            elementoPrincipal.appendChild(firma.getElement());
-        }
+	Element elementoPrincipal = null;
+	// TODO: permitir utilizar cadenas XPATH para indicar el nodo que contendrÃ¡ la firma
+	if (!dataToSign.isEnveloped()) {
+	    doc.appendChild(firma.getElement());
+	} else {
+	    String nodoRaizXml = dataToSign.getParentSignNode();
+	    if (nodoRaizXml == null) { // Si no se indicÃ³, se toma el primero del documento
+		elementoPrincipal = doc.getDocumentElement();// (Element) doc.getFirstChild();
+	    } else { // SÃ­ se indicÃ³
+		NodeList nodos = doc.getElementsByTagName(nodoRaizXml);
+		if (nodos.getLength() != 0) // Si se encuentra el/los nodos se toma el primero
+		    elementoPrincipal = (Element) nodos.item(0);
+		else { // Si no se encuentra el nodo, se realiza la busqueda con un identificador en
+		       // lugar de TagName
+		    Node nodo = UtilidadTratarNodo.getElementById(doc, nodoRaizXml);
+		    if (nodo != null) // Si se encuentra el nodo, se toma como nodo padre de la
+				      // firma
+			elementoPrincipal = (Element) nodo;
+		    else
+			throw new Exception(
+				I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_2));
+		}
+	    }
+	    elementoPrincipal.appendChild(firma.getElement());
+	}
 
-        idSigProperties = UtilidadTratarNodo.newID(doc, ConstantesXADES.GUION_SIGNED_PROPERTIES);
-        if (xadesActivo) {
+	idSigProperties = UtilidadTratarNodo.newID(doc, ConstantesXADES.GUION_SIGNED_PROPERTIES);
+	if (xadesActivo) {
 
-            String tipoEsquema = UtilidadFirmaElectronica.obtenerTipoReference(xadesSchema);
+	    String tipoEsquema = UtilidadFirmaElectronica.obtenerTipoReference(xadesSchema);
 
-            firma.addDocument(ConstantesXADES.ALMOHADILLA + firma.getId() + idSigProperties, null, algDigestXML,
-                    UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNED_PROPERTIES_ID), tipoEsquema);
-        }
+	    firma.addDocument(ConstantesXADES.ALMOHADILLA + firma.getId() + idSigProperties, null,
+		    algDigestXML,
+		    UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNED_PROPERTIES_ID),
+		    tipoEsquema);
+	}
 
-        firma.addKeyInfo(certificadoFirma);
-        firma.addKeyInfo(certificadoFirma.getPublicKey());
-        String idCert = UtilidadTratarNodo.newID(doc, ConstantesXADES.CERTIFICATE1);
-        firma.getKeyInfo().setId(idCert);
+	firma.addKeyInfo(certificadoFirma);
+	firma.addKeyInfo(certificadoFirma.getPublicKey());
+	String idCert = UtilidadTratarNodo.newID(doc, ConstantesXADES.CERTIFICATE1);
+	firma.getKeyInfo().setId(idCert);
 
-        // TODO: cambiar la manera de indicar los elementos que se firman a una manera mÃ¡s estÃ¡ndar a travÃ©s de
-        // objetos externos,
-        // objetos internos en firma y objetos internos fuera de firma.
-        // AÃ±adimos los elementos propios de la firma en XADES
+	// TODO: cambiar la manera de indicar los elementos que se firman a una manera mÃ¡s
+	// estÃ¡ndar a travÃ©s de
+	// objetos externos,
+	// objetos internos en firma y objetos internos fuera de firma.
+	// AÃ±adimos los elementos propios de la firma en XADES
 
-        // Firma el certificado de firma
-        firma.addDocument(ConstantesXADES.ALMOHADILLA + idCert, null, algDigestXML, null, null);
+	// Firma el certificado de firma
+	firma.addDocument(ConstantesXADES.ALMOHADILLA + idCert, null, algDigestXML, null, null);
 
-        // Incluye los objetos que se quiere firmar
-        ArrayList<ObjectToSign> objects = dataToSign.getObjects();
-        if (objects != null) {
-            Iterator<ObjectToSign> it = objects.iterator();
-            while (it.hasNext()) {
-                ObjectToSign obj = it.next();
-                AbstractObjectToSign objToSign = obj.getObjectToSign();
+	// Incluye los objetos que se quiere firmar
+	ArrayList<ObjectToSign> objects = dataToSign.getObjects();
+	if (objects != null) {
+	    Iterator<ObjectToSign> it = objects.iterator();
+	    while (it.hasNext()) {
+		ObjectToSign obj = it.next();
+		AbstractObjectToSign objToSign = obj.getObjectToSign();
 
-                String refId = UtilidadTratarNodo.newID(doc, "Reference-ID-");
-                List<ObjectContainer> containers = objToSign.getObjects(doc);
-                if (containers != null) {
-                    for (ObjectContainer objectContainer : containers) {
-                        firma.appendObject(objectContainer);
-                    }
-                }
+		String refId = UtilidadTratarNodo.newID(doc, "Reference-ID-");
+		List<ObjectContainer> containers = objToSign.getObjects(doc);
+		if (containers != null) {
+		    for (ObjectContainer objectContainer : containers) {
+			firma.appendObject(objectContainer);
+		    }
+		}
 
-                String objId = objToSign.getReferenceURI();
-                // Construye las transformadas que se aplicarÃ¡n al objeto
-                Transforms trans = null;
-                List<Transform> list = objToSign.getTransforms();
-                // Si la firma estÃ¡ dentro de lo firmado indica que la transformada debe ser de enveloped
-                if (dataToSign.isEnveloped()) {
-                    if (objId != null) {
-                        Element aFirmar = UtilidadTratarNodo.getElementById(doc, objId);
-                        if (UtilidadTratarNodo.isChildNode(firma.getElement(), aFirmar)) {
-                            list.add(new TransformEnveloped());
-                        }
-                    }
-                }
-                if (list.size() > 0) {
-                    trans = new Transforms(doc);
-                    for (Transform transform : list) {
-                        trans.addTransform(transform.getAlgorithm(), transform.getExtraData(doc));
-                    }
-                }
+		String objId = objToSign.getReferenceURI();
+		// Construye las transformadas que se aplicarÃ¡n al objeto
+		Transforms trans = null;
+		List<Transform> list = objToSign.getTransforms();
+		// Si la firma estÃ¡ dentro de lo firmado indica que la transformada debe ser de
+		// enveloped
+		if (dataToSign.isEnveloped()) {
+		    if (objId != null) {
+			Element aFirmar = UtilidadTratarNodo.getElementById(doc, objId);
+			if (UtilidadTratarNodo.isChildNode(firma.getElement(), aFirmar)) {
+			    list.add(new TransformEnveloped());
+			}
+		    }
+		}
+		if (list.size() > 0) {
+		    trans = new Transforms(doc);
+		    for (Transform transform : list) {
+			trans.addTransform(transform.getAlgorithm(), transform.getExtraData(doc));
+		    }
+		}
 
-                MITyCResourceResolver resolver = objToSign.getResolver();
-                if (resolver != null) {
-                    firma.addResourceResolver(resolver);
-                }
+		MITyCResourceResolver resolver = objToSign.getResolver();
+		if (resolver != null) {
+		    firma.addResourceResolver(resolver);
+		}
 
-                String typeInfo = objToSign.getType();
-                firma.addDocument(objId, trans, algDigestXML, refId, typeInfo);
+		String typeInfo = objToSign.getType();
+		firma.addDocument(objId, trans, algDigestXML, refId, typeInfo);
 
-                obj.setId(ConstantesXADES.ALMOHADILLA + refId);
-            }
-        }
+		obj.setId(ConstantesXADES.ALMOHADILLA + refId);
+	    }
+	}
 
-        XAdESSchemas schema = null;
-        if (xadesActivo) {
+	XAdESSchemas schema = null;
+	if (xadesActivo) {
 
-            schema = XAdESSchemas.getXAdESSchema(xadesSchema);
-            if (schema == null) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_44) + ConstantesXADES.ESPACIO
-                        + xadesSchema);
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_45));
-            }
-            addXades(doc, firma.getId(), certificadoFirma, firma.getElement(), schema, dataToSign, algDigestXML);
-            if (dataToSign.hasPolicy()) {
-                addXadesEPES(firma.getElement(), dataToSign.getPolicyKey());
-            } else if (XAdESSchemas.XAdES_111.equals(schema)) {
-                // Se escribe una polÃ­tica implÃ­cita
-                addXadesEPES(firma.getElement(), ConstantesXADES.LIBRERIAXADES_IMPLIEDPOLICY_MANAGER);
-            }
-        }
+	    schema = XAdESSchemas.getXAdESSchema(xadesSchema);
+	    if (schema == null) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_44)
+			+ ConstantesXADES.ESPACIO + xadesSchema);
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_45));
+	    }
+	    addXades(doc, firma.getId(), certificadoFirma, firma.getElement(), schema, dataToSign,
+		    algDigestXML);
+	    if (dataToSign.hasPolicy()) {
+		addXadesEPES(firma.getElement(), dataToSign.getPolicyKey());
+	    } else if (XAdESSchemas.XAdES_111.equals(schema)) {
+		// Se escribe una polÃ­tica implÃ­cita
+		addXadesEPES(firma.getElement(),
+			ConstantesXADES.LIBRERIAXADES_IMPLIEDPOLICY_MANAGER);
+	    }
+	}
 
-        // TODO: este cÃ³digo no es multihilo, corregir
-        // String provId = JCEMapper.getProviderId();
-        try {
-            Security.addProvider(provider);
-            // JCEMapper.setProviderSignatureThread(provider);
+	// TODO: este cÃ³digo no es multihilo, corregir
+	// String provId = JCEMapper.getProviderId();
+	try {
+	    Security.addProvider(provider);
+	    // JCEMapper.setProviderSignatureThread(provider);
 
-            firma.sign(pk);
-        } catch (Exception ex) {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4), ex);
-            throw ex;
-            // if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
-            // throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
-            // else if (t.getMessage().startsWith(ConstantesXADES.FIRMA_NO_CONTIENE_DATOS))
-            // throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_1));
-            // else
-            // throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
-        } finally {
-            // JCEMapper.setProviderId(provId);
-            // JCEMapper.removeProviderSignatureThread();
-            Security.removeProvider(provider.getName());
-        }
+	    firma.sign(pk);
+	} catch (Exception ex) {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4), ex);
+	    throw ex;
+	    // if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
+	    // throw new
+	    // Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
+	    // else if (t.getMessage().startsWith(ConstantesXADES.FIRMA_NO_CONTIENE_DATOS))
+	    // throw new
+	    // Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_1));
+	    // else
+	    // throw new
+	    // Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
+	} finally {
+	    // JCEMapper.setProviderId(provId);
+	    // JCEMapper.removeProviderSignatureThread();
+	    Security.removeProvider(provider.getName());
+	}
 
-        // AÃ±adimos el Id al nodo signature value
+	// AÃ±adimos el Id al nodo signature value
 
-        Element elementoValorFirma = null;
+	Element elementoValorFirma = null;
 
-        NodeList nodoValorFirma = firma.getElement().getElementsByTagNameNS(ConstantesXADES.SCHEMA_DSIG,
-                ConstantesXADES.SIGNATURE_VALUE);
-        if (nodoValorFirma.getLength() != 0)
-            elementoValorFirma = (Element) nodoValorFirma.item(0);
-        else
-            throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_5));
-        // Le aÃ±adimos el elemento ID
-        Attr idValorFirma = doc.createAttributeNS(null, ConstantesXADES.ID);
-        idSignatureValue = UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNATURE_VALUE);
-        idValorFirma.setValue(idSignatureValue);
-        NamedNodeMap elementoIdAtributosValorFirma = elementoValorFirma.getAttributes();
-        elementoIdAtributosValorFirma.setNamedItem(idValorFirma);
+	NodeList nodoValorFirma = firma.getElement().getElementsByTagNameNS(
+		ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE_VALUE);
+	if (nodoValorFirma.getLength() != 0)
+	    elementoValorFirma = (Element) nodoValorFirma.item(0);
+	else
+	    throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_5));
+	// Le aÃ±adimos el elemento ID
+	Attr idValorFirma = doc.createAttributeNS(null, ConstantesXADES.ID);
+	idSignatureValue = UtilidadTratarNodo.newID(doc, ConstantesXADES.SIGNATURE_VALUE);
+	idValorFirma.setValue(idSignatureValue);
+	NamedNodeMap elementoIdAtributosValorFirma = elementoValorFirma.getAttributes();
+	elementoIdAtributosValorFirma.setNamedItem(idValorFirma);
 
-        // Comprobamos si se debe de firmar aÃ±adiendo el elemento de XADES-T
+	// Comprobamos si se debe de firmar aÃ±adiendo el elemento de XADES-T
 
-        boolean xadesT = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_T) >= 0);
+	boolean xadesT = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_T) >= 0);
 
-        log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_1) + xadesT);
+	log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_1) + xadesT);
 
-        if (xadesT) {
+	if (xadesT) {
 
-            try {
-                // AÃ±adimos XADES-T
+	    try {
+		// AÃ±adimos XADES-T
 
-                if (servidorTSA != null && !servidorTSA.trim().equals(ConstantesXADES.CADENA_VACIA)) {
-                    // Obtenemos la respuesta del servidor TSA
-                    TSCliente tsCli = null;
-                    // if(estadoProxy)
-                    // {
-                    // System.setProperty("http.proxyHost", servidorProxy);
-                    // System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
-                    // if (isProxyAuth) {
-                    // Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
-                    // }
-                    // else {
-                    // Authenticator.setDefault(null);
-                    // }
-                    // }
-                    tsCli = new TSCliente(servidorTSA, algoritmoTSA);
+		if (servidorTSA != null
+			&& !servidorTSA.trim().equals(ConstantesXADES.CADENA_VACIA)) {
+		    // Obtenemos la respuesta del servidor TSA
+		    TSCliente tsCli = null;
+		    // if(estadoProxy)
+		    // {
+		    // System.setProperty("http.proxyHost", servidorProxy);
+		    // System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
+		    // if (isProxyAuth) {
+		    // Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
+		    // }
+		    // else {
+		    // Authenticator.setDefault(null);
+		    // }
+		    // }
+		    tsCli = new TSCliente(servidorTSA, algoritmoTSA);
 
-                    // Se aÃ±aden los elementos propios de la firma XADES-T
-                    byte[] byteSignature = UtilidadTratarNodo.obtenerByteNodo(firma.getElement(),
-                            ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE_VALUE,
-                            CanonicalizationEnum.C14N_OMIT_COMMENTS, 5);
-                    addXadesT(firma.getElement(), firma.getId(), tsCli.generarSelloTiempo(byteSignature));
-                } else {
-                    throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_6));
-                }
-            } catch (AddXadesException e) {
-                throw new ClienteError(
-                        I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_7) + e.getMessage());
-            }
-        }
+		    // Se aÃ±aden los elementos propios de la firma XADES-T
+		    byte[] byteSignature = UtilidadTratarNodo.obtenerByteNodo(firma.getElement(),
+			    ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE_VALUE,
+			    CanonicalizationEnum.C14N_OMIT_COMMENTS, 5);
+		    addXadesT(firma.getElement(), firma.getId(),
+			    tsCli.generarSelloTiempo(byteSignature));
+		} else {
+		    throw new ClienteError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_6));
+		}
+	    } catch (AddXadesException e) {
+		throw new ClienteError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_7)
+				+ e.getMessage());
+	    }
+	}
 
-        // Comprobamos si se debe de firmar aÃ±adiendo los elementos de XADES-C
-        boolean xadesC = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_C) >= 0);
-        log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_2) + xadesC);
+	// Comprobamos si se debe de firmar aÃ±adiendo los elementos de XADES-C
+	boolean xadesC = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_C) >= 0);
+	log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_2) + xadesC);
 
-        if (xadesC) {
+	if (xadesC) {
 
-            try {
+	    try {
 
-                // Comprobamos si se ha realizado antes la firma XADES-T. En caso contrario se le avisa
-                // al usuario que no puede realizarse la firma XADES-C
-                if (xadesT) {
-                    if (dataToSign.getCertStatusManager() == null) {
-                        throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_53));
-                    }
-                    // AÃ±adimos XADES-C
+		// Comprobamos si se ha realizado antes la firma XADES-T. En caso contrario se le
+		// avisa
+		// al usuario que no puede realizarse la firma XADES-C
+		if (xadesT) {
+		    if (dataToSign.getCertStatusManager() == null) {
+			throw new ClienteError(
+				I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_53));
+		    }
+		    // AÃ±adimos XADES-C
 
-                    respuestas = convertICertStatus2RespYCerts(
-                            dataToSign.getCertStatusManager().getCertChainStatus(certificadoFirma));
+		    respuestas = convertICertStatus2RespYCerts(
+			    dataToSign.getCertStatusManager().getCertChainStatus(certificadoFirma));
 
-                    // TODO: si alguna de las respuestas de la cadena de certificaciÃ³n es revocado se deberÃ¡ parar la
-                    // firma
+		    // TODO: si alguna de las respuestas de la cadena de certificaciÃ³n es revocado
+		    // se deberÃ¡ parar la
+		    // firma
 
-                    addXadesC(firma.getElement(), respuestas, schema, algDigestXML);
+		    addXadesC(firma.getElement(), respuestas, schema, algDigestXML);
 
-                } else {
-                    throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_24));
-                }
-            } catch (CertStatusException e) {
-                throw new ClienteError(
-                        I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_56) + e.getMessage());
-            } catch (AddXadesException e) {
-                throw new ClienteError(
-                        I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_10) + e.getMessage());
-            }
-        }
+		} else {
+		    throw new ClienteError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_24));
+		}
+	    } catch (CertStatusException e) {
+		throw new ClienteError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_56)
+				+ e.getMessage());
+	    } catch (AddXadesException e) {
+		throw new ClienteError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_10)
+				+ e.getMessage());
+	    }
+	}
 
-        // Comprobamos si se debe de firmar aÃ±adiendo los elementos de XADES-X
-        boolean xadesX = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_X) >= 0);
-        log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_3) + xadesX);
+	// Comprobamos si se debe de firmar aÃ±adiendo los elementos de XADES-X
+	boolean xadesX = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_X) >= 0);
+	log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_3) + xadesX);
 
-        boolean xadesXL = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_XL) == 0);
-        log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_4) + xadesXL);
+	boolean xadesXL = (tipoFirma.compareTo(EnumFormatoFirma.XAdES_XL) == 0);
+	log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_4) + xadesXL);
 
-        // xadesXL = xadesX; // Si es XAdES-X, se pone xades-XL a true para redondear
-        // Si se firma XADES-C exclusivamente, se guardan las respuestaOCSP y los certificados
-        // con un nombre asociado al fichero de firma y en la misma ruta temporal
-        // TODO: solucionar nombre de los ficheros OCSP
-        if (xadesC && !xadesXL) {
-            try {
-                doc = addURIXadesC(firma.getElement(), saveOCSPFiles(respuestas, dataToSign.getElementsStorer()),
-                        dataToSign.getBaseURI());
-            } catch (FirmaXMLError ex) {
-                throw new ClienteError("Error al guardar ficheros de estados de certificados", ex);
-            }
-        }
+	// xadesXL = xadesX; // Si es XAdES-X, se pone xades-XL a true para redondear
+	// Si se firma XADES-C exclusivamente, se guardan las respuestaOCSP y los certificados
+	// con un nombre asociado al fichero de firma y en la misma ruta temporal
+	// TODO: solucionar nombre de los ficheros OCSP
+	if (xadesC && !xadesXL) {
+	    try {
+		doc = addURIXadesC(firma.getElement(),
+			saveOCSPFiles(respuestas, dataToSign.getElementsStorer()),
+			dataToSign.getBaseURI());
+	    } catch (FirmaXMLError ex) {
+		throw new ClienteError("Error al guardar ficheros de estados de certificados", ex);
+	    }
+	}
 
-        if (xadesX) {
-            // Para realizar la firma XADES-XL se deben completar antes los
-            // formatos de firmas XADES-T y XADES-C
+	if (xadesX) {
+	    // Para realizar la firma XADES-XL se deben completar antes los
+	    // formatos de firmas XADES-T y XADES-C
 
-            if (xadesT && xadesC) {
+	    if (xadesT && xadesC) {
 
-                // Se obtiene el nodo raÃ­z de la firma
-                Element signatureElement = firma.getElement();
-                if (!(new NombreNodo(ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE)
-                        .equals(new NombreNodo(signatureElement.getNamespaceURI(), signatureElement.getLocalName())))) {
-                    // No se encuentra el nodo Signature
-                    throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
-                            + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
-                }
+		// Se obtiene el nodo raÃ­z de la firma
+		Element signatureElement = firma.getElement();
+		if (!(new NombreNodo(ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE)
+			.equals(new NombreNodo(signatureElement.getNamespaceURI(),
+				signatureElement.getLocalName())))) {
+		    // No se encuentra el nodo Signature
+		    throw new ClienteError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+				    + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
+		}
 
-                // A partir del nodo raÃ­z de la firma se obtiene el nodo UnsignedSignatureProperties
-                Element unsignedSignaturePropertiesElement = null;
-                NodeList unsignedSignaturePropertiesNodes = signatureElement.getElementsByTagNameNS(xadesSchema,
-                        ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+		// A partir del nodo raÃ­z de la firma se obtiene el nodo
+		// UnsignedSignatureProperties
+		Element unsignedSignaturePropertiesElement = null;
+		NodeList unsignedSignaturePropertiesNodes = signatureElement.getElementsByTagNameNS(
+			xadesSchema, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
 
-                if (unsignedSignaturePropertiesNodes.getLength() != 1) {
-                    // El nodo UnsignedSignatureProperties no existe o no es Ãºnico
-                    log.error(
-                            I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_36) + ConstantesXADES.ESPACIO
-                                    + ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES + ConstantesXADES.ESPACIO
-                                    + I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_37)
-                                    + ConstantesXADES.ESPACIO + unsignedSignaturePropertiesNodes.getLength());
-                    // El sistema no soporta nodos UnsignedSignatureProperties mÃºltiples
-                    throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_41));
-                } else
-                    unsignedSignaturePropertiesElement = (Element) unsignedSignaturePropertiesNodes.item(0);
+		if (unsignedSignaturePropertiesNodes.getLength() != 1) {
+		    // El nodo UnsignedSignatureProperties no existe o no es Ãºnico
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_36)
+			    + ConstantesXADES.ESPACIO
+			    + ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES
+			    + ConstantesXADES.ESPACIO
+			    + I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_37)
+			    + ConstantesXADES.ESPACIO
+			    + unsignedSignaturePropertiesNodes.getLength());
+		    // El sistema no soporta nodos UnsignedSignatureProperties mÃºltiples
+		    throw new ClienteError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_41));
+		} else
+		    unsignedSignaturePropertiesElement = (Element) unsignedSignaturePropertiesNodes
+			    .item(0);
 
-                // Se aÃ±aden los elementos propios de la firma XADES-X
-                switch (dataToSign.getXAdESXType()) {
-                case TYPE_2:
-                    addXadesX2(unsignedSignaturePropertiesElement);
-                    break;
-                case TYPE_1:
-                default:
-                    addXadesX(unsignedSignaturePropertiesElement);
-                }
-            } else {
-                throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_25));
-            }
-        }
+		// Se aÃ±aden los elementos propios de la firma XADES-X
+		switch (dataToSign.getXAdESXType()) {
+		case TYPE_2:
+		    addXadesX2(unsignedSignaturePropertiesElement);
+		    break;
+		case TYPE_1:
+		default:
+		    addXadesX(unsignedSignaturePropertiesElement);
+		}
+	    } else {
+		throw new ClienteError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_25));
+	    }
+	}
 
-        if (xadesXL) {
-            // Para realizar la firma XADES-XL se deben completar antes los
-            // formatos de firmas XADES-T, XADES-C y XADES-X
+	if (xadesXL) {
+	    // Para realizar la firma XADES-XL se deben completar antes los
+	    // formatos de firmas XADES-T, XADES-C y XADES-X
 
-            if (xadesT && xadesC && xadesX) {
-                try {
-                    // AÃ±adimos XADES-XL
+	    if (xadesT && xadesC && xadesX) {
+		try {
+		    // AÃ±adimos XADES-XL
 
-                    addXadesXL(firma.getElement(), respuestas, schema);
-                } catch (Exception e) {
-                    throw new ClienteError(
-                            I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_12) + e.getMessage(), e);
-                }
-            } else {
-                throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_13));
-            }
-        }
+		    addXadesXL(firma.getElement(), respuestas, schema);
+		} catch (Exception e) {
+		    throw new ClienteError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_12)
+				    + e.getMessage(),
+			    e);
+		}
+	    } else {
+		throw new ClienteError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_13));
+	    }
+	}
 
-        // boolean xadesA = dataToSign.isXadesA();
-        //
-        // if (xadesA) {
-        // try
-        // {
-        // // AÃ±adimos el sello de tiempo del nives XADES-A
-        //
-        // if (servidorTSA!=null && !servidorTSA.trim().equals(ConstantesXADES.CADENA_VACIA))
-        // {
-        // // Obtenemos la respuesta del servidor TSA
-        // TSCliente tsCli = null;
-        //// if(estadoProxy)
-        //// {
-        //// System.setProperty("http.proxyHost", servidorProxy);
-        //// System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
-        //// if (isProxyAuth) {
-        //// Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
-        //// }
-        //// else {
-        //// Authenticator.setDefault(null);
-        //// }
-        //// }
-        // tsCli = new TSCliente(servidorTSA, algoritmoTSA);
-        //
-        // // Se chequea que existan los nodos requeridos para el sello de tiempo
-        // // CertificateValues y RevocationValues
-        // ArrayList<Element> certificateValuesNodes = UtilidadTratarNodo.obtenerNodos(firma.getElement(), 5,
-        // new NombreNodo(xadesSchema, ConstantesXADES.CERTIFICATE_VALUES));
-        // ArrayList<Element> revocationValuesNodes = UtilidadTratarNodo.obtenerNodos(firma.getElement(), 5,
-        // new NombreNodo(xadesSchema, ConstantesXADES.REVOCATION_VALUES));
-        //
-        // if((certificateValuesNodes.size() != 1))
-        // // Se requiere el nodo CertificateValues para agregar un sello XAdES-A
-        // log.warn("Se va a agregar el nodo requerido para el sello XAdES-A CertificateValues");
-        //
-        // if((revocationValuesNodes.size() != 1))
-        // // Se requiere el nodo RevocationValues para agregar un sello XAdES-A
-        // log.warn("Se va a agregar el nodo requerido para el sello XAdES-A RevocationValues");
-        //
-        // if((certificateValuesNodes.size() != 1) || (revocationValuesNodes.size() != 1)) {
-        //
-        // // Se busca el nodo UnsignedSignatureProperties. Si no existe, se crea
-        // ArrayList<Element> unsignedSigProperties = UtilidadTratarNodo.obtenerNodos(firma.getElement(), 4,
-        // new NombreNodo(xadesSchema, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES));
-        //
-        // ArrayList<Element> qualifyingPropertiesNodes = UtilidadTratarNodo.obtenerNodos(firma.getElement(), 2,
-        // new NombreNodo(xadesSchema, ConstantesXADES.QUALIFYING_PROPERTIES));
-        // if (unsignedSigProperties == null || unsignedSigProperties.size() == 0) {
-        // Element propiedadesElementosNoFirmados =
-        // doc.createElementNS(xadesSchema, xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.UNSIGNED_PROPERTIES);
-        //
-        // // Creamos los atributos de UnsignedProperties
-        // Attr propiedadesNoFirmadasId = doc.createAttributeNS(null, ConstantesXADES.ID);
-        // propiedadesNoFirmadasId.setValue(UtilidadTratarNodo.newID(doc,
-        // firma.getId() + ConstantesXADES.GUION_UNSIGNED_PROPERTIES));
-        // NamedNodeMap atributosSinFirmarPropiedadesElemento =
-        // propiedadesElementosNoFirmados.getAttributes();
-        // atributosSinFirmarPropiedadesElemento.setNamedItem(propiedadesNoFirmadasId);
-        //
-        // Element propiedadesSinFirmarFirmaElementos =
-        // doc.createElementNS(xadesSchema, xadesNS + ConstantesXADES.DOS_PUNTOS +
-        // ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
-        //
-        // propiedadesElementosNoFirmados.appendChild(propiedadesSinFirmarFirmaElementos);
-        // qualifyingPropertiesNodes.get(0).appendChild(propiedadesElementosNoFirmados);
-        //
-        // respuestas =
-        // convertICertStatus2RespYCerts(dataToSign.getCertStatusManager().getCertStatus(certificadoFirma));
-        // }
-        //
-        // addXadesXL(firma.getElement(), respuestas, schema);
-        // }
-        //
-        // // Para los esquemas 1.1.1 y 1.2.2 se aÃ±aden includes con los nodos tomados
-        // ArrayList<String> inc = null;
-        // if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema) ||
-        // ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
-        // inc = UtilidadXadesA.obtenerListadoIdsElementosXadesA(xadesSchema, firma, null);
-        // }
-        //
-        // // Se obtiene la cadena de bytes de entrada del sello XAdES A
-        // byte[] input = UtilidadXadesA.obtenerListadoXadesA(xadesSchema, firma, null);
-        // addXadesA(firma.getElement(), tsCli.generarSelloTiempo(input), inc) ;
-        // }
-        // else
-        // {
-        // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_6));
-        // }
-        // }
-        // catch (AddXadesException e)
-        // {
-        // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_7) + e.getMessage()) ;
-        // }
-        // }
+	// boolean xadesA = dataToSign.isXadesA();
+	//
+	// if (xadesA) {
+	// try
+	// {
+	// // AÃ±adimos el sello de tiempo del nives XADES-A
+	//
+	// if (servidorTSA!=null && !servidorTSA.trim().equals(ConstantesXADES.CADENA_VACIA))
+	// {
+	// // Obtenemos la respuesta del servidor TSA
+	// TSCliente tsCli = null;
+	//// if(estadoProxy)
+	//// {
+	//// System.setProperty("http.proxyHost", servidorProxy);
+	//// System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
+	//// if (isProxyAuth) {
+	//// Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
+	//// }
+	//// else {
+	//// Authenticator.setDefault(null);
+	//// }
+	//// }
+	// tsCli = new TSCliente(servidorTSA, algoritmoTSA);
+	//
+	// // Se chequea que existan los nodos requeridos para el sello de tiempo
+	// // CertificateValues y RevocationValues
+	// ArrayList<Element> certificateValuesNodes =
+	// UtilidadTratarNodo.obtenerNodos(firma.getElement(), 5,
+	// new NombreNodo(xadesSchema, ConstantesXADES.CERTIFICATE_VALUES));
+	// ArrayList<Element> revocationValuesNodes =
+	// UtilidadTratarNodo.obtenerNodos(firma.getElement(), 5,
+	// new NombreNodo(xadesSchema, ConstantesXADES.REVOCATION_VALUES));
+	//
+	// if((certificateValuesNodes.size() != 1))
+	// // Se requiere el nodo CertificateValues para agregar un sello XAdES-A
+	// log.warn("Se va a agregar el nodo requerido para el sello XAdES-A CertificateValues");
+	//
+	// if((revocationValuesNodes.size() != 1))
+	// // Se requiere el nodo RevocationValues para agregar un sello XAdES-A
+	// log.warn("Se va a agregar el nodo requerido para el sello XAdES-A RevocationValues");
+	//
+	// if((certificateValuesNodes.size() != 1) || (revocationValuesNodes.size() != 1)) {
+	//
+	// // Se busca el nodo UnsignedSignatureProperties. Si no existe, se crea
+	// ArrayList<Element> unsignedSigProperties =
+	// UtilidadTratarNodo.obtenerNodos(firma.getElement(), 4,
+	// new NombreNodo(xadesSchema, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES));
+	//
+	// ArrayList<Element> qualifyingPropertiesNodes =
+	// UtilidadTratarNodo.obtenerNodos(firma.getElement(), 2,
+	// new NombreNodo(xadesSchema, ConstantesXADES.QUALIFYING_PROPERTIES));
+	// if (unsignedSigProperties == null || unsignedSigProperties.size() == 0) {
+	// Element propiedadesElementosNoFirmados =
+	// doc.createElementNS(xadesSchema, xadesNS + ConstantesXADES.DOS_PUNTOS +
+	// ConstantesXADES.UNSIGNED_PROPERTIES);
+	//
+	// // Creamos los atributos de UnsignedProperties
+	// Attr propiedadesNoFirmadasId = doc.createAttributeNS(null, ConstantesXADES.ID);
+	// propiedadesNoFirmadasId.setValue(UtilidadTratarNodo.newID(doc,
+	// firma.getId() + ConstantesXADES.GUION_UNSIGNED_PROPERTIES));
+	// NamedNodeMap atributosSinFirmarPropiedadesElemento =
+	// propiedadesElementosNoFirmados.getAttributes();
+	// atributosSinFirmarPropiedadesElemento.setNamedItem(propiedadesNoFirmadasId);
+	//
+	// Element propiedadesSinFirmarFirmaElementos =
+	// doc.createElementNS(xadesSchema, xadesNS + ConstantesXADES.DOS_PUNTOS +
+	// ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+	//
+	// propiedadesElementosNoFirmados.appendChild(propiedadesSinFirmarFirmaElementos);
+	// qualifyingPropertiesNodes.get(0).appendChild(propiedadesElementosNoFirmados);
+	//
+	// respuestas =
+	// convertICertStatus2RespYCerts(dataToSign.getCertStatusManager().getCertStatus(certificadoFirma));
+	// }
+	//
+	// addXadesXL(firma.getElement(), respuestas, schema);
+	// }
+	//
+	// // Para los esquemas 1.1.1 y 1.2.2 se aÃ±aden includes con los nodos tomados
+	// ArrayList<String> inc = null;
+	// if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema) ||
+	// ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
+	// inc = UtilidadXadesA.obtenerListadoIdsElementosXadesA(xadesSchema, firma, null);
+	// }
+	//
+	// // Se obtiene la cadena de bytes de entrada del sello XAdES A
+	// byte[] input = UtilidadXadesA.obtenerListadoXadesA(xadesSchema, firma, null);
+	// addXadesA(firma.getElement(), tsCli.generarSelloTiempo(input), inc) ;
+	// }
+	// else
+	// {
+	// throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_6));
+	// }
+	// }
+	// catch (AddXadesException e)
+	// {
+	// throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_7) +
+	// e.getMessage()) ;
+	// }
+	// }
 
-        Object[] res = new Object[2];
-        res[0] = doc;
-        if (xadesC && !xadesXL)
-            res[1] = respuestas;
-        else
-            res[1] = null;
+	Object[] res = new Object[2];
+	res[0] = doc;
+	if (xadesC && !xadesXL)
+	    res[1] = respuestas;
+	else
+	    res[1] = null;
 
-        return res;
+	return res;
     }
 
     private ArrayList<RespYCerts> convertICertStatus2RespYCerts(List<ICertStatus> status) {
-        ArrayList<RespYCerts> resps = new ArrayList<RespYCerts>((status != null) ? status.size() : 0);
-        if (status != null) {
-            Iterator<ICertStatus> itStatus = status.iterator();
-            while (itStatus.hasNext()) {
-                RespYCerts resp = new RespYCerts();
-                resp.setCertstatus(itStatus.next());
-                resps.add(resp);
-            }
-        }
-        return resps;
+	ArrayList<RespYCerts> resps = new ArrayList<RespYCerts>(
+		(status != null) ? status.size() : 0);
+	if (status != null) {
+	    Iterator<ICertStatus> itStatus = status.iterator();
+	    while (itStatus.hasNext()) {
+		RespYCerts resp = new RespYCerts();
+		resp.setCertstatus(itStatus.next());
+		resps.add(resp);
+	    }
+	}
+	return resps;
     }
 
     // private String relativizeRute(String baseUri, File file) {
     // String strFile = null;
     // try {
     // URI relative = new URI(URIEncoder.encode(baseUri, "UTF-8"));
-    // URI uri = file.toURI();//new URI("file:///" + URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"),
+    // URI uri = file.toURI();//new URI("file:///" +
+    // URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"),
     // "UTF-8"));
     // strFile = URIEncoder.relativize(relative.toString(), uri.toString());
     // } catch (UnsupportedEncodingException e) {
     //// try {
-    // strFile = file.toURI().toString();//"file:///" + URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"),
+    // strFile = file.toURI().toString();//"file:///" +
+    // URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"),
     // "UTF-8");
     //// } catch (UnsupportedEncodingException ex) {
     //// // TODO: lanzar aviso
     //// }
     // } catch (URISyntaxException e) {
     //// try {
-    // strFile = file.toURI().toString();//"file:///" + URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"),
+    // strFile = file.toURI().toString();//"file:///" +
+    // URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"),
     // "UTF-8");
-    //// strFile = "file:///" + URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"), "UTF-8");
+    //// strFile = "file:///" + URIEncoder.encode(file.getAbsolutePath().replace("\\", "/"),
+    // "UTF-8");
     //// } catch (UnsupportedEncodingException ex) {
     //// // TODO: lanzar aviso
     //// }
@@ -868,1032 +914,1083 @@ public class FirmaXML {
     /**
      * Este mÃ©todo realiza la implementaciÃ³n de la firma XADES-BES
      *
-     * @param doc
-     *            Documento de firma
-     * @param firmaID
-     *            Identificador del nodo de firma
-     * @param firmaCertificado
-     *            Certificado que realiza la firma
-     * @param elementoPrincipalFirma
-     *            Elemento principal del nodo de firma
+     * @param doc                    Documento de firma
+     * @param firmaID                Identificador del nodo de firma
+     * @param firmaCertificado       Certificado que realiza la firma
+     * @param elementoPrincipalFirma Elemento principal del nodo de firma
      *
      * @return Documento de firma con formato XADES-BES
      *
      * @throws Exception
      */
     private Document addXades(Document doc, String firmaID, X509Certificate firmaCertificado,
-            Element elementoPrincipalFirma, XAdESSchemas schemaXades, DataToSign dataToSign, String algDigestXML)
-            throws AddXadesException {
+	    Element elementoPrincipalFirma, XAdESSchemas schemaXades, DataToSign dataToSign,
+	    String algDigestXML) throws AddXadesException {
 
-        // AÃ±adimos el objeto
-        Element elementoObjeto = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OBJECT);
-        elementoObjeto.setAttributeNS(null, ConstantesXADES.ID,
-                UtilidadTratarNodo.newID(doc, firmaID + ConstantesXADES.GUION_OBJECT));
-        elementoPrincipalFirma.appendChild(elementoObjeto);
+	// AÃ±adimos el objeto
+	Element elementoObjeto = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OBJECT);
+	elementoObjeto.setAttributeNS(null, ConstantesXADES.ID,
+		UtilidadTratarNodo.newID(doc, firmaID + ConstantesXADES.GUION_OBJECT));
+	elementoPrincipalFirma.appendChild(elementoObjeto);
 
-        // Creamos el QualifyingProperties
-        Element elemntQualifyingProperties = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.QUALIFYING_PROPERTIES);
-        elementoObjeto.appendChild(elemntQualifyingProperties);
+	// Creamos el QualifyingProperties
+	Element elemntQualifyingProperties = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.QUALIFYING_PROPERTIES);
+	elementoObjeto.appendChild(elemntQualifyingProperties);
 
-        // Creamos los atributos de QualifyingProperties
-        elemntQualifyingProperties.setAttributeNS(null, ConstantesXADES.TARGET, ConstantesXADES.ALMOHADILLA + firmaID);
+	// Creamos los atributos de QualifyingProperties
+	elemntQualifyingProperties.setAttributeNS(null, ConstantesXADES.TARGET,
+		ConstantesXADES.ALMOHADILLA + firmaID);
 
-        // Creamos el elemento SignedProperties
-        Element propiedadesFirmadasElemento = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNED_PROPERTIES);
-        elemntQualifyingProperties.appendChild(propiedadesFirmadasElemento);
+	// Creamos el elemento SignedProperties
+	Element propiedadesFirmadasElemento = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNED_PROPERTIES);
+	elemntQualifyingProperties.appendChild(propiedadesFirmadasElemento);
 
-        // Creamos los atributos de SignedProperties
-        propiedadesFirmadasElemento.setAttributeNS(null, ConstantesXADES.ID, firmaID + idSigProperties);
+	// Creamos los atributos de SignedProperties
+	propiedadesFirmadasElemento.setAttributeNS(null, ConstantesXADES.ID,
+		firmaID + idSigProperties);
 
-        // Creamos el xades:SignedSignatureProperties
-        Element propiedadesFirmadasElementoFirma = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNED_SIGNATURE_PROPERTIES);
-        propiedadesFirmadasElemento.appendChild(propiedadesFirmadasElementoFirma);
+	// Creamos el xades:SignedSignatureProperties
+	Element propiedadesFirmadasElementoFirma = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNED_SIGNATURE_PROPERTIES);
+	propiedadesFirmadasElemento.appendChild(propiedadesFirmadasElementoFirma);
 
-        // Creamos el xades:SigningTime
-        Date signingDate = dataToSign.getSignDate();
-        if ((signingDate == null) && (schemaXades.equals(XAdESSchemas.XAdES_111)))
-            throw new AddXadesException("SigningTime es requerido");
-        if (signingDate != null) {
-            SigningTime tiempoFirma = new SigningTime(schemaXades, signingDate);
-            Element tiempoFirmaElemento = null;
-            try {
-                tiempoFirmaElemento = tiempoFirma.createElement(doc, xadesNS);
-            } catch (InvalidInfoNodeException e) {
-                throw new AddXadesException(e.getMessage(), e);
-            }
-            propiedadesFirmadasElementoFirma.appendChild(tiempoFirmaElemento);
-        }
+	// Creamos el xades:SigningTime
+	Date signingDate = dataToSign.getSignDate();
+	if ((signingDate == null) && (schemaXades.equals(XAdESSchemas.XAdES_111)))
+	    throw new AddXadesException("SigningTime es requerido");
+	if (signingDate != null) {
+	    SigningTime tiempoFirma = new SigningTime(schemaXades, signingDate);
+	    Element tiempoFirmaElemento = null;
+	    try {
+		tiempoFirmaElemento = tiempoFirma.createElement(doc, xadesNS);
+	    } catch (InvalidInfoNodeException e) {
+		throw new AddXadesException(e.getMessage(), e);
+	    }
+	    propiedadesFirmadasElementoFirma.appendChild(tiempoFirmaElemento);
+	}
 
-        // Creamos el xades:SigningCertificate
-        Element certificadoFirmaElemento = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNING_CERTIFICATE);
-        propiedadesFirmadasElementoFirma.appendChild(certificadoFirmaElemento);
+	// Creamos el xades:SigningCertificate
+	Element certificadoFirmaElemento = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNING_CERTIFICATE);
+	propiedadesFirmadasElementoFirma.appendChild(certificadoFirmaElemento);
 
-        // Creamos el xades:Cert
-        Element certificadoElemento = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT);
-        File signCertFile = dataToSign.getSigningCert();
-        if (signCertFile != null) {
-            String uri = UtilidadFicheros.relativizeRute(dataToSign.getBaseURI(), signCertFile);
-            certificadoElemento.setAttributeNS(null, ConstantesXADES.URI_MAYUS, uri);
-        }
+	// Creamos el xades:Cert
+	Element certificadoElemento = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT);
+	File signCertFile = dataToSign.getSigningCert();
+	if (signCertFile != null) {
+	    String uri = UtilidadFicheros.relativizeRute(dataToSign.getBaseURI(), signCertFile);
+	    certificadoElemento.setAttributeNS(null, ConstantesXADES.URI_MAYUS, uri);
+	}
 
-        // Creamos el xades:CertDigest
-        Element resumenCertificadoElemento = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT_DIGEST);
+	// Creamos el xades:CertDigest
+	Element resumenCertificadoElemento = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT_DIGEST);
 
-        // Creamos el xades:DigestMethod
-        Element metodoResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_METHOD);
-        metodoResumenElemento.setAttributeNS(null, ConstantesXADES.ALGORITHM, algDigestXML);
+	// Creamos el xades:DigestMethod
+	Element metodoResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_METHOD);
+	metodoResumenElemento.setAttributeNS(null, ConstantesXADES.ALGORITHM, algDigestXML);
 
-        // Creamos el xades:DigestValue
-        String resumenCertificado = ConstantesXADES.CADENA_VACIA;
+	// Creamos el xades:DigestValue
+	String resumenCertificado = ConstantesXADES.CADENA_VACIA;
 
-        try {
-            MessageDigest resumenCertificadoTemp = UtilidadFirmaElectronica.getMessageDigest(algDigestXML);
-            if (resumenCertificadoTemp == null)
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_16));
-            byte[] byteMessageDigest = resumenCertificadoTemp.digest(firmaCertificado.getEncoded());
-            resumenCertificado = new String(Base64Coder.encode(byteMessageDigest));
-        } catch (CertificateEncodingException cee) {
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_17));
-        }
+	try {
+	    MessageDigest resumenCertificadoTemp = UtilidadFirmaElectronica
+		    .getMessageDigest(algDigestXML);
+	    if (resumenCertificadoTemp == null)
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_16));
+	    byte[] byteMessageDigest = resumenCertificadoTemp.digest(firmaCertificado.getEncoded());
+	    resumenCertificado = new String(Base64Coder.encode(byteMessageDigest));
+	} catch (CertificateEncodingException cee) {
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_17));
+	}
 
-        Element elementDigestValue = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_VALUE);
-        elementDigestValue.appendChild(doc.createTextNode(resumenCertificado));
+	Element elementDigestValue = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_VALUE);
+	elementDigestValue.appendChild(doc.createTextNode(resumenCertificado));
 
-        // Creamos el xades:IssuerSerial
-        Element elementoEmisorSerial = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ISSUER_SERIAL);
+	// Creamos el xades:IssuerSerial
+	Element elementoEmisorSerial = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ISSUER_SERIAL);
 
-        // Creamos el xades:X509IssuerName
-        Element elementoX509EmisorNombre = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.X_509_ISSUER_NAME);
-        elementoX509EmisorNombre.appendChild(doc.createTextNode(firmaCertificado.getIssuerX500Principal().getName()));
+	// Creamos el xades:X509IssuerName
+	Element elementoX509EmisorNombre = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.X_509_ISSUER_NAME);
+	elementoX509EmisorNombre.appendChild(
+		doc.createTextNode(firmaCertificado.getIssuerX500Principal().getName()));
 
-        // Creamos el xades:X509SerialNumber
-        Element elementoX509NumeroSerial = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.X_509_SERIAL_NUMBER);
-        elementoX509NumeroSerial.appendChild(doc.createTextNode(firmaCertificado.getSerialNumber().toString()));
+	// Creamos el xades:X509SerialNumber
+	Element elementoX509NumeroSerial = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.X_509_SERIAL_NUMBER);
+	elementoX509NumeroSerial
+		.appendChild(doc.createTextNode(firmaCertificado.getSerialNumber().toString()));
 
-        // Creamos el xades:SignatureProductionPlace.
-        String[] produc = dataToSign.getProductionPlace();
-        if (produc != null) {
-            SignatureProductionPlace spp = new SignatureProductionPlace(schemaXades, produc[0], produc[1], produc[2],
-                    produc[3]);
-            Element productionPlaceElemento = null;
-            try {
-                productionPlaceElemento = spp.createElement(doc, xadesNS);
-            } catch (InvalidInfoNodeException e) {
-                throw new AddXadesException(e.getMessage(), e);
-            }
-            propiedadesFirmadasElementoFirma.appendChild(productionPlaceElemento);
-        }
+	// Creamos el xades:SignatureProductionPlace.
+	String[] produc = dataToSign.getProductionPlace();
+	if (produc != null) {
+	    SignatureProductionPlace spp = new SignatureProductionPlace(schemaXades, produc[0],
+		    produc[1], produc[2], produc[3]);
+	    Element productionPlaceElemento = null;
+	    try {
+		productionPlaceElemento = spp.createElement(doc, xadesNS);
+	    } catch (InvalidInfoNodeException e) {
+		throw new AddXadesException(e.getMessage(), e);
+	    }
+	    propiedadesFirmadasElementoFirma.appendChild(productionPlaceElemento);
+	}
 
-        // String rolesFirmante = configuracion.getValor(ConstantesXADES.SIGNER_ROLES);
-        // boolean roleFirmante = false;
-        // Element elementoRoleFirmanteElemento = doc.createElementNS(xadesSchema, xadesNS + ConstantesXADES.DOS_PUNTOS
-        // + ConstantesXADES.SIGNER_ROLE);
-        //
-        // if(!Configuracion.isEmpty(rolesFirmante))
-        // {
-        // Element elementoRolesDemandadosElementos = doc.createElementNS(xadesSchema, xadesNS +
-        // ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CLAIMED_ROLES);
-        // elementoRoleFirmanteElemento.appendChild(elementoRolesDemandadosElementos);
-        //
-        //
-        // // AÃ±adimos un nuevo elemento SignerRoles
-        // StringTokenizer roles = new StringTokenizer(rolesFirmante, ConstantesXADES.COMA);
-        // boolean valor = roles.hasMoreElements();
-        // while(valor){
-        // String role = (String) roles.nextElement();
-        // Element elementClaimedRoleElement = doc.createElementNS(xadesSchema, xadesNS + ConstantesXADES.DOS_PUNTOS +
-        // ConstantesXADES.CLAIMED_ROLE);
-        // elementClaimedRoleElement.appendChild(doc.createTextNode(role.trim()));
-        // elementoRolesDemandadosElementos.appendChild(elementClaimedRoleElement);
-        // valor = roles.hasMoreElements();
-        // }
-        // roleFirmante = true;
-        // }
+	// String rolesFirmante = configuracion.getValor(ConstantesXADES.SIGNER_ROLES);
+	// boolean roleFirmante = false;
+	// Element elementoRoleFirmanteElemento = doc.createElementNS(xadesSchema, xadesNS +
+	// ConstantesXADES.DOS_PUNTOS
+	// + ConstantesXADES.SIGNER_ROLE);
+	//
+	// if(!Configuracion.isEmpty(rolesFirmante))
+	// {
+	// Element elementoRolesDemandadosElementos = doc.createElementNS(xadesSchema, xadesNS +
+	// ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CLAIMED_ROLES);
+	// elementoRoleFirmanteElemento.appendChild(elementoRolesDemandadosElementos);
+	//
+	//
+	// // AÃ±adimos un nuevo elemento SignerRoles
+	// StringTokenizer roles = new StringTokenizer(rolesFirmante, ConstantesXADES.COMA);
+	// boolean valor = roles.hasMoreElements();
+	// while(valor){
+	// String role = (String) roles.nextElement();
+	// Element elementClaimedRoleElement = doc.createElementNS(xadesSchema, xadesNS +
+	// ConstantesXADES.DOS_PUNTOS +
+	// ConstantesXADES.CLAIMED_ROLE);
+	// elementClaimedRoleElement.appendChild(doc.createTextNode(role.trim()));
+	// elementoRolesDemandadosElementos.appendChild(elementClaimedRoleElement);
+	// valor = roles.hasMoreElements();
+	// }
+	// roleFirmante = true;
+	// }
 
-        resumenCertificadoElemento.appendChild(metodoResumenElemento);
-        resumenCertificadoElemento.appendChild(elementDigestValue);
+	resumenCertificadoElemento.appendChild(metodoResumenElemento);
+	resumenCertificadoElemento.appendChild(elementDigestValue);
 
-        certificadoElemento.appendChild(resumenCertificadoElemento);
+	certificadoElemento.appendChild(resumenCertificadoElemento);
 
-        elementoEmisorSerial.appendChild(elementoX509EmisorNombre);
-        elementoEmisorSerial.appendChild(elementoX509NumeroSerial);
+	elementoEmisorSerial.appendChild(elementoX509EmisorNombre);
+	elementoEmisorSerial.appendChild(elementoX509NumeroSerial);
 
-        certificadoElemento.appendChild(elementoEmisorSerial);
+	certificadoElemento.appendChild(elementoEmisorSerial);
 
-        certificadoFirmaElemento.appendChild(certificadoElemento);
+	certificadoFirmaElemento.appendChild(certificadoElemento);
 
-        // if(roleFirmante)
-        // {
-        // propiedadesFirmadasElementoFirma.appendChild(elementoRoleFirmanteElemento);
-        // }
+	// if(roleFirmante)
+	// {
+	// propiedadesFirmadasElementoFirma.appendChild(elementoRoleFirmanteElemento);
+	// }
 
-        // Se crea el xades:SignerRole. Para ello se consulta el fichero de propiedades
-        ArrayList<IClaimedRole> rolesFirmante = dataToSign.getClaimedRoles();
-        if (rolesFirmante != null) {
-            Element elementoRoleFirmanteElemento = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNER_ROLE);
-            propiedadesFirmadasElementoFirma.appendChild(elementoRoleFirmanteElemento);
+	// Se crea el xades:SignerRole. Para ello se consulta el fichero de propiedades
+	ArrayList<IClaimedRole> rolesFirmante = dataToSign.getClaimedRoles();
+	if (rolesFirmante != null) {
+	    Element elementoRoleFirmanteElemento = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNER_ROLE);
+	    propiedadesFirmadasElementoFirma.appendChild(elementoRoleFirmanteElemento);
 
-            Element elementoRolesDemandadosElementos = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CLAIMED_ROLES);
-            elementoRoleFirmanteElemento.appendChild(elementoRolesDemandadosElementos);
-            Iterator<IClaimedRole> it = rolesFirmante.iterator();
-            while (it.hasNext()) {
-                Element elementClaimedRoleElement = doc.createElementNS(xadesSchema,
-                        xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CLAIMED_ROLE);
-                elementClaimedRoleElement.appendChild(it.next().createClaimedRoleContent(doc));
-                elementoRolesDemandadosElementos.appendChild(elementClaimedRoleElement);
-            }
-        }
+	    Element elementoRolesDemandadosElementos = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CLAIMED_ROLES);
+	    elementoRoleFirmanteElemento.appendChild(elementoRolesDemandadosElementos);
+	    Iterator<IClaimedRole> it = rolesFirmante.iterator();
+	    while (it.hasNext()) {
+		Element elementClaimedRoleElement = doc.createElementNS(xadesSchema,
+			xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CLAIMED_ROLE);
+		elementClaimedRoleElement.appendChild(it.next().createClaimedRoleContent(doc));
+		elementoRolesDemandadosElementos.appendChild(elementClaimedRoleElement);
+	    }
+	}
 
-        // Se agrega informaciÃ³n sobre los objetos firmados
-        ArrayList<ObjectToSign> objects = dataToSign.getObjects();
-        if (objects != null && objects.size() > 0) {
+	// Se agrega informaciÃ³n sobre los objetos firmados
+	ArrayList<ObjectToSign> objects = dataToSign.getObjects();
+	if (objects != null && objects.size() > 0) {
 
-            // Se crea el elemento SignedDataObjectProperties
-            Element signedDataObjectProperties = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.XADES_SIGNED_DATA_OBJECT_PROPERTIES);
+	    // Se crea el elemento SignedDataObjectProperties
+	    Element signedDataObjectProperties = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS
+			    + ConstantesXADES.XADES_SIGNED_DATA_OBJECT_PROPERTIES);
 
-            Iterator<ObjectToSign> it = objects.iterator();
-            DataObjectFormat dof = null; // Nodo a escribir
-            ObjectIdentifier oi = null;
+	    Iterator<ObjectToSign> it = objects.iterator();
+	    DataObjectFormat dof = null; // Nodo a escribir
+	    ObjectIdentifier oi = null;
 
-            ObjectToSign obj = null; // Objeto de datos
-            String id = null; // Identificador del objeto
-            String desc = null; // DescripciÃ³n del formato del objeto
-            String tipoMIME = null; // Tipo MIME del objeto firmado
-            URI encoding = null; // CodificaciÃ³n del objeto
+	    ObjectToSign obj = null; // Objeto de datos
+	    String id = null; // Identificador del objeto
+	    String desc = null; // DescripciÃ³n del formato del objeto
+	    String tipoMIME = null; // Tipo MIME del objeto firmado
+	    URI encoding = null; // CodificaciÃ³n del objeto
 
-            URI referenceId = null;
-            while (it.hasNext()) {
-                obj = it.next();
+	    URI referenceId = null;
+	    while (it.hasNext()) {
+		obj = it.next();
 
-                if (obj != null) {
-                    // Se recupera el identificador
-                    id = obj.getId();
-                    // Se recoge la descripciÃ³n
-                    desc = obj.getDescription();
-                    // Se recoge el tipo MIME
-                    tipoMIME = obj.getMimeType();
-                    // Se recoge la codificaciÃ³n
-                    encoding = obj.getEncoding();
-                    // Se recupera ObjectIdentifier
-                    oi = obj.getObjectIdentifier();
-                }
+		if (obj != null) {
+		    // Se recupera el identificador
+		    id = obj.getId();
+		    // Se recoge la descripciÃ³n
+		    desc = obj.getDescription();
+		    // Se recoge el tipo MIME
+		    tipoMIME = obj.getMimeType();
+		    // Se recoge la codificaciÃ³n
+		    encoding = obj.getEncoding();
+		    // Se recupera ObjectIdentifier
+		    oi = obj.getObjectIdentifier();
+		}
 
-                if ((desc == null) && (tipoMIME == null) && (oi == null))
-                    continue;
+		if ((desc == null) && (tipoMIME == null) && (oi == null))
+		    continue;
 
-                // Identificador del objeto
-                if (id != null) {
-                    try {
-                        referenceId = new URI(id);
-                    } catch (URISyntaxException e) {
-                        log.error(e.getMessage(), e);
-                    }
-                }
+		// Identificador del objeto
+		if (id != null) {
+		    try {
+			referenceId = new URI(id);
+		    } catch (URISyntaxException e) {
+			log.error(e.getMessage(), e);
+		    }
+		}
 
-                if ((referenceId == null) || (schemaXades == null)) {
-                    log.error("No se puede incluir el objeto DataObjectFormat porque faltan datos");
-                    throw new AddXadesException(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_2));
-                }
+		if ((referenceId == null) || (schemaXades == null)) {
+		    log.error("No se puede incluir el objeto DataObjectFormat porque faltan datos");
+		    throw new AddXadesException(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_2));
+		}
 
-                dof = new DataObjectFormat(schemaXades, referenceId, desc, tipoMIME);
+		dof = new DataObjectFormat(schemaXades, referenceId, desc, tipoMIME);
 
-                if (encoding != null)
-                    dof.setEncoding(encoding);
+		if (encoding != null)
+		    dof.setEncoding(encoding);
 
-                if (oi != null)
-                    dof.setObjectIdentifier(oi);
+		if (oi != null)
+		    dof.setObjectIdentifier(oi);
 
-                try {
-                    signedDataObjectProperties.appendChild(dof.createElement(doc, xadesNS));
-                } catch (DOMException e) {
-                    throw new AddXadesException(e.getMessage(), e);
-                } catch (InvalidInfoNodeException e) {
-                    log.error(e.getMessage(), e);
-                    throw new AddXadesException(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_2));
-                }
-            }
+		try {
+		    signedDataObjectProperties.appendChild(dof.createElement(doc, xadesNS));
+		} catch (DOMException e) {
+		    throw new AddXadesException(e.getMessage(), e);
+		} catch (InvalidInfoNodeException e) {
+		    log.error(e.getMessage(), e);
+		    throw new AddXadesException(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_2));
+		}
+	    }
 
-            // Se aÃ±ade el nodo generado, si contiene informaciÃ³n
-            if (signedDataObjectProperties.getChildNodes().getLength() > 0)
-                propiedadesFirmadasElemento.appendChild(signedDataObjectProperties);
-        }
+	    // Se aÃ±ade el nodo generado, si contiene informaciÃ³n
+	    if (signedDataObjectProperties.getChildNodes().getLength() > 0)
+		propiedadesFirmadasElemento.appendChild(signedDataObjectProperties);
+	}
 
-        return null;
+	return null;
     }
 
-    private void addXadesEPES(Element elementoPrincipalFirma, String confPolicyManager) throws AddXadesException {
-        if (confPolicyManager == null) {
-            confPolicyManager = ConstantesXADES.LIBRERIAXADES_IMPLIEDPOLICY_MANAGER;
-        }
-        // Se obtiene el manager para la polÃ­tica indicada
-        IFirmaPolicy policyManager = PoliciesManager.getInstance().getEscritorPolicy(confPolicyManager);
-        if (policyManager == null) {
-            // PolicyManager buscado no disponible
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_46) + ConstantesXADES.ESPACIO
-                    + confPolicyManager);
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_47));
-        }
+    private void addXadesEPES(Element elementoPrincipalFirma, String confPolicyManager)
+	    throws AddXadesException {
+	if (confPolicyManager == null) {
+	    confPolicyManager = ConstantesXADES.LIBRERIAXADES_IMPLIEDPOLICY_MANAGER;
+	}
+	// Se obtiene el manager para la polÃ­tica indicada
+	IFirmaPolicy policyManager = PoliciesManager.getInstance()
+		.getEscritorPolicy(confPolicyManager);
+	if (policyManager == null) {
+	    // PolicyManager buscado no disponible
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_46)
+		    + ConstantesXADES.ESPACIO + confPolicyManager);
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_47));
+	}
 
-        XAdESSchemas schema = XAdESSchemas.getXAdESSchema(xadesSchema);
-        if (schema == null) {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_44) + ConstantesXADES.ESPACIO
-                    + xadesSchema);
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_45));
-        }
+	XAdESSchemas schema = XAdESSchemas.getXAdESSchema(xadesSchema);
+	if (schema == null) {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_44)
+		    + ConstantesXADES.ESPACIO + xadesSchema);
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_45));
+	}
 
-        try {
-            policyManager.writePolicyNode(elementoPrincipalFirma, xmldsigNS, xadesNS, schema);
-        } catch (PolicyException ex) {
-            // Error escribiendo polÃ­ticas
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_48) + ConstantesXADES.ESPACIO
-                    + ex.getMessage(), ex);
-            throw new AddXadesException(ex.getMessage(), ex);
-        }
+	try {
+	    policyManager.writePolicyNode(elementoPrincipalFirma, xmldsigNS, xadesNS, schema);
+	} catch (PolicyException ex) {
+	    // Error escribiendo polÃ­ticas
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_48)
+		    + ConstantesXADES.ESPACIO + ex.getMessage(), ex);
+	    throw new AddXadesException(ex.getMessage(), ex);
+	}
 
     }
 
     /**
      * Este mÃ©todo aÃ±ade la implementaciÃ³n para XADES-T
      *
-     * @param doc
-     *            Documento de firma con formato XADES-BES
-     * @param firmaID
-     *            Identificador del nodo de firma
-     * @param selloTiempo
-     *            Respuesta del servidor TSA con el sello de tiempo en formato binario
+     * @param doc         Documento de firma con formato XADES-BES
+     * @param firmaID     Identificador del nodo de firma
+     * @param selloTiempo Respuesta del servidor TSA con el sello de tiempo en formato binario
      *
      * @return Documento de firma con formato XADES-T
      *
      * @throws Exception
      */
-    private Document addXadesT(Element firma, String firmaID, byte[] selloTiempo) throws AddXadesException {
+    private Document addXadesT(Element firma, String firmaID, byte[] selloTiempo)
+	    throws AddXadesException {
 
-        Document doc = firma.getOwnerDocument();
-        Element elementoPrincipal = null;
-        NodeList nodos = firma.getElementsByTagNameNS(xadesSchema, ConstantesXADES.QUALIFYING_PROPERTIES);
-        if (nodos.getLength() != 0)
-            elementoPrincipal = (Element) nodos.item(0);
-        else
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_18));
+	Document doc = firma.getOwnerDocument();
+	Element elementoPrincipal = null;
+	NodeList nodos = firma.getElementsByTagNameNS(xadesSchema,
+		ConstantesXADES.QUALIFYING_PROPERTIES);
+	if (nodos.getLength() != 0)
+	    elementoPrincipal = (Element) nodos.item(0);
+	else
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_18));
 
-        Element propiedadesElementosNoFirmados = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.UNSIGNED_PROPERTIES);
+	Element propiedadesElementosNoFirmados = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.UNSIGNED_PROPERTIES);
 
-        // Creamos los atributos de UnSignedProperties
-        Attr propiedadesNoFirmadasId = doc.createAttributeNS(null, ConstantesXADES.ID);
-        propiedadesNoFirmadasId
-                .setValue(UtilidadTratarNodo.newID(doc, firmaID + ConstantesXADES.GUION_UNSIGNED_PROPERTIES));
-        NamedNodeMap atributosSinFirmarPropiedadesElemento = propiedadesElementosNoFirmados.getAttributes();
-        atributosSinFirmarPropiedadesElemento.setNamedItem(propiedadesNoFirmadasId);
+	// Creamos los atributos de UnSignedProperties
+	Attr propiedadesNoFirmadasId = doc.createAttributeNS(null, ConstantesXADES.ID);
+	propiedadesNoFirmadasId.setValue(
+		UtilidadTratarNodo.newID(doc, firmaID + ConstantesXADES.GUION_UNSIGNED_PROPERTIES));
+	NamedNodeMap atributosSinFirmarPropiedadesElemento = propiedadesElementosNoFirmados
+		.getAttributes();
+	atributosSinFirmarPropiedadesElemento.setNamedItem(propiedadesNoFirmadasId);
 
-        Element propiedadesSinFirmarFirmaElementos = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+	Element propiedadesSinFirmarFirmaElementos = doc.createElementNS(xadesSchema, xadesNS
+		+ ConstantesXADES.DOS_PUNTOS + ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
 
-        // Se buscan otros sellos de tiempo en la firma y se les asigna una Id si no la tienen
-        NodeList sellosPreexistentes = doc.getElementsByTagNameNS(xadesSchema, ConstantesXADES.SIGNATURE_TIME_STAMP);
-        int numSellos = sellosPreexistentes.getLength();
-        for (int i = 0; i < numSellos; ++i) {
-            Element sello = (Element) sellosPreexistentes.item(i);
-            String selloId = sello.getAttribute(ConstantesXADES.ID);
-            if (selloId == null) {
-                Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
-                selloId = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
-                informacionElementoSigTimeStamp.setValue(selloId);
-                sello.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
-            }
-            // Se almacena su nombre de Id por si es preciso referenciarlos
-            idNodoSelloTiempo.add(selloId);
-        }
+	// Se buscan otros sellos de tiempo en la firma y se les asigna una Id si no la tienen
+	NodeList sellosPreexistentes = doc.getElementsByTagNameNS(xadesSchema,
+		ConstantesXADES.SIGNATURE_TIME_STAMP);
+	int numSellos = sellosPreexistentes.getLength();
+	for (int i = 0; i < numSellos; ++i) {
+	    Element sello = (Element) sellosPreexistentes.item(i);
+	    String selloId = sello.getAttribute(ConstantesXADES.ID);
+	    if (selloId == null) {
+		Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null,
+			ConstantesXADES.ID);
+		selloId = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
+		informacionElementoSigTimeStamp.setValue(selloId);
+		sello.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
+	    }
+	    // Se almacena su nombre de Id por si es preciso referenciarlos
+	    idNodoSelloTiempo.add(selloId);
+	}
 
-        // Se crea el nodo de sello de tiempo
-        Element tiempoSelloElementoFirma = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNATURE_TIME_STAMP);
+	// Se crea el nodo de sello de tiempo
+	Element tiempoSelloElementoFirma = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIGNATURE_TIME_STAMP);
 
-        // Se escribe una Id Ãºnica
-        Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
-        String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
-        informacionElementoSigTimeStamp.setValue(idSelloTiempo);
-        idNodoSelloTiempo.add(idSelloTiempo);
-        tiempoSelloElementoFirma.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
+	// Se escribe una Id Ãºnica
+	Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
+	String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
+	informacionElementoSigTimeStamp.setValue(idSelloTiempo);
+	idNodoSelloTiempo.add(idSelloTiempo);
+	tiempoSelloElementoFirma.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
 
-        // Se incluye un nodo que referencia a la Id de SignatureValue
-        if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)
-                || ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
+	// Se incluye un nodo que referencia a la Id de SignatureValue
+	if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)
+		|| ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
 
-            String nombreNodoUri = null;
-            String tipoUri = null;
-            if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
-                nombreNodoUri = ConstantesXADES.HASH_DATA_INFO;
-                tipoUri = ConstantesXADES.URI_MINUS;
-            } else {
-                nombreNodoUri = ConstantesXADES.INCLUDE;
-                tipoUri = ConstantesXADES.URI_MAYUS;
-            }
+	    String nombreNodoUri = null;
+	    String tipoUri = null;
+	    if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
+		nombreNodoUri = ConstantesXADES.HASH_DATA_INFO;
+		tipoUri = ConstantesXADES.URI_MINUS;
+	    } else {
+		nombreNodoUri = ConstantesXADES.INCLUDE;
+		tipoUri = ConstantesXADES.URI_MAYUS;
+	    }
 
-            Element informacionElementoHashDatos = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + nombreNodoUri);
+	    Element informacionElementoHashDatos = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS + nombreNodoUri);
 
-            Attr informacionElementoHashDatosUri = doc.createAttributeNS(null, tipoUri);
-            informacionElementoHashDatosUri.setValue(ConstantesXADES.ALMOHADILLA + idSignatureValue);
+	    Attr informacionElementoHashDatosUri = doc.createAttributeNS(null, tipoUri);
+	    informacionElementoHashDatosUri
+		    .setValue(ConstantesXADES.ALMOHADILLA + idSignatureValue);
 
-            NamedNodeMap informacionAtributosElementoHashDatos = informacionElementoHashDatos.getAttributes();
-            informacionAtributosElementoHashDatos.setNamedItem(informacionElementoHashDatosUri);
+	    NamedNodeMap informacionAtributosElementoHashDatos = informacionElementoHashDatos
+		    .getAttributes();
+	    informacionAtributosElementoHashDatos.setNamedItem(informacionElementoHashDatosUri);
 
-            tiempoSelloElementoFirma.appendChild(informacionElementoHashDatos);
-        }
+	    tiempoSelloElementoFirma.appendChild(informacionElementoHashDatos);
+	}
 
-        // Se crea el nodo canonicalizationMethod en los esquemas 1.2.2 y 1.3.2
-        if (!ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
-            Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                    xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CANONICALIZATION_METHOD);
-            Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
-            canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-            canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
+	// Se crea el nodo canonicalizationMethod en los esquemas 1.2.2 y 1.3.2
+	if (!ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
+	    Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		    xmldsigNS + ConstantesXADES.DOS_PUNTOS
+			    + ConstantesXADES.CANONICALIZATION_METHOD);
+	    Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
+	    canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+	    canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
 
-            tiempoSelloElementoFirma.appendChild(canonicalizationElemento);
-        }
+	    tiempoSelloElementoFirma.appendChild(canonicalizationElemento);
+	}
 
-        // Se crea el nodo del sello de tiempo
-        Element tiempoSelloEncapsulado = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
+	// Se crea el nodo del sello de tiempo
+	Element tiempoSelloEncapsulado = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
 
-        tiempoSelloEncapsulado.appendChild(doc.createTextNode(new String(Base64Coder.encode(selloTiempo))));
-        Attr tiempoSelloEncapsuladoId = doc.createAttributeNS(null, ConstantesXADES.ID);
-        String idEncapsulated = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO_TOKEN);
-        tiempoSelloEncapsuladoId.setValue(idEncapsulated);
-        tiempoSelloEncapsulado.getAttributes().setNamedItem(tiempoSelloEncapsuladoId);
+	tiempoSelloEncapsulado
+		.appendChild(doc.createTextNode(new String(Base64Coder.encode(selloTiempo))));
+	Attr tiempoSelloEncapsuladoId = doc.createAttributeNS(null, ConstantesXADES.ID);
+	String idEncapsulated = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO_TOKEN);
+	tiempoSelloEncapsuladoId.setValue(idEncapsulated);
+	tiempoSelloEncapsulado.getAttributes().setNamedItem(tiempoSelloEncapsuladoId);
 
-        tiempoSelloElementoFirma.appendChild(tiempoSelloEncapsulado);
+	tiempoSelloElementoFirma.appendChild(tiempoSelloEncapsulado);
 
-        propiedadesSinFirmarFirmaElementos.appendChild(tiempoSelloElementoFirma);
-        propiedadesElementosNoFirmados.appendChild(propiedadesSinFirmarFirmaElementos);
-        elementoPrincipal.appendChild(propiedadesElementosNoFirmados);
-        return doc;
+	propiedadesSinFirmarFirmaElementos.appendChild(tiempoSelloElementoFirma);
+	propiedadesElementosNoFirmados.appendChild(propiedadesSinFirmarFirmaElementos);
+	elementoPrincipal.appendChild(propiedadesElementosNoFirmados);
+	return doc;
     }
 
     /**
      * Este mÃ©todo aÃ±ade la implementacion para XADES-C
      *
-     * @param doc
-     *            Documento de firma con formato XADES-T
-     * @param tiempoRespuesta
-     *            Fecha y hora de la respuesta del servidor OCSP
-     * @param mensajeRespuesta
-     *            Valor del OCSPResponse
-     * @param certRefs
-     *            Cadena de CertificaciÃ³n del certificado de firma
+     * @param doc              Documento de firma con formato XADES-T
+     * @param tiempoRespuesta  Fecha y hora de la respuesta del servidor OCSP
+     * @param mensajeRespuesta Valor del OCSPResponse
+     * @param certRefs         Cadena de CertificaciÃ³n del certificado de firma
      *
      * @return Documento de firma con formato XADES-C
      *
      * @throws Exception
      */
     private Document addXadesC(Element firma,
-            // String tiempoRespuesta,
-            // String respuestaID,
-            ArrayList<RespYCerts> respuestas, XAdESSchemas schema, String algDigestXML) throws AddXadesException {
-        Document doc = firma.getOwnerDocument();
-        // Recogemos el nodo UnsignedSignatureProperties del cual dependen los nodos
-        // que hay que aÃ±adir para completar la firma XADES-C
-        Element elementoPrincipal = null;
-        ArrayList<X509Certificate> certRefs = null;
+	    // String tiempoRespuesta,
+	    // String respuestaID,
+	    ArrayList<RespYCerts> respuestas, XAdESSchemas schema, String algDigestXML)
+	    throws AddXadesException {
+	Document doc = firma.getOwnerDocument();
+	// Recogemos el nodo UnsignedSignatureProperties del cual dependen los nodos
+	// que hay que aÃ±adir para completar la firma XADES-C
+	Element elementoPrincipal = null;
+	ArrayList<X509Certificate> certRefs = null;
 
-        String tipoUri = null;
-        if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
-            tipoUri = ConstantesXADES.URI_MINUS;
-        } else {
-            tipoUri = ConstantesXADES.URI_MAYUS;
-        }
+	String tipoUri = null;
+	if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
+	    tipoUri = ConstantesXADES.URI_MINUS;
+	} else {
+	    tipoUri = ConstantesXADES.URI_MAYUS;
+	}
 
-        NodeList nodos = firma.getElementsByTagNameNS(xadesSchema, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
-        if (nodos.getLength() != 0) {
-            elementoPrincipal = (Element) nodos.item(0);
-        } else {
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_19));
-        }
+	NodeList nodos = firma.getElementsByTagNameNS(xadesSchema,
+		ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+	if (nodos.getLength() != 0) {
+	    elementoPrincipal = (Element) nodos.item(0);
+	} else {
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_19));
+	}
 
-        // Aqui vienen las llamadas para los certificados
-        Element certificadosElementosFirma = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.COMPLETE_CERTIFICATE_REFS);
-        Element revocacionesElementoFirma = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.COMPLETE_REVOCATION_REFS);
+	// Aqui vienen las llamadas para los certificados
+	Element certificadosElementosFirma = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.COMPLETE_CERTIFICATE_REFS);
+	Element revocacionesElementoFirma = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.COMPLETE_REVOCATION_REFS);
 
-        // Construye las referencias del certificado
-        int size = respuestas.size();
-        if (size > 0) {
-            certRefs = new ArrayList<X509Certificate>(size);
-            for (int x = 0; x < size; ++x) {
-                certRefs.add((respuestas.get(x)).getCertstatus().getCertificate());
-            }
-        }
+	// Construye las referencias del certificado
+	int size = respuestas.size();
+	if (size > 0) {
+	    certRefs = new ArrayList<X509Certificate>(size);
+	    for (int x = 0; x < size; ++x) {
+		certRefs.add((respuestas.get(x)).getCertstatus().getCertificate());
+	    }
+	}
 
-        if (certRefs != null) {
-            // Se le agrega una Id Ãºnica
-            Attr informacionElementoCertRef = doc.createAttributeNS(null, ConstantesXADES.ID);
-            idNodoCertificateRefs = UtilidadTratarNodo.newID(doc, ConstantesXADES.COMPLETE_CERTIFICATE_REFS);
-            informacionElementoCertRef.setValue(idNodoCertificateRefs);
-            certificadosElementosFirma.getAttributes().setNamedItem(informacionElementoCertRef);
+	if (certRefs != null) {
+	    // Se le agrega una Id Ãºnica
+	    Attr informacionElementoCertRef = doc.createAttributeNS(null, ConstantesXADES.ID);
+	    idNodoCertificateRefs = UtilidadTratarNodo.newID(doc,
+		    ConstantesXADES.COMPLETE_CERTIFICATE_REFS);
+	    informacionElementoCertRef.setValue(idNodoCertificateRefs);
+	    certificadosElementosFirma.getAttributes().setNamedItem(informacionElementoCertRef);
 
-            Element elementoCertRefs = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT_REFS);
+	    Element elementoCertRefs = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT_REFS);
 
-            certificadosElementosFirma.appendChild(elementoCertRefs);
-            int longitud = certRefs.size();
+	    certificadosElementosFirma.appendChild(elementoCertRefs);
+	    int longitud = certRefs.size();
 
-            // Se agrega una id al certificado de firma
-            String idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.LIBRERIAXADES_CERT_PATH);
-            respuestas.get(0).setIdCertificado(idNueva);
+	    // Se agrega una id al certificado de firma
+	    String idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.LIBRERIAXADES_CERT_PATH);
+	    respuestas.get(0).setIdCertificado(idNueva);
 
-            for (int i = 1; i < longitud; i++) // Se salta el primero porque es el certificado firmante
-            {
-                X509Certificate firmaCertificado = (X509Certificate) certRefs.get(i);
-                Element elementCertRef = doc.createElementNS(xadesSchema,
-                        xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT);
+	    for (int i = 1; i < longitud; i++) // Se salta el primero porque es el certificado
+					       // firmante
+	    {
+		X509Certificate firmaCertificado = (X509Certificate) certRefs.get(i);
+		Element elementCertRef = doc.createElementNS(xadesSchema,
+			xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT);
 
-                // Creamos los atributos de UnSignedProperties
-                Attr uris = doc.createAttributeNS(null, tipoUri);
-                // AppPerfect: Falso positivo. No son expresiones constantes
-                idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.LIBRERIAXADES_CERT_PATH);
-                uris.setValue(ConstantesXADES.ALMOHADILLA + idNueva);
-                respuestas.get(i).setIdCertificado(idNueva);
-                NamedNodeMap atributosURI = elementCertRef.getAttributes();
-                atributosURI.setNamedItem(uris);
+		// Creamos los atributos de UnSignedProperties
+		Attr uris = doc.createAttributeNS(null, tipoUri);
+		// AppPerfect: Falso positivo. No son expresiones constantes
+		idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.LIBRERIAXADES_CERT_PATH);
+		uris.setValue(ConstantesXADES.ALMOHADILLA + idNueva);
+		respuestas.get(i).setIdCertificado(idNueva);
+		NamedNodeMap atributosURI = elementCertRef.getAttributes();
+		atributosURI.setNamedItem(uris);
 
-                Element resumenElementoCert = doc.createElementNS(xadesSchema,
-                        xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT_DIGEST);
+		Element resumenElementoCert = doc.createElementNS(xadesSchema,
+			xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CERT_DIGEST);
 
-                // Creamos el xades:DigestMethod
-                Element metodoResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                        xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_METHOD);
+		// Creamos el xades:DigestMethod
+		Element metodoResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+			xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_METHOD);
 
-                // Creamos los atributos de DigestMethod
-                Attr propiedadesFirmaAlgoritmo = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
-                propiedadesFirmaAlgoritmo.setValue(algDigestXML);
-                NamedNodeMap cualidadesMetodoResumenElemento = metodoResumenElemento.getAttributes();
-                cualidadesMetodoResumenElemento.setNamedItem(propiedadesFirmaAlgoritmo);
+		// Creamos los atributos de DigestMethod
+		Attr propiedadesFirmaAlgoritmo = doc.createAttributeNS(null,
+			ConstantesXADES.ALGORITHM);
+		propiedadesFirmaAlgoritmo.setValue(algDigestXML);
+		NamedNodeMap cualidadesMetodoResumenElemento = metodoResumenElemento
+			.getAttributes();
+		cualidadesMetodoResumenElemento.setNamedItem(propiedadesFirmaAlgoritmo);
 
-                // Creamos el xades:DigestValue
-                String resumenCertificado = ConstantesXADES.CADENA_VACIA;
-                try {
-                    MessageDigest resumenCertificadoTemp = UtilidadFirmaElectronica.getMessageDigest(algDigestXML);
-                    if (resumenCertificadoTemp == null)
-                        throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_16));
-                    byte[] resumenMensajeByte = resumenCertificadoTemp.digest(firmaCertificado.getEncoded());
-                    resumenCertificado = new String(Base64Coder.encode(resumenMensajeByte));
-                } catch (CertificateEncodingException e) {
-                    log.error(e);
-                    throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_23));
-                }
+		// Creamos el xades:DigestValue
+		String resumenCertificado = ConstantesXADES.CADENA_VACIA;
+		try {
+		    MessageDigest resumenCertificadoTemp = UtilidadFirmaElectronica
+			    .getMessageDigest(algDigestXML);
+		    if (resumenCertificadoTemp == null)
+			throw new AddXadesException(
+				I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_16));
+		    byte[] resumenMensajeByte = resumenCertificadoTemp
+			    .digest(firmaCertificado.getEncoded());
+		    resumenCertificado = new String(Base64Coder.encode(resumenMensajeByte));
+		} catch (CertificateEncodingException e) {
+		    log.error("Generic CertificateEncodingException", e);
+		    throw new AddXadesException(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_23));
+		}
 
-                Element elementDigestValue = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                        xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_VALUE);
-                elementDigestValue.appendChild(doc.createTextNode(resumenCertificado));
+		Element elementDigestValue = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+			xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_VALUE);
+		elementDigestValue.appendChild(doc.createTextNode(resumenCertificado));
 
-                // Creamos el xades:IssuerSerial
-                Element elementoEmisorSerial = doc.createElementNS(xadesSchema,
-                        xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ISSUER_SERIAL);
-                // Creamos el xades:X509IssuerName
-                Element elementoX509EmisorNombre = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                        xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.X_509_ISSUER_NAME);
-                elementoX509EmisorNombre
-                        .appendChild(doc.createTextNode(firmaCertificado.getIssuerX500Principal().getName()));
+		// Creamos el xades:IssuerSerial
+		Element elementoEmisorSerial = doc.createElementNS(xadesSchema,
+			xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ISSUER_SERIAL);
+		// Creamos el xades:X509IssuerName
+		Element elementoX509EmisorNombre = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+			xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.X_509_ISSUER_NAME);
+		elementoX509EmisorNombre.appendChild(
+			doc.createTextNode(firmaCertificado.getIssuerX500Principal().getName()));
 
-                // Creamos el xades:X509SerialNumber
-                Element elementoX509NumeroSerial = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                        xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.X_509_SERIAL_NUMBER);
-                elementoX509NumeroSerial.appendChild(doc.createTextNode(firmaCertificado.getSerialNumber().toString()));
+		// Creamos el xades:X509SerialNumber
+		Element elementoX509NumeroSerial = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+			xmldsigNS + ConstantesXADES.DOS_PUNTOS
+				+ ConstantesXADES.X_509_SERIAL_NUMBER);
+		elementoX509NumeroSerial.appendChild(
+			doc.createTextNode(firmaCertificado.getSerialNumber().toString()));
 
-                // Add references
-                elementoEmisorSerial.appendChild(elementoX509EmisorNombre);
-                elementoEmisorSerial.appendChild(elementoX509NumeroSerial);
+		// Add references
+		elementoEmisorSerial.appendChild(elementoX509EmisorNombre);
+		elementoEmisorSerial.appendChild(elementoX509NumeroSerial);
 
-                resumenElementoCert.appendChild(metodoResumenElemento);
-                resumenElementoCert.appendChild(elementDigestValue);
+		resumenElementoCert.appendChild(metodoResumenElemento);
+		resumenElementoCert.appendChild(elementDigestValue);
 
-                elementCertRef.appendChild(resumenElementoCert);
-                elementCertRef.appendChild(elementoEmisorSerial);
+		elementCertRef.appendChild(resumenElementoCert);
+		elementCertRef.appendChild(elementoEmisorSerial);
 
-                elementoCertRefs.appendChild(elementCertRef);
-            }
-        }
+		elementoCertRefs.appendChild(elementCertRef);
+	    }
+	}
 
-        Element elementOCSPRef = null;
-        String tiempoRespuesta = null;
-        byte[] mensajeRespuesta = null;
+	Element elementOCSPRef = null;
+	String tiempoRespuesta = null;
+	byte[] mensajeRespuesta = null;
 
-        if (size > 0) {
+	if (size > 0) {
 
-            // Se le agrega una Id Ãºnica
-            Attr informacionElementoCertRef = doc.createAttributeNS(null, ConstantesXADES.ID);
-            idNodoRevocationRefs = UtilidadTratarNodo.newID(doc, ConstantesXADES.COMPLETE_REVOCATION_REFS);
-            informacionElementoCertRef.setValue(idNodoRevocationRefs);
-            revocacionesElementoFirma.getAttributes().setNamedItem(informacionElementoCertRef);
+	    // Se le agrega una Id Ãºnica
+	    Attr informacionElementoCertRef = doc.createAttributeNS(null, ConstantesXADES.ID);
+	    idNodoRevocationRefs = UtilidadTratarNodo.newID(doc,
+		    ConstantesXADES.COMPLETE_REVOCATION_REFS);
+	    informacionElementoCertRef.setValue(idNodoRevocationRefs);
+	    revocacionesElementoFirma.getAttributes().setNamedItem(informacionElementoCertRef);
 
-            int nOCSPRefs = 0;
-            int nCRLRefs = 0;
+	    int nOCSPRefs = 0;
+	    int nCRLRefs = 0;
 
-            // Construye el valor de la respuesta del servidor OCSP
-            // bajo el nodo completo de la referencia de la revocaciÃ³n
-            Element elementOCSPRefs = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_REFS);
-            CRLRefs elementCRLRefs = new CRLRefs(schema);
+	    // Construye el valor de la respuesta del servidor OCSP
+	    // bajo el nodo completo de la referencia de la revocaciÃ³n
+	    Element elementOCSPRefs = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_REFS);
+	    CRLRefs elementCRLRefs = new CRLRefs(schema);
 
-            for (int x = 0; x < size - 1; ++x) {
+	    for (int x = 0; x < size - 1; ++x) {
 
-                RespYCerts respYCert = respuestas.get(x);
-                ICertStatus certStatus = respYCert.getCertstatus();
-                if (certStatus instanceof IOCSPCertStatus) {
-                    nOCSPRefs++;
-                    IOCSPCertStatus respOcsp = (IOCSPCertStatus) certStatus;
+		RespYCerts respYCert = respuestas.get(x);
+		ICertStatus certStatus = respYCert.getCertstatus();
+		if (certStatus instanceof IOCSPCertStatus) {
+		    nOCSPRefs++;
+		    IOCSPCertStatus respOcsp = (IOCSPCertStatus) certStatus;
 
-                    tiempoRespuesta = UtilidadFechas.formatFechaXML(respOcsp.getResponseDate());
-                    IOCSPCertStatus.TYPE_RESPONDER tipoResponder = respOcsp.getResponderType();
-                    String valorResponder = respOcsp.getResponderID();
-                    mensajeRespuesta = respOcsp.getEncoded();
+		    tiempoRespuesta = UtilidadFechas.formatFechaXML(respOcsp.getResponseDate());
+		    IOCSPCertStatus.TYPE_RESPONDER tipoResponder = respOcsp.getResponderType();
+		    String valorResponder = respOcsp.getResponderID();
+		    mensajeRespuesta = respOcsp.getEncoded();
 
-                    elementOCSPRef = doc.createElementNS(xadesSchema,
-                            xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_REF);
+		    elementOCSPRef = doc.createElementNS(xadesSchema,
+			    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_REF);
 
-                    // Creamos los atributos de UnSignedProperties
-                    String idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.OCSP);
-                    respYCert.setIdRespStatus(idNueva);
+		    // Creamos los atributos de UnSignedProperties
+		    String idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.OCSP);
+		    respYCert.setIdRespStatus(idNueva);
 
-                    Element identificadorElementoOCSP = doc.createElementNS(xadesSchema,
-                            xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_IDENTIFIER);
-                    Attr uris = doc.createAttributeNS(null, tipoUri);
-                    uris.setValue(ConstantesXADES.ALMOHADILLA + idNueva);
-                    NamedNodeMap atributosURI = identificadorElementoOCSP.getAttributes();
-                    atributosURI.setNamedItem(uris);
+		    Element identificadorElementoOCSP = doc.createElementNS(xadesSchema,
+			    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_IDENTIFIER);
+		    Attr uris = doc.createAttributeNS(null, tipoUri);
+		    uris.setValue(ConstantesXADES.ALMOHADILLA + idNueva);
+		    NamedNodeMap atributosURI = identificadorElementoOCSP.getAttributes();
+		    atributosURI.setNamedItem(uris);
 
-                    // Creamos el xades:DigestMethod
-                    Element elementoRespondedorId = doc.createElementNS(xadesSchema,
-                            xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.RESPONDER_ID);
+		    // Creamos el xades:DigestMethod
+		    Element elementoRespondedorId = doc.createElementNS(xadesSchema,
+			    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.RESPONDER_ID);
 
-                    Element responderFinal = elementoRespondedorId;
-                    if (!(ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema))
-                            && !(ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema))) {
-                        Element hijo = null;
-                        if (tipoResponder.equals(IOCSPCertStatus.TYPE_RESPONDER.BY_NAME)) {
-                            hijo = doc.createElementNS(xadesSchema,
-                                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.BY_NAME);
-                        } else {
-                            hijo = doc.createElementNS(xadesSchema,
-                                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.BY_KEY);
-                        }
-                        // TODO: tener en cuenta que podria no ser ninguno de estos valores en un futuro
-                        elementoRespondedorId.appendChild(hijo);
-                        responderFinal = hijo;
-                    }
-                    responderFinal.appendChild(doc.createTextNode(valorResponder));
+		    Element responderFinal = elementoRespondedorId;
+		    if (!(ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema))
+			    && !(ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema))) {
+			Element hijo = null;
+			if (tipoResponder.equals(IOCSPCertStatus.TYPE_RESPONDER.BY_NAME)) {
+			    hijo = doc.createElementNS(xadesSchema,
+				    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.BY_NAME);
+			} else {
+			    hijo = doc.createElementNS(xadesSchema,
+				    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.BY_KEY);
+			}
+			// TODO: tener en cuenta que podria no ser ninguno de estos valores en un
+			// futuro
+			elementoRespondedorId.appendChild(hijo);
+			responderFinal = hijo;
+		    }
+		    responderFinal.appendChild(doc.createTextNode(valorResponder));
 
-                    Element elementoProdujoEn = doc.createElementNS(xadesSchema,
-                            xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.PRODUCE_AT);
+		    Element elementoProdujoEn = doc.createElementNS(xadesSchema,
+			    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.PRODUCE_AT);
 
-                    elementoProdujoEn.appendChild(doc.createTextNode(tiempoRespuesta));
+		    elementoProdujoEn.appendChild(doc.createTextNode(tiempoRespuesta));
 
-                    identificadorElementoOCSP.appendChild(elementoRespondedorId);
-                    identificadorElementoOCSP.appendChild(elementoProdujoEn);
-                    Element valorYResumenElemento = doc.createElementNS(xadesSchema,
-                            xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_ALG_AND_VALUE);
+		    identificadorElementoOCSP.appendChild(elementoRespondedorId);
+		    identificadorElementoOCSP.appendChild(elementoProdujoEn);
+		    Element valorYResumenElemento = doc.createElementNS(xadesSchema, xadesNS
+			    + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_ALG_AND_VALUE);
 
-                    // Creamos el xades:DigestMethod
-                    Element metodoResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                            xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_METHOD);
+		    // Creamos el xades:DigestMethod
+		    Element metodoResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+			    xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_METHOD);
 
-                    // Creamos los atributos de DigestMethod
-                    Attr propiedadesAlgoritmoFirmado = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
-                    propiedadesAlgoritmoFirmado.setValue(algDigestXML);
-                    NamedNodeMap atributosMetodoResumenElemento = metodoResumenElemento.getAttributes();
-                    atributosMetodoResumenElemento.setNamedItem(propiedadesAlgoritmoFirmado);
+		    // Creamos los atributos de DigestMethod
+		    Attr propiedadesAlgoritmoFirmado = doc.createAttributeNS(null,
+			    ConstantesXADES.ALGORITHM);
+		    propiedadesAlgoritmoFirmado.setValue(algDigestXML);
+		    NamedNodeMap atributosMetodoResumenElemento = metodoResumenElemento
+			    .getAttributes();
+		    atributosMetodoResumenElemento.setNamedItem(propiedadesAlgoritmoFirmado);
 
-                    // Creamos el xades:DigestValue
-                    // El mensaje de la respuesta es el OCSPResponse
-                    String digestCertificado = ConstantesXADES.CADENA_VACIA;
-                    MessageDigest resumenCertificadoTemp = UtilidadFirmaElectronica.getMessageDigest(algDigestXML);
-                    if (resumenCertificadoTemp == null)
-                        throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_20));
-                    byte[] resumenMensajeByte = resumenCertificadoTemp.digest(mensajeRespuesta);
-                    digestCertificado = new String(Base64Coder.encode(resumenMensajeByte));
+		    // Creamos el xades:DigestValue
+		    // El mensaje de la respuesta es el OCSPResponse
+		    String digestCertificado = ConstantesXADES.CADENA_VACIA;
+		    MessageDigest resumenCertificadoTemp = UtilidadFirmaElectronica
+			    .getMessageDigest(algDigestXML);
+		    if (resumenCertificadoTemp == null)
+			throw new AddXadesException(
+				I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_20));
+		    byte[] resumenMensajeByte = resumenCertificadoTemp.digest(mensajeRespuesta);
+		    digestCertificado = new String(Base64Coder.encode(resumenMensajeByte));
 
-                    Element valorResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                            xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_VALUE);
+		    Element valorResumenElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+			    xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.DIGEST_VALUE);
 
-                    valorResumenElemento.appendChild(doc.createTextNode(digestCertificado));
+		    valorResumenElemento.appendChild(doc.createTextNode(digestCertificado));
 
-                    valorYResumenElemento.appendChild(metodoResumenElemento);
-                    valorYResumenElemento.appendChild(valorResumenElemento);
+		    valorYResumenElemento.appendChild(metodoResumenElemento);
+		    valorYResumenElemento.appendChild(valorResumenElemento);
 
-                    elementOCSPRef.appendChild(identificadorElementoOCSP);
-                    elementOCSPRef.appendChild(valorYResumenElemento);
+		    elementOCSPRef.appendChild(identificadorElementoOCSP);
+		    elementOCSPRef.appendChild(valorYResumenElemento);
 
-                    elementOCSPRefs.appendChild(elementOCSPRef);
-                } else if (certStatus instanceof IX509CRLCertStatus) {
-                    nCRLRefs++;
-                    IX509CRLCertStatus respCRL = (IX509CRLCertStatus) certStatus;
-                    try {
-                        CRLRef crlRef = new CRLRef(schema, algDigestXML, respCRL.getX509CRL());
+		    elementOCSPRefs.appendChild(elementOCSPRef);
+		} else if (certStatus instanceof IX509CRLCertStatus) {
+		    nCRLRefs++;
+		    IX509CRLCertStatus respCRL = (IX509CRLCertStatus) certStatus;
+		    try {
+			CRLRef crlRef = new CRLRef(schema, algDigestXML, respCRL.getX509CRL());
 
-                        String idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.CRL);
-                        crlRef.getCrlIdentifier().setUri(ConstantesXADES.ALMOHADILLA + idNueva);
-                        respYCert.setIdRespStatus(idNueva);
+			String idNueva = UtilidadTratarNodo.newID(doc, ConstantesXADES.CRL);
+			crlRef.getCrlIdentifier().setUri(ConstantesXADES.ALMOHADILLA + idNueva);
+			respYCert.setIdRespStatus(idNueva);
 
-                        elementCRLRefs.addCRLRef(crlRef);
-                    } catch (InvalidInfoNodeException ex) {
-                        throw new AddXadesException("No se pudo construir las referencias a CRLs", ex);
-                    }
-                }
-            }
+			elementCRLRefs.addCRLRef(crlRef);
+		    } catch (InvalidInfoNodeException ex) {
+			throw new AddXadesException("No se pudo construir las referencias a CRLs",
+				ex);
+		    }
+		}
+	    }
 
-            if (nCRLRefs > 0) {
-                try {
-                    Element el = elementCRLRefs.createElement(doc, xmldsigNS, xadesNS);
-                    revocacionesElementoFirma.appendChild(el);
-                } catch (InvalidInfoNodeException ex) {
-                    throw new AddXadesException("No se pudo construir las referencias a CRLs", ex);
-                }
-            }
+	    if (nCRLRefs > 0) {
+		try {
+		    Element el = elementCRLRefs.createElement(doc, xmldsigNS, xadesNS);
+		    revocacionesElementoFirma.appendChild(el);
+		} catch (InvalidInfoNodeException ex) {
+		    throw new AddXadesException("No se pudo construir las referencias a CRLs", ex);
+		}
+	    }
 
-            if (nOCSPRefs > 0)
-                revocacionesElementoFirma.appendChild(elementOCSPRefs);
+	    if (nOCSPRefs > 0)
+		revocacionesElementoFirma.appendChild(elementOCSPRefs);
 
-        }
+	}
 
-        elementoPrincipal.appendChild(certificadosElementosFirma);
-        elementoPrincipal.appendChild(revocacionesElementoFirma);
+	elementoPrincipal.appendChild(certificadosElementosFirma);
+	elementoPrincipal.appendChild(revocacionesElementoFirma);
 
-        return doc;
+	return doc;
     }
 
     /**
-     * Este metodo aÃ±ade la implementaciÃ³n del sello de tiempo de tipo 1 (implÃ­cito) para XADES-X segÃºn los esquemas
-     * 1.2.2 y 1.3.2. Los elementos sobre los que se calcula el sello son los siguientes: - SignatureValue -
-     * SignatureTimestamp - CompleteCertificateRefs - CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2:
-     * - AttributeCertificateRefs - AttributeRevocationRefs
+     * Este metodo aÃ±ade la implementaciÃ³n del sello de tiempo de tipo 1 (implÃ­cito) para XADES-X
+     * segÃºn los esquemas 1.2.2 y 1.3.2. Los elementos sobre los que se calcula el sello son los
+     * siguientes: - SignatureValue - SignatureTimestamp - CompleteCertificateRefs -
+     * CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2: - AttributeCertificateRefs
+     * - AttributeRevocationRefs
      *
-     * @param Element
-     *            UnsignedSignatureProperties Nodo a partir del cual se aÃ±ade el nodo SigAndRefsTimeStamp
+     * @param Element UnsignedSignatureProperties Nodo a partir del cual se aÃ±ade el nodo
+     *                SigAndRefsTimeStamp
      *
      * @return Documento de firma con formato XADES-X
      *
-     * @throws AddXadesException
-     *             En caso de error
+     * @throws AddXadesException En caso de error
      */
     private Document addXadesX(Element UnsignedSignatureProperties) throws AddXadesException {
 
-        // Se obtiene el formato de la constante URI en funciÃ³n del esquema
-        String tipoUri = null;
-        String nombreNodoUri = null;
-        if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
-            nombreNodoUri = ConstantesXADES.HASH_DATA_INFO;
-            tipoUri = ConstantesXADES.URI_MINUS;
-        } else {
-            nombreNodoUri = ConstantesXADES.INCLUDE;
-            tipoUri = ConstantesXADES.URI_MAYUS;
-        }
+	// Se obtiene el formato de la constante URI en funciÃ³n del esquema
+	String tipoUri = null;
+	String nombreNodoUri = null;
+	if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
+	    nombreNodoUri = ConstantesXADES.HASH_DATA_INFO;
+	    tipoUri = ConstantesXADES.URI_MINUS;
+	} else {
+	    nombreNodoUri = ConstantesXADES.INCLUDE;
+	    tipoUri = ConstantesXADES.URI_MAYUS;
+	}
 
-        // Se obtiene el documento que contiene al nodo UnsignedSignatureProperties
-        Document doc = UnsignedSignatureProperties.getOwnerDocument();
+	// Se obtiene el documento que contiene al nodo UnsignedSignatureProperties
+	Document doc = UnsignedSignatureProperties.getOwnerDocument();
 
-        // Se obtiene el nodo Signature que contiene al nodo UnsignedSignatureProperties (es el 4Âº padre, segÃºn
-        // esquema XAdES)
-        Node padre = UnsignedSignatureProperties.getParentNode();
-        for (int i = 0; i < 3; ++i) {
-            if (padre != null)
-                padre = padre.getParentNode();
-            else
-                // No se encuentra el nodo Signature
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
-                        + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
-        }
+	// Se obtiene el nodo Signature que contiene al nodo UnsignedSignatureProperties (es el 4Âº
+	// padre, segÃºn
+	// esquema XAdES)
+	Node padre = UnsignedSignatureProperties.getParentNode();
+	for (int i = 0; i < 3; ++i) {
+	    if (padre != null)
+		padre = padre.getParentNode();
+	    else
+		// No se encuentra el nodo Signature
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+				+ ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
+	}
 
-        Element signatureElement = null;
-        if (padre != null && ConstantesXADES.SIGNATURE.equals(padre.getLocalName()))
-            signatureElement = (Element) padre;
-        else
-            // No se encuentra el nodo Signature
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
-                    + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
+	Element signatureElement = null;
+	if (padre != null && ConstantesXADES.SIGNATURE.equals(padre.getLocalName()))
+	    signatureElement = (Element) padre;
+	else
+	    // No se encuentra el nodo Signature
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+			    + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
 
-        // Se crea el nodo SigAndRefsTimeStamp
-        Element sigAndRefsTimeStampElement = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIG_AND_REFS_TIME_STAMP);
+	// Se crea el nodo SigAndRefsTimeStamp
+	Element sigAndRefsTimeStampElement = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.SIG_AND_REFS_TIME_STAMP);
 
-        // Se escribe una Id Ãºnica
-        Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
-        String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
-        informacionElementoSigTimeStamp.setValue(idSelloTiempo);
-        idNodoSelloTiempo.add(idSelloTiempo);
-        sigAndRefsTimeStampElement.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
+	// Se escribe una Id Ãºnica
+	Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
+	String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
+	informacionElementoSigTimeStamp.setValue(idSelloTiempo);
+	idNodoSelloTiempo.add(idSelloTiempo);
+	sigAndRefsTimeStampElement.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
 
-        // Se coloca el nodo creado al final del nodo UnsignedSignatureProperties
-        UnsignedSignatureProperties.appendChild(sigAndRefsTimeStampElement);
+	// Se coloca el nodo creado al final del nodo UnsignedSignatureProperties
+	UnsignedSignatureProperties.appendChild(sigAndRefsTimeStampElement);
 
-        // Se obtiene el listado de elementos de un sello de tiempo XAdES X de tipo 1
-        ArrayList<Element> elementosSelloX = null;
-        try {
-            elementosSelloX = UtilidadXadesX.obtenerListadoXADESX1imp(xadesSchema, signatureElement,
-                    sigAndRefsTimeStampElement);
-        } catch (BadFormedSignatureException e) {
-            throw new AddXadesException(e.getMessage(), e);
-        } catch (FirmaXMLError e) {
-            throw new AddXadesException(e.getMessage(), e);
-        }
+	// Se obtiene el listado de elementos de un sello de tiempo XAdES X de tipo 1
+	ArrayList<Element> elementosSelloX = null;
+	try {
+	    elementosSelloX = UtilidadXadesX.obtenerListadoXADESX1imp(xadesSchema, signatureElement,
+		    sigAndRefsTimeStampElement);
+	} catch (BadFormedSignatureException e) {
+	    throw new AddXadesException(e.getMessage(), e);
+	} catch (FirmaXMLError e) {
+	    throw new AddXadesException(e.getMessage(), e);
+	}
 
-        // Se aÃ±aden nodos de referencia a los nodos obtenidos para el cÃ¡lculo del sello (sÃ³lo para esquemas 1.2.2 y
-        // 1.1.1)
-        if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)
-                || ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
-            // Se obtienen las Ids de los nodos del sello de tiempo X
-            ArrayList<String> elementosIdSelloX = UtilidadTratarNodo.obtenerIDs(elementosSelloX);
+	// Se aÃ±aden nodos de referencia a los nodos obtenidos para el cÃ¡lculo del sello (sÃ³lo
+	// para esquemas 1.2.2 y
+	// 1.1.1)
+	if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)
+		|| ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
+	    // Se obtienen las Ids de los nodos del sello de tiempo X
+	    ArrayList<String> elementosIdSelloX = UtilidadTratarNodo.obtenerIDs(elementosSelloX);
 
-            // Se crea una estructura con los nodos Include (1.2.2) o HashDataInfo (1.1.1) que contienen las URIs que
-            // apuntan a estas IDs
-            ArrayList<Element> nodosUriReferencia = new ArrayList<Element>(elementosIdSelloX.size());
-            Iterator<String> itIds = elementosIdSelloX.iterator();
-            while (itIds.hasNext()) {
-                String id = itIds.next();
-                Element uriNode = doc.createElementNS(xadesSchema,
-                        xadesNS + ConstantesXADES.DOS_PUNTOS + nombreNodoUri);
-                Attr includeNodeUri = doc.createAttributeNS(null, tipoUri);
-                includeNodeUri.setValue(ConstantesXADES.ALMOHADILLA + id);
-                NamedNodeMap atributosNodo = uriNode.getAttributes();
-                atributosNodo.setNamedItem(includeNodeUri);
+	    // Se crea una estructura con los nodos Include (1.2.2) o HashDataInfo (1.1.1) que
+	    // contienen las URIs que
+	    // apuntan a estas IDs
+	    ArrayList<Element> nodosUriReferencia = new ArrayList<Element>(
+		    elementosIdSelloX.size());
+	    Iterator<String> itIds = elementosIdSelloX.iterator();
+	    while (itIds.hasNext()) {
+		String id = itIds.next();
+		Element uriNode = doc.createElementNS(xadesSchema,
+			xadesNS + ConstantesXADES.DOS_PUNTOS + nombreNodoUri);
+		Attr includeNodeUri = doc.createAttributeNS(null, tipoUri);
+		includeNodeUri.setValue(ConstantesXADES.ALMOHADILLA + id);
+		NamedNodeMap atributosNodo = uriNode.getAttributes();
+		atributosNodo.setNamedItem(includeNodeUri);
 
-                nodosUriReferencia.add(uriNode);
-            }
+		nodosUriReferencia.add(uriNode);
+	    }
 
-            // Se escribe en el nodo SigAndRefsTimeStamp el listado obtenido por orden
-            Iterator<Element> itUrisReferencia = nodosUriReferencia.iterator();
-            while (itUrisReferencia.hasNext()) {
-                Element includeNode = itUrisReferencia.next();
-                sigAndRefsTimeStampElement.appendChild(includeNode);
-            }
-        }
+	    // Se escribe en el nodo SigAndRefsTimeStamp el listado obtenido por orden
+	    Iterator<Element> itUrisReferencia = nodosUriReferencia.iterator();
+	    while (itUrisReferencia.hasNext()) {
+		Element includeNode = itUrisReferencia.next();
+		sigAndRefsTimeStampElement.appendChild(includeNode);
+	    }
+	}
 
-        // Se obtiene el Array de bytes de los nodos obtenidos
-        byte[] byteData = null;
-        try {
-            byteData = UtilidadTratarNodo.obtenerByte(elementosSelloX, CanonicalizationEnum.C14N_OMIT_COMMENTS);
-        } catch (FirmaXMLError e) {
-            throw new AddXadesException(e.getMessage(), e);
-        }
+	// Se obtiene el Array de bytes de los nodos obtenidos
+	byte[] byteData = null;
+	try {
+	    byteData = UtilidadTratarNodo.obtenerByte(elementosSelloX,
+		    CanonicalizationEnum.C14N_OMIT_COMMENTS);
+	} catch (FirmaXMLError e) {
+	    throw new AddXadesException(e.getMessage(), e);
+	}
 
-        // Calculamos el hash del sello de tiempo y lo escribimos en el nodo como String del array de bytes calculado
-        TSCliente tsCli = null;
-        // if(estadoProxy) {
-        // System.setProperty("http.proxyHost", servidorProxy);
-        // System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
-        // if (isProxyAuth) {
-        // Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
-        // }
-        // else {
-        // Authenticator.setDefault(null);
-        // }
-        // }
-        tsCli = new TSCliente(servidorTSA, algoritmoTSA);
+	// Calculamos el hash del sello de tiempo y lo escribimos en el nodo como String del array
+	// de bytes calculado
+	TSCliente tsCli = null;
+	// if(estadoProxy) {
+	// System.setProperty("http.proxyHost", servidorProxy);
+	// System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
+	// if (isProxyAuth) {
+	// Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
+	// }
+	// else {
+	// Authenticator.setDefault(null);
+	// }
+	// }
+	tsCli = new TSCliente(servidorTSA, algoritmoTSA);
 
-        try {
-            byteData = tsCli.generarSelloTiempo(byteData);
-        } catch (TSClienteError e) {
-            throw new AddXadesException(
-                    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_11) + e.getMessage());
-        }
-        String hashSelloX = new String(Base64Coder.encode(byteData));
+	try {
+	    byteData = tsCli.generarSelloTiempo(byteData);
+	} catch (TSClienteError e) {
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_11)
+			    + e.getMessage());
+	}
+	String hashSelloX = new String(Base64Coder.encode(byteData));
 
-        // Se crea el nodo canonicalizationMethod en los esquemas 1.2.2 y 1.3.2
-        if (!ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
-            Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                    xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CANONICALIZATION_METHOD);
-            Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
-            canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-            canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
+	// Se crea el nodo canonicalizationMethod en los esquemas 1.2.2 y 1.3.2
+	if (!ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
+	    Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		    xmldsigNS + ConstantesXADES.DOS_PUNTOS
+			    + ConstantesXADES.CANONICALIZATION_METHOD);
+	    Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
+	    canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+	    canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
 
-            sigAndRefsTimeStampElement.appendChild(canonicalizationElemento);
-        }
+	    sigAndRefsTimeStampElement.appendChild(canonicalizationElemento);
+	}
 
-        // Escribimos el resultado en el nodo EncapsulatedTimeStamp
-        Element encapsulatedTimeStampNode = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
-        encapsulatedTimeStampNode.appendChild(doc.createTextNode(hashSelloX));
-        sigAndRefsTimeStampElement.appendChild(encapsulatedTimeStampNode);
+	// Escribimos el resultado en el nodo EncapsulatedTimeStamp
+	Element encapsulatedTimeStampNode = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
+	encapsulatedTimeStampNode.appendChild(doc.createTextNode(hashSelloX));
+	sigAndRefsTimeStampElement.appendChild(encapsulatedTimeStampNode);
 
-        return doc;
+	return doc;
     }
 
     /**
-     * Este metodo aÃ±ade la implementaciÃ³n del sello de tiempo de tipo 2 (explÃ­cito) para XADES-X segÃºn los esquemas
-     * 1.1.1, 1.2.2 y 1.3.2. Los elementos sobre los que se calcula el sello son los siguientes: -
-     * CompleteCertificateRefs - CompleteRevocationRefs Opcionalmente en el esquema 1.2.2 y 1.3.2: -
-     * AttributeCertificateRefs - AttributeRevocationRefs
+     * Este metodo aÃ±ade la implementaciÃ³n del sello de tiempo de tipo 2 (explÃ­cito) para XADES-X
+     * segÃºn los esquemas 1.1.1, 1.2.2 y 1.3.2. Los elementos sobre los que se calcula el sello son
+     * los siguientes: - CompleteCertificateRefs - CompleteRevocationRefs Opcionalmente en el
+     * esquema 1.2.2 y 1.3.2: - AttributeCertificateRefs - AttributeRevocationRefs
      *
-     * @param Element
-     *            UnsignedSignatureProperties Nodo a partir del cual se aÃ±ade el nodo RefsOnlyTimeStamp
+     * @param Element UnsignedSignatureProperties Nodo a partir del cual se aÃ±ade el nodo
+     *                RefsOnlyTimeStamp
      *
      * @return Documento de firma con formato XADES-X
      *
-     * @throws AddXadesException
-     *             En caso de error
+     * @throws AddXadesException En caso de error
      */
     private Document addXadesX2(Element UnsignedSignatureProperties) throws AddXadesException {
-        // Se obtiene el formato de la constante URI en funciÃ³n del esquema
-        String tipoUri = null;
-        String nombreNodoUri = null;
-        if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
-            nombreNodoUri = ConstantesXADES.HASH_DATA_INFO;
-            tipoUri = ConstantesXADES.URI_MINUS;
-        } else {
-            nombreNodoUri = ConstantesXADES.INCLUDE;
-            tipoUri = ConstantesXADES.URI_MAYUS;
-        }
+	// Se obtiene el formato de la constante URI en funciÃ³n del esquema
+	String tipoUri = null;
+	String nombreNodoUri = null;
+	if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
+	    nombreNodoUri = ConstantesXADES.HASH_DATA_INFO;
+	    tipoUri = ConstantesXADES.URI_MINUS;
+	} else {
+	    nombreNodoUri = ConstantesXADES.INCLUDE;
+	    tipoUri = ConstantesXADES.URI_MAYUS;
+	}
 
-        // Se obtiene el documento que contiene al nodo UnsignedSignatureProperties
-        Document doc = UnsignedSignatureProperties.getOwnerDocument();
+	// Se obtiene el documento que contiene al nodo UnsignedSignatureProperties
+	Document doc = UnsignedSignatureProperties.getOwnerDocument();
 
-        // Se obtiene el nodo Signature que contiene al nodo UnsignedSignatureProperties (es el 4Âº padre, segÃºn
-        // esquema XAdES)
-        Node padre = UnsignedSignatureProperties.getParentNode();
-        for (int i = 0; i < 3; ++i) {
-            if (padre != null)
-                padre = padre.getParentNode();
-            else
-                // No se encuentra el nodo Signature
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
-                        + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
-        }
+	// Se obtiene el nodo Signature que contiene al nodo UnsignedSignatureProperties (es el 4Âº
+	// padre, segÃºn
+	// esquema XAdES)
+	Node padre = UnsignedSignatureProperties.getParentNode();
+	for (int i = 0; i < 3; ++i) {
+	    if (padre != null)
+		padre = padre.getParentNode();
+	    else
+		// No se encuentra el nodo Signature
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+				+ ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
+	}
 
-        Element signatureElement = null;
-        if (padre != null && ConstantesXADES.SIGNATURE.equals(padre.getLocalName()))
-            signatureElement = (Element) padre;
-        else
-            // No se encuentra el nodo Signature
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
-                    + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
+	Element signatureElement = null;
+	if (padre != null && ConstantesXADES.SIGNATURE.equals(padre.getLocalName()))
+	    signatureElement = (Element) padre;
+	else
+	    // No se encuentra el nodo Signature
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+			    + ConstantesXADES.ESPACIO + ConstantesXADES.SIGNATURE);
 
-        // Se crea el nodo RefsOnlyTimeStamp
-        Element refsOnlyTimeStampElement = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.REFS_ONLY_TIME_STAMP);
+	// Se crea el nodo RefsOnlyTimeStamp
+	Element refsOnlyTimeStampElement = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.REFS_ONLY_TIME_STAMP);
 
-        // Se escribe una Id Ãºnica
-        Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
-        String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
-        informacionElementoSigTimeStamp.setValue(idSelloTiempo);
-        idNodoSelloTiempo.add(idSelloTiempo);
-        refsOnlyTimeStampElement.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
+	// Se escribe una Id Ãºnica
+	Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
+	String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO);
+	informacionElementoSigTimeStamp.setValue(idSelloTiempo);
+	idNodoSelloTiempo.add(idSelloTiempo);
+	refsOnlyTimeStampElement.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
 
-        // Se coloca el nodo creado al final del nodo UnsignedSignatureProperties
-        UnsignedSignatureProperties.appendChild(refsOnlyTimeStampElement);
+	// Se coloca el nodo creado al final del nodo UnsignedSignatureProperties
+	UnsignedSignatureProperties.appendChild(refsOnlyTimeStampElement);
 
-        // Se obtiene el listado de elementos de un sello de tiempo XAdES X de tipo 2
-        ArrayList<Element> elementosSelloX = null;
-        try {
-            elementosSelloX = UtilidadXadesX.obtenerListadoXADESX2exp(xadesSchema, signatureElement,
-                    refsOnlyTimeStampElement);
-        } catch (BadFormedSignatureException e) {
-            throw new AddXadesException(e.getMessage(), e);
-        } catch (FirmaXMLError e) {
-            throw new AddXadesException(e.getMessage(), e);
-        }
+	// Se obtiene el listado de elementos de un sello de tiempo XAdES X de tipo 2
+	ArrayList<Element> elementosSelloX = null;
+	try {
+	    elementosSelloX = UtilidadXadesX.obtenerListadoXADESX2exp(xadesSchema, signatureElement,
+		    refsOnlyTimeStampElement);
+	} catch (BadFormedSignatureException e) {
+	    throw new AddXadesException(e.getMessage(), e);
+	} catch (FirmaXMLError e) {
+	    throw new AddXadesException(e.getMessage(), e);
+	}
 
-        // Se aÃ±aden nodos de referencia a los nodos obtenidos para el cÃ¡lculo del sello (sÃ³lo para esquemas 1.2.2 y
-        // 1.1.1)
-        if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)
-                || ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
-            // Se obtienen las Ids de los nodos del sello de tiempo X
-            ArrayList<String> elementosIdSelloX = UtilidadTratarNodo.obtenerIDs(elementosSelloX);
+	// Se aÃ±aden nodos de referencia a los nodos obtenidos para el cÃ¡lculo del sello (sÃ³lo
+	// para esquemas 1.2.2 y
+	// 1.1.1)
+	if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)
+		|| ConstantesXADES.SCHEMA_XADES_122.equals(xadesSchema)) {
+	    // Se obtienen las Ids de los nodos del sello de tiempo X
+	    ArrayList<String> elementosIdSelloX = UtilidadTratarNodo.obtenerIDs(elementosSelloX);
 
-            // Se crea una estructura con los nodos Include (1.2.2) o HashDataInfo (1.1.1) que contienen las URIs que
-            // apuntan a estas IDs
-            ArrayList<Element> nodosUriReferencia = new ArrayList<Element>(elementosIdSelloX.size());
-            Iterator<String> itIds = elementosIdSelloX.iterator();
-            while (itIds.hasNext()) {
-                String id = itIds.next();
-                Element uriNode = doc.createElementNS(xadesSchema,
-                        xadesNS + ConstantesXADES.DOS_PUNTOS + nombreNodoUri);
-                Attr includeNodeUri = doc.createAttributeNS(null, tipoUri);
-                includeNodeUri.setValue(ConstantesXADES.ALMOHADILLA + id);
-                NamedNodeMap atributosNodo = uriNode.getAttributes();
-                atributosNodo.setNamedItem(includeNodeUri);
+	    // Se crea una estructura con los nodos Include (1.2.2) o HashDataInfo (1.1.1) que
+	    // contienen las URIs que
+	    // apuntan a estas IDs
+	    ArrayList<Element> nodosUriReferencia = new ArrayList<Element>(
+		    elementosIdSelloX.size());
+	    Iterator<String> itIds = elementosIdSelloX.iterator();
+	    while (itIds.hasNext()) {
+		String id = itIds.next();
+		Element uriNode = doc.createElementNS(xadesSchema,
+			xadesNS + ConstantesXADES.DOS_PUNTOS + nombreNodoUri);
+		Attr includeNodeUri = doc.createAttributeNS(null, tipoUri);
+		includeNodeUri.setValue(ConstantesXADES.ALMOHADILLA + id);
+		NamedNodeMap atributosNodo = uriNode.getAttributes();
+		atributosNodo.setNamedItem(includeNodeUri);
 
-                nodosUriReferencia.add(uriNode);
-            }
+		nodosUriReferencia.add(uriNode);
+	    }
 
-            // Se escribe en el nodo RefsOnlyTimeStamp el listado obtenido, por orden
-            Iterator<Element> itUrisReferencia = nodosUriReferencia.iterator();
-            while (itUrisReferencia.hasNext()) {
-                Element includeNode = itUrisReferencia.next();
-                refsOnlyTimeStampElement.appendChild(includeNode);
-            }
-        }
+	    // Se escribe en el nodo RefsOnlyTimeStamp el listado obtenido, por orden
+	    Iterator<Element> itUrisReferencia = nodosUriReferencia.iterator();
+	    while (itUrisReferencia.hasNext()) {
+		Element includeNode = itUrisReferencia.next();
+		refsOnlyTimeStampElement.appendChild(includeNode);
+	    }
+	}
 
-        // Se obtiene el Array de bytes de los nodos obtenidos
-        byte[] byteData = null;
-        try {
-            byteData = UtilidadTratarNodo.obtenerByte(elementosSelloX, CanonicalizationEnum.C14N_OMIT_COMMENTS);
-        } catch (FirmaXMLError e) {
-            throw new AddXadesException(e.getMessage(), e);
-        }
+	// Se obtiene el Array de bytes de los nodos obtenidos
+	byte[] byteData = null;
+	try {
+	    byteData = UtilidadTratarNodo.obtenerByte(elementosSelloX,
+		    CanonicalizationEnum.C14N_OMIT_COMMENTS);
+	} catch (FirmaXMLError e) {
+	    throw new AddXadesException(e.getMessage(), e);
+	}
 
-        // Calculamos el hash del sello de tiempo y lo escribimos en el nodo como String del array de bytes calculado
-        TSCliente tsCli = null;
-        // if(estadoProxy) {
-        // System.setProperty("http.proxyHost", servidorProxy);
-        // System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
-        // if (isProxyAuth) {
-        // Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
-        // }
-        // else {
-        // Authenticator.setDefault(null);
-        // }
-        // }
-        tsCli = new TSCliente(servidorTSA, algoritmoTSA);
+	// Calculamos el hash del sello de tiempo y lo escribimos en el nodo como String del array
+	// de bytes calculado
+	TSCliente tsCli = null;
+	// if(estadoProxy) {
+	// System.setProperty("http.proxyHost", servidorProxy);
+	// System.setProperty("http.proxyPort", Integer.toString(numeroPuertoProxy));
+	// if (isProxyAuth) {
+	// Authenticator.setDefault(new SimpleAuthenticator(proxyUser, proxyPass));
+	// }
+	// else {
+	// Authenticator.setDefault(null);
+	// }
+	// }
+	tsCli = new TSCliente(servidorTSA, algoritmoTSA);
 
-        try {
-            byteData = tsCli.generarSelloTiempo(byteData);
-        } catch (TSClienteError e) {
-            throw new AddXadesException(
-                    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_11) + e.getMessage());
-        }
-        String hashSelloX = new String(Base64Coder.encode(byteData));
+	try {
+	    byteData = tsCli.generarSelloTiempo(byteData);
+	} catch (TSClienteError e) {
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_11)
+			    + e.getMessage());
+	}
+	String hashSelloX = new String(Base64Coder.encode(byteData));
 
-        // Se crea el nodo canonicalizationMethod en los esquemas 1.2.2 y 1.3.2
-        if (!ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
-            Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                    xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CANONICALIZATION_METHOD);
-            Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
-            canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-            canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
+	// Se crea el nodo canonicalizationMethod en los esquemas 1.2.2 y 1.3.2
+	if (!ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema)) {
+	    Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		    xmldsigNS + ConstantesXADES.DOS_PUNTOS
+			    + ConstantesXADES.CANONICALIZATION_METHOD);
+	    Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
+	    canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+	    canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
 
-            refsOnlyTimeStampElement.appendChild(canonicalizationElemento);
-        }
+	    refsOnlyTimeStampElement.appendChild(canonicalizationElemento);
+	}
 
-        // Escribimos el resultado en el nodo EncapsulatedTimeStamp
-        Element encapsulatedTimeStampNode = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
-        encapsulatedTimeStampNode.appendChild(doc.createTextNode(hashSelloX));
-        refsOnlyTimeStampElement.appendChild(encapsulatedTimeStampNode);
+	// Escribimos el resultado en el nodo EncapsulatedTimeStamp
+	Element encapsulatedTimeStampNode = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
+	encapsulatedTimeStampNode.appendChild(doc.createTextNode(hashSelloX));
+	refsOnlyTimeStampElement.appendChild(encapsulatedTimeStampNode);
 
-        return doc;
+	return doc;
     }
 
     /**
      * Este metodo aÃ±ade la implementacion para XADES-XL
      *
-     * @param doc
-     *            Documento de firma con formato XADES-X
+     * @param doc              Documento de firma con formato XADES-X
      * @param valorCertificado
      * @param valorRevocacion
      *
@@ -1901,188 +1998,199 @@ public class FirmaXML {
      *
      * @throws Exception
      */
-    private Document addXadesXL(Element firma, ArrayList<RespYCerts> respuestas, XAdESSchemas schema)
-            throws AddXadesException {
-        // Recogemos el nodo UnsignedSignatureProperties del cual dependen los nodos
-        // que hay que aÃ±adir para completar la firma XADES-XL
-        Document doc = firma.getOwnerDocument();
-        Element elementoPrincipal = null;
+    private Document addXadesXL(Element firma, ArrayList<RespYCerts> respuestas,
+	    XAdESSchemas schema) throws AddXadesException {
+	// Recogemos el nodo UnsignedSignatureProperties del cual dependen los nodos
+	// que hay que aÃ±adir para completar la firma XADES-XL
+	Document doc = firma.getOwnerDocument();
+	Element elementoPrincipal = null;
 
-        NodeList nodosUnsignedSignatureProperties = firma.getElementsByTagNameNS(schema.getSchemaUri(),
-                ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
-        if (nodosUnsignedSignatureProperties.getLength() != 0)
-            elementoPrincipal = (Element) nodosUnsignedSignatureProperties.item(0);
-        else
-            // No se encuentra el nodo UnsignedSignatureProperties
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_19));
+	NodeList nodosUnsignedSignatureProperties = firma.getElementsByTagNameNS(
+		schema.getSchemaUri(), ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+	if (nodosUnsignedSignatureProperties.getLength() != 0)
+	    elementoPrincipal = (Element) nodosUnsignedSignatureProperties.item(0);
+	else
+	    // No se encuentra el nodo UnsignedSignatureProperties
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_19));
 
-        // Se aÃ±aden los certificados referenciados en el nodo CertificateValues
-        if (respuestas != null) {
-            EncapsulatedX509Certificate encapsulatedX509certificate = null;
-            ArrayList<EncapsulatedX509Certificate> certs = new ArrayList<EncapsulatedX509Certificate>();
-            Iterator<RespYCerts> itResp = respuestas.iterator();
-            boolean hasNext = itResp.hasNext();
-            while (hasNext) {
-                RespYCerts resp = itResp.next();
-                hasNext = itResp.hasNext();
-                encapsulatedX509certificate = new EncapsulatedX509Certificate(schema, resp.getIdCertificado());
-                try {
-                    encapsulatedX509certificate.setX509Certificate(resp.getCertstatus().getCertificate());
-                } catch (CertificateException e) {
-                    log.error(e.getMessage(), e);
-                    throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_23));
-                }
-                certs.add(encapsulatedX509certificate);
-            }
+	// Se aÃ±aden los certificados referenciados en el nodo CertificateValues
+	if (respuestas != null) {
+	    EncapsulatedX509Certificate encapsulatedX509certificate = null;
+	    ArrayList<EncapsulatedX509Certificate> certs = new ArrayList<EncapsulatedX509Certificate>();
+	    Iterator<RespYCerts> itResp = respuestas.iterator();
+	    boolean hasNext = itResp.hasNext();
+	    while (hasNext) {
+		RespYCerts resp = itResp.next();
+		hasNext = itResp.hasNext();
+		encapsulatedX509certificate = new EncapsulatedX509Certificate(schema,
+			resp.getIdCertificado());
+		try {
+		    encapsulatedX509certificate
+			    .setX509Certificate(resp.getCertstatus().getCertificate());
+		} catch (CertificateException e) {
+		    log.error(e.getMessage(), e);
+		    throw new AddXadesException(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_23));
+		}
+		certs.add(encapsulatedX509certificate);
+	    }
 
-            CertificateValues certificateValues = new CertificateValues(schema, certs);
-            Element certificateValuesElement = null;
-            try {
-                certificateValuesElement = certificateValues.createElement(doc, xadesNS);
-            } catch (InvalidInfoNodeException e) {
-                log.error(e.getMessage(), e);
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_23));
-            }
+	    CertificateValues certificateValues = new CertificateValues(schema, certs);
+	    Element certificateValuesElement = null;
+	    try {
+		certificateValuesElement = certificateValues.createElement(doc, xadesNS);
+	    } catch (InvalidInfoNodeException e) {
+		log.error(e.getMessage(), e);
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_23));
+	    }
 
-            // Se escribe una Id Ãºnica
-            Attr atributoCertVal = doc.createAttributeNS(null, ConstantesXADES.ID);
-            String idCertVal = UtilidadTratarNodo.newID(doc, ConstantesXADES.CERTIFICATE_VALUES);
-            atributoCertVal.setValue(idCertVal);
-            certificateValuesElement.getAttributes().setNamedItem(atributoCertVal);
+	    // Se escribe una Id Ãºnica
+	    Attr atributoCertVal = doc.createAttributeNS(null, ConstantesXADES.ID);
+	    String idCertVal = UtilidadTratarNodo.newID(doc, ConstantesXADES.CERTIFICATE_VALUES);
+	    atributoCertVal.setValue(idCertVal);
+	    certificateValuesElement.getAttributes().setNamedItem(atributoCertVal);
 
-            elementoPrincipal.appendChild(certificateValuesElement);
+	    elementoPrincipal.appendChild(certificateValuesElement);
 
-            // Se aÃ±ade la respuesta del servidor OCSP
-            Element valoresElementosRevocados = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.REVOCATION_VALUES);
+	    // Se aÃ±ade la respuesta del servidor OCSP
+	    Element valoresElementosRevocados = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.REVOCATION_VALUES);
 
-            Element valorElementOCSP = doc.createElementNS(xadesSchema,
-                    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_VALUES);
+	    Element valorElementOCSP = doc.createElementNS(xadesSchema,
+		    xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.OCSP_VALUES);
 
-            CRLValues valorElementoCRL = new CRLValues(schema);
+	    CRLValues valorElementoCRL = new CRLValues(schema);
 
-            int nOcspResps = 0;
-            int nCRLSResps = 0;
-            itResp = respuestas.iterator();
-            hasNext = itResp.hasNext();
-            while (hasNext) {
-                RespYCerts resp = itResp.next();
-                hasNext = itResp.hasNext();
-                if (hasNext) {
-                    ICertStatus respStatus = resp.getCertstatus();
-                    if (respStatus instanceof IOCSPCertStatus) {
-                        nOcspResps++;
-                        IOCSPCertStatus respOCSP = (IOCSPCertStatus) respStatus;
-                        Element valorElementoEncapsuladoOCSP = doc.createElementNS(xadesSchema,
-                                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_OCSP_VALUE);
-                        valorElementoEncapsuladoOCSP
-                                .appendChild(doc.createTextNode(new String(Base64Coder.encode(respOCSP.getEncoded()))));
-                        valorElementoEncapsuladoOCSP.setAttributeNS(null, ConstantesXADES.ID, resp.getIdRespStatus());
-                        valorElementOCSP.appendChild(valorElementoEncapsuladoOCSP);
-                    } else if (respStatus instanceof IX509CRLCertStatus) {
-                        nCRLSResps++;
-                        IX509CRLCertStatus respCRL = (IX509CRLCertStatus) respStatus;
-                        try {
-                            valorElementoCRL.addCRL(respCRL.getX509CRL(), resp.getIdRespStatus());
-                        } catch (InvalidInfoNodeException ex) {
-                            throw new AddXadesException("No se pudo generar nodo EncapsulatedCRLValue", ex);
-                        }
-                    }
-                }
-            }
+	    int nOcspResps = 0;
+	    int nCRLSResps = 0;
+	    itResp = respuestas.iterator();
+	    hasNext = itResp.hasNext();
+	    while (hasNext) {
+		RespYCerts resp = itResp.next();
+		hasNext = itResp.hasNext();
+		if (hasNext) {
+		    ICertStatus respStatus = resp.getCertstatus();
+		    if (respStatus instanceof IOCSPCertStatus) {
+			nOcspResps++;
+			IOCSPCertStatus respOCSP = (IOCSPCertStatus) respStatus;
+			Element valorElementoEncapsuladoOCSP = doc.createElementNS(xadesSchema,
+				xadesNS + ConstantesXADES.DOS_PUNTOS
+					+ ConstantesXADES.ENCAPSULATED_OCSP_VALUE);
+			valorElementoEncapsuladoOCSP.appendChild(doc.createTextNode(
+				new String(Base64Coder.encode(respOCSP.getEncoded()))));
+			valorElementoEncapsuladoOCSP.setAttributeNS(null, ConstantesXADES.ID,
+				resp.getIdRespStatus());
+			valorElementOCSP.appendChild(valorElementoEncapsuladoOCSP);
+		    } else if (respStatus instanceof IX509CRLCertStatus) {
+			nCRLSResps++;
+			IX509CRLCertStatus respCRL = (IX509CRLCertStatus) respStatus;
+			try {
+			    valorElementoCRL.addCRL(respCRL.getX509CRL(), resp.getIdRespStatus());
+			} catch (InvalidInfoNodeException ex) {
+			    throw new AddXadesException(
+				    "No se pudo generar nodo EncapsulatedCRLValue", ex);
+			}
+		    }
+		}
+	    }
 
-            if (nCRLSResps > 0) {
-                try {
-                    Element el = valorElementoCRL.createElement(doc, xadesNS);
-                    valoresElementosRevocados.appendChild(el);
-                } catch (InvalidInfoNodeException ex) {
-                    throw new AddXadesException("No se pudo generar nodo CRLValues", ex);
-                }
-            }
+	    if (nCRLSResps > 0) {
+		try {
+		    Element el = valorElementoCRL.createElement(doc, xadesNS);
+		    valoresElementosRevocados.appendChild(el);
+		} catch (InvalidInfoNodeException ex) {
+		    throw new AddXadesException("No se pudo generar nodo CRLValues", ex);
+		}
+	    }
 
-            if (nOcspResps > 0)
-                valoresElementosRevocados.appendChild(valorElementOCSP);
+	    if (nOcspResps > 0)
+		valoresElementosRevocados.appendChild(valorElementOCSP);
 
-            // Se escribe una Id Ãºnica
-            Attr atributoRevVal = doc.createAttributeNS(null, ConstantesXADES.ID);
-            String idRevVal = UtilidadTratarNodo.newID(doc, ConstantesXADES.REVOCATION_VALUES);
-            atributoRevVal.setValue(idRevVal);
-            valoresElementosRevocados.getAttributes().setNamedItem(atributoRevVal);
+	    // Se escribe una Id Ãºnica
+	    Attr atributoRevVal = doc.createAttributeNS(null, ConstantesXADES.ID);
+	    String idRevVal = UtilidadTratarNodo.newID(doc, ConstantesXADES.REVOCATION_VALUES);
+	    atributoRevVal.setValue(idRevVal);
+	    valoresElementosRevocados.getAttributes().setNamedItem(atributoRevVal);
 
-            elementoPrincipal.appendChild(valoresElementosRevocados);
-        }
+	    elementoPrincipal.appendChild(valoresElementosRevocados);
+	}
 
-        return doc;
+	return doc;
     }
 
-    private Document addXadesA(Element firma, byte[] selloTiempo, ArrayList<String> inc) throws Exception {
+    private Document addXadesA(Element firma, byte[] selloTiempo, ArrayList<String> inc)
+	    throws Exception {
 
-        Document doc = firma.getOwnerDocument();
+	Document doc = firma.getOwnerDocument();
 
-        ArrayList<Element> UnsignedSignaturePropertiesNodes = UtilidadTratarNodo.obtenerNodos(firma, 4,
-                new NombreNodo(xadesSchema, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES));
-        Element UnsignedSignaturePropertiesNode = null;
-        if (UnsignedSignaturePropertiesNodes.size() == 1)
-            UnsignedSignaturePropertiesNode = (Element) UnsignedSignaturePropertiesNodes.get(0);
-        else
-            // No se encuentra el nodo UnsignedSignatureProperties
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_19));
+	ArrayList<Element> UnsignedSignaturePropertiesNodes = UtilidadTratarNodo.obtenerNodos(firma,
+		4, new NombreNodo(xadesSchema, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES));
+	Element UnsignedSignaturePropertiesNode = null;
+	if (UnsignedSignaturePropertiesNodes.size() == 1)
+	    UnsignedSignaturePropertiesNode = (Element) UnsignedSignaturePropertiesNodes.get(0);
+	else
+	    // No se encuentra el nodo UnsignedSignatureProperties
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_19));
 
-        Element archiveTimeStamp = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ARCHIVE_TIME_STAMP);
+	Element archiveTimeStamp = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ARCHIVE_TIME_STAMP);
 
-        // Creamos los atributos de ArchiveTimeStamp (Id)
-        Attr archiveTimeStampId = doc.createAttributeNS(null, ConstantesXADES.ID);
-        archiveTimeStampId
-                .setValue(UtilidadTratarNodo.newID(doc, ConstantesXADES.ARCHIVE_TIME_STAMP + ConstantesXADES.GUION));
-        NamedNodeMap archiveTimeStampAttributesElement = archiveTimeStamp.getAttributes();
-        archiveTimeStampAttributesElement.setNamedItem(archiveTimeStampId);
+	// Creamos los atributos de ArchiveTimeStamp (Id)
+	Attr archiveTimeStampId = doc.createAttributeNS(null, ConstantesXADES.ID);
+	archiveTimeStampId.setValue(UtilidadTratarNodo.newID(doc,
+		ConstantesXADES.ARCHIVE_TIME_STAMP + ConstantesXADES.GUION));
+	NamedNodeMap archiveTimeStampAttributesElement = archiveTimeStamp.getAttributes();
+	archiveTimeStampAttributesElement.setNamedItem(archiveTimeStampId);
 
-        // Se agrega el nodo EncapsulatedTimeStamp, con Id y Encoding como atributos
-        Element encapsulatedTimeStamp = doc.createElementNS(xadesSchema,
-                xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
+	// Se agrega el nodo EncapsulatedTimeStamp, con Id y Encoding como atributos
+	Element encapsulatedTimeStamp = doc.createElementNS(xadesSchema,
+		xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.ENCAPSULATED_TIME_STAMP);
 
-        // Se escribe una Id Ãºnica
-        Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
-        String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO_TOKEN);
-        informacionElementoSigTimeStamp.setValue(idSelloTiempo);
-        idNodoSelloTiempo.add(idSelloTiempo);
-        encapsulatedTimeStamp.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
+	// Se escribe una Id Ãºnica
+	Attr informacionElementoSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.ID);
+	String idSelloTiempo = UtilidadTratarNodo.newID(doc, ConstantesXADES.SELLO_TIEMPO_TOKEN);
+	informacionElementoSigTimeStamp.setValue(idSelloTiempo);
+	idNodoSelloTiempo.add(idSelloTiempo);
+	encapsulatedTimeStamp.getAttributes().setNamedItem(informacionElementoSigTimeStamp);
 
-        // Se agrega el attributo Encoding
-        // Attr idSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.XADES_TAG_ENCODING);
-        // String encoding = EncodingEnum.DER_ENCODED;
-        // idSigTimeStamp.setValue(encoding);
-        // encapsulatedTimeStamp.getAttributes().setNamedItem(idSigTimeStamp);
+	// Se agrega el attributo Encoding
+	// Attr idSigTimeStamp = doc.createAttributeNS(null, ConstantesXADES.XADES_TAG_ENCODING);
+	// String encoding = EncodingEnum.DER_ENCODED;
+	// idSigTimeStamp.setValue(encoding);
+	// encapsulatedTimeStamp.getAttributes().setNamedItem(idSigTimeStamp);
 
-        // Se agrega el CanonicalizationMethod
-        Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CANONICALIZATION_METHOD);
-        Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
-        canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-        canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
+	// Se agrega el CanonicalizationMethod
+	Element canonicalizationElemento = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		xmldsigNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.CANONICALIZATION_METHOD);
+	Attr canonicalizationAttribute = doc.createAttributeNS(null, ConstantesXADES.ALGORITHM);
+	canonicalizationAttribute.setValue(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+	canonicalizationElemento.getAttributes().setNamedItem(canonicalizationAttribute);
 
-        archiveTimeStamp.appendChild(canonicalizationElemento);
+	archiveTimeStamp.appendChild(canonicalizationElemento);
 
-        encapsulatedTimeStamp.appendChild(doc.createTextNode(new String(Base64Coder.encode(selloTiempo))));
+	encapsulatedTimeStamp
+		.appendChild(doc.createTextNode(new String(Base64Coder.encode(selloTiempo))));
 
-        // Se agregan, si existen, los nodos include
-        if (inc != null) {
-            Element includeNode = null;
-            for (int i = 0; i < inc.size(); ++i) {
-                includeNode = doc.createElementNS(xadesSchema,
-                        xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.INCLUDE);
-                includeNode.setAttributeNS(null, ConstantesXADES.URI_MAYUS, inc.get(i));
-                archiveTimeStamp.appendChild(includeNode);
-            }
-        }
+	// Se agregan, si existen, los nodos include
+	if (inc != null) {
+	    Element includeNode = null;
+	    for (int i = 0; i < inc.size(); ++i) {
+		includeNode = doc.createElementNS(xadesSchema,
+			xadesNS + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.INCLUDE);
+		includeNode.setAttributeNS(null, ConstantesXADES.URI_MAYUS, inc.get(i));
+		archiveTimeStamp.appendChild(includeNode);
+	    }
+	}
 
-        archiveTimeStamp.appendChild(encapsulatedTimeStamp);
+	archiveTimeStamp.appendChild(encapsulatedTimeStamp);
 
-        // Se agrega el sello creado a las propiedades no firmadas
-        UnsignedSignaturePropertiesNode.appendChild(archiveTimeStamp);
+	// Se agrega el sello creado a las propiedades no firmadas
+	UnsignedSignaturePropertiesNode.appendChild(archiveTimeStamp);
 
-        return doc;
+	return doc;
     }
 
     /**
@@ -2100,229 +2208,245 @@ public class FirmaXML {
      *
      * @throws Exception
      */
-    public void countersignFile(X509Certificate firmaCertificado, DataToSign xml, IPKStoreManager storeManager,
-            String nodoAFirmarId, String destino, String nombreArchivo) throws Exception {
-        PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
-        Document doc = countersign(firmaCertificado, xml, nodoAFirmarId, pk,
-                storeManager.getProvider(firmaCertificado));
+    public void countersignFile(X509Certificate firmaCertificado, DataToSign xml,
+	    IPKStoreManager storeManager, String nodoAFirmarId, String destino,
+	    String nombreArchivo) throws Exception {
+	PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
+	Document doc = countersign(firmaCertificado, xml, nodoAFirmarId, pk,
+		storeManager.getProvider(firmaCertificado));
 
-        // Se guarda la firma en su destino
-        File fichero = new File(destino + nombreArchivo);
-        FileOutputStream f2 = new FileOutputStream(fichero);
+	// Se guarda la firma en su destino
+	File fichero = new File(destino + nombreArchivo);
+	FileOutputStream f2 = new FileOutputStream(fichero);
 
-        try {
-            XMLUtils.outputDOM(doc, f2, true);
-        } catch (Throwable t) {
-            if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
-            else
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
-        } finally {
-            f2.close();
-        }
+	try {
+	    XMLUtils.outputDOM(doc, f2, true);
+	} catch (Throwable t) {
+	    if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
+	    else
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
+	} finally {
+	    f2.close();
+	}
     }
 
-    public void countersign2Stream(X509Certificate firmaCertificado, DataToSign xml, IPKStoreManager storeManager,
-            String nodoAFirmarId, OutputStream salida) throws Exception {
-        PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
-        Document doc = countersign(firmaCertificado, xml, nodoAFirmarId, pk,
-                storeManager.getProvider(firmaCertificado));
+    public void countersign2Stream(X509Certificate firmaCertificado, DataToSign xml,
+	    IPKStoreManager storeManager, String nodoAFirmarId, OutputStream salida)
+	    throws Exception {
+	PrivateKey pk = storeManager.getPrivateKey(firmaCertificado);
+	Document doc = countersign(firmaCertificado, xml, nodoAFirmarId, pk,
+		storeManager.getProvider(firmaCertificado));
 
-        // Se guarda la firma en su destino
-        try {
-            XMLUtils.outputDOM(doc, salida, true);
-        } catch (Throwable t) {
-            if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
-            else
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
-        }
+	// Se guarda la firma en su destino
+	try {
+	    XMLUtils.outputDOM(doc, salida, true);
+	} catch (Throwable t) {
+	    if (t.getMessage().startsWith(ConstantesXADES.JAVA_HEAP_SPACE))
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_3));
+	    else
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_4));
+	}
     }
 
     /**
      * Contrafirma una firma segÃºn esquema XAdES
      *
-     * @param pk
-     *            .- Clave privada del certificado
-     * @param certificadoFirma
-     *            .- Certificado de firma
-     * @param xml
-     *            .- Contenido a firmar
-     * @param destino
-     *            .- Ruta donde guardar la firma generada
-     * @param nombreArchivo
-     *            .- Nombre del archivo que guarda la firma generada
+     * @param pk               .- Clave privada del certificado
+     * @param certificadoFirma .- Certificado de firma
+     * @param xml              .- Contenido a firmar
+     * @param destino          .- Ruta donde guardar la firma generada
+     * @param nombreArchivo    .- Nombre del archivo que guarda la firma generada
      */
-    private Document countersign(X509Certificate certificadoFirma, DataToSign xml, String nodoAFirmarId, PrivateKey pk,
-            Provider provider) throws Exception {
+    private Document countersign(X509Certificate certificadoFirma, DataToSign xml,
+	    String nodoAFirmarId, PrivateKey pk, Provider provider) throws Exception {
 
-        Security.addProvider(new BouncyCastleProvider());
-        Document doc = xml.getDocument();
-        if (doc == null) {
-            try {
-                InputStream is = xml.getInputStream();
-                if (is != null) {
-                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                    dbf.setNamespaceAware(true);
-                    DocumentBuilder db = dbf.newDocumentBuilder();
-                    db.setErrorHandler(new IgnoreAllErrorHandler());
-                    InputSource isour = new InputSource(is);
-                    String encoding = xml.getXMLEncoding();
-                    isour.setEncoding(encoding);
-                    doc = db.parse(isour);
-                }
-            } catch (IOException ex) {
-                throw new Exception(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_50));
-            }
-        }
+	Security.addProvider(new BouncyCastleProvider());
+	Document doc = xml.getDocument();
+	if (doc == null) {
+	    try {
+		InputStream is = xml.getInputStream();
+		if (is != null) {
+		    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		    dbf.setNamespaceAware(true);
+		    DocumentBuilder db = dbf.newDocumentBuilder();
+		    db.setErrorHandler(new IgnoreAllErrorHandler());
+		    InputSource isour = new InputSource(is);
+		    String encoding = xml.getXMLEncoding();
+		    isour.setEncoding(encoding);
+		    doc = db.parse(isour);
+		}
+	    } catch (IOException ex) {
+		throw new Exception(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_50));
+	    }
+	}
 
-        // Si no se indica nodo a contrafirmar se contrafirma la Ãºltima firma disponible
-        Node nodePadreNodoFirmar = null;
-        if (nodoAFirmarId != null) {
-            Element nodoAFirmar = UtilidadTratarNodo.getElementById(doc, nodoAFirmarId);
-            if (nodoAFirmar == null) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33) + ConstantesXADES.ESPACIO
-                        + nodoAFirmarId);
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
-            }
+	// Si no se indica nodo a contrafirmar se contrafirma la Ãºltima firma disponible
+	Node nodePadreNodoFirmar = null;
+	if (nodoAFirmarId != null) {
+	    Element nodoAFirmar = UtilidadTratarNodo.getElementById(doc, nodoAFirmarId);
+	    if (nodoAFirmar == null) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+			+ ConstantesXADES.ESPACIO + nodoAFirmarId);
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
+	    }
 
-            // Se indique el signatureValue o el signature se obtiene el mismo padre
-            if (ConstantesXADES.SIGNATURE_VALUE.equals(nodoAFirmar.getLocalName())) {
-                idSignatureValue = nodoAFirmarId;
-                nodePadreNodoFirmar = nodoAFirmar.getParentNode();
-            } else if (ConstantesXADES.SIGNATURE.equals(nodoAFirmar.getLocalName())) {
-                nodePadreNodoFirmar = nodoAFirmar;
-            } else {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33) + ConstantesXADES.ESPACIO
-                        + nodoAFirmarId);
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
-            }
-        } else {
-            // Busca la Ãºltima firma
-            NodeList list = doc.getElementsByTagNameNS(ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE);
-            if (list.getLength() < 1) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33) + ConstantesXADES.ESPACIO
-                        + nodoAFirmarId);
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
-            } else {
-                nodePadreNodoFirmar = list.item(list.getLength() - 1);
-            }
-        }
-        String idSignatureValue = null;
-        Element padreNodoFirmar = null;
-        if ((nodePadreNodoFirmar != null) && (nodePadreNodoFirmar.getNodeType() == Node.ELEMENT_NODE)) {
-            padreNodoFirmar = (Element) nodePadreNodoFirmar;
-            ArrayList<Element> listElements = UtilidadTratarNodo.obtenerNodos(padreNodoFirmar, 2,
-                    new NombreNodo(ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE_VALUE));
-            if (listElements.size() != 1) {
-                // TODO: indicar un error especÃ­fico (No se puede tener mÃ¡s de un nodo SignatureValue por firma
-                // XmlDSig)
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33) + ConstantesXADES.ESPACIO
-                        + nodoAFirmarId);
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
-            }
-            idSignatureValue = listElements.get(0).getAttribute(ConstantesXADES.ID);
-            // TODO: Si este nodo no tiene id, identificarlo vÃ­a XPATH
-            if (idSignatureValue == null) {
-                // TODO: indicar un error especÃ­fico (No se puede identificar nodo SignatureValue en firma XmlDSig)
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33) + ConstantesXADES.ESPACIO
-                        + nodoAFirmarId);
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
-            }
-        }
+	    // Se indique el signatureValue o el signature se obtiene el mismo padre
+	    if (ConstantesXADES.SIGNATURE_VALUE.equals(nodoAFirmar.getLocalName())) {
+		idSignatureValue = nodoAFirmarId;
+		nodePadreNodoFirmar = nodoAFirmar.getParentNode();
+	    } else if (ConstantesXADES.SIGNATURE.equals(nodoAFirmar.getLocalName())) {
+		nodePadreNodoFirmar = nodoAFirmar;
+	    } else {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+			+ ConstantesXADES.ESPACIO + nodoAFirmarId);
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
+	    }
+	} else {
+	    // Busca la Ãºltima firma
+	    NodeList list = doc.getElementsByTagNameNS(ConstantesXADES.SCHEMA_DSIG,
+		    ConstantesXADES.SIGNATURE);
+	    if (list.getLength() < 1) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+			+ ConstantesXADES.ESPACIO + nodoAFirmarId);
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
+	    } else {
+		nodePadreNodoFirmar = list.item(list.getLength() - 1);
+	    }
+	}
+	String idSignatureValue = null;
+	Element padreNodoFirmar = null;
+	if ((nodePadreNodoFirmar != null)
+		&& (nodePadreNodoFirmar.getNodeType() == Node.ELEMENT_NODE)) {
+	    padreNodoFirmar = (Element) nodePadreNodoFirmar;
+	    ArrayList<Element> listElements = UtilidadTratarNodo.obtenerNodos(padreNodoFirmar, 2,
+		    new NombreNodo(ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.SIGNATURE_VALUE));
+	    if (listElements.size() != 1) {
+		// TODO: indicar un error especÃ­fico (No se puede tener mÃ¡s de un nodo
+		// SignatureValue por firma
+		// XmlDSig)
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+			+ ConstantesXADES.ESPACIO + nodoAFirmarId);
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
+	    }
+	    idSignatureValue = listElements.get(0).getAttribute(ConstantesXADES.ID);
+	    // TODO: Si este nodo no tiene id, identificarlo vÃ­a XPATH
+	    if (idSignatureValue == null) {
+		// TODO: indicar un error especÃ­fico (No se puede identificar nodo SignatureValue
+		// en firma XmlDSig)
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+			+ ConstantesXADES.ESPACIO + nodoAFirmarId);
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
+	    }
+	}
 
-        // Se busca si existe el path hasta el nodo raÃ­z CounterSignature. Si no existe, se crea.
-        ArrayList<Element> listElements = UtilidadTratarNodo.obtenerNodos(padreNodoFirmar, 2,
-                ConstantesXADES.QUALIFYING_PROPERTIES);
-        if (listElements.size() != 1) {
-            // TODO: indicar un error especÃ­fico (No se puede tener mÃ¡s de un nodo Qualifying por firma XAdES
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33) + ConstantesXADES.ESPACIO
-                    + nodoAFirmarId);
-            throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
-        }
-        String esquemaOrigen = listElements.get(0).getNamespaceURI();
-        NodeList nodosUnsigSigProp = (padreNodoFirmar).getElementsByTagNameNS(esquemaOrigen,
-                ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+	// Se busca si existe el path hasta el nodo raÃ­z CounterSignature. Si no existe, se crea.
+	ArrayList<Element> listElements = UtilidadTratarNodo.obtenerNodos(padreNodoFirmar, 2,
+		ConstantesXADES.QUALIFYING_PROPERTIES);
+	if (listElements.size() != 1) {
+	    // TODO: indicar un error especÃ­fico (No se puede tener mÃ¡s de un nodo Qualifying por
+	    // firma XAdES
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+		    + ConstantesXADES.ESPACIO + nodoAFirmarId);
+	    throw new AddXadesException(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_51));
+	}
+	String esquemaOrigen = listElements.get(0).getNamespaceURI();
+	NodeList nodosUnsigSigProp = (padreNodoFirmar).getElementsByTagNameNS(esquemaOrigen,
+		ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
 
-        Element nodoRaiz = null;
-        if (nodosUnsigSigProp != null && nodosUnsigSigProp.getLength() != 0)
-            nodoRaiz = (Element) nodosUnsigSigProp.item(0); // Se toma el primero de la lista
-        else { // Se busca el nodo QualifyingProperties
-            NodeList nodosQualifying = (padreNodoFirmar).getElementsByTagNameNS(esquemaOrigen,
-                    ConstantesXADES.QUALIFYING_PROPERTIES);
+	Element nodoRaiz = null;
+	if (nodosUnsigSigProp != null && nodosUnsigSigProp.getLength() != 0)
+	    nodoRaiz = (Element) nodosUnsigSigProp.item(0); // Se toma el primero de la lista
+	else { // Se busca el nodo QualifyingProperties
+	    NodeList nodosQualifying = (padreNodoFirmar).getElementsByTagNameNS(esquemaOrigen,
+		    ConstantesXADES.QUALIFYING_PROPERTIES);
 
-            if (nodosQualifying != null && nodosQualifying.getLength() != 0) {
-                Element nodoQualifying = (Element) nodosQualifying.item(0);
-                Element unsignedProperties = null;
-                if (nodoQualifying.getPrefix() != null) {
-                    unsignedProperties = doc.createElementNS(esquemaOrigen, nodoQualifying.getPrefix()
-                            + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.UNSIGNED_PROPERTIES);
-                    nodoRaiz = doc.createElementNS(esquemaOrigen, nodoQualifying.getPrefix()
-                            + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
-                } else {
-                    unsignedProperties = doc.createElementNS(esquemaOrigen, ConstantesXADES.UNSIGNED_PROPERTIES);
-                    nodoRaiz = doc.createElementNS(esquemaOrigen, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
-                }
+	    if (nodosQualifying != null && nodosQualifying.getLength() != 0) {
+		Element nodoQualifying = (Element) nodosQualifying.item(0);
+		Element unsignedProperties = null;
+		if (nodoQualifying.getPrefix() != null) {
+		    unsignedProperties = doc.createElementNS(esquemaOrigen,
+			    nodoQualifying.getPrefix() + ConstantesXADES.DOS_PUNTOS
+				    + ConstantesXADES.UNSIGNED_PROPERTIES);
+		    nodoRaiz = doc.createElementNS(esquemaOrigen,
+			    nodoQualifying.getPrefix() + ConstantesXADES.DOS_PUNTOS
+				    + ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+		} else {
+		    unsignedProperties = doc.createElementNS(esquemaOrigen,
+			    ConstantesXADES.UNSIGNED_PROPERTIES);
+		    nodoRaiz = doc.createElementNS(esquemaOrigen,
+			    ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+		}
 
-                unsignedProperties.appendChild(nodoRaiz);
-                nodosQualifying.item(0).appendChild(unsignedProperties);
-            } else
-                throw new AddXadesException(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_52));
-        }
+		unsignedProperties.appendChild(nodoRaiz);
+		nodosQualifying.item(0).appendChild(unsignedProperties);
+	    } else
+		throw new AddXadesException(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_52));
+	}
 
-        // Se genera un nuevo nodo Countersignature donde irÃ¡ la firma
-        Element counterSignature = null;
-        if (nodoRaiz.getPrefix() != null) {
-            counterSignature = doc.createElementNS(esquemaOrigen,
-                    nodoRaiz.getPrefix() + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.COUNTER_SIGNATURE);
-        } else {
-            counterSignature = doc.createElementNS(esquemaOrigen, ConstantesXADES.COUNTER_SIGNATURE);
-        }
-        nodoRaiz.appendChild(counterSignature);
+	// Se genera un nuevo nodo Countersignature donde irÃ¡ la firma
+	Element counterSignature = null;
+	if (nodoRaiz.getPrefix() != null) {
+	    counterSignature = doc.createElementNS(esquemaOrigen, nodoRaiz.getPrefix()
+		    + ConstantesXADES.DOS_PUNTOS + ConstantesXADES.COUNTER_SIGNATURE);
+	} else {
+	    counterSignature = doc.createElementNS(esquemaOrigen,
+		    ConstantesXADES.COUNTER_SIGNATURE);
+	}
+	nodoRaiz.appendChild(counterSignature);
 
-        // Se escribe una Id Ãºnica
-        Attr counterSignatureAttrib = doc.createAttributeNS(null, ConstantesXADES.ID);
-        String counterSignatureId = UtilidadTratarNodo.newID(doc,
-                ConstantesXADES.COUNTER_SIGNATURE + ConstantesXADES.GUION);
-        counterSignatureAttrib.setValue(counterSignatureId);
-        counterSignature.getAttributes().setNamedItem(counterSignatureAttrib);
+	// Se escribe una Id Ãºnica
+	Attr counterSignatureAttrib = doc.createAttributeNS(null, ConstantesXADES.ID);
+	String counterSignatureId = UtilidadTratarNodo.newID(doc,
+		ConstantesXADES.COUNTER_SIGNATURE + ConstantesXADES.GUION);
+	counterSignatureAttrib.setValue(counterSignatureId);
+	counterSignature.getAttributes().setNamedItem(counterSignatureAttrib);
 
-        // Se reemplaza el documento original por el documento preparado para contrafirma
-        xml.setDocument(doc);
+	// Se reemplaza el documento original por el documento preparado para contrafirma
+	xml.setDocument(doc);
 
-        // Se incluye la referencia a la contrafirma
-        AbstractObjectToSign obj = null;
-        if (XAdESSchemas.XAdES_132.getSchemaUri().equals(xadesSchema)) {
-            obj = new SignObjectToSign(idSignatureValue);
-        } else {
-            obj = new InternObjectToSign(idSignatureValue);
-        }
-        xml.addObject(new ObjectToSign(obj, null, null, null, null));
+	// Se incluye la referencia a la contrafirma
+	AbstractObjectToSign obj = null;
+	if (XAdESSchemas.XAdES_132.getSchemaUri().equals(xadesSchema)) {
+	    obj = new SignObjectToSign(idSignatureValue);
+	} else {
+	    obj = new InternObjectToSign(idSignatureValue);
+	}
+	xml.addObject(new ObjectToSign(obj, null, null, null, null));
 
-        // Se firma el documento generado, indicando el nodo padre y el identificador del nodo a firmar
-        xml.setParentSignNode(counterSignatureId);
-        Object[] res = signFile(certificadoFirma, xml, pk, provider);
+	// Se firma el documento generado, indicando el nodo padre y el identificador del nodo a
+	// firmar
+	xml.setParentSignNode(counterSignatureId);
+	Object[] res = signFile(certificadoFirma, xml, pk, provider);
 
-        doc = (Document) res[0];
+	doc = (Document) res[0];
 
-        // Se elimina el identificador del nodo CounterSignature
-        counterSignature = UtilidadTratarNodo.getElementById(doc, counterSignatureId);
-        counterSignature.removeAttribute(ConstantesXADES.ID);
+	// Se elimina el identificador del nodo CounterSignature
+	counterSignature = UtilidadTratarNodo.getElementById(doc, counterSignatureId);
+	counterSignature.removeAttribute(ConstantesXADES.ID);
 
-        return doc;
+	return doc;
     }
 
     /**
      * Sube el nivel XAdES de un InputStream de firma y lo guarda en la direcciÃ³n indicada
      *
-     * @param InputStream
-     *            Stream que contiene la firma
-     * @param EnumFormatoFirma
-     *            nivel de firma deseado
-     * @param String
-     *            Ruta bajo la que se guarda el fichero generado
-     * @param String
-     *            Nombre bajo el que se guarda el fichero generado
+     * @param InputStream      Stream que contiene la firma
+     * @param EnumFormatoFirma nivel de firma deseado
+     * @param String           Ruta bajo la que se guarda el fichero generado
+     * @param String           Nombre bajo el que se guarda el fichero generado
      */
     // public boolean subirNivel(BufferedInputStream firma, EnumFormatoFirma nivelDeseado,
     // String path, String nombreArchivo) throws ClienteError{
@@ -2362,10 +2486,8 @@ public class FirmaXML {
     /**
      * Sube el nivel XAdES de un archivo de firma y lo sobreescribe
      *
-     * @param File
-     *            archivo que contiene la firma
-     * @param EnumFormatoFirma
-     *            nivel de firma deseado
+     * @param File             archivo que contiene la firma
+     * @param EnumFormatoFirma nivel de firma deseado
      */
     // public boolean subirNivel(File firma, EnumFormatoFirma nivelDeseado) throws Exception{
     // AnalizadorFicheroFirma aff = new AnalizadorFicheroFirma();
@@ -2376,14 +2498,10 @@ public class FirmaXML {
     /**
      * Sube el nivel XAdES de una firma (No esta preparado para firma mÃºltiple)
      *
-     * @param InputStream
-     *            Stream que contiene la firma
-     * @param EnumFormatoFirma
-     *            Nivel de firma deseado
-     * @param String
-     *            Ruta bajo la que se guarda el fichero generado
-     * @param String
-     *            Nombre bajo el que se guarda el fichero generado
+     * @param InputStream      Stream que contiene la firma
+     * @param EnumFormatoFirma Nivel de firma deseado
+     * @param String           Ruta bajo la que se guarda el fichero generado
+     * @param String           Nombre bajo el que se guarda el fichero generado
      */
     // public boolean subirNivel(File firma, EnumFormatoFirma nivelDeseado,
     // String path, String nombreArchivo) throws ClienteError {
@@ -2481,7 +2599,8 @@ public class FirmaXML {
     // if (resultado.isValidate() && resultado.getDatosFirma() != null &&
     // resultado.getDatosFirma().getCadenaFirma() != null &&
     // !resultado.getDatosFirma().getCadenaFirma().getCertificates().isEmpty())
-    // { // Se continÃºa sÃ³lo si el documento de firma es vÃ¡lido y hay datos del certificado de firma
+    // { // Se continÃºa sÃ³lo si el documento de firma es vÃ¡lido y hay datos del certificado de
+    // firma
     //
     // // Obtenemos los niveles a subir
     // ArrayList<EnumFormatoFirma> mejora = new ArrayList<EnumFormatoFirma>();
@@ -2531,7 +2650,8 @@ public class FirmaXML {
     // tsCli = new TSCliente(servidorTSA,algoritmoTSA);
     // byte[] byteSignature = null;
     // try {
-    // byteSignature = UtilidadTratarNodo.obtenerByteNodo((Element)nodoFirma, ConstantesXADES.SCHEMA_DSIG,
+    // byteSignature = UtilidadTratarNodo.obtenerByteNodo((Element)nodoFirma,
+    // ConstantesXADES.SCHEMA_DSIG,
     // ConstantesXADES.SIGNATURE_VALUE, CanonicalizationEnum.C14N_OMIT_COMMENTS, 5);
     // } catch (FirmaXMLError e) {
     // log.error(e.getMessage(), e);
@@ -2539,7 +2659,8 @@ public class FirmaXML {
     // }
     // try {
     // addXadesT((Element)nodoFirma,
-    // configuracion.getValor(ConstantesXADES.SIGNATURE_NODE_ID),tsCli.generarSelloTiempo(byteSignature)) ;
+    // configuracion.getValor(ConstantesXADES.SIGNATURE_NODE_ID),tsCli.generarSelloTiempo(byteSignature))
+    // ;
     // } catch (TSClienteError e) {
     // log.error(e.getMessage(), e);
     // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_6));
@@ -2549,7 +2670,8 @@ public class FirmaXML {
     // }
     // } catch (AddXadesException e) {
     // log.error(e.getMessage(), e);
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_7) + e.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_7) +
+    // e.getMessage()) ;
     // }
     //
     // } else if((EnumFormatoFirma.XAdES_C).equals(nivel)) {
@@ -2581,13 +2703,15 @@ public class FirmaXML {
     // (X509Certificate)resultado.getDatosFirma().getCadenaFirma().getCertificates().get(0));
     // } catch (OCSPProxyException e) {
     // log.error(e.getMessage(), e);
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) + e.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) +
+    // e.getMessage()) ;
     // }
     // tiempoRespuesta = UtilidadFechas.formatFechaXML(respuesta.getTiempoRespuesta());
     // }
     // catch (OCSPClienteException ex) {
     // log.error(ex.getMessage(), ex);
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) + ex.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) +
+    // ex.getMessage()) ;
     // }
     //
     // // Solo continÃºa si el certificado es vÃ¡lido
@@ -2613,12 +2737,14 @@ public class FirmaXML {
     // try {
     // respuesta = ocspCliente.validateCert(certificado);
     // } catch (OCSPProxyException e) {
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) + e.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) +
+    // e.getMessage()) ;
     // }
     // tiempoRespuesta = UtilidadFechas.formatFechaXML(respuesta.getTiempoRespuesta());
     // } catch (OCSPClienteException ex) {
     // log.error(ex.getMessage(), ex);
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) + ex.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) +
+    // ex.getMessage()) ;
     // }
     // // SÃ³lo continÃºa si el certificado es vÃ¡lido
     // if (respuesta.getNroRespuesta()!=0) {
@@ -2643,7 +2769,8 @@ public class FirmaXML {
     // }
     // } catch (AddXadesException e) {
     // log.error(e.getMessage(), e);
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_10) + e.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_10) +
+    // e.getMessage()) ;
     // }
     //
     // // Si se firma XAdES-C exclusivamente, se guardan los ficheros adjuntos
@@ -2692,11 +2819,13 @@ public class FirmaXML {
     // // A partir del nodo raÃ­z de la firma se obtiene el nodo UnsignedSignatureProperties
     // Element unsignedSignaturePropertiesElement = null;
     // NodeList unsignedSignaturePropertiesNodes =
-    // signatureElement.getElementsByTagNameNS(xadesSchema, ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
+    // signatureElement.getElementsByTagNameNS(xadesSchema,
+    // ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES);
     //
     // if (unsignedSignaturePropertiesNodes.getLength() != 1) {
     // // El nodo UnsignedSignatureProperties no existe o no es Ãºnico
-    // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_36) + ConstantesXADES.ESPACIO +
+    // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_36) +
+    // ConstantesXADES.ESPACIO +
     // ConstantesXADES.UNSIGNED_SIGNATURE_PROPERTIES + ConstantesXADES.ESPACIO +
     // I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_37) + ConstantesXADES.ESPACIO +
     // unsignedSignaturePropertiesNodes.getLength());
@@ -2710,7 +2839,8 @@ public class FirmaXML {
     // addXadesX(unsignedSignaturePropertiesElement);
     // } catch (AddXadesException e) {
     // log.error(e.getMessage(), e);
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_12) + e.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_12) +
+    // e.getMessage()) ;
     // }
     //
     // } else if((EnumFormatoFirma.XAdES_XL).equals(nivel)) {
@@ -2718,7 +2848,8 @@ public class FirmaXML {
     // addXadesXL((Element)nodoFirma, respuestas, XAdESSchemas.getXAdESSchema(xadesSchema));
     // } catch (Exception e) {
     // log.error(e.getMessage(), e);
-    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_12) + e.getMessage()) ;
+    // throw new ClienteError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_12) +
+    // e.getMessage()) ;
     // }
     // }
     //
@@ -2756,146 +2887,155 @@ public class FirmaXML {
     /**
      * Este mÃ©todo se encarga de insertar las URIs de XADES-C en la firma
      *
-     * @param doc,
-     *            Documento con la firma xml
-     * @param listaArchivos,
-     *            Lista de nombres de la respuestaOCSP y el path de certificaciÃ³n
+     * @param doc,           Documento con la firma xml
+     * @param listaArchivos, Lista de nombres de la respuestaOCSP y el path de certificaciÃ³n
      *
      * @return Document doc, Documento firmado con las nuevas URIÂ´s
      */
-    public Document addURIXadesC(Element firma, ArrayList<NombreElementos> listaArchivos, String baseUri)
-            throws FirmaXMLError {
+    public Document addURIXadesC(Element firma, ArrayList<NombreElementos> listaArchivos,
+	    String baseUri) throws FirmaXMLError {
 
-        Document doc = firma.getOwnerDocument();
+	Document doc = firma.getOwnerDocument();
 
-        NodeList completeCertificateRefs = null;
-        NodeList completeRevocationRefs = null;
+	NodeList completeCertificateRefs = null;
+	NodeList completeRevocationRefs = null;
 
-        // TODO: MALLLLLL se estan buscando por todo el documento
-        completeCertificateRefs = firma.getElementsByTagNameNS(xadesSchema, ConstantesXADES.COMPLETE_CERTIFICATE_REFS);
-        completeRevocationRefs = firma.getElementsByTagNameNS(xadesSchema, ConstantesXADES.COMPLETE_REVOCATION_REFS);
+	// TODO: MALLLLLL se estan buscando por todo el documento
+	completeCertificateRefs = firma.getElementsByTagNameNS(xadesSchema,
+		ConstantesXADES.COMPLETE_CERTIFICATE_REFS);
+	completeRevocationRefs = firma.getElementsByTagNameNS(xadesSchema,
+		ConstantesXADES.COMPLETE_REVOCATION_REFS);
 
-        if (completeCertificateRefs.getLength() == 0 || completeRevocationRefs.getLength() == 0) {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_29));
-            return doc;
-        }
+	if (completeCertificateRefs.getLength() == 0 || completeRevocationRefs.getLength() == 0) {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_29));
+	    return doc;
+	}
 
-        String tipoUri = null;
-        if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema))
-            tipoUri = ConstantesXADES.URI_MINUS;
-        else
-            tipoUri = ConstantesXADES.URI_MAYUS;
+	String tipoUri = null;
+	if (ConstantesXADES.SCHEMA_XADES_111.equals(xadesSchema))
+	    tipoUri = ConstantesXADES.URI_MINUS;
+	else
+	    tipoUri = ConstantesXADES.URI_MAYUS;
 
-        // TODO: cÃ³digo parcheado, hay que recodificar relacionando correctamente nombres de ficheros con CRL/OCSP ref
-        // relacionado
+	// TODO: cÃ³digo parcheado, hay que recodificar relacionando correctamente nombres de
+	// ficheros con CRL/OCSP ref
+	// relacionado
 
-        // A continuaciÃ³n se sacan las referencias OCSP del nodo OCSPRefs
-        NodeList ocspRefs = null;
-        NodeList crlRefs = null;
-        try {
-            ArrayList<Element> listOcspRefs = UtilidadTratarNodo.obtenerNodos((Element) completeRevocationRefs.item(0),
-                    null, new NombreNodo(xadesSchema, ConstantesXADES.OCSP_REFS));
-            ArrayList<Element> listCRLRefs = UtilidadTratarNodo.obtenerNodos((Element) completeRevocationRefs.item(0),
-                    null, new NombreNodo(xadesSchema, ConstantesXADES.CRL_REFS));
-            if (listOcspRefs.size() > 1) {
-                throw new FirmaXMLError("hay demasiados elementos ocsprefs");
-            }
-            if (listCRLRefs.size() > 1) {
-                throw new FirmaXMLError("hay demasiados elementos crlrefs");
-            }
-            if (listOcspRefs.size() > 0)
-                ocspRefs = listOcspRefs.get(0).getChildNodes();
-            if (listCRLRefs.size() > 0)
-                crlRefs = listCRLRefs.get(0).getChildNodes();
-        } catch (FirmaXMLError ex) {
-            throw new FirmaXMLError("error obteniendo elementos ocsprefs y crlrefs");
-        }
+	// A continuaciÃ³n se sacan las referencias OCSP del nodo OCSPRefs
+	NodeList ocspRefs = null;
+	NodeList crlRefs = null;
+	try {
+	    ArrayList<Element> listOcspRefs = UtilidadTratarNodo.obtenerNodos(
+		    (Element) completeRevocationRefs.item(0), null,
+		    new NombreNodo(xadesSchema, ConstantesXADES.OCSP_REFS));
+	    ArrayList<Element> listCRLRefs = UtilidadTratarNodo.obtenerNodos(
+		    (Element) completeRevocationRefs.item(0), null,
+		    new NombreNodo(xadesSchema, ConstantesXADES.CRL_REFS));
+	    if (listOcspRefs.size() > 1) {
+		throw new FirmaXMLError("hay demasiados elementos ocsprefs");
+	    }
+	    if (listCRLRefs.size() > 1) {
+		throw new FirmaXMLError("hay demasiados elementos crlrefs");
+	    }
+	    if (listOcspRefs.size() > 0)
+		ocspRefs = listOcspRefs.get(0).getChildNodes();
+	    if (listCRLRefs.size() > 0)
+		crlRefs = listCRLRefs.get(0).getChildNodes();
+	} catch (FirmaXMLError ex) {
+	    throw new FirmaXMLError("error obteniendo elementos ocsprefs y crlrefs");
+	}
 
-        // Si ha encontrado el nodo OCSPRefs, se pasa a capturar su contenido
-        Iterator<NombreElementos> it = listaArchivos.iterator();
-        int indexOCSP = 0;
-        int indexCRL = 0;
-        while (it.hasNext()) {
-            NombreElementos nf = it.next();
-            if (it.hasNext()) {
-                String nameFile = nf.getNameFileCRLResp();
-                Node el;
-                if (nameFile == null) {
-                    nameFile = nf.getNameFileOCSPResp();
-                    if (nameFile == null)
-                        throw new FirmaXMLError("Fichero de status (OCSP o CRL) sin nombre");
-                    if ((ocspRefs == null) || (ocspRefs.getLength() <= indexOCSP))
-                        throw new FirmaXMLError("Fichero de status no relacionable con crlref");
-                    el = ((Element) ocspRefs.item(indexOCSP++))
-                            .getElementsByTagNameNS(xadesSchema, ConstantesXADES.OCSP_IDENTIFIER).item(0);
-                } else {
-                    if ((crlRefs == null) || (crlRefs.getLength() <= indexCRL))
-                        throw new FirmaXMLError("Fichero de status no relacionable con crlref");
-                    el = ((Element) crlRefs.item(indexCRL++))
-                            .getElementsByTagNameNS(xadesSchema, ConstantesXADES.XADES_TAG_CRL_IDENTIFIER).item(0);
-                }
-                Attr uri = doc.createAttributeNS(null, tipoUri);
-                // uri.setValue(relativizeRute(baseUri,new File(nameFile)));
-                uri.setValue(nameFile);
+	// Si ha encontrado el nodo OCSPRefs, se pasa a capturar su contenido
+	Iterator<NombreElementos> it = listaArchivos.iterator();
+	int indexOCSP = 0;
+	int indexCRL = 0;
+	while (it.hasNext()) {
+	    NombreElementos nf = it.next();
+	    if (it.hasNext()) {
+		String nameFile = nf.getNameFileCRLResp();
+		Node el;
+		if (nameFile == null) {
+		    nameFile = nf.getNameFileOCSPResp();
+		    if (nameFile == null)
+			throw new FirmaXMLError("Fichero de status (OCSP o CRL) sin nombre");
+		    if ((ocspRefs == null) || (ocspRefs.getLength() <= indexOCSP))
+			throw new FirmaXMLError("Fichero de status no relacionable con crlref");
+		    el = ((Element) ocspRefs.item(indexOCSP++))
+			    .getElementsByTagNameNS(xadesSchema, ConstantesXADES.OCSP_IDENTIFIER)
+			    .item(0);
+		} else {
+		    if ((crlRefs == null) || (crlRefs.getLength() <= indexCRL))
+			throw new FirmaXMLError("Fichero de status no relacionable con crlref");
+		    el = ((Element) crlRefs.item(indexCRL++)).getElementsByTagNameNS(xadesSchema,
+			    ConstantesXADES.XADES_TAG_CRL_IDENTIFIER).item(0);
+		}
+		Attr uri = doc.createAttributeNS(null, tipoUri);
+		// uri.setValue(relativizeRute(baseUri,new File(nameFile)));
+		uri.setValue(nameFile);
 
-                NamedNodeMap nodo = el.getAttributes();
-                nodo.setNamedItem(uri);
-            }
-        }
+		NamedNodeMap nodo = el.getAttributes();
+		nodo.setNamedItem(uri);
+	    }
+	}
 
-        // if (ocspRefs != null)
-        // {
-        // // Se saca la lista de referencias
-        // NodeList refs = ocspRefs.getChildNodes();
-        // int l = refs.getLength();
-        // for (int i=0; i<l; i++)
-        // {
-        // // Sacamos los nodos OCSPRef uno por uno
-        // Element ocspRef = (Element)refs.item(i); // Sacamos OCSPRef
-        // NodeList list = ocspRef.getElementsByTagNameNS(xadesSchema, ConstantesXADES.OCSP_IDENTIFIER);
-        // // Si existe, incluimos la URI de su respuesta OCSP
-        // if (ocspRef != null) {
-        // Attr uri = doc.createAttributeNS(null, tipoUri);
-        // uri.setValue(relativizeRute(baseUri,new File((listaArchivos.get(i)).getNameFileOCSPResp())));
-        //
-        // NamedNodeMap nodoOCSP = list.item(0).getAttributes();
-        // nodoOCSP.setNamedItem(uri);
-        // }
-        // }
-        // }
+	// if (ocspRefs != null)
+	// {
+	// // Se saca la lista de referencias
+	// NodeList refs = ocspRefs.getChildNodes();
+	// int l = refs.getLength();
+	// for (int i=0; i<l; i++)
+	// {
+	// // Sacamos los nodos OCSPRef uno por uno
+	// Element ocspRef = (Element)refs.item(i); // Sacamos OCSPRef
+	// NodeList list = ocspRef.getElementsByTagNameNS(xadesSchema,
+	// ConstantesXADES.OCSP_IDENTIFIER);
+	// // Si existe, incluimos la URI de su respuesta OCSP
+	// if (ocspRef != null) {
+	// Attr uri = doc.createAttributeNS(null, tipoUri);
+	// uri.setValue(relativizeRute(baseUri,new
+	// File((listaArchivos.get(i)).getNameFileOCSPResp())));
+	//
+	// NamedNodeMap nodoOCSP = list.item(0).getAttributes();
+	// nodoOCSP.setNamedItem(uri);
+	// }
+	// }
+	// }
 
-        // A continuaciÃ³n se sacan los Certificados del nodo CertRefs
-        Node certRefs = (Node) completeCertificateRefs.item(0).getFirstChild();
+	// A continuaciÃ³n se sacan los Certificados del nodo CertRefs
+	Node certRefs = (Node) completeCertificateRefs.item(0).getFirstChild();
 
-        // Si ha encontrado el nodo CertRefs, se pasa a capturar su contenido
-        if (certRefs != null) {
-            // Se saca la lista de certificados
-            NodeList certs = certRefs.getChildNodes();
-            int l = certs.getLength();
+	// Si ha encontrado el nodo CertRefs, se pasa a capturar su contenido
+	if (certRefs != null) {
+	    // Se saca la lista de certificados
+	    NodeList certs = certRefs.getChildNodes();
+	    int l = certs.getLength();
 
-            if (l != (listaArchivos.size() - 1)) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_30));
-            }
+	    if (l != (listaArchivos.size() - 1)) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_30));
+	    }
 
-            for (int i = 0; i < l; i++) {
-                // Sacamos los nodos Cert uno por uno
-                Node certificado = certs.item(i); // Sacamos cert
-                if (certificado != null) {
-                    // incluimos la uri
+	    for (int i = 0; i < l; i++) {
+		// Sacamos los nodos Cert uno por uno
+		Node certificado = certs.item(i); // Sacamos cert
+		if (certificado != null) {
+		    // incluimos la uri
 
-                    Attr uri = doc.createAttributeNS(null, tipoUri);
-                    // uri.setValue(relativizeRute(baseUri,new File(listaArchivos.get(i+1).getNameFileX509Cert()))); //
-                    // La posicion 0 es del certificado firmante
-                    uri.setValue(listaArchivos.get(i + 1).getNameFileX509Cert()); // La posicion 0 es del certificado
-                                                                                  // firmante
+		    Attr uri = doc.createAttributeNS(null, tipoUri);
+		    // uri.setValue(relativizeRute(baseUri,new
+		    // File(listaArchivos.get(i+1).getNameFileX509Cert()))); //
+		    // La posicion 0 es del certificado firmante
+		    uri.setValue(listaArchivos.get(i + 1).getNameFileX509Cert()); // La posicion 0
+										  // es del
+										  // certificado
+										  // firmante
 
-                    NamedNodeMap nodoCertificado = certificado.getAttributes();
-                    nodoCertificado.setNamedItem(uri);
-                }
-            }
-        }
+		    NamedNodeMap nodoCertificado = certificado.getAttributes();
+		    nodoCertificado.setNamedItem(uri);
+		}
+	    }
+	}
 
-        return doc;
+	return doc;
     }
 
     /**
@@ -2903,166 +3043,177 @@ public class FirmaXML {
      *
      * @return un ArrayList con la lista de archivos guardados
      */
-    public ArrayList<NombreElementos> saveOCSPFiles(ArrayList<RespYCerts> respuesta, IStoreElements storer) {
-        // OutputStream f = null;
-        // File directorio = null;
-        // NombreElementos nameFiles = null;
-        ArrayList<NombreElementos> listaArchivos = new ArrayList<NombreElementos>();
-        // nomFichero = nomFichero.substring(0,nomFichero.indexOf(ConstantesXADES.PUNTO));
-        //
-        // String pathDir = rutaFicheroFirmado + DIR_OCSP;
+    public ArrayList<NombreElementos> saveOCSPFiles(ArrayList<RespYCerts> respuesta,
+	    IStoreElements storer) {
+	// OutputStream f = null;
+	// File directorio = null;
+	// NombreElementos nameFiles = null;
+	ArrayList<NombreElementos> listaArchivos = new ArrayList<NombreElementos>();
+	// nomFichero = nomFichero.substring(0,nomFichero.indexOf(ConstantesXADES.PUNTO));
+	//
+	// String pathDir = rutaFicheroFirmado + DIR_OCSP;
 
-        if ((respuesta != null) && (respuesta.size() > 0)) {
-            int i = 0;
-            Iterator<RespYCerts> it = respuesta.iterator();
-            while (it.hasNext()) {
-                RespYCerts respAndCert = it.next();
+	if ((respuesta != null) && (respuesta.size() > 0)) {
+	    int i = 0;
+	    Iterator<RespYCerts> it = respuesta.iterator();
+	    while (it.hasNext()) {
+		RespYCerts respAndCert = it.next();
 
-                // Datos del certificado
-                X509Certificate certificate = null;
-                String certFile = null;
-                if (i > 0) {
-                    certFile = respAndCert.getX509CertFile();
-                    if ((certFile == null) || (certFile.trim().length() == 0))
-                        certificate = respAndCert.getCertstatus().getCertificate();
-                }
-                // Datos del estado del certificado
-                ICertStatus respCert = null;
-                if (i < respuesta.size() - 1) {
-                    respCert = respAndCert.getCertstatus();
-                }
-                // Almacena los datos
-                String[] names = storer.storeCertAndStatus(certificate, respCert);
+		// Datos del certificado
+		X509Certificate certificate = null;
+		String certFile = null;
+		if (i > 0) {
+		    certFile = respAndCert.getX509CertFile();
+		    if ((certFile == null) || (certFile.trim().length() == 0))
+			certificate = respAndCert.getCertstatus().getCertificate();
+		}
+		// Datos del estado del certificado
+		ICertStatus respCert = null;
+		if (i < respuesta.size() - 1) {
+		    respCert = respAndCert.getCertstatus();
+		}
+		// Almacena los datos
+		String[] names = storer.storeCertAndStatus(certificate, respCert);
 
-                NombreElementos nombreElemento = new NombreElementos();
-                if ((certFile != null) && (certFile.trim().length() > 0)) {
-                    nombreElemento.setNameFileX509Cert(certFile);
-                } else {
-                    nombreElemento.setNameFileX509Cert(names[0]);
-                }
-                if (respCert instanceof IOCSPCertStatus) {
-                    nombreElemento.setNameFileOCSPResp(names[1]);
-                } else if (respCert instanceof IX509CRLCertStatus) {
-                    nombreElemento.setNameFileCRLResp(names[1]);
-                }
-                listaArchivos.add(nombreElemento);
+		NombreElementos nombreElemento = new NombreElementos();
+		if ((certFile != null) && (certFile.trim().length() > 0)) {
+		    nombreElemento.setNameFileX509Cert(certFile);
+		} else {
+		    nombreElemento.setNameFileX509Cert(names[0]);
+		}
+		if (respCert instanceof IOCSPCertStatus) {
+		    nombreElemento.setNameFileOCSPResp(names[1]);
+		} else if (respCert instanceof IX509CRLCertStatus) {
+		    nombreElemento.setNameFileCRLResp(names[1]);
+		}
+		listaArchivos.add(nombreElemento);
 
-                i++;
-            }
+		i++;
+	    }
 
-            // int longitud = respuesta.size();
-            // for (int x = 0; x < longitud; ++x) { // Se incluyen todas las OCSPResp y todos los Cert del path menos el
-            // firmante
-            //
-            // RespYCerts respAndCert = respuesta.get(x);
-            // nameFiles = new NombreElementos();
-            //
-            // if (x < longitud - 1) {
-            // IRespCertStatus certStatus = respAndCert.getCertstatus();
-            // if (certStatus instanceof RespOCSP) {
-            // RespOCSP respOcsp = (RespOCSP)certStatus;
-            //
-            // if (respOcsp.getFilename() == null) {
-            // // Guardamos la respuesta OCSP
-            // ByteArrayInputStream respuestaOCSP = new ByteArrayInputStream(respOcsp.getRespOCSP());
-            // // AppPerfect: Falsos positivos. No son expresiones constantes
-            // String nomRespOCSP = DIR_OCSP + ConstantesXADES.FICH_OCSP_RESP + nomFichero + ConstantesXADES.GUION + (x
-            // + 1) + ConstantesXADES.EXTENSION_OCS;
-            // log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_6) + ConstantesXADES.ESPACIO +
-            // rutaFicheroFirmado + nomRespOCSP);
-            // try {
-            // directorio = new File(pathDir);
-            // directorio.mkdir();
-            // f = new FileOutputStream(rutaFicheroFirmado + nomRespOCSP);
-            // int ch = respuestaOCSP.read();
-            // ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            // while ((ch) >= 0) {
-            // bos.write(ch);
-            // ch = respuestaOCSP.read();
-            // }
-            // f.write(bos.toByteArray());
-            // } catch (FileNotFoundException ex) {
-            // log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_3, rutaFicheroFirmado));
-            // log.debug("", ex);
-            // } catch (IOException ex) {
-            // log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_4, rutaFicheroFirmado, nomRespOCSP));
-            // log.debug("", ex);
-            // } finally {
-            // try {
-            // if (f != null) {
-            // f.flush() ;
-            // f.close() ;
-            // }
-            // nameFiles.setNameFileOCSPResp(rutaFicheroFirmado + nomRespOCSP);
-            // } catch (IOException e) {
-            // log.error(e.getMessage());
-            // }
-            // }
-            // }
-            // else {
-            // nameFiles.setNameFileOCSPResp(respOcsp.getFilename());
-            // }
-            // }
-            // else if (certStatus instanceof RespCRL) {
-            // RespCRL respCRL = (RespCRL)certStatus;
-            // if (respCRL.getFilename() == null) {
-            // // TODO: escribir la CRL a disco duro
-            // }
-            // else {
-            // nameFiles.setNameFileCRLResp(respCRL.getFilename());
-            // }
-            // }
-            // }
-            //
-            // if (x!=0) // Se salta el certificado que firma
-            // {
-            // // Guardamos la cadena de certificados
-            // String certFile = respAndCert.getX509CertFile();
-            // if (certFile == null) {
-            // X509Certificate certificado = respAndCert.getX509Cert();
-            // String nomCert = DIR_CERTS + ConstantesXADES.FICH_CERT_REF + nomFichero + ConstantesXADES.GUION + (x) +
-            // ConstantesXADES.EXTENSION_CER;
-            // log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_5) + ConstantesXADES.ESPACIO +
-            // rutaFicheroFirmado + nomCert);
-            // try {
-            // directorio = new File(rutaFicheroFirmado + DIR_CERTS);
-            // directorio.mkdir();
-            // f = new BufferedOutputStream(new FileOutputStream(rutaFicheroFirmado + nomCert));
-            // f.write(certificado.getEncoded()) ; // CertRef guardado
-            // } catch (FileNotFoundException e) {
-            // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_26) + ConstantesXADES.ESPACIO +
-            // e.getMessage());
-            // } catch (IOException e) {
-            // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_26) + ConstantesXADES.ESPACIO +
-            // e.getMessage());
-            // } catch (CertificateEncodingException e) {
-            // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_26) + ConstantesXADES.ESPACIO +
-            // e.getMessage());
-            // } finally {
-            // try {
-            // f.flush() ;
-            // //AppPerfect: Falso positivo
-            // f.close() ;
-            // nameFiles.setNameFileX509Cert(rutaFicheroFirmado + nomCert);
-            // } catch (IOException e) {
-            // log.error(e.getMessage());
-            // }
-            // }
-            // }
-            // else {
-            // nameFiles.setNameFileX509Cert(certFile);
-            // }
-            // } else {
-            // nameFiles.setNameFileX509Cert(ConstantesXADES.CADENA_VACIA);
-            // }
-            // listaArchivos.add(nameFiles);
-            // }
+	    // int longitud = respuesta.size();
+	    // for (int x = 0; x < longitud; ++x) { // Se incluyen todas las OCSPResp y todos los
+	    // Cert del path menos el
+	    // firmante
+	    //
+	    // RespYCerts respAndCert = respuesta.get(x);
+	    // nameFiles = new NombreElementos();
+	    //
+	    // if (x < longitud - 1) {
+	    // IRespCertStatus certStatus = respAndCert.getCertstatus();
+	    // if (certStatus instanceof RespOCSP) {
+	    // RespOCSP respOcsp = (RespOCSP)certStatus;
+	    //
+	    // if (respOcsp.getFilename() == null) {
+	    // // Guardamos la respuesta OCSP
+	    // ByteArrayInputStream respuestaOCSP = new
+	    // ByteArrayInputStream(respOcsp.getRespOCSP());
+	    // // AppPerfect: Falsos positivos. No son expresiones constantes
+	    // String nomRespOCSP = DIR_OCSP + ConstantesXADES.FICH_OCSP_RESP + nomFichero +
+	    // ConstantesXADES.GUION + (x
+	    // + 1) + ConstantesXADES.EXTENSION_OCS;
+	    // log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_6) +
+	    // ConstantesXADES.ESPACIO +
+	    // rutaFicheroFirmado + nomRespOCSP);
+	    // try {
+	    // directorio = new File(pathDir);
+	    // directorio.mkdir();
+	    // f = new FileOutputStream(rutaFicheroFirmado + nomRespOCSP);
+	    // int ch = respuestaOCSP.read();
+	    // ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	    // while ((ch) >= 0) {
+	    // bos.write(ch);
+	    // ch = respuestaOCSP.read();
+	    // }
+	    // f.write(bos.toByteArray());
+	    // } catch (FileNotFoundException ex) {
+	    // log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_3, rutaFicheroFirmado));
+	    // log.debug("", ex);
+	    // } catch (IOException ex) {
+	    // log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_4, rutaFicheroFirmado,
+	    // nomRespOCSP));
+	    // log.debug("", ex);
+	    // } finally {
+	    // try {
+	    // if (f != null) {
+	    // f.flush() ;
+	    // f.close() ;
+	    // }
+	    // nameFiles.setNameFileOCSPResp(rutaFicheroFirmado + nomRespOCSP);
+	    // } catch (IOException e) {
+	    // log.error(e.getMessage());
+	    // }
+	    // }
+	    // }
+	    // else {
+	    // nameFiles.setNameFileOCSPResp(respOcsp.getFilename());
+	    // }
+	    // }
+	    // else if (certStatus instanceof RespCRL) {
+	    // RespCRL respCRL = (RespCRL)certStatus;
+	    // if (respCRL.getFilename() == null) {
+	    // // TODO: escribir la CRL a disco duro
+	    // }
+	    // else {
+	    // nameFiles.setNameFileCRLResp(respCRL.getFilename());
+	    // }
+	    // }
+	    // }
+	    //
+	    // if (x!=0) // Se salta el certificado que firma
+	    // {
+	    // // Guardamos la cadena de certificados
+	    // String certFile = respAndCert.getX509CertFile();
+	    // if (certFile == null) {
+	    // X509Certificate certificado = respAndCert.getX509Cert();
+	    // String nomCert = DIR_CERTS + ConstantesXADES.FICH_CERT_REF + nomFichero +
+	    // ConstantesXADES.GUION + (x) +
+	    // ConstantesXADES.EXTENSION_CER;
+	    // log.debug(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_DEBUG_5) +
+	    // ConstantesXADES.ESPACIO +
+	    // rutaFicheroFirmado + nomCert);
+	    // try {
+	    // directorio = new File(rutaFicheroFirmado + DIR_CERTS);
+	    // directorio.mkdir();
+	    // f = new BufferedOutputStream(new FileOutputStream(rutaFicheroFirmado + nomCert));
+	    // f.write(certificado.getEncoded()) ; // CertRef guardado
+	    // } catch (FileNotFoundException e) {
+	    // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_26) +
+	    // ConstantesXADES.ESPACIO +
+	    // e.getMessage());
+	    // } catch (IOException e) {
+	    // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_26) +
+	    // ConstantesXADES.ESPACIO +
+	    // e.getMessage());
+	    // } catch (CertificateEncodingException e) {
+	    // log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_26) +
+	    // ConstantesXADES.ESPACIO +
+	    // e.getMessage());
+	    // } finally {
+	    // try {
+	    // f.flush() ;
+	    // //AppPerfect: Falso positivo
+	    // f.close() ;
+	    // nameFiles.setNameFileX509Cert(rutaFicheroFirmado + nomCert);
+	    // } catch (IOException e) {
+	    // log.error(e.getMessage());
+	    // }
+	    // }
+	    // }
+	    // else {
+	    // nameFiles.setNameFileX509Cert(certFile);
+	    // }
+	    // } else {
+	    // nameFiles.setNameFileX509Cert(ConstantesXADES.CADENA_VACIA);
+	    // }
+	    // listaArchivos.add(nameFiles);
+	    // }
 
-        } else {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_27));
-            return null;
-        }
+	} else {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_27));
+	    return null;
+	}
 
-        return listaArchivos;
+	return listaArchivos;
     }
 }

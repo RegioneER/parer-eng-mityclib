@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.refs;
@@ -30,12 +26,13 @@ import es.mityc.javasign.xml.transform.Transform;
  * Representa un objeto externo al XML (no definido) que debe ser firmado.
  * </p>
  * <p>
- * Para poder acceder al contenido y obtener su digest se debe proporcionar el digester adecuado que implemente el
- * interfaz <code>IPrivateDate</code>.
+ * Para poder acceder al contenido y obtener su digest se debe proporcionar el digester adecuado que
+ * implemente el interfaz <code>IPrivateDate</code>.
  * </p>
  * <p>
- * Este tipo de objetos delega la seguridad e integridad del contenido en el gestionador de la informacion privada, que
- * sera el responsable de asegurar que no se produce ningún ataque sobre la informacon.
+ * Este tipo de objetos delega la seguridad e integridad del contenido en el gestionador de la
+ * informacion privada, que sera el responsable de asegurar que no se produce ningún ataque sobre la
+ * informacon.
  * </p>
  *
  * @author Ministerio de Industria, Turismo y Comercio
@@ -51,15 +48,15 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
     private IPrivateData digester;
 
     public UnknownExternObjectToSign(String name, IPrivateData privateDataDigester) {
-        this.name = name;
-        this.digester = privateDataDigester;
+	this.name = name;
+	this.digester = privateDataDigester;
     }
 
     /**
      * @return the name
      */
     public String getName() {
-        return name;
+	return name;
     }
 
     /**
@@ -67,7 +64,7 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      * @return
      */
     public IPrivateData getDigester() {
-        return digester;
+	return digester;
     }
 
     /**
@@ -75,7 +72,7 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      */
     @Override
     public void addTransform(Transform t) {
-        throw new IllegalArgumentException(I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_10));
+	throw new IllegalArgumentException(I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_10));
     }
 
     /**
@@ -83,7 +80,7 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      */
     @Override
     public String getReferenceURI() {
-        return name;
+	return name;
     }
 
     /**
@@ -91,6 +88,6 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      */
     @Override
     public MITyCResourceResolver getResolver() {
-        return new ResolverPrivateData(getDigester());
+	return new ResolverPrivateData(getDigester());
     }
 }

@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign;
@@ -76,7 +72,9 @@ public class ConstantsXAdES {
     public static final String I18N_VALIDATE_4 = "i18n.mityc.xades.validate.4";
     /** El campo OCSPResponderID.BY_HASH no tiene forma base64binary: {0}. */
     public static final String I18N_VALIDATE_5 = "i18n.mityc.xades.validate.5";
-    /** No se consiguio identificar el tipo de OCSPResponder para el IRecovererElements configurado. */
+    /**
+     * No se consiguio identificar el tipo de OCSPResponder para el IRecovererElements configurado.
+     */
     public static final String I18N_VALIDATE_6 = "i18n.mityc.xades.validate.6";
     /** No se pudo acceder a un reference de la firma: {0}. */
     public static final String I18N_VALIDATE_7 = "i18n.mityc.xades.validate.7";
@@ -88,7 +86,10 @@ public class ConstantsXAdES {
     public static final String I18N_VALIDATE_10 = "i18n.mityc.xades.validate.10";
     /** La forma de un nodo Cert del SigningCertificate no es valida: {0}. */
     public static final String I18N_VALIDATE_11 = "i18n.mityc.xades.validate.11";
-    /** El formato del nombre de Issuer de un certificado de SigningCertificate no se ajusta a X500: {0}. */
+    /**
+     * El formato del nombre de Issuer de un certificado de SigningCertificate no se ajusta a X500:
+     * {0}.
+     */
     public static final String I18N_VALIDATE_12 = "i18n.mityc.xades.validate.12";
     /** Firma invalida. La informacion sobre el certificado de firma no se ajusta a XAdES. */
     public static final String I18N_VALIDATE_13 = "i18n.mityc.xades.validate.13";

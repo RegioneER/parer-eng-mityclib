@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.utilidades;
@@ -31,8 +27,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.mityc.firmaJava.libreria.ConstantesXADES;
 import es.mityc.javasign.ConstantsXAdES;
@@ -49,7 +45,7 @@ import es.mityc.javasign.i18n.II18nManager;
 public class UtilidadFirmaElectronica { // implements ConstantesXADES
 
     /** Logger. */
-    private static final Log LOG = LogFactory.getLog(UtilidadFirmaElectronica.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UtilidadFirmaElectronica.class);
     /** Internationalizador. */
     private static final II18nManager I18N = I18nFactory.getI18nManager(ConstantsXAdES.LIB_NAME);
 
@@ -63,213 +59,214 @@ public class UtilidadFirmaElectronica { // implements ConstantesXADES
     /** Selector para indicar si un certificado es del DNIe y de firma. */
     private static final X509CertSelector CS_DNIE_SIGN = new X509CertSelector();
     static {
-        try {
-            CS_DNIE_AUTHENTICATE.setPolicy(new HashSet<String>(Arrays.asList(POLICY_DNIE_AUTHENTICATE)));
-            CS_DNIE_SIGN.setPolicy(new HashSet<String>(Arrays.asList(POLICY_DNIE_SIGN)));
-        } catch (IOException ex) {
-            LOG.warn(I18N.getLocalMessage(ConstantsXAdES.I18N_UTILS_2));
-            if (LOG.isDebugEnabled()) {
-                LOG.debug(ex.getMessage(), ex);
-            }
-        }
+	try {
+	    CS_DNIE_AUTHENTICATE
+		    .setPolicy(new HashSet<String>(Arrays.asList(POLICY_DNIE_AUTHENTICATE)));
+	    CS_DNIE_SIGN.setPolicy(new HashSet<String>(Arrays.asList(POLICY_DNIE_SIGN)));
+	} catch (IOException ex) {
+	    LOG.warn(I18N.getLocalMessage(ConstantsXAdES.I18N_UTILS_2));
+	    if (LOG.isDebugEnabled()) {
+		LOG.debug(ex.getMessage(), ex);
+	    }
+	}
     }
 
     /**
      * Decodifica una cadena a UTF-8
      *
-     * @param input
-     *            Cadena a decodificar
+     * @param input Cadena a decodificar
      *
      * @return cadena en UTF-8
      */
     public static String decodeUTF(byte[] input) {
-        int longitud = input.length;
-        char[] output = new char[longitud];
-        int i = 0;
-        int j = 0;
-        while (i < longitud) {
-            int b = input[i++] & 0xff;
-            // clasificado según el alto orden de 3 bits
-            switch (b >>> 5) {
-            default:
-                // codificacion del 1 byte
-                // 0xxxxxxx
-                // uso justo de orden bajo de 7 bits
-                // 00000000 0xxxxxxx
-                output[j++] = (char) (b & 0x7f);
-                break;
-            case 6:
-                // codificacion del 2 byte
-                // 110yyyyy 10xxxxxx
-                // uso bajo de orden de 6 bits
-                int y = b & 0x1f;
-                // uso del orden bajo de 6 bits del byte siguiente
-                // debe tener un orden alto de 10 bits, el cual no comprobaremos
-                int x = input[i++] & 0x3f;
-                // 00000yyy yyxxxxxx
-                output[j++] = (char) (y << 6 | x);
-                break;
-            case 7:
-                // codificacion del 3 byte
-                // 1110zzzz 10yyyyyy 10xxxxxx
-                // assert ( b & 0x10 )
-                // == 0 : "UTF8Decoder does not handle 32-bit characters";
-                if ((b & 0x10) == 0) {
-                    throw new RuntimeException(ConstantesXADES.UTF8DECODER_ERROR);
+	int longitud = input.length;
+	char[] output = new char[longitud];
+	int i = 0;
+	int j = 0;
+	while (i < longitud) {
+	    int b = input[i++] & 0xff;
+	    // clasificado según el alto orden de 3 bits
+	    switch (b >>> 5) {
+	    default:
+		// codificacion del 1 byte
+		// 0xxxxxxx
+		// uso justo de orden bajo de 7 bits
+		// 00000000 0xxxxxxx
+		output[j++] = (char) (b & 0x7f);
+		break;
+	    case 6:
+		// codificacion del 2 byte
+		// 110yyyyy 10xxxxxx
+		// uso bajo de orden de 6 bits
+		int y = b & 0x1f;
+		// uso del orden bajo de 6 bits del byte siguiente
+		// debe tener un orden alto de 10 bits, el cual no comprobaremos
+		int x = input[i++] & 0x3f;
+		// 00000yyy yyxxxxxx
+		output[j++] = (char) (y << 6 | x);
+		break;
+	    case 7:
+		// codificacion del 3 byte
+		// 1110zzzz 10yyyyyy 10xxxxxx
+		// assert ( b & 0x10 )
+		// == 0 : "UTF8Decoder does not handle 32-bit characters";
+		if ((b & 0x10) == 0) {
+		    throw new RuntimeException(ConstantesXADES.UTF8DECODER_ERROR);
 
-                }
-                // uso del orden bajo de 4 bits
-                int z = b & 0x0f;
-                // uso del orden bajo de 6 bits del siguiente byte
-                // debería tener un orden alto de 10 bits, el cual no comprobaremos
-                y = input[i++] & 0x3f;
-                // uso bajo del orden de 6 bits del siguiente byte
-                // debería tener un orden alto de 10 bits, el cual no comprobaremos
-                x = input[i++] & 0x3f;
-                // zzzzyyyy yyxxxxxx
-                int asint = (z << 12 | y << 6 | x);
-                output[j++] = (char) asint;
-                break;
-            }
-        }
-        return new String(output, 0, j);
+		}
+		// uso del orden bajo de 4 bits
+		int z = b & 0x0f;
+		// uso del orden bajo de 6 bits del siguiente byte
+		// debería tener un orden alto de 10 bits, el cual no comprobaremos
+		y = input[i++] & 0x3f;
+		// uso bajo del orden de 6 bits del siguiente byte
+		// debería tener un orden alto de 10 bits, el cual no comprobaremos
+		x = input[i++] & 0x3f;
+		// zzzzyyyy yyxxxxxx
+		int asint = (z << 12 | y << 6 | x);
+		output[j++] = (char) asint;
+		break;
+	    }
+	}
+	return new String(output, 0, j);
     }
 
     /**
-     * @param listaCertificadosTemp
-     *            Lista de certificados temporales
+     * @param listaCertificadosTemp Lista de certificados temporales
      * @param emisorDN
      *
      * @return
      *
      *         TODO: revisar este método y reconstruirlo decentemente
      */
-    public static List<X509Certificate> filtraCertificados(List<X509Certificate> listaCertificadosTemp,
-            String emisorDN) {
-        String[] allIssuers = emisorDN.split(ConstantesXADES.ALMOHADILLA);
-        List<X509Certificate> devuelveCertificados = new ArrayList<X509Certificate>();
-        Date hoy = new Date();
-        int longitudCertificados = listaCertificadosTemp.size();
-        for (int a = 0; a < longitudCertificados; a++) {
-            X509Certificate certTemp = listaCertificadosTemp.get(a);
-            int longitudIssuers = allIssuers.length;
-            for (int b = 0; b < longitudIssuers; b++) {
-                if (certTemp.getIssuerDN().toString().indexOf(allIssuers[b]) >= 0) {
-                    try {
-                        certTemp.checkValidity(hoy);
-                    } catch (CertificateExpiredException e) {
-                        break;
-                    } catch (CertificateNotYetValidException e) {
-                        break;
-                    }
-                    devuelveCertificados.add(certTemp);
-                    break;
-                }
-            }
-        }
-        return devuelveCertificados;
+    public static List<X509Certificate> filtraCertificados(
+	    List<X509Certificate> listaCertificadosTemp, String emisorDN) {
+	String[] allIssuers = emisorDN.split(ConstantesXADES.ALMOHADILLA);
+	List<X509Certificate> devuelveCertificados = new ArrayList<X509Certificate>();
+	Date hoy = new Date();
+	int longitudCertificados = listaCertificadosTemp.size();
+	for (int a = 0; a < longitudCertificados; a++) {
+	    X509Certificate certTemp = listaCertificadosTemp.get(a);
+	    int longitudIssuers = allIssuers.length;
+	    for (int b = 0; b < longitudIssuers; b++) {
+		if (certTemp.getIssuerDN().toString().indexOf(allIssuers[b]) >= 0) {
+		    try {
+			certTemp.checkValidity(hoy);
+		    } catch (CertificateExpiredException e) {
+			break;
+		    } catch (CertificateNotYetValidException e) {
+			break;
+		    }
+		    devuelveCertificados.add(certTemp);
+		    break;
+		}
+	    }
+	}
+	return devuelveCertificados;
     }
 
     /**
      *
-     * @param listaCertificadosTemp
-     *            Lista de certificados temporales
+     * @param listaCertificadosTemp Lista de certificados temporales
      *
      * @return
      */
     public static List<X509Certificate> filtraDNIe(List<X509Certificate> listaCertificadosTemp) {
-        if (LOG.isTraceEnabled()) {
-            LOG.trace("Filtrando certificados del DNIe...");
-        }
-        List<X509Certificate> returnCertificates = new ArrayList<X509Certificate>();
-        Date hoy = new Date();
-        // ASN1InputStream asn1IS = null;
-        Iterator<X509Certificate> it = listaCertificadosTemp.iterator();
-        while (it.hasNext()) {
-            X509Certificate certTemp = it.next();
-            try {
-                certTemp.checkValidity(hoy);
-            } catch (CertificateExpiredException e) {
-                continue;
-            } catch (CertificateNotYetValidException e) {
-                continue;
-            }
-            if (!CS_DNIE_AUTHENTICATE.match(certTemp)) {
-                returnCertificates.add(certTemp);
-            }
-        }
-        // int longitudCertificados = listaCertificadosTemp.size();
-        // for (int a = 0; a < longitudCertificados; a++) {
-        // X509Certificate certTemp = listaCertificadosTemp.get(a) ;
-        // try {
-        // certTemp.checkValidity(hoy);
-        // } catch (CertificateExpiredException e) {
-        // continue;
-        // } catch (CertificateNotYetValidException e) {
-        // continue;
-        // }
-        // if (!CS_DNIE_AUTHENTICATE.match(certTemp)){
-        // returnCertificates.add(certTemp);
-        // }
-        // if (UtilidadDNIe.isCertDNIe(certTemp.getIssuerDN().toString())) {
-        // try {
-        // // El certificado de autenticacion tiene una certificate policy 2.16.724.1.2.2.2.4
-        // // El certificado de firma tiene una certificate policy 2.16.724.1.2.2.2.3
-        // // Recupera la certificate policy de este certificado
-        // byte[] policies = certTemp.getExtensionValue(ConstantesXADES.CERTIFICATE_POLICIES_OID);
-        // if (policies != null) {
-        // //Falsos positivos
-        // asn1IS = new ASN1InputStream(policies);
-        // // Una extension de certificado va como DER-encoded OCTET (ver getExtensionValue de X509Extension)
-        // ASN1OctetString ext = (ASN1OctetString)((ASN1InputStream)asn1IS).readObject();
-        // //asn1IS.close();
-        // asn1IS = new ASN1InputStream(ext.getOctets());
-        // ASN1Sequence seq = (ASN1Sequence)asn1IS.readObject();
-        // // Solo hay una PolicyInformation para el DNIe
-        // PolicyInformation pi = new PolicyInformation((ASN1Sequence)seq.getObjectAt(0));
-        // if (ConstantesXADES.POLICY_OID_CERTIFICADO_AUTENTICACION_DNIE.equals(pi.getPolicyIdentifier().getId()))
-        // continue;
-        // }
-        // returnCertificates.add(certTemp);
-        // }
-        // catch (Exception ex) {
-        // returnCertificates.add(certTemp);
-        // }
-        //
-        // finally{
-        // if (asn1IS != null){
-        // try {
-        // asn1IS.close();
-        // } catch (IOException e) {
-        // LOG.error(e);
-        // }
-        // }
-        // }
-        // }
-        // else
-        // returnCertificates.add(certTemp);
-        // }
-        return returnCertificates;
+	if (LOG.isTraceEnabled()) {
+	    LOG.trace("Filtrando certificados del DNIe...");
+	}
+	List<X509Certificate> returnCertificates = new ArrayList<X509Certificate>();
+	Date hoy = new Date();
+	// ASN1InputStream asn1IS = null;
+	Iterator<X509Certificate> it = listaCertificadosTemp.iterator();
+	while (it.hasNext()) {
+	    X509Certificate certTemp = it.next();
+	    try {
+		certTemp.checkValidity(hoy);
+	    } catch (CertificateExpiredException e) {
+		continue;
+	    } catch (CertificateNotYetValidException e) {
+		continue;
+	    }
+	    if (!CS_DNIE_AUTHENTICATE.match(certTemp)) {
+		returnCertificates.add(certTemp);
+	    }
+	}
+	// int longitudCertificados = listaCertificadosTemp.size();
+	// for (int a = 0; a < longitudCertificados; a++) {
+	// X509Certificate certTemp = listaCertificadosTemp.get(a) ;
+	// try {
+	// certTemp.checkValidity(hoy);
+	// } catch (CertificateExpiredException e) {
+	// continue;
+	// } catch (CertificateNotYetValidException e) {
+	// continue;
+	// }
+	// if (!CS_DNIE_AUTHENTICATE.match(certTemp)){
+	// returnCertificates.add(certTemp);
+	// }
+	// if (UtilidadDNIe.isCertDNIe(certTemp.getIssuerDN().toString())) {
+	// try {
+	// // El certificado de autenticacion tiene una certificate policy 2.16.724.1.2.2.2.4
+	// // El certificado de firma tiene una certificate policy 2.16.724.1.2.2.2.3
+	// // Recupera la certificate policy de este certificado
+	// byte[] policies = certTemp.getExtensionValue(ConstantesXADES.CERTIFICATE_POLICIES_OID);
+	// if (policies != null) {
+	// //Falsos positivos
+	// asn1IS = new ASN1InputStream(policies);
+	// // Una extension de certificado va como DER-encoded OCTET (ver getExtensionValue de
+	// X509Extension)
+	// ASN1OctetString ext = (ASN1OctetString)((ASN1InputStream)asn1IS).readObject();
+	// //asn1IS.close();
+	// asn1IS = new ASN1InputStream(ext.getOctets());
+	// ASN1Sequence seq = (ASN1Sequence)asn1IS.readObject();
+	// // Solo hay una PolicyInformation para el DNIe
+	// PolicyInformation pi = new PolicyInformation((ASN1Sequence)seq.getObjectAt(0));
+	// if
+	// (ConstantesXADES.POLICY_OID_CERTIFICADO_AUTENTICACION_DNIE.equals(pi.getPolicyIdentifier().getId()))
+	// continue;
+	// }
+	// returnCertificates.add(certTemp);
+	// }
+	// catch (Exception ex) {
+	// returnCertificates.add(certTemp);
+	// }
+	//
+	// finally{
+	// if (asn1IS != null){
+	// try {
+	// asn1IS.close();
+	// } catch (IOException e) {
+	// LOG.error(e);
+	// }
+	// }
+	// }
+	// }
+	// else
+	// returnCertificates.add(certTemp);
+	// }
+	return returnCertificates;
     }
 
     public static String obtenerTipoReference(String esquema) {
 
-        String tipoEsquema = null;
+	String tipoEsquema = null;
 
-        if ((ConstantesXADES.SCHEMA_XADES_132).equals(esquema) || (ConstantesXADES.SCHEMA_XADES_141).equals(esquema))
-            tipoEsquema = ConstantesXADES.SCHEMA_XADES + ConstantesXADES.SIGNED_PROPERTIES;
-        else if ((ConstantesXADES.SCHEMA_XADES_131).equals(esquema))
-            tipoEsquema = ConstantesXADES.SCHEMA_XADES_131 + ConstantesXADES.SIGNED_PROPERTIES;
-        else if ((ConstantesXADES.SCHEMA_XADES_122).equals(esquema))
-            tipoEsquema = ConstantesXADES.SCHEMA_XADES_122 + ConstantesXADES.SIGNED_PROPERTIES;
-        else if ((ConstantesXADES.SCHEMA_XADES_111).equals(esquema))
-            tipoEsquema = ConstantesXADES.SCHEMA_XADES_111 + ConstantesXADES.SIGNED_PROPERTIES;
-        else {
-            LOG.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR1));
-            return null;
-        }
+	if ((ConstantesXADES.SCHEMA_XADES_132).equals(esquema)
+		|| (ConstantesXADES.SCHEMA_XADES_141).equals(esquema))
+	    tipoEsquema = ConstantesXADES.SCHEMA_XADES + ConstantesXADES.SIGNED_PROPERTIES;
+	else if ((ConstantesXADES.SCHEMA_XADES_131).equals(esquema))
+	    tipoEsquema = ConstantesXADES.SCHEMA_XADES_131 + ConstantesXADES.SIGNED_PROPERTIES;
+	else if ((ConstantesXADES.SCHEMA_XADES_122).equals(esquema))
+	    tipoEsquema = ConstantesXADES.SCHEMA_XADES_122 + ConstantesXADES.SIGNED_PROPERTIES;
+	else if ((ConstantesXADES.SCHEMA_XADES_111).equals(esquema))
+	    tipoEsquema = ConstantesXADES.SCHEMA_XADES_111 + ConstantesXADES.SIGNED_PROPERTIES;
+	else {
+	    LOG.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_VALIDARFIRMA_ERROR1));
+	    return null;
+	}
 
-        return tipoEsquema;
+	return tipoEsquema;
     }
 
     // TODOLARGO: incluir también los OIDs
@@ -296,52 +293,52 @@ public class UtilidadFirmaElectronica { // implements ConstantesXADES
     /**
      * Devuelve el MessageDigest asociado a la uri (según la rfc 3275 y la rfc 4051).
      *
-     * @param uri
-     *            Uri que define el algoritmo de digest (según las rfc 3275 y 4051).
+     * @param uri Uri que define el algoritmo de digest (según las rfc 3275 y 4051).
      *
-     * @return MessageDigest asociado o null si no hay ninguno disponible para el algoritmo indicado.
+     * @return MessageDigest asociado o null si no hay ninguno disponible para el algoritmo
+     *         indicado.
      */
     public static MessageDigest getMessageDigest(String uri) {
-        MessageDigest md = null;
-        if (uri != null) {
-            try {
-                if (uri.equals(DIGEST_ALG_SHA1))
-                    md = MessageDigest.getInstance("SHA-1");
-                else if (uri.equals(DIGEST_ALG_SHA256) || uri.equals(DIGEST_ALG_SHA256_enc)
-                        || uri.equals(DIGEST_ALG_SHA256_hmac))
-                    md = MessageDigest.getInstance("SHA-256");
-                else if (uri.equals(DIGEST_ALG_SHA512) || uri.equals(DIGEST_ALG_SHA512_enc)
-                        || uri.equals(DIGEST_ALG_SHA512_hmac))
-                    md = MessageDigest.getInstance("SHA-512");
-                else if (uri.equals(DIGEST_ALG_SHA224))
-                    md = MessageDigest.getInstance("SHA-224");
-                else if (uri.equals(DIGEST_ALG_SHA384))
-                    md = MessageDigest.getInstance("SHA-384");
-                else if (uri.equals(DIGEST_ALG_MD2))
-                    md = MessageDigest.getInstance("MD2");
-                else if (uri.equals(DIGEST_ALG_MD4))
-                    md = MessageDigest.getInstance("MD4");
-                else if (uri.equals(DIGEST_ALG_MD5))
-                    md = MessageDigest.getInstance("MD5");
-                else if (uri.equals(DIGEST_ALG_RIPEMD128))
-                    md = MessageDigest.getInstance("RIPEDM128");
-                else if (uri.equals(DIGEST_ALG_RIPEMD160))
-                    md = MessageDigest.getInstance("RIPEMD160");
-                else if (uri.equals(DIGEST_ALG_RIPEMD256))
-                    md = MessageDigest.getInstance("RIPEMD256");
-                else if (uri.equals(DIGEST_ALG_RIPEMD320))
-                    md = MessageDigest.getInstance("RIPEMD320");
-                else if (uri.equals(DIGEST_ALG_TIGER))
-                    md = MessageDigest.getInstance("Tiger");
-                else if (uri.equals(DIGEST_ALG_WHIRLPOOL))
-                    md = MessageDigest.getInstance("WHIRLPOOL");
-                else if (uri.equals(DIGEST_ALG_GOST3411))
-                    md = MessageDigest.getInstance("GOST3411");
-            } catch (NoSuchAlgorithmException ex) {
-                LOG.info("Algoritmo de digest no disponible para: " + uri, ex);
-            }
-        }
-        return md;
+	MessageDigest md = null;
+	if (uri != null) {
+	    try {
+		if (uri.equals(DIGEST_ALG_SHA1))
+		    md = MessageDigest.getInstance("SHA-1");
+		else if (uri.equals(DIGEST_ALG_SHA256) || uri.equals(DIGEST_ALG_SHA256_enc)
+			|| uri.equals(DIGEST_ALG_SHA256_hmac))
+		    md = MessageDigest.getInstance("SHA-256");
+		else if (uri.equals(DIGEST_ALG_SHA512) || uri.equals(DIGEST_ALG_SHA512_enc)
+			|| uri.equals(DIGEST_ALG_SHA512_hmac))
+		    md = MessageDigest.getInstance("SHA-512");
+		else if (uri.equals(DIGEST_ALG_SHA224))
+		    md = MessageDigest.getInstance("SHA-224");
+		else if (uri.equals(DIGEST_ALG_SHA384))
+		    md = MessageDigest.getInstance("SHA-384");
+		else if (uri.equals(DIGEST_ALG_MD2))
+		    md = MessageDigest.getInstance("MD2");
+		else if (uri.equals(DIGEST_ALG_MD4))
+		    md = MessageDigest.getInstance("MD4");
+		else if (uri.equals(DIGEST_ALG_MD5))
+		    md = MessageDigest.getInstance("MD5");
+		else if (uri.equals(DIGEST_ALG_RIPEMD128))
+		    md = MessageDigest.getInstance("RIPEDM128");
+		else if (uri.equals(DIGEST_ALG_RIPEMD160))
+		    md = MessageDigest.getInstance("RIPEMD160");
+		else if (uri.equals(DIGEST_ALG_RIPEMD256))
+		    md = MessageDigest.getInstance("RIPEMD256");
+		else if (uri.equals(DIGEST_ALG_RIPEMD320))
+		    md = MessageDigest.getInstance("RIPEMD320");
+		else if (uri.equals(DIGEST_ALG_TIGER))
+		    md = MessageDigest.getInstance("Tiger");
+		else if (uri.equals(DIGEST_ALG_WHIRLPOOL))
+		    md = MessageDigest.getInstance("WHIRLPOOL");
+		else if (uri.equals(DIGEST_ALG_GOST3411))
+		    md = MessageDigest.getInstance("GOST3411");
+	    } catch (NoSuchAlgorithmException ex) {
+		LOG.info("Algoritmo de digest no disponible para: " + uri, ex);
+	    }
+	}
+	return md;
     }
 
 }

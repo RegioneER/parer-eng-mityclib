@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -35,7 +31,7 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 public class Cert extends CertIDType {
 
     public Cert(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
     /**
@@ -44,7 +40,7 @@ public class Cert extends CertIDType {
      * @param issuerSerial
      */
     public Cert(XAdESSchemas schema, CertDigest digest, IssuerSerial issuerSerial) {
-        super(schema, digest, issuerSerial);
+	super(schema, digest, issuerSerial);
     }
 
     /**
@@ -57,8 +53,8 @@ public class Cert extends CertIDType {
      * @throws InvalidInfoNodeException
      */
     public Cert(XAdESSchemas schema, String digestMethod, byte[] digestValue, String issuerName,
-            BigInteger serialNumber) throws InvalidInfoNodeException {
-        super(schema, digestMethod, digestValue, issuerName, serialNumber);
+	    BigInteger serialNumber) throws InvalidInfoNodeException {
+	super(schema, digestMethod, digestValue, issuerName, serialNumber);
     }
 
     /**
@@ -69,8 +65,8 @@ public class Cert extends CertIDType {
      * @param serialNumber
      */
     public Cert(XAdESSchemas schema, String digestMethod, String digestValue, String issuerName,
-            BigInteger serialNumber) {
-        super(schema, digestMethod, digestValue, issuerName, serialNumber);
+	    BigInteger serialNumber) {
+	super(schema, digestMethod, digestValue, issuerName, serialNumber);
     }
 
     /**
@@ -78,8 +74,8 @@ public class Cert extends CertIDType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERT);
-        super.load(element);
+	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERT);
+	super.load(element);
     }
 
     /**
@@ -87,7 +83,7 @@ public class Cert extends CertIDType {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), schema.getSchemaUri(), ConstantesXADES.CERT);
+	return isElementName(nodeToElement(node), schema.getSchemaUri(), ConstantesXADES.CERT);
     }
 
     /**
@@ -96,8 +92,8 @@ public class Cert extends CertIDType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-            throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXDsig, namespaceXAdES);
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXDsig, namespaceXAdES);
     }
 
     /**
@@ -105,9 +101,10 @@ public class Cert extends CertIDType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        Element res = doc.createElementNS(schema.getSchemaUri(), namespaceXAdES + ":" + ConstantesXADES.CERT);
-        super.addContent(res, namespaceXAdES, namespaceXDsig);
-        return res;
+	Element res = doc.createElementNS(schema.getSchemaUri(),
+		namespaceXAdES + ":" + ConstantesXADES.CERT);
+	super.addContent(res, namespaceXAdES, namespaceXDsig);
+	return res;
     }
 
 }

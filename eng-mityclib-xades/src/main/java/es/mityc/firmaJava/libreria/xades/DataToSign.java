@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades;
@@ -43,7 +39,7 @@ import es.mityc.javasign.xml.xades.LocalFileStoreElements;
 public class DataToSign {
 
     public enum XADES_X_TYPES {
-        TYPE_1, TYPE_2
+	TYPE_1, TYPE_2
     };
 
     private Date signDate;
@@ -70,18 +66,18 @@ public class DataToSign {
     private String encoding = ConstantsXAdES.DEFAULT_XML_ENCODING;
 
     public DataToSign(File xmlToSign) {
-        this.xmlInFileToSign = xmlToSign;
-        basePath = xmlToSign.getParent();
-        signDate = new Date();
+	this.xmlInFileToSign = xmlToSign;
+	basePath = xmlToSign.getParent();
+	signDate = new Date();
     }
 
     public DataToSign(String xmlToSign) {
-        this.xmlToSign = xmlToSign;
-        signDate = new Date();
+	this.xmlToSign = xmlToSign;
+	signDate = new Date();
     }
 
     public DataToSign() {
-        signDate = new Date();
+	signDate = new Date();
     }
 
     /**
@@ -89,14 +85,14 @@ public class DataToSign {
      * Establece la codificacion del XML que se quiere firmar.
      * </p>
      * <p>
-     * La recomendacion del estandar es que el XML a firmar esté en UTF-8 (valor que toma este campo por defecto).
+     * La recomendacion del estandar es que el XML a firmar esté en UTF-8 (valor que toma este campo
+     * por defecto).
      * </p>
      *
-     * @param _encoding
-     *            Codificacion del xml
+     * @param _encoding Codificacion del xml
      */
     public void setXMLEncoding(String _encoding) {
-        this.encoding = _encoding;
+	this.encoding = _encoding;
     }
 
     /**
@@ -110,7 +106,7 @@ public class DataToSign {
      * @return codificacion del XML
      */
     public String getXMLEncoding() {
-        return this.encoding;
+	return this.encoding;
     }
 
     /**
@@ -118,11 +114,10 @@ public class DataToSign {
      * Establece el tipo de XAdES-X que se quiere aplicar en la firma.
      * </p>
      *
-     * @param _xadesXType
-     *            Tipo de XAdES-X
+     * @param _xadesXType Tipo de XAdES-X
      */
     public void setXAdESXType(XADES_X_TYPES _xadesXType) {
-        this.xadesXType = _xadesXType;
+	this.xadesXType = _xadesXType;
     }
 
     /**
@@ -136,37 +131,39 @@ public class DataToSign {
      * @return tipo de XAdES-X
      */
     public XADES_X_TYPES getXAdESXType() {
-        return xadesXType;
+	return xadesXType;
     }
 
     /**
      * Devuelve el nodo padre que se ha configurado para que contenga la firma.
      *
-     * @return nodo padre configurado, <code>null</code> si se quiere que la firme cuelgue del nodo raíz
+     * @return nodo padre configurado, <code>null</code> si se quiere que la firme cuelgue del nodo
+     *         raíz
      */
     public String getParentSignNode() {
-        return parentSignNode;
+	return parentSignNode;
     }
 
     /**
      * Establece la identidad del nodo padre que se quiere que contenga la firma.
      *
-     * @param parentNode
-     *            ID del nodo que se quiere configurar, <code>null</code> si se quiere que se cuelgue del nodo raíz
+     * @param parentNode ID del nodo que se quiere configurar, <code>null</code> si se quiere que se
+     *                   cuelgue del nodo raíz
      */
     public void setParentSignNode(String parentNode) {
-        this.parentSignNode = parentNode;
+	this.parentSignNode = parentNode;
     }
 
     /**
-     * Devuelve el formato de firma XAdES que se quiere aplicar en la firma. Por defecto se tiene establecido XAdES-BES.
+     * Devuelve el formato de firma XAdES que se quiere aplicar en la firma. Por defecto se tiene
+     * establecido XAdES-BES.
      *
      * @return
      *
      * @see es.mityc.firmaJava.configuracion.EnumFormatoFirma
      */
     public EnumFormatoFirma getXadesFormat() {
-        return xadesFormat;
+	return xadesFormat;
     }
 
     /**
@@ -177,35 +174,36 @@ public class DataToSign {
      * @see es.mityc.firmaJava.configuracion.EnumFormatoFirma
      */
     public void setXadesFormat(EnumFormatoFirma xadesFormat) {
-        this.xadesFormat = xadesFormat;
+	this.xadesFormat = xadesFormat;
     }
 
     /**
-     * Indica si la firma ha de llevar política. Por defecto se tiene establecido que no se añade política.
+     * Indica si la firma ha de llevar política. Por defecto se tiene establecido que no se añade
+     * política.
      *
      * @return
      */
     public boolean hasPolicy() {
-        return addPolicy;
+	return addPolicy;
     }
 
     /**
-     * Devuelve la clave de la política que se quiere aplicar a la firma (<code>null</code> si se quiere la implícita).
+     * Devuelve la clave de la política que se quiere aplicar a la firma (<code>null</code> si se
+     * quiere la implícita).
      *
      * @return
      */
     public String getPolicyKey() {
-        return policyKey;
+	return policyKey;
     }
 
     /**
      * Establece si se quiere incluir una política en la firma
      *
-     * @param addPolicy
-     *            <b>true</b> si se quiere incluir política, <b>false</b> si no
+     * @param addPolicy <b>true</b> si se quiere incluir política, <b>false</b> si no
      */
     public void setAddPolicy(boolean addPolicy) {
-        this.addPolicy = addPolicy;
+	this.addPolicy = addPolicy;
     }
 
     /**
@@ -213,53 +211,53 @@ public class DataToSign {
      *
      * <br/>
      * <br/>
-     * Las claves disponibles dependeran de los modulos disponibles de políticas de firma (por ejemplo MITyCLibPolicy).
-     * Para política implícita se debe utilizar <code>null</code>.
+     * Las claves disponibles dependeran de los modulos disponibles de políticas de firma (por
+     * ejemplo MITyCLibPolicy). Para política implícita se debe utilizar <code>null</code>.
      *
      * @param policyKey
      */
     public void setPolicyKey(String policyKey) {
-        this.policyKey = policyKey;
+	this.policyKey = policyKey;
     }
 
     /**
-     * Establece cual sera la instancia encargada de almacenar los elementos externos a una firma XAdES-X/XAdES-X
-     * (certificados y estados).
+     * Establece cual sera la instancia encargada de almacenar los elementos externos a una firma
+     * XAdES-X/XAdES-X (certificados y estados).
      *
      * @param storer
      */
     public void setElementsStorer(IStoreElements storer) {
-        this.storer = storer;
+	this.storer = storer;
     }
 
     public IStoreElements getElementsStorer() {
-        if (storer == null) {
-            // TODO: instanciar el storer configurado por defecto
-            IStoreElements nullStorer = new LocalFileStoreElements();
-            nullStorer.init(getBaseURI());
-            storer = nullStorer;
-        }
-        return storer;
+	if (storer == null) {
+	    // TODO: instanciar el storer configurado por defecto
+	    IStoreElements nullStorer = new LocalFileStoreElements();
+	    nullStorer.init(getBaseURI());
+	    storer = nullStorer;
+	}
+	return storer;
     }
 
     public boolean isEnveloped() {
-        return enveloped;
+	return enveloped;
     }
 
     public void setEnveloped(boolean enveloped) {
-        this.enveloped = enveloped;
+	this.enveloped = enveloped;
     }
 
     public InputStream getInputStream() throws IOException {
-        InputStream is = null;
-        if (enveloped) {
-            if (xmlInFileToSign != null) {
-                is = new FileInputStream(xmlInFileToSign);
-            } else if (xmlToSign != null) {
-                is = new ByteArrayInputStream(xmlToSign.getBytes());
-            }
-        }
-        return is;
+	InputStream is = null;
+	if (enveloped) {
+	    if (xmlInFileToSign != null) {
+		is = new FileInputStream(xmlInFileToSign);
+	    } else if (xmlToSign != null) {
+		is = new ByteArrayInputStream(xmlToSign.getBytes());
+	    }
+	}
+	return is;
     }
 
     /**
@@ -268,111 +266,111 @@ public class DataToSign {
      * @param doc
      */
     public void setDocument(Document doc) {
-        this.doc = doc;
+	this.doc = doc;
     }
 
     public Document getDocument() {
-        return this.doc;
+	return this.doc;
     }
 
     public String getBaseURI() {
-        if (basePath != null)
-            return basePath;
-        else
-            return "";
+	if (basePath != null)
+	    return basePath;
+	else
+	    return "";
     }
 
     public void setBaseURI(String basePath) {
-        this.basePath = basePath;
+	this.basePath = basePath;
     }
 
     public void addObject(ObjectToSign object) {
-        if (objects == null)
-            objects = new ArrayList<ObjectToSign>();
-        objects.add(object);
+	if (objects == null)
+	    objects = new ArrayList<ObjectToSign>();
+	objects.add(object);
     }
 
     public ArrayList<ObjectToSign> getObjects() {
-        return objects;
+	return objects;
     }
 
     public Date getSignDate() {
-        return signDate;
+	return signDate;
     }
 
     public void setSignDate(Date signDate) {
-        this.signDate = signDate;
+	this.signDate = signDate;
     }
 
     public File getSigningCert() {
-        return signingCert;
+	return signingCert;
     }
 
     public void setSigningCert(File signingCert) {
-        this.signingCert = signingCert;
+	this.signingCert = signingCert;
     }
 
     public void setProductionPlace(String city, String state, String postalCode, String country) {
-        if ((city == null) && (state == null) && (postalCode == null) && (country == null))
-            productionPlace = null;
-        else {
-            productionPlace = new String[4];
-            productionPlace[0] = city;
-            productionPlace[1] = state;
-            productionPlace[2] = postalCode;
-            productionPlace[3] = country;
-        }
+	if ((city == null) && (state == null) && (postalCode == null) && (country == null))
+	    productionPlace = null;
+	else {
+	    productionPlace = new String[4];
+	    productionPlace[0] = city;
+	    productionPlace[1] = state;
+	    productionPlace[2] = postalCode;
+	    productionPlace[3] = country;
+	}
     }
 
     public String[] getProductionPlace() {
-        return productionPlace;
+	return productionPlace;
     }
 
     public void addClaimedRol(IClaimedRole data) {
-        if (claimedRoles == null)
-            claimedRoles = new ArrayList<IClaimedRole>();
-        claimedRoles.add(data);
+	if (claimedRoles == null)
+	    claimedRoles = new ArrayList<IClaimedRole>();
+	claimedRoles.add(data);
     }
 
     public ArrayList<IClaimedRole> getClaimedRoles() {
-        return claimedRoles;
+	return claimedRoles;
     }
 
     public ICertStatusRecoverer getCertStatusManager() {
-        return certStatusManager;
+	return certStatusManager;
     }
 
     public void setCertStatusManager(ICertStatusRecoverer certStatusManager) {
-        this.certStatusManager = certStatusManager;
+	this.certStatusManager = certStatusManager;
     }
 
     public File getXmlInFileToSign() {
-        return xmlInFileToSign;
+	return xmlInFileToSign;
     }
 
     public String getAlgDigestXmlDSig() {
-        return algDigestXmlDSig;
+	return algDigestXmlDSig;
     }
 
     public void setAlgDigestXmlDSig(String algDigestXmlDSig) {
-        if (algDigestXmlDSig != null)
-            this.algDigestXmlDSig = algDigestXmlDSig;
+	if (algDigestXmlDSig != null)
+	    this.algDigestXmlDSig = algDigestXmlDSig;
     }
 
     public String getAlgDigestTSA() {
-        return algDigestTSA;
+	return algDigestTSA;
     }
 
     public void setAlgDigestTSA(String algDigestTSA) {
-        this.algDigestTSA = algDigestTSA;
+	this.algDigestTSA = algDigestTSA;
     }
 
     public XAdESSchemas getEsquema() {
-        return esquema;
+	return esquema;
     }
 
     public void setEsquema(XAdESSchemas esquema) {
-        this.esquema = esquema;
+	this.esquema = esquema;
     }
 
     // public boolean isXadesA() {

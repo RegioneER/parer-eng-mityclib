@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -36,11 +32,11 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      * @param schema
      */
     public SignaturePolicyIdentifier(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
     public SignaturePolicyIdentifier(XAdESSchemas schema, boolean isImplied) {
-        super(schema, isImplied);
+	super(schema, isImplied);
     }
 
     /**
@@ -48,7 +44,8 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), schema.getSchemaUri(), ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
+	return isElementName(nodeToElement(node), schema.getSchemaUri(),
+		ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
     }
 
     /**
@@ -56,8 +53,9 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
-        super.load(element);
+	checkElementName(element, schema.getSchemaUri(),
+		ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
+	super.load(element);
     }
 
     /**
@@ -66,8 +64,8 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-            throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXDsig, namespaceXAdES);
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXDsig, namespaceXAdES);
     }
 
     /**
@@ -75,10 +73,10 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        Element res = doc.createElementNS(schema.getSchemaUri(),
-                namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
-        super.addContent(res, namespaceXAdES, namespaceXDsig);
-        return res;
+	Element res = doc.createElementNS(schema.getSchemaUri(),
+		namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
+	super.addContent(res, namespaceXAdES, namespaceXDsig);
+	return res;
     }
 
 }

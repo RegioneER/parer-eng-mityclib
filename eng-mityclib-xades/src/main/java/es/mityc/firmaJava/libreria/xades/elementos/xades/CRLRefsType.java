@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -39,33 +35,32 @@ public class CRLRefsType extends AbstractXADESElement {
      * @param schema
      */
     public CRLRefsType(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
     public CRLRefsType(XAdESSchemas schema, ArrayList<CRLRef> crlRefs) {
-        super(schema);
-        this.crlRefs = crlRefs;
+	super(schema);
+	this.crlRefs = crlRefs;
     }
 
     public void addCRLRef(CRLRef crlRef) {
-        if (crlRefs == null)
-            crlRefs = new ArrayList<CRLRef>();
-        crlRefs.add(crlRef);
+	if (crlRefs == null)
+	    crlRefs = new ArrayList<CRLRef>();
+	crlRefs.add(crlRef);
     }
 
     /**
      * @return the certificates
      */
     public ArrayList<CRLRef> getCRLRefs() {
-        return crlRefs;
+	return crlRefs;
     }
 
     /**
-     * @param certificates
-     *            the certificates to set
+     * @param certificates the certificates to set
      */
     public void setCertificates(ArrayList<CRLRef> crlRefs) {
-        this.crlRefs = crlRefs;
+	this.crlRefs = crlRefs;
     }
 
     /**
@@ -73,22 +68,22 @@ public class CRLRefsType extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof CRLRefsType) {
-            CRLRefsType cvt = (CRLRefsType) obj;
-            ArrayList<CRLRef> comp = cvt.crlRefs;
-            if (((crlRefs == null) || (crlRefs.isEmpty())) && ((comp == null) || (comp.isEmpty())))
-                return true;
-            if (((crlRefs != null) && (comp != null)) && (crlRefs.size() == comp.size())) {
-                Iterator<CRLRef> itThis = crlRefs.iterator();
-                Iterator<CRLRef> itComp = comp.iterator();
-                while (itThis.hasNext()) {
-                    if (!itThis.next().equals(itComp.next()))
-                        return false;
-                }
-                return true;
-            }
-        }
-        return false;
+	if (obj instanceof CRLRefsType) {
+	    CRLRefsType cvt = (CRLRefsType) obj;
+	    ArrayList<CRLRef> comp = cvt.crlRefs;
+	    if (((crlRefs == null) || (crlRefs.isEmpty())) && ((comp == null) || (comp.isEmpty())))
+		return true;
+	    if (((crlRefs != null) && (comp != null)) && (crlRefs.size() == comp.size())) {
+		Iterator<CRLRef> itThis = crlRefs.iterator();
+		Iterator<CRLRef> itComp = comp.iterator();
+		while (itThis.hasNext()) {
+		    if (!itThis.next().equals(itComp.next()))
+			return false;
+		}
+		return true;
+	    }
+	}
+	return false;
     }
 
     /**
@@ -96,23 +91,23 @@ public class CRLRefsType extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        NodeList nodos = element.getChildNodes();
+	NodeList nodos = element.getChildNodes();
 
-        ArrayList<CRLRef> temp = new ArrayList<CRLRef>(nodos.getLength());
-        for (int i = 0; i < nodos.getLength(); i++) {
-            Node nodo = nodos.item(i);
-            if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                throw new InvalidInfoNodeException("Hijo de CRLRefsType no es un elemento");
+	ArrayList<CRLRef> temp = new ArrayList<CRLRef>(nodos.getLength());
+	for (int i = 0; i < nodos.getLength(); i++) {
+	    Node nodo = nodos.item(i);
+	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		throw new InvalidInfoNodeException("Hijo de CRLRefsType no es un elemento");
 
-            CRLRef crlRef = new CRLRef(schema);
-            crlRef.load((Element) nodo);
-            temp.add(crlRef);
-        }
+	    CRLRef crlRef = new CRLRef(schema);
+	    crlRef.load((Element) nodo);
+	    temp.add(crlRef);
+	}
 
-        if (temp.size() == 0)
-            throw new InvalidInfoNodeException("CRLRefsType debe tener al menos un hijo");
+	if (temp.size() == 0)
+	    throw new InvalidInfoNodeException("CRLRefsType debe tener al menos un hijo");
 
-        crlRefs = temp;
+	crlRefs = temp;
     }
 
     /**
@@ -120,18 +115,19 @@ public class CRLRefsType extends AbstractXADESElement {
      */
     @Override
     protected void addContent(Element element) throws InvalidInfoNodeException {
-        if ((crlRefs == null) || (crlRefs.size() == 0))
-            throw new InvalidInfoNodeException("CRLRefsType debe tener al menos un hijo");
-        Iterator<CRLRef> it = crlRefs.iterator();
-        while (it.hasNext()) {
-            element.appendChild(it.next().createElement(element.getOwnerDocument(), namespaceXDsig, namespaceXAdES));
-        }
+	if ((crlRefs == null) || (crlRefs.size() == 0))
+	    throw new InvalidInfoNodeException("CRLRefsType debe tener al menos un hijo");
+	Iterator<CRLRef> it = crlRefs.iterator();
+	while (it.hasNext()) {
+	    element.appendChild(it.next().createElement(element.getOwnerDocument(), namespaceXDsig,
+		    namespaceXAdES));
+	}
     }
 
     @Override
     public void addContent(Element element, String namespaceXAdES, String namespaceXDsig)
-            throws InvalidInfoNodeException {
-        super.addContent(element, namespaceXAdES, namespaceXDsig);
+	    throws InvalidInfoNodeException {
+	super.addContent(element, namespaceXAdES, namespaceXDsig);
     }
 
 }

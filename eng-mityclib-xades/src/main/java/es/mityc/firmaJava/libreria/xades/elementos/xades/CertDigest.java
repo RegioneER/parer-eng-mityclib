@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -33,7 +29,7 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 public class CertDigest extends DigestAlgAndValueType {
 
     public CertDigest(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
     /**
@@ -41,15 +37,16 @@ public class CertDigest extends DigestAlgAndValueType {
      * @param value
      */
     public CertDigest(XAdESSchemas schema, String method, String value) {
-        super(schema, method, value);
+	super(schema, method, value);
     }
 
     public CertDigest(XAdESSchemas schema, DigestAlgAndValueType daaavt) {
-        super(schema, daaavt.getDigestMethod().getAlgorithm(), daaavt.getDigestValue().getValue());
+	super(schema, daaavt.getDigestMethod().getAlgorithm(), daaavt.getDigestValue().getValue());
     }
 
-    public CertDigest(XAdESSchemas schema, String method, byte[] data) throws InvalidInfoNodeException {
-        super(schema, method, data);
+    public CertDigest(XAdESSchemas schema, String method, byte[] data)
+	    throws InvalidInfoNodeException {
+	super(schema, method, data);
     }
 
     /**
@@ -57,8 +54,8 @@ public class CertDigest extends DigestAlgAndValueType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERT_DIGEST);
-        super.load(element);
+	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERT_DIGEST);
+	super.load(element);
     }
 
     /**
@@ -66,7 +63,8 @@ public class CertDigest extends DigestAlgAndValueType {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), schema.getSchemaUri(), ConstantesXADES.CERT_DIGEST);
+	return isElementName(nodeToElement(node), schema.getSchemaUri(),
+		ConstantesXADES.CERT_DIGEST);
     }
 
     /**
@@ -75,8 +73,8 @@ public class CertDigest extends DigestAlgAndValueType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-            throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXDsig, namespaceXAdES);
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXDsig, namespaceXAdES);
     }
 
     /**
@@ -84,9 +82,10 @@ public class CertDigest extends DigestAlgAndValueType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        Element res = doc.createElementNS(schema.getSchemaUri(), namespaceXAdES + ":" + ConstantesXADES.CERT_DIGEST);
-        super.addContent(res, namespaceXAdES, namespaceXDsig);
-        return res;
+	Element res = doc.createElementNS(schema.getSchemaUri(),
+		namespaceXAdES + ":" + ConstantesXADES.CERT_DIGEST);
+	super.addContent(res, namespaceXAdES, namespaceXDsig);
+	return res;
     }
 
 }

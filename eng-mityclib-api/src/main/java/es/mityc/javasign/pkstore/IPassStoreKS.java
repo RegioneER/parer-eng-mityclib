@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.pkstore;
@@ -21,7 +17,8 @@ import java.security.cert.X509Certificate;
 
 /**
  * <p>
- * Interfaz para acceder a las contraseñas pedidas cuando se accede a la clave asociada a un certificado.
+ * Interfaz para acceder a las contraseñas pedidas cuando se accede a la clave asociada a un
+ * certificado.
  * </p>
  *
  * @author Ministerio de Industria, Turismo y Comercio
@@ -32,14 +29,12 @@ public interface IPassStoreKS {
 
     /**
      * <p>
-     * Se llama a este método cuando el {@link IPKStoreManager} intenta acceder a la clave privada asociada a un
-     * certificado contenido en el KeyStore.
+     * Se llama a este método cuando el {@link IPKStoreManager} intenta acceder a la clave privada
+     * asociada a un certificado contenido en el KeyStore.
      * </p>
      *
-     * @param certificate
-     *            Certificado que tiene la clave
-     * @param alias
-     *            Alias del certificado
+     * @param certificate Certificado que tiene la clave
+     * @param alias       Alias del certificado
      *
      * @return Se debe devolver la contraseña de acceso a la clave
      */

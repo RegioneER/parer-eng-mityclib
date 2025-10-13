@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.utilidades;
@@ -29,8 +25,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.bouncycastle.util.encoders.HexEncoder;
 
 import es.mityc.firmaJava.libreria.ConstantesXADES;
@@ -44,125 +40,125 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  */
 public class Utilidades { // implements ConstantesXADES
 
-    static Log logger = LogFactory.getLog(Utilidades.class);
+    static Logger logger = LoggerFactory.getLogger(Utilidades.class);
 
     private static final String STR_ABRIENDO_CONEXION = "Abriendo conexion con ";
     private static final String STR_TRES_PUNTOS = "...";
 
     public static boolean isAfirmativo(String valor) {
 
-        if ((valor != null) && (((valor.trim()).toUpperCase()).equals(ConstantesXADES.YES_MAYUSCULA)
-                || ((valor.trim()).toUpperCase()).equals(ConstantesXADES.SI_MAYUSCULA))) {
-            return true;
-        }
-        // En cualquier otro caso serÃ¡ falso
-        return false;
+	if ((valor != null) && (((valor.trim()).toUpperCase()).equals(ConstantesXADES.YES_MAYUSCULA)
+		|| ((valor.trim()).toUpperCase()).equals(ConstantesXADES.SI_MAYUSCULA))) {
+	    return true;
+	}
+	// En cualquier otro caso serÃ¡ falso
+	return false;
     }
 
     public static boolean tieneValor(String valor) {
-        if (valor != null && !valor.trim().equals(ConstantesXADES.CADENA_VACIA)) {
-            return true;
-        }
-        return false;
+	if (valor != null && !valor.trim().equals(ConstantesXADES.CADENA_VACIA)) {
+	    return true;
+	}
+	return false;
     }
 
     public static boolean isEmpty(String valor) {
-        return (valor == null || valor.trim().equals(ConstantesXADES.CADENA_VACIA));
+	return (valor == null || valor.trim().equals(ConstantesXADES.CADENA_VACIA));
     }
 
     /**
-     * Este metodo recupera via URLConnection el fichero ubicado en la URL pasada como parametro. Devuelve un objeto
-     * tipo FileInputStream
+     * Este metodo recupera via URLConnection el fichero ubicado en la URL pasada como parametro.
+     * Devuelve un objeto tipo FileInputStream
      *
      * @return
      */
     public static InputStream getInputStreamFromURL(String _url) throws Exception {
-        URL url = new URL(_url);
-        logger.debug(STR_ABRIENDO_CONEXION + _url + STR_TRES_PUNTOS);
-        url.openConnection();
-        // Copia el recurso al fichero local, usa un fichero remoto
-        // si no esta especificado el nombre del fichero local
-        InputStream is = url.openStream();
+	URL url = new URL(_url);
+	logger.debug(STR_ABRIENDO_CONEXION + _url + STR_TRES_PUNTOS);
+	url.openConnection();
+	// Copia el recurso al fichero local, usa un fichero remoto
+	// si no esta especificado el nombre del fichero local
+	InputStream is = url.openStream();
 
-        System.out.flush();
+	System.out.flush();
 
-        return is;
+	return is;
     }
 
     public static void writeInputStream(File sourceFile, Writer wtargetFile) throws IOException {
-        byte[] buffer = new byte[510];
-        int numBytes = 0;
-        BufferedInputStream bSourceFile = null;
-        BufferedWriter targetFile = (BufferedWriter) wtargetFile;
-        try {
-            bSourceFile = new BufferedInputStream(new FileInputStream(sourceFile));
-            String aux = ConstantesXADES.CADENA_VACIA;
-            do {
-                numBytes = bSourceFile.read(buffer);
-                if (numBytes == -1)
-                    break;
-                aux = new String(Base64Coder.encode(buffer, numBytes));
-                targetFile.write(aux);
-            } while (numBytes >= 0);
-        } finally {
-            if (null != bSourceFile)
-                bSourceFile.close();
-        }
+	byte[] buffer = new byte[510];
+	int numBytes = 0;
+	BufferedInputStream bSourceFile = null;
+	BufferedWriter targetFile = (BufferedWriter) wtargetFile;
+	try {
+	    bSourceFile = new BufferedInputStream(new FileInputStream(sourceFile));
+	    String aux = ConstantesXADES.CADENA_VACIA;
+	    do {
+		numBytes = bSourceFile.read(buffer);
+		if (numBytes == -1)
+		    break;
+		aux = new String(Base64Coder.encode(buffer, numBytes));
+		targetFile.write(aux);
+	    } while (numBytes >= 0);
+	} finally {
+	    if (null != bSourceFile)
+		bSourceFile.close();
+	}
 
     }
 
-    public static void writeInputStream(File sourceFile, File attachedFile, Writer wtargetFile) throws IOException {
-        byte[] buffer = new byte[510];
-        int numBytes = 0;
+    public static void writeInputStream(File sourceFile, File attachedFile, Writer wtargetFile)
+	    throws IOException {
+	byte[] buffer = new byte[510];
+	int numBytes = 0;
 
-        BufferedInputStream bSourceFile = null;
-        BufferedWriter targetFile = (BufferedWriter) wtargetFile;
+	BufferedInputStream bSourceFile = null;
+	BufferedWriter targetFile = (BufferedWriter) wtargetFile;
 
-        BufferedWriter ficheroAdjuntoDatos = new BufferedWriter(new FileWriter(attachedFile));
-        attachedFile.deleteOnExit();
+	BufferedWriter ficheroAdjuntoDatos = new BufferedWriter(new FileWriter(attachedFile));
+	attachedFile.deleteOnExit();
 
-        try {
-            bSourceFile = new BufferedInputStream(new FileInputStream(sourceFile));
-            String aux = ConstantesXADES.CADENA_VACIA;
-            do {
-                numBytes = bSourceFile.read(buffer);
-                if (numBytes == -1)
-                    break;
-                aux = new String(Base64Coder.encode(buffer, numBytes));
-                targetFile.write(aux);
-                ficheroAdjuntoDatos.write(aux);
-                targetFile.flush();
-                ficheroAdjuntoDatos.flush();
+	try {
+	    bSourceFile = new BufferedInputStream(new FileInputStream(sourceFile));
+	    String aux = ConstantesXADES.CADENA_VACIA;
+	    do {
+		numBytes = bSourceFile.read(buffer);
+		if (numBytes == -1)
+		    break;
+		aux = new String(Base64Coder.encode(buffer, numBytes));
+		targetFile.write(aux);
+		ficheroAdjuntoDatos.write(aux);
+		targetFile.flush();
+		ficheroAdjuntoDatos.flush();
 
-            } while (numBytes >= 0);
+	    } while (numBytes >= 0);
 
-        } finally {
-            if (null != ficheroAdjuntoDatos)
-                ficheroAdjuntoDatos.close();
+	} finally {
+	    if (null != ficheroAdjuntoDatos)
+		ficheroAdjuntoDatos.close();
 
-            if (null != bSourceFile)
-                bSourceFile.close();
-        }
+	    if (null != bSourceFile)
+		bSourceFile.close();
+	}
 
     }
 
     /**
      * Codifica un array de bytes a Hexadecimal
      *
-     * @param byte[]
-     *            Datos a codificar
+     * @param byte[] Datos a codificar
      *
      * @return String Datos codificados en hexadecimal
      */
     public static String binary2String(byte[] data) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            HexEncoder enc = new HexEncoder();
-            enc.encode(data, 0, data.length, baos);
-            return baos.toString();
-        } catch (IOException ex) {
-        }
-        return null;
+	try {
+	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    HexEncoder enc = new HexEncoder();
+	    enc.encode(data, 0, data.length, baos);
+	    return baos.toString();
+	} catch (IOException ex) {
+	}
+	return null;
     }
 
     /**
@@ -171,23 +167,25 @@ public class Utilidades { // implements ConstantesXADES
      * @param data1
      * @param data2
      *
-     * @return <code>true</code> si tienen el mismo contenido, <code>false</code> en cualquier otro caso
+     * @return <code>true</code> si tienen el mismo contenido, <code>false</code> en cualquier otro
+     *         caso
      */
     public static boolean isEqual(byte[] data1, byte[] data2) {
-        if ((data1 == null) && (data2 == null))
-            return true;
-        if ((data1 == null) || (data2 == null))
-            return false;
-        if (data1.length != data2.length)
-            return false;
-        for (int i = 0; i < data1.length; i++) {
-            if (data1[i] != data2[i])
-                return false;
-        }
-        return true;
+	if ((data1 == null) && (data2 == null))
+	    return true;
+	if ((data1 == null) || (data2 == null))
+	    return false;
+	if (data1.length != data2.length)
+	    return false;
+	for (int i = 0; i < data1.length; i++) {
+	    if (data1[i] != data2[i])
+		return false;
+	}
+	return true;
     }
 
-    private static int[] XML_ENTITIES = { 34, 38, 39, 60, 62 };
+    private static int[] XML_ENTITIES = {
+	    34, 38, 39, 60, 62 };
 
     /**
      * <p>
@@ -197,26 +195,25 @@ public class Utilidades { // implements ConstantesXADES
      * Basada en la clase StringEscapeUtils de commons-lang pero sin cambiar los caracteres unicode.
      * </p>
      *
-     * @param str
-     *            cadena a escapar
+     * @param str cadena a escapar
      *
      * @return
      */
     public static String escapeXML(String str) {
-        StringWriter stringWriter = new StringWriter(
-                (int) ((double) str.length() + (double) str.length() * 0.10000000000000001D));
-        int len = str.length();
-        for (int i = 0; i < len; i++) {
-            char c = str.charAt(i);
-            if ((XML_ENTITIES[0] == c) || (XML_ENTITIES[1] == c) || (XML_ENTITIES[2] == c) || (XML_ENTITIES[3] == c)
-                    || (XML_ENTITIES[4] == c)) {
-                stringWriter.write("&#");
-                stringWriter.write(Integer.toString(c, 10));
-                stringWriter.write(59);
-            } else {
-                stringWriter.write(c);
-            }
-        }
-        return stringWriter.toString();
+	StringWriter stringWriter = new StringWriter(
+		(int) ((double) str.length() + (double) str.length() * 0.10000000000000001D));
+	int len = str.length();
+	for (int i = 0; i < len; i++) {
+	    char c = str.charAt(i);
+	    if ((XML_ENTITIES[0] == c) || (XML_ENTITIES[1] == c) || (XML_ENTITIES[2] == c)
+		    || (XML_ENTITIES[3] == c) || (XML_ENTITIES[4] == c)) {
+		stringWriter.write("&#");
+		stringWriter.write(Integer.toString(c, 10));
+		stringWriter.write(59);
+	    } else {
+		stringWriter.write(c);
+	    }
+	}
+	return stringWriter.toString();
     }
 }

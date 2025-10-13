@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.xades;
@@ -26,8 +22,8 @@ import es.mityc.javasign.certificate.IRecoverElements;
 import es.mityc.javasign.certificate.UnknownElementClassException;
 
 /**
- * Con esta clase se indica que no se debe intentar recuperar ni guardar ninguno de los elementos relacionados con los
- * certificados de una firma.
+ * Con esta clase se indica que no se debe intentar recuperar ni guardar ninguno de los elementos
+ * relacionados con los certificados de una firma.
  *
  * @author Ministerio de Industria, Turismo y Comercio
  *
@@ -51,15 +47,16 @@ public class NullStoreElements implements IStoreElements, IRecoverElements {
      *      es.mityc.firmaJava.certificates.status.ICertStatusElement)
      */
     public String[] storeCertAndStatus(X509Certificate certificate, ICertStatus certStatus) {
-        return new String[0];
+	return new String[0];
     }
 
     /**
-     * @see es.mityc.javasign.certificate.IRecoverElements#getElement(java.util.Map, java.lang.Class)
+     * @see es.mityc.javasign.certificate.IRecoverElements#getElement(java.util.Map,
+     *      java.lang.Class)
      */
     public <T> T getElement(Map<String, Object> props, Class<T> elementClass)
-            throws ElementNotFoundException, UnknownElementClassException {
-        return null;
+	    throws ElementNotFoundException, UnknownElementClassException {
+	return null;
     }
 
 }

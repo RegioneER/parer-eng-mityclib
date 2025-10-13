@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -38,15 +34,16 @@ public class CertificateValues extends CertificateValuesType {
      * @param schema
      */
     public CertificateValues(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
     /**
      * @param schema
      * @param certificates
      */
-    public CertificateValues(XAdESSchemas schema, ArrayList<EncapsulatedX509Certificate> certificates) {
-        super(schema, certificates);
+    public CertificateValues(XAdESSchemas schema,
+	    ArrayList<EncapsulatedX509Certificate> certificates) {
+	super(schema, certificates);
     }
 
     /**
@@ -54,8 +51,8 @@ public class CertificateValues extends CertificateValuesType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERTIFICATE_VALUES);
-        super.load(element);
+	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERTIFICATE_VALUES);
+	super.load(element);
     }
 
     /**
@@ -63,7 +60,8 @@ public class CertificateValues extends CertificateValuesType {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), schema.getSchemaUri(), ConstantesXADES.CERTIFICATE_VALUES);
+	return isElementName(nodeToElement(node), schema.getSchemaUri(),
+		ConstantesXADES.CERTIFICATE_VALUES);
     }
 
     /**
@@ -71,8 +69,9 @@ public class CertificateValues extends CertificateValuesType {
      *      java.lang.String)
      */
     @Override
-    public Element createElement(Document doc, String namespaceXAdES) throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXAdES);
+    public Element createElement(Document doc, String namespaceXAdES)
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -80,10 +79,10 @@ public class CertificateValues extends CertificateValuesType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        Element res = doc.createElementNS(schema.getSchemaUri(),
-                namespaceXAdES + ":" + ConstantesXADES.CERTIFICATE_VALUES);
-        super.addContent(res, namespaceXAdES);
-        return res;
+	Element res = doc.createElementNS(schema.getSchemaUri(),
+		namespaceXAdES + ":" + ConstantesXADES.CERTIFICATE_VALUES);
+	super.addContent(res, namespaceXAdES);
+	return res;
     }
 
 }

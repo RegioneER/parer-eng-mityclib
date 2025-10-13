@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.ts;
@@ -34,7 +30,7 @@ public class TSClienteError extends Exception {
      * <p>
      */
     public TSClienteError() {
-        super();
+	super();
     }
 
     /**
@@ -42,11 +38,10 @@ public class TSClienteError extends Exception {
      * Crea una nueva instancia de TSClienteError.
      * </p>
      *
-     * @param mensaje
-     *            Valor del mensaje
+     * @param mensaje Valor del mensaje
      */
     public TSClienteError(String mensaje) {
-        super(mensaje);
+	super(mensaje);
     }
 
     /**
@@ -54,11 +49,10 @@ public class TSClienteError extends Exception {
      * Crea una nueva instancia de TSClienteError.
      * </p>
      *
-     * @param causa
-     *            Excepcion original
+     * @param causa Excepcion original
      */
     public TSClienteError(Throwable causa) {
-        super(causa);
+	super(causa);
     }
 
     /**
@@ -66,13 +60,11 @@ public class TSClienteError extends Exception {
      * Crea una nueva instancia de TSClienteError.
      * </p>
      *
-     * @param mensaje
-     *            Valor del mensaje
-     * @param causa
-     *            Excepcion original
+     * @param mensaje Valor del mensaje
+     * @param causa   Excepcion original
      */
     public TSClienteError(String mensaje, Throwable causa) {
-        super(mensaje, causa);
+	super(mensaje, causa);
     }
 
     /**
@@ -83,6 +75,6 @@ public class TSClienteError extends Exception {
      * @return "Nombre de la clase":"Mensaje de la excepcion"
      */
     public String toString() {
-        return super.toString();
+	return super.toString();
     }
 }

@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -40,32 +36,33 @@ public class DocumentationReferencesType extends AbstractXADESElement {
      * @param schema
      */
     public DocumentationReferencesType(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
-    public DocumentationReferencesType(XAdESSchemas schema, ArrayList<DocumentationReference> list) {
-        super(schema);
-        this.references = list;
+    public DocumentationReferencesType(XAdESSchemas schema,
+	    ArrayList<DocumentationReference> list) {
+	super(schema);
+	this.references = list;
     }
 
     public ArrayList<DocumentationReference> getList() {
-        return references;
+	return references;
     }
 
     public void setList(ArrayList<DocumentationReference> list) {
-        this.references = list;
+	this.references = list;
     }
 
     public void addReference(DocumentationReference qualifier) {
-        if (references == null)
-            references = new ArrayList<DocumentationReference>();
-        references.add(qualifier);
+	if (references == null)
+	    references = new ArrayList<DocumentationReference>();
+	references.add(qualifier);
     }
 
     public void addReference(URI uri) {
-        if (references == null)
-            references = new ArrayList<DocumentationReference>();
-        references.add(new DocumentationReference(schema, uri));
+	if (references == null)
+	    references = new ArrayList<DocumentationReference>();
+	references.add(new DocumentationReference(schema, uri));
     }
 
     /*
@@ -75,38 +72,41 @@ public class DocumentationReferencesType extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof DocumentationReferencesType) {
-            DocumentationReferencesType cvt = (DocumentationReferencesType) obj;
-            ArrayList<DocumentationReference> comp = cvt.references;
-            if (((references == null) || (references.isEmpty())) && ((comp == null) || (comp.isEmpty())))
-                return true;
-            if (((references != null) && (comp != null)) && (references.size() == comp.size())) {
-                Iterator<DocumentationReference> itThis = references.iterator();
-                Iterator<DocumentationReference> itComp = comp.iterator();
-                while (itThis.hasNext()) {
-                    if (!itThis.next().equals(itComp.next()))
-                        return false;
-                }
-                return true;
-            }
-        }
-        return false;
+	if (obj instanceof DocumentationReferencesType) {
+	    DocumentationReferencesType cvt = (DocumentationReferencesType) obj;
+	    ArrayList<DocumentationReference> comp = cvt.references;
+	    if (((references == null) || (references.isEmpty()))
+		    && ((comp == null) || (comp.isEmpty())))
+		return true;
+	    if (((references != null) && (comp != null)) && (references.size() == comp.size())) {
+		Iterator<DocumentationReference> itThis = references.iterator();
+		Iterator<DocumentationReference> itComp = comp.iterator();
+		while (itThis.hasNext()) {
+		    if (!itThis.next().equals(itComp.next()))
+			return false;
+		}
+		return true;
+	    }
+	}
+	return false;
     }
 
     @Override
     protected void addContent(Element element) throws InvalidInfoNodeException {
-        if ((references != null) && (references.size() > 0)) {
-            Iterator<DocumentationReference> it = references.iterator();
-            while (it.hasNext()) {
-                element.appendChild(it.next().createElement(element.getOwnerDocument(), namespaceXAdES));
-            }
-        } else
-            throw new InvalidInfoNodeException("Nodo DocumentationReferencesType no tiene ningún hijo");
+	if ((references != null) && (references.size() > 0)) {
+	    Iterator<DocumentationReference> it = references.iterator();
+	    while (it.hasNext()) {
+		element.appendChild(
+			it.next().createElement(element.getOwnerDocument(), namespaceXAdES));
+	    }
+	} else
+	    throw new InvalidInfoNodeException(
+		    "Nodo DocumentationReferencesType no tiene ningún hijo");
     }
 
     @Override
     public void addContent(Element element, String namespaceXAdES) throws InvalidInfoNodeException {
-        super.addContent(element, namespaceXAdES);
+	super.addContent(element, namespaceXAdES);
     }
 
     /*
@@ -116,25 +116,28 @@ public class DocumentationReferencesType extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        NodeList nodos = element.getChildNodes();
-        ArrayList<DocumentationReference> temp = new ArrayList<DocumentationReference>(nodos.getLength());
-        for (int i = 0; i < nodos.getLength(); i++) {
-            Node nodo = nodos.item(i);
-            if (isDecorationNode(nodo))
-                continue;
+	NodeList nodos = element.getChildNodes();
+	ArrayList<DocumentationReference> temp = new ArrayList<DocumentationReference>(
+		nodos.getLength());
+	for (int i = 0; i < nodos.getLength(); i++) {
+	    Node nodo = nodos.item(i);
+	    if (isDecorationNode(nodo))
+		continue;
 
-            if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                throw new InvalidInfoNodeException("Hijo de DocumentationReferencesType no es un elemento");
+	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		throw new InvalidInfoNodeException(
+			"Hijo de DocumentationReferencesType no es un elemento");
 
-            DocumentationReference reference = new DocumentationReference(schema);
-            reference.load((Element) nodo);
-            temp.add(reference);
-        }
+	    DocumentationReference reference = new DocumentationReference(schema);
+	    reference.load((Element) nodo);
+	    temp.add(reference);
+	}
 
-        if (temp.size() == 0)
-            throw new InvalidInfoNodeException("DocumentationReferencesType debe tener al menos un hijo");
+	if (temp.size() == 0)
+	    throw new InvalidInfoNodeException(
+		    "DocumentationReferencesType debe tener al menos un hijo");
 
-        references = temp;
+	references = temp;
     }
 
 }

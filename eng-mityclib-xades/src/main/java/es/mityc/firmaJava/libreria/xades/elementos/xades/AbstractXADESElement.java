@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -37,23 +33,22 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
     protected String namespaceXAdES;
 
     protected AbstractXADESElement(XAdESSchemas schema) {
-        super();
-        this.schema = schema;
+	super();
+	this.schema = schema;
     }
 
     /**
      * @return the schema
      */
     public XAdESSchemas getSchema() {
-        return schema;
+	return schema;
     }
 
     /**
-     * @param schema
-     *            the schema to set
+     * @param schema the schema to set
      */
     public void setSchema(XAdESSchemas schema) {
-        this.schema = schema;
+	this.schema = schema;
     }
 
     /**
@@ -62,9 +57,10 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
      * @see es.mityc.firmaJava.libreria.xades.elementos.xmldsig.AbstractXDsigElement#createElement(org.w3c.dom.Document,
      *      java.lang.String)
      */
-    protected Element createElement(Document doc, String namespaceXAdES) throws InvalidInfoNodeException {
-        setNamespaceXAdES(namespaceXAdES);
-        return createElement(doc);
+    protected Element createElement(Document doc, String namespaceXAdES)
+	    throws InvalidInfoNodeException {
+	setNamespaceXAdES(namespaceXAdES);
+	return createElement(doc);
     }
 
     /**
@@ -79,9 +75,9 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
      * @throws InvalidInfoNodeException
      */
     protected Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-            throws InvalidInfoNodeException {
-        setNamespaceXAdES(namespaceXAdES);
-        return super.createElement(doc, namespaceXDsig);
+	    throws InvalidInfoNodeException {
+	setNamespaceXAdES(namespaceXAdES);
+	return super.createElement(doc, namespaceXDsig);
     }
 
     /**
@@ -90,9 +86,10 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
      * @see es.mityc.firmaJava.libreria.xades.elementos.xmldsig.AbstractXDsigElement#addContent(org.w3c.dom.Document,
      *      org.w3c.dom.Element, java.lang.String)
      */
-    protected void addContent(Element element, String namespaceXAdES) throws InvalidInfoNodeException {
-        setNamespaceXAdES(namespaceXAdES);
-        addContent(element);
+    protected void addContent(Element element, String namespaceXAdES)
+	    throws InvalidInfoNodeException {
+	setNamespaceXAdES(namespaceXAdES);
+	addContent(element);
     }
 
     /**
@@ -106,24 +103,23 @@ public abstract class AbstractXADESElement extends AbstractXDsigElement {
      * @throws InvalidInfoNodeException
      */
     protected void addContent(Element element, String namespaceXAdES, String namespaceXDsig)
-            throws InvalidInfoNodeException {
-        setNamespaceXAdES(namespaceXAdES);
-        super.addContent(element, namespaceXDsig);
+	    throws InvalidInfoNodeException {
+	setNamespaceXAdES(namespaceXAdES);
+	super.addContent(element, namespaceXDsig);
     }
 
     /**
      * @return the namespaceXAdES
      */
     public String getNamespaceXAdES() {
-        return namespaceXAdES;
+	return namespaceXAdES;
     }
 
     /**
-     * @param namespaceXAdES
-     *            the namespaceXAdES to set
+     * @param namespaceXAdES the namespaceXAdES to set
      */
     public void setNamespaceXAdES(String namespaceXAdES) {
-        this.namespaceXAdES = namespaceXAdES;
+	this.namespaceXAdES = namespaceXAdES;
     }
 
 }

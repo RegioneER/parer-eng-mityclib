@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xmldsig;
@@ -38,17 +34,17 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
     private String nameElement;
 
     public AbstractXDsigIntegerElement(String nameElement, BigInteger data) {
-        super();
-        this.nameElement = nameElement;
-        this.data = new XMLDataIntegerType(data);
+	super();
+	this.nameElement = nameElement;
+	this.data = new XMLDataIntegerType(data);
     }
 
     /**
      * @param nameElement
      */
     public AbstractXDsigIntegerElement(String nameElement) {
-        super();
-        this.nameElement = nameElement;
+	super();
+	this.nameElement = nameElement;
     }
 
     /**
@@ -56,12 +52,14 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        if (data == null) {
-            throw new InvalidInfoNodeException("Informacion insuficiente para escribir elemento " + nameElement);
-        }
-        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG, namespaceXDsig + ":" + nameElement);
-        data.addContent(res);
-        return res;
+	if (data == null) {
+	    throw new InvalidInfoNodeException(
+		    "Informacion insuficiente para escribir elemento " + nameElement);
+	}
+	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		namespaceXDsig + ":" + nameElement);
+	data.addContent(res);
+	return res;
     }
 
     /**
@@ -69,8 +67,9 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      *      java.lang.String)
      */
     @Override
-    public Element createElement(Document doc, String namespaceXDsig) throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXDsig);
+    public Element createElement(Document doc, String namespaceXDsig)
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXDsig);
     }
 
     /**
@@ -78,15 +77,15 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof AbstractXDsigIntegerElement) {
-            AbstractXDsigIntegerElement desc = (AbstractXDsigIntegerElement) obj;
-            if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data))) {
-                return true;
-            }
-        } else {
-            return data.equals(obj);
-        }
-        return false;
+	if (obj instanceof AbstractXDsigIntegerElement) {
+	    AbstractXDsigIntegerElement desc = (AbstractXDsigIntegerElement) obj;
+	    if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data))) {
+		return true;
+	    }
+	} else {
+	    return data.equals(obj);
+	}
+	return false;
     }
 
     /**
@@ -94,24 +93,24 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, ConstantesXADES.SCHEMA_DSIG, nameElement);
-        data = new XMLDataIntegerType(null);
-        data.load(element);
+	checkElementName(element, ConstantesXADES.SCHEMA_DSIG, nameElement);
+	data = new XMLDataIntegerType(null);
+	data.load(element);
     }
 
     public void setValue(BigInteger value) {
-        if (data == null) {
-            data = new XMLDataIntegerType(value);
-        } else {
-            data.setValue(value);
-        }
+	if (data == null) {
+	    data = new XMLDataIntegerType(value);
+	} else {
+	    data.setValue(value);
+	}
     }
 
     public BigInteger getValue() {
-        if (data != null) {
-            return data.getValue();
-        }
-        return null;
+	if (data != null) {
+	    return data.getValue();
+	}
+	return null;
     }
 
     /**
@@ -119,6 +118,6 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG, nameElement);
+	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG, nameElement);
     }
 }

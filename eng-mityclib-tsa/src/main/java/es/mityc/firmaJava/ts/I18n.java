@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.ts;
@@ -39,13 +35,12 @@ public class I18n implements ConstantesTSA {
      * Obtiene el valor de una cadena definida para el idioma por defecto configurado.
      * </p>
      *
-     * @param key
-     *            Clave que identifica la cadena de texto
+     * @param key Clave que identifica la cadena de texto
      *
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(final String key) {
-        return getResource(key, locale);
+	return getResource(key, locale);
     }
 
     /**
@@ -53,15 +48,13 @@ public class I18n implements ConstantesTSA {
      * Obtiene el valor de una cadena definida para el idioma pasado por parametro en el Locale.
      * </p>
      *
-     * @param key
-     *            Clave que identifica la cadena de texto
-     * @param locale
-     *            Locale del idioma del cual queremos la traduccion
+     * @param key    Clave que identifica la cadena de texto
+     * @param locale Locale del idioma del cual queremos la traduccion
      *
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(final String key, final Locale locale) {
-        return ResourceBundle.getBundle(NOMBRE_LIBRERIA, locale).getString(key);
+	return ResourceBundle.getBundle(NOMBRE_LIBRERIA, locale).getString(key);
     }
 
     /**
@@ -72,7 +65,7 @@ public class I18n implements ConstantesTSA {
      * @return Locale que se utiliza en ese momento
      */
     public static Locale getLocale() {
-        return locale;
+	return locale;
     }
 
     /**
@@ -80,11 +73,10 @@ public class I18n implements ConstantesTSA {
      * Asigna el Locale que se utilizara en las traducciones.
      * </p>
      *
-     * @param _locale
-     *            Locale que se utilizara en las traducciones
+     * @param _locale Locale que se utilizara en las traducciones
      */
     public static void setLocale(final Locale _locale) {
-        locale = _locale;
+	locale = _locale;
     }
 
     /**
@@ -92,12 +84,10 @@ public class I18n implements ConstantesTSA {
      * Asigna el Locale que se utilizara en las traducciones.
      * </p>
      *
-     * @param country
-     *            Pais
-     * @param dialect
-     *            Dialecto del idioma
+     * @param country Pais
+     * @param dialect Dialecto del idioma
      */
     public static void setLocaleCountry(final String country, final String dialect) {
-        locale = new Locale(country, dialect);
+	locale = new Locale(country, dialect);
     }
 }

@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.io;
@@ -40,7 +36,7 @@ public class CharWrittable implements IWriter {
      * </p>
      */
     public CharWrittable() {
-        caw = new CharArrayWriter();
+	caw = new CharArrayWriter();
     }
 
     /**
@@ -48,15 +44,12 @@ public class CharWrittable implements IWriter {
      * Escribe nuevos datos en el buffer de escritura.
      * </p>
      *
-     * @param c
-     *            array de caracteres a escribir
-     * @param off
-     *            Offset sobre el array de caracteres
-     * @param len
-     *            cantidad de bytes a escribir
+     * @param c   array de caracteres a escribir
+     * @param off Offset sobre el array de caracteres
+     * @param len cantidad de bytes a escribir
      */
     public void write(final char[] c, final int off, final int len) {
-        caw.write(c, off, len);
+	caw.write(c, off, len);
     }
 
     /**
@@ -64,13 +57,12 @@ public class CharWrittable implements IWriter {
      * Asegura el contenido del buffer interno.
      * </p>
      *
-     * @throws IOException
-     *             Lanzada cuando se produce un error al asegurar el buffer interno
+     * @throws IOException Lanzada cuando se produce un error al asegurar el buffer interno
      *
      * @see es.mityc.javasign.io.IWriter#flush()
      */
     public void flush() throws IOException {
-        caw.flush();
+	caw.flush();
     }
 
     /**
@@ -81,7 +73,7 @@ public class CharWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#reset()
      */
     public void reset() {
-        caw.reset();
+	caw.reset();
     }
 
     /**
@@ -94,7 +86,7 @@ public class CharWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#size()
      */
     public int size() {
-        return caw.size();
+	return caw.size();
     }
 
     /**
@@ -107,6 +99,6 @@ public class CharWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#toByteArray()
      */
     public byte[] toByteArray() {
-        return caw.toString().getBytes();
+	return caw.toString().getBytes();
     }
 }

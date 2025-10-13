@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -43,7 +39,7 @@ public class EncapsulatedX509Certificate extends EncapsulatedPKIDataType {
      * @param schema
      */
     public EncapsulatedX509Certificate(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
     /**
@@ -51,7 +47,7 @@ public class EncapsulatedX509Certificate extends EncapsulatedPKIDataType {
      * @param id
      */
     public EncapsulatedX509Certificate(XAdESSchemas schema, String id) {
-        super(schema, id);
+	super(schema, id);
     }
 
     /**
@@ -59,52 +55,55 @@ public class EncapsulatedX509Certificate extends EncapsulatedPKIDataType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.ENCAPSULATED_X_509_CERTIFICATE);
-        super.load(element);
+	checkElementName(element, schema.getSchemaUri(),
+		ConstantesXADES.ENCAPSULATED_X_509_CERTIFICATE);
+	super.load(element);
 
-        // Si no esta en DER esta mal
-        EncodingEnum encoding = getEncoding();
-        if ((encoding != null) && (!encoding.equals(EncodingEnum.DER_ENCODED)))
-            throw new InvalidInfoNodeException(
-                    "El contenido de EncapsulatedX509Certificate debe estar en la codificacion "
-                            + EncodingEnum.DER_ENCODED.getEncodingUri().toString());
+	// Si no esta en DER esta mal
+	EncodingEnum encoding = getEncoding();
+	if ((encoding != null) && (!encoding.equals(EncodingEnum.DER_ENCODED)))
+	    throw new InvalidInfoNodeException(
+		    "El contenido de EncapsulatedX509Certificate debe estar en la codificacion "
+			    + EncodingEnum.DER_ENCODED.getEncodingUri().toString());
 
-        // Comprueba que el valor recogido es un certificado X509
-        X509Certificate cert;
-        try {
-            cert = getX509Certificate();
-        } catch (CertificateException ex) {
-            throw new InvalidInfoNodeException(
-                    "El contenido de EncapsulatedX509Certificate no es un certificado X509 valido", ex);
-        }
-        if (cert == null) {
-            throw new InvalidInfoNodeException(
-                    "El contenido de EncapsulatedX509Certificate no es un certificado X509 valido");
-        }
+	// Comprueba que el valor recogido es un certificado X509
+	X509Certificate cert;
+	try {
+	    cert = getX509Certificate();
+	} catch (CertificateException ex) {
+	    throw new InvalidInfoNodeException(
+		    "El contenido de EncapsulatedX509Certificate no es un certificado X509 valido",
+		    ex);
+	}
+	if (cert == null) {
+	    throw new InvalidInfoNodeException(
+		    "El contenido de EncapsulatedX509Certificate no es un certificado X509 valido");
+	}
     }
 
     public X509Certificate getX509Certificate() throws CertificateException {
-        String value = getValue();
-        if (value != null) {
-            byte[] data;
-            try {
-                data = Base64Coder.decode(value);
-            } catch (IllegalArgumentException ex) {
-                throw new CertificateException("Contenido base64 de EncapsulatedX509Certificate invalido", ex);
-            }
-            ByteArrayInputStream bais = new ByteArrayInputStream(data);
-            CertificateFactory cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
-            Certificate cert = cf.generateCertificate(bais);
-            if (cert instanceof X509Certificate)
-                return (X509Certificate) cert;
-            throw new CertificateException(
-                    "Contenido base64 de EncapsulatedX509Certificate no es un certificado tipo X.509");
-        } else
-            return null;
+	String value = getValue();
+	if (value != null) {
+	    byte[] data;
+	    try {
+		data = Base64Coder.decode(value);
+	    } catch (IllegalArgumentException ex) {
+		throw new CertificateException(
+			"Contenido base64 de EncapsulatedX509Certificate invalido", ex);
+	    }
+	    ByteArrayInputStream bais = new ByteArrayInputStream(data);
+	    CertificateFactory cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
+	    Certificate cert = cf.generateCertificate(bais);
+	    if (cert instanceof X509Certificate)
+		return (X509Certificate) cert;
+	    throw new CertificateException(
+		    "Contenido base64 de EncapsulatedX509Certificate no es un certificado tipo X.509");
+	} else
+	    return null;
     }
 
     public void setX509Certificate(X509Certificate certificate) throws CertificateException {
-        setValue(new String(Base64Coder.encode(certificate.getEncoded())));
+	setValue(new String(Base64Coder.encode(certificate.getEncoded())));
     }
 
     /**
@@ -112,8 +111,8 @@ public class EncapsulatedX509Certificate extends EncapsulatedPKIDataType {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), schema.getSchemaUri(),
-                ConstantesXADES.ENCAPSULATED_X_509_CERTIFICATE);
+	return isElementName(nodeToElement(node), schema.getSchemaUri(),
+		ConstantesXADES.ENCAPSULATED_X_509_CERTIFICATE);
     }
 
     /**
@@ -121,8 +120,9 @@ public class EncapsulatedX509Certificate extends EncapsulatedPKIDataType {
      *      java.lang.String)
      */
     @Override
-    public Element createElement(Document doc, String namespaceXAdES) throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXAdES);
+    public Element createElement(Document doc, String namespaceXAdES)
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -130,10 +130,10 @@ public class EncapsulatedX509Certificate extends EncapsulatedPKIDataType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        Element res = doc.createElementNS(schema.getSchemaUri(),
-                namespaceXAdES + ":" + ConstantesXADES.ENCAPSULATED_X_509_CERTIFICATE);
-        super.addContent(res, namespaceXAdES);
-        return res;
+	Element res = doc.createElementNS(schema.getSchemaUri(),
+		namespaceXAdES + ":" + ConstantesXADES.ENCAPSULATED_X_509_CERTIFICATE);
+	super.addContent(res, namespaceXAdES);
+	return res;
     }
 
 }

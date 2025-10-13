@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades;
@@ -24,8 +20,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 import es.mityc.firmaJava.libreria.ConstantesXADES;
@@ -48,7 +44,7 @@ import es.mityc.javasign.xml.xades.TransformProxy;
 public class DatosNodosFirmados {
 
     /** Logger. */
-    private static final Log LOGGER = LogFactory.getLog(DatosNodosFirmados.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatosNodosFirmados.class);
     /** Internacionalizador. */
     private static final II18nManager I18N = I18nFactory.getI18nManager(ConstantsXAdES.LIB_NAME);
 
@@ -68,46 +64,55 @@ public class DatosNodosFirmados {
     }
 
     public DatosNodosFirmados(ObjectIdentifier oi, String desc, String mimeType, URI encoding) {
-        this.oi = oi;
-        this.desc = desc;
-        this.mimeType = mimeType;
-        this.encoding = encoding;
+	this.oi = oi;
+	this.desc = desc;
+	this.mimeType = mimeType;
+	this.encoding = encoding;
     }
 
     public void setReference(ReferenceProxy ref) {
-        this.reference = ref;
-        // si la referencia señala a un nodo ds:object intenta obtener sus datos de mimetype y encoding
-        if ((ref != null) && (!isExternalData())) {
-            Element el = UtilidadTratarNodo.getElementById(ref.getElement().getOwnerDocument(), getId());
-            NombreNodo nn = new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT);
-            if (nn.equals(el)) {
-                setMimeType(el.getAttribute(ConstantesXADES.XADES_TAG_MIME_TYPE));
-                String data = el.getAttribute(ConstantesXADES.XADES_TAG_ENCODING);
-                if (data != null) {
-                    try {
-                        // FIX: Cambia los espacios por %20 para evitar problemas con la clase URI
-                        data = data.replace(" ", "%20");
-                        setEncoding(new URI(data));
-                    } catch (URISyntaxException ex) {
-                        LOGGER.warn(I18N.getLocalMessage(ConstantsXAdES.I18N_VALIDATE_9, ex.getMessage()));
-                    }
-                }
-            }
-        }
+	this.reference = ref;
+	// si la referencia señala a un nodo ds:object intenta obtener sus datos de mimetype y
+	// encoding
+	if ((ref != null) && (!isExternalData())) {
+	    Element el = UtilidadTratarNodo.getElementById(ref.getElement().getOwnerDocument(),
+		    getId());
+	    NombreNodo nn = new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT);
+	    if (nn.equals(el)) {
+		setMimeType(el.getAttribute(ConstantesXADES.XADES_TAG_MIME_TYPE));
+		String data = el.getAttribute(ConstantesXADES.XADES_TAG_ENCODING);
+		if (data != null) {
+		    try {
+			// FIX: Cambia los espacios por %20 para evitar problemas con la clase URI
+			data = data.replace(" ", "%20");
+			setEncoding(new URI(data));
+		    } catch (URISyntaxException ex) {
+			LOGGER.warn(I18N.getLocalMessage(ConstantsXAdES.I18N_VALIDATE_9,
+				ex.getMessage()));
+		    }
+		}
+	    }
+	}
     }
 
     /**
      * <p>
-     * Intenta recuperar el identificador de este elemento basandose en la ruta indicada en el reference.
+     * Intenta recuperar el identificador de este elemento basandose en la ruta indicada en el
+     * reference.
      * </p>
      *
      * @return id del nodo
      */
     public String getId() {
-        // TODO: Si la URI es xpointer u otro obtener correctamente la Id
-        String uri = getURI();
-        return (uri != null) ? ((uri.startsWith("#")) ? ((uri.startsWith(XPOINTER_ID))
-                ? uri.substring(XPOINTER_ID.length(), uri.length() - 2) : uri.substring(1)) : uri) : null;
+	// TODO: Si la URI es xpointer u otro obtener correctamente la Id
+	String uri = getURI();
+	return (uri != null)
+		? ((uri.startsWith("#"))
+			? ((uri.startsWith(XPOINTER_ID))
+				? uri.substring(XPOINTER_ID.length(), uri.length() - 2)
+				: uri.substring(1))
+			: uri)
+		: null;
     }
 
     /**
@@ -118,7 +123,7 @@ public class DatosNodosFirmados {
      * @return id del nodo reference
      */
     public String getIdReference() {
-        return (reference != null) ? reference.getID() : null;
+	return (reference != null) ? reference.getID() : null;
     }
 
     /**
@@ -129,39 +134,39 @@ public class DatosNodosFirmados {
      * @return Element
      */
     public Element getElementReference() {
-        return (reference != null) ? reference.getElement() : null;
+	return (reference != null) ? reference.getElement() : null;
     }
 
     public ObjectIdentifier getObjectIdentifier() {
-        return oi;
+	return oi;
     }
 
     public void setObjectIdentifier(ObjectIdentifier oi) {
-        this.oi = oi;
+	this.oi = oi;
     }
 
     public String getDescription() {
-        return desc;
+	return desc;
     }
 
     public void setDescription(String desc) {
-        this.desc = desc;
+	this.desc = desc;
     }
 
     public String getMimeType() {
-        return mimeType;
+	return mimeType;
     }
 
     public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+	this.mimeType = mimeType;
     }
 
     public URI getEncoding() {
-        return encoding;
+	return encoding;
     }
 
     public void setEncoding(URI encoding) {
-        this.encoding = encoding;
+	this.encoding = encoding;
     }
 
     /**
@@ -172,7 +177,11 @@ public class DatosNodosFirmados {
      * @return URI
      */
     public String getURI() {
-        return (reference != null) ? ((XPOINTER_ROOT.equals(reference)) ? "" : reference.getURI()) : null;
+	if (reference != null) {
+	    String uri = reference.getURI();
+	    return (XPOINTER_ROOT.equals(uri)) ? "" : uri;
+	}
+	return null;
     }
 
     /**
@@ -183,32 +192,34 @@ public class DatosNodosFirmados {
      * @return
      */
     public List<TransformProxy> getTransforms() {
-        return (reference != null) ? reference.getTransforms() : new ArrayList<TransformProxy>();
+	return (reference != null) ? reference.getTransforms() : new ArrayList<TransformProxy>();
     }
 
     /**
      * <p>
-     * Indica si el nodo firmado puede ver modificado su contenido debido a las aplicaciones a las que esta sometido.
+     * Indica si el nodo firmado puede ver modificado su contenido debido a las aplicaciones a las
+     * que esta sometido.
      * </p>
      * <p>
-     * Las únicas transformadas que supone que no modifican al contenido original (de una manera significativa) son las
-     * de canonicalizacion y la enveloped.
+     * Las únicas transformadas que supone que no modifican al contenido original (de una manera
+     * significativa) son las de canonicalizacion y la enveloped.
      * </p>
      *
-     * @return <code>true</code> si existe alguna transformada que no sea enveloped o de canonicalizacion
+     * @return <code>true</code> si existe alguna transformada que no sea enveloped o de
+     *         canonicalizacion
      */
     public boolean canBeModifiedByTransforms() {
-        boolean modified = false;
-        List<TransformProxy> trans = getTransforms();
-        for (TransformProxy transform : trans) {
-            String uri = transform.getURI();
-            if ((!TransformProxy.isCanonicalization(transform))
-                    && (!uri.equals(TransformProxy.TRANSFORM_ENVELOPED_SIGNATURE))) {
-                modified = true;
-                break;
-            }
-        }
-        return modified;
+	boolean modified = false;
+	List<TransformProxy> trans = getTransforms();
+	for (TransformProxy transform : trans) {
+	    String uri = transform.getURI();
+	    if ((!TransformProxy.isCanonicalization(transform))
+		    && (!uri.equals(TransformProxy.TRANSFORM_ENVELOPED_SIGNATURE))) {
+		modified = true;
+		break;
+	    }
+	}
+	return modified;
     }
 
     /**
@@ -219,7 +230,7 @@ public class DatosNodosFirmados {
      * @return contenido del nodo en bytes
      */
     public byte[] getNodoFirmadoBytes() {
-        return reference.getBytes();
+	return reference.getBytes();
     }
 
     /**
@@ -227,14 +238,12 @@ public class DatosNodosFirmados {
      * Escribe el contenido firmado en un stream de salida.
      * </p>
      *
-     * @param os
-     *            stream de salida
+     * @param os stream de salida
      *
-     * @throws IOException
-     *             lanzada si ocurre algún error durante la escritura del contenido
+     * @throws IOException lanzada si ocurre algún error durante la escritura del contenido
      */
     public void writeBytesToStream(OutputStream os) throws IOException {
-        reference.writeToStream(os);
+	reference.writeToStream(os);
     }
 
     /**
@@ -248,45 +257,49 @@ public class DatosNodosFirmados {
      * @return <code>true</code> si es un nodo con informacion de firma
      */
     public boolean isSignInternal() {
-        boolean res = false;
-        if (!isExternalData()) {
-            if (reference != null) {
-                String id = getId();
-                if (id != null) {
-                    Element el = UtilidadTratarNodo.getElementById(reference.getElement().getOwnerDocument(), id);
-                    if (el != null) {
-                        Element signature = (Element) reference.getElement().getParentNode().getParentNode();
-                        if (UtilidadTratarNodo.isChildNode(el, signature)) {
-                            // Es un nodo interno a la firma, comprueba si es un nodo ds:object dentro de la firma
-                            res = !UtilidadTratarNodo.isChildNode(el,
-                                    new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT), signature);
-                        } else {
-                            res = false;
-                        }
-                    }
-                }
-            }
-        }
-        return res;
+	boolean res = false;
+	if (!isExternalData()) {
+	    if (reference != null) {
+		String id = getId();
+		if (id != null) {
+		    Element el = UtilidadTratarNodo
+			    .getElementById(reference.getElement().getOwnerDocument(), id);
+		    if (el != null) {
+			Element signature = (Element) reference.getElement().getParentNode()
+				.getParentNode();
+			if (UtilidadTratarNodo.isChildNode(el, signature)) {
+			    // Es un nodo interno a la firma, comprueba si es un nodo ds:object
+			    // dentro de la firma
+			    res = !UtilidadTratarNodo.isChildNode(el,
+				    new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT),
+				    signature);
+			} else {
+			    res = false;
+			}
+		    }
+		}
+	    }
+	}
+	return res;
     }
 
     /**
      * <p>
-     * Indica que la informacion firmada en el reference es informacion <i>detached</i> (no disponible dentro de la
-     * firma).
+     * Indica que la informacion firmada en el reference es informacion <i>detached</i> (no
+     * disponible dentro de la firma).
      * </p>
      *
      * @return <code>true</code> si los datos son externos al xml que contiene la firma
      */
     public boolean isExternalData() {
-        boolean res = false;
-        if (reference != null) {
-            String uri = reference.getURI();
-            if ((uri != null) && (!"".equals(uri)) && (!uri.startsWith("#"))) {
-                res = true;
-            }
-        }
-        return res;
+	boolean res = false;
+	if (reference != null) {
+	    String uri = reference.getURI();
+	    if ((uri != null) && (!"".equals(uri)) && (!uri.startsWith("#"))) {
+		res = true;
+	    }
+	}
+	return res;
     }
 
 }

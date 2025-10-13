@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.refs;
@@ -24,8 +20,8 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
  * Representa una firma que es contrafirmada.
  * </p>
  * <p>
- * Este objeto solo debe utilizarse en una firma XAdES 1.3.2 o superior. Si es esta firmando mediante un XAdES 1.1.1 o
- * 1.2.2 se recomienda utilizar la clase {@link InternObjectToSign}.
+ * Este objeto solo debe utilizarse en una firma XAdES 1.3.2 o superior. Si es esta firmando
+ * mediante un XAdES 1.1.1 o 1.2.2 se recomienda utilizar la clase {@link InternObjectToSign}.
  * </p>
  *
  * @author Ministerio de Industria, Turismo y Comercio
@@ -39,11 +35,10 @@ public class SignObjectToSign extends InternObjectToSign {
      * Constructor.
      * </p>
      *
-     * @param id
-     *            identidad que tiene la firma contrafirmada
+     * @param id identidad que tiene la firma contrafirmada
      */
     public SignObjectToSign(String id) {
-        super(id);
+	super(id);
     }
 
     /**
@@ -51,7 +46,7 @@ public class SignObjectToSign extends InternObjectToSign {
      */
     @Override
     public String getType() {
-        return ConstantesXADES.SCHEMA_COUNTER_SIGNATURE;
+	return ConstantesXADES.SCHEMA_COUNTER_SIGNATURE;
     }
 
 }
