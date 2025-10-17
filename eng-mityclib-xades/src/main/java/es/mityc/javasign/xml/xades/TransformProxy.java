@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.xades;
@@ -52,11 +48,10 @@ public class TransformProxy {
      * <p>
      * Construye un wrapper con la transformada indicada
      *
-     * @param ref
-     *            Referencia
+     * @param ref Referencia
      */
     public TransformProxy(Transform ref) {
-        this.transform = ref;
+	this.transform = ref;
     }
 
     /**
@@ -67,7 +62,7 @@ public class TransformProxy {
      * @return URI de la transformada
      */
     public String getURI() {
-        return transform.getURI();
+	return transform.getURI();
     }
 
     /**
@@ -75,19 +70,20 @@ public class TransformProxy {
      * Indica si la transformada es de canonicalizacion.
      * </p>
      *
-     * @param trans
-     *            Transformada
+     * @param trans Transformada
      *
      * @return true si es una canonicalizacion
      */
     public static boolean isCanonicalization(TransformProxy trans) {
-        String uri = trans.getURI();
-        if ((uri.equals(TRANSFORM_C14N_OMIT_COMMENTS)) || (uri.equals(TRANSFORM_C14N_WITH_COMMENTS))
-                || (uri.equals(TRANSFORM_C14N11_OMIT_COMMENTS)) || (uri.equals(TRANSFORM_C14N11_WITH_COMMENTS))
-                || (uri.equals(TRANSFORM_C14N_EXCL_OMIT_COMMENTS)) || (uri.equals(TRANSFORM_C14N_EXCL_WITH_COMMENTS))) {
-            return true;
-        }
-        return false;
+	String uri = trans.getURI();
+	if ((uri.equals(TRANSFORM_C14N_OMIT_COMMENTS)) || (uri.equals(TRANSFORM_C14N_WITH_COMMENTS))
+		|| (uri.equals(TRANSFORM_C14N11_OMIT_COMMENTS))
+		|| (uri.equals(TRANSFORM_C14N11_WITH_COMMENTS))
+		|| (uri.equals(TRANSFORM_C14N_EXCL_OMIT_COMMENTS))
+		|| (uri.equals(TRANSFORM_C14N_EXCL_WITH_COMMENTS))) {
+	    return true;
+	}
+	return false;
     }
 
 }

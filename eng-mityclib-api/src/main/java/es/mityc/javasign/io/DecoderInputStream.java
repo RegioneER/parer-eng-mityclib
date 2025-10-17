@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.io;
@@ -24,13 +20,13 @@ import java.io.InputStream;
 
 /**
  * <p>
- * Implementacion de {@link FilterInputStream} que permite filtrar los datos de entrada mediante un decodificador que
- * implemente el interfaz {@link IDecoder}.
+ * Implementacion de {@link FilterInputStream} que permite filtrar los datos de entrada mediante un
+ * decodificador que implemente el interfaz {@link IDecoder}.
  * </p>
  *
  * <p>
- * Basado en el <i>stream</i> {@link java.util.zip.InflaterInputStream}, adaptado para permitir una forma mas general de
- * decodificacion.
+ * Basado en el <i>stream</i> {@link java.util.zip.InflaterInputStream}, adaptado para permitir una
+ * forma mas general de decodificacion.
  * </p>
  *
  * @author Ministerio de Industria, Turismo y Comercio
@@ -60,13 +56,11 @@ public class DecoderInputStream extends FilterInputStream {
      * Constructor.
      * </p>
      *
-     * @param in
-     *            InputStream desde donde se leeran los datos codificados
-     * @param dec
-     *            Decodificador que se utilizara para convertir los datos
+     * @param in  InputStream desde donde se leeran los datos codificados
+     * @param dec Decodificador que se utilizara para convertir los datos
      */
     public DecoderInputStream(InputStream in, IDecoder dec) {
-        this(in, dec, DEFAULT_BUFFER_SIZE);
+	this(in, dec, DEFAULT_BUFFER_SIZE);
     }
 
     /**
@@ -74,22 +68,19 @@ public class DecoderInputStream extends FilterInputStream {
      * Constructor.
      * </p>
      *
-     * @param in
-     *            InputStream desde donde se leeran los datos codificados
-     * @param dec
-     *            Decodificador que se utilizara para convertir los datos
-     * @param size
-     *            Tamaño del buffer interno de lectura que se le pasara al decodificador
+     * @param in   InputStream desde donde se leeran los datos codificados
+     * @param dec  Decodificador que se utilizara para convertir los datos
+     * @param size Tamaño del buffer interno de lectura que se le pasara al decodificador
      */
     public DecoderInputStream(InputStream in, IDecoder dec, final int size) {
-        super(in);
-        if (in == null || dec == null) {
-            throw new NullPointerException();
-        } else if (size <= 0) {
-            throw new IllegalArgumentException("buffer size <= 0");
-        }
-        this.decoder = dec;
-        buf = new byte[size];
+	super(in);
+	if (in == null || dec == null) {
+	    throw new NullPointerException();
+	} else if (size <= 0) {
+	    throw new IllegalArgumentException("buffer size <= 0");
+	}
+	this.decoder = dec;
+	buf = new byte[size];
     }
 
     /**
@@ -97,13 +88,12 @@ public class DecoderInputStream extends FilterInputStream {
      * Check to make sure that this stream has not been closed.
      * </p>
      *
-     * @throws IOException
-     *             launched with Stream closed
+     * @throws IOException launched with Stream closed
      */
     private void ensureOpen() throws IOException {
-        if (closed) {
-            throw new IOException("Stream closed");
-        }
+	if (closed) {
+	    throw new IOException("Stream closed");
+	}
     }
 
     /** Buffer para leer un único byte. */
@@ -112,76 +102,73 @@ public class DecoderInputStream extends FilterInputStream {
     private static final int MASK_BYTE = 0xff;
 
     /**
-     * Reads a byte of uncompressed data. This method will block until enough input is available for decompression.
+     * Reads a byte of uncompressed data. This method will block until enough input is available for
+     * decompression.
      *
      * @return the byte read, or -1 if end of compressed input is reached
      *
-     * @exception IOException
-     *                if an I/O error has occurred
+     * @exception IOException if an I/O error has occurred
      */
     public int read() throws IOException {
-        ensureOpen();
-        return read(singleByteBuf, 0, 1) == -1 ? -1 : singleByteBuf[0] & MASK_BYTE;
+	ensureOpen();
+	return read(singleByteBuf, 0, 1) == -1 ? -1 : singleByteBuf[0] & MASK_BYTE;
     }
 
     /**
-     * Reads encoded data into an array of bytes. This method will block until some input can be decoded.
+     * Reads encoded data into an array of bytes. This method will block until some input can be
+     * decoded.
      *
-     * @param b
-     *            the buffer into which the data is read
-     * @param off
-     *            the start offset of the data
-     * @param len
-     *            the maximum number of bytes read
+     * @param b   the buffer into which the data is read
+     * @param off the start offset of the data
+     * @param len the maximum number of bytes read
      *
      * @return the actual number of bytes read, or -1 if the end of the encoded input is reached
      *
-     * @exception IOException
-     *                if an I/O error has occurred
-     *                <ul>
-     *                <li>{@link DecodingException} if a encoding format error has occurred</li>
-     *                </ul>
+     * @exception IOException if an I/O error has occurred
+     *                        <ul>
+     *                        <li>{@link DecodingException} if a encoding format error has
+     *                        occurred</li>
+     *                        </ul>
      */
     public int read(byte[] b, final int off, final int len) throws IOException {
-        ensureOpen();
-        if ((off | len | (off + len) | (b.length - (off + len))) < 0) {
-            throw new IndexOutOfBoundsException();
-        } else if (len == 0) {
-            return 0;
-        }
-        int n;
-        int tries = 0;
-        while ((n = decoder.decode(b, off, len)) == 0) {
-            if (decoder.needsInput()) {
-                if (fill() == -1) {
-                    if (decoder.isIncomplete()) {
-                        throw new EOFException("Decoder has buffer not depleted");
-                    }
-                    reachEOF = true;
-                    return -1;
-                }
-            }
-            tries++;
-            if (tries > MAX_TRIES) {
-                break;
-            }
-        }
-        return n;
+	ensureOpen();
+	if ((off | len | (off + len) | (b.length - (off + len))) < 0) {
+	    throw new IndexOutOfBoundsException();
+	} else if (len == 0) {
+	    return 0;
+	}
+	int n;
+	int tries = 0;
+	while ((n = decoder.decode(b, off, len)) == 0) {
+	    if (decoder.needsInput()) {
+		if (fill() == -1) {
+		    if (decoder.isIncomplete()) {
+			throw new EOFException("Decoder has buffer not depleted");
+		    }
+		    reachEOF = true;
+		    return -1;
+		}
+	    }
+	    tries++;
+	    if (tries > MAX_TRIES) {
+		break;
+	    }
+	}
+	return n;
     }
 
     /**
      * Returns 0 after EOF has been reached, otherwise always return 1.
      * <p>
-     * Programs should not count on this method to return the actual number of bytes that could be read without
-     * blocking.
+     * Programs should not count on this method to return the actual number of bytes that could be
+     * read without blocking.
      *
      * @return 1 before EOF and 0 after EOF.
      *
-     * @exception IOException
-     *                if an I public int available() throws IOException { ensureOpen(); if (reachEOF) { return 0; } else
-     *                { return 1; } }
+     * @exception IOException if an I public int available() throws IOException { ensureOpen(); if
+     *                        (reachEOF) { return 0; } else { return 1; } }
      *
-     *                /** buffer interno para calcular el skip.
+     *                        /** buffer interno para calcular el skip.
      */
     private byte[] tempBuffer = new byte[DEFAULT_BUFFER_SIZE];
 
@@ -193,47 +180,44 @@ public class DecoderInputStream extends FilterInputStream {
      * Could throw {@link IllegalArgumentException} if n &lt; 0.
      * </p>
      *
-     * @param n
-     *            the number of bytes to skip
+     * @param n the number of bytes to skip
      *
      * @return the actual number of bytes skipped.
      *
-     * @exception IOException
-     *                if an I/O error has occurred
+     * @exception IOException if an I/O error has occurred
      */
     public long skip(final long n) throws IOException {
-        if (n < 0) {
-            throw new IllegalArgumentException("negative skip length");
-        }
-        ensureOpen();
-        int max = (int) Math.min(n, Integer.MAX_VALUE);
-        int total = 0;
-        while (total < max) {
-            int len = max - total;
-            if (len > tempBuffer.length) {
-                len = tempBuffer.length;
-            }
-            len = read(tempBuffer, 0, len);
-            if (len == -1) {
-                reachEOF = true;
-                break;
-            }
-            total += len;
-        }
-        return total;
+	if (n < 0) {
+	    throw new IllegalArgumentException("negative skip length");
+	}
+	ensureOpen();
+	int max = (int) Math.min(n, Integer.MAX_VALUE);
+	int total = 0;
+	while (total < max) {
+	    int len = max - total;
+	    if (len > tempBuffer.length) {
+		len = tempBuffer.length;
+	    }
+	    len = read(tempBuffer, 0, len);
+	    if (len == -1) {
+		reachEOF = true;
+		break;
+	    }
+	    total += len;
+	}
+	return total;
     }
 
     /**
      * Closes this input stream and releases any system resources associated with the stream.
      *
-     * @exception IOException
-     *                if an I/O error has occurred
+     * @exception IOException if an I/O error has occurred
      */
     public void close() throws IOException {
-        if (!closed) {
-            in.close();
-            closed = true;
-        }
+	if (!closed) {
+	    in.close();
+	    closed = true;
+	}
     }
 
     /**
@@ -241,30 +225,30 @@ public class DecoderInputStream extends FilterInputStream {
      *
      * @return bytes filled
      *
-     * @exception IOException
-     *                if an I/O error has occurred
+     * @exception IOException if an I/O error has occurred
      */
     protected int fill() throws IOException {
-        ensureOpen();
-        lenBuffer = in.read(buf, 0, buf.length);
-        if (lenBuffer > -1) {
-            decoder.addInput(buf, 0, lenBuffer);
-        }
-        return lenBuffer;
+	ensureOpen();
+	lenBuffer = in.read(buf, 0, buf.length);
+	if (lenBuffer > -1) {
+	    decoder.addInput(buf, 0, lenBuffer);
+	}
+	return lenBuffer;
     }
 
     /**
      * Tests if this input stream supports the <code>mark</code> and <code>reset</code> methods. The
-     * <code>markSupported</code> method of <code>DecoderInputStream</code> returns <code>false</code>.
+     * <code>markSupported</code> method of <code>DecoderInputStream</code> returns
+     * <code>false</code>.
      *
-     * @return a <code>boolean</code> indicating if this stream type supports the <code>mark</code> and
-     *         <code>reset</code> methods.
+     * @return a <code>boolean</code> indicating if this stream type supports the <code>mark</code>
+     *         and <code>reset</code> methods.
      *
      * @see java.io.InputStream#mark(int)
      * @see java.io.InputStream#reset()
      */
     public boolean markSupported() {
-        return false;
+	return false;
     }
 
     /**
@@ -273,8 +257,8 @@ public class DecoderInputStream extends FilterInputStream {
      * <p>
      * The <code>mark</code> method of <code>DecoderInputStream</code> does nothing.
      *
-     * @param readlimit
-     *            the maximum limit of bytes that can be read before the mark position becomes invalid.
+     * @param readlimit the maximum limit of bytes that can be read before the mark position becomes
+     *                  invalid.
      *
      * @see java.io.InputStream#reset()
      */
@@ -282,20 +266,19 @@ public class DecoderInputStream extends FilterInputStream {
     }
 
     /**
-     * Repositions this stream to the position at the time the <code>mark</code> method was last called on this input
-     * stream.
+     * Repositions this stream to the position at the time the <code>mark</code> method was last
+     * called on this input stream.
      *
      * <p>
-     * The method <code>reset</code> for class <code>DecoderInputStream</code> does nothing except throw an
-     * <code>IOException</code>.
+     * The method <code>reset</code> for class <code>DecoderInputStream</code> does nothing except
+     * throw an <code>IOException</code>.
      *
-     * @exception IOException
-     *                if this method is invoked.
+     * @exception IOException if this method is invoked.
      *
      * @see java.io.InputStream#mark(int)
      * @see java.io.IOException
      */
     public synchronized void reset() throws IOException {
-        throw new IOException("mark/reset not supported");
+	throw new IOException("mark/reset not supported");
     }
 }

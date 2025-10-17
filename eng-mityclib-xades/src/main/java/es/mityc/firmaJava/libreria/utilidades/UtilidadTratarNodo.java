@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.utilidades;
@@ -25,10 +21,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.xml.security.c14n.CanonicalizationException;
 import org.apache.xml.security.signature.XMLSignatureInput;
+import org.apache.xml.security.signature.XMLSignatureNodeInput;
 import org.apache.xml.security.transforms.TransformationException;
 import org.apache.xml.security.transforms.Transforms;
 import org.w3c.dom.Attr;
@@ -52,9 +49,10 @@ import es.mityc.firmaJava.libreria.xades.errores.FirmaXMLError;
 
 public class UtilidadTratarNodo {
 
-    private static Log log = LogFactory.getLog(UtilidadTratarNodo.class);
+    private static Logger log = LoggerFactory.getLogger(UtilidadTratarNodo.class);
 
-    private final static String[] IDs = { ConstantesXADES.ID, ConstantesXADES.ID_MINUS, ConstantesXADES.ID_MAYUS };
+    private final static String[] IDs = {
+	    ConstantesXADES.ID, ConstantesXADES.ID_MINUS, ConstantesXADES.ID_MAYUS };
 
     private static Random rnd = new Random(new Date().getTime());
     private final static int RND_MAX_SIZE = 1048576;
@@ -65,563 +63,584 @@ public class UtilidadTratarNodo {
     public static final String XPOINTER_ROOT = "#xpointer(/)";
 
     /**
-     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del documento, y que se ajusten
-     * al namespace.
+     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del
+     * documento, y que se ajusten al namespace.
      *
-     * @param doc
-     *            documento en el que se buscaran los hijos (en cualquier profundidad)
-     * @param ns
-     *            namespace en el que deben estar los hijos que se van a buscar (<code>null</code> si el mismo namespace
-     *            que el nodo raiz)
-     * @param nombreHijos
-     *            nombre del tag de los hijos que se buscaran
+     * @param doc         documento en el que se buscaran los hijos (en cualquier profundidad)
+     * @param ns          namespace en el que deben estar los hijos que se van a buscar
+     *                    (<code>null</code> si el mismo namespace que el nodo raiz)
+     * @param nombreHijos nombre del tag de los hijos que se buscaran
      *
-     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
+     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y
+     *         no es requerido
      *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Document doc, String ns, String nombreHijos,
-            CanonicalizationEnum canonicalization) throws FirmaXMLError {
-        return obtenerByteNodo(doc.getDocumentElement(), ns, nombreHijos, canonicalization, 0);
+	    CanonicalizationEnum canonicalization) throws FirmaXMLError {
+	return obtenerByteNodo(doc.getDocumentElement(), ns, nombreHijos, canonicalization, 0);
     }
 
     /**
-     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
-     * al namespace.
+     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo
+     * padre, y que se ajusten al namespace.
      *
-     * Equivalente a la ejecucion: <blockquote> obtenerByteNodo(Element padre, String ns, String nombreHijos, true)
-     * </blockquote>
+     * Equivalente a la ejecucion: <blockquote> obtenerByteNodo(Element padre, String ns, String
+     * nombreHijos, true) </blockquote>
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos (en cualquier profundidad)
-     * @param ns
-     *            namespace en el que deben estar los hijos que se van a buscar (<code>null</code> si el mismo namespace
-     *            que el nodo padre)
-     * @param nombreHijos
-     *            nombre del tag de los hijos que se buscaran
+     * @param padre       nodo padre del que se buscaran los hijos (en cualquier profundidad)
+     * @param ns          namespace en el que deben estar los hijos que se van a buscar
+     *                    (<code>null</code> si el mismo namespace que el nodo padre)
+     * @param nombreHijos nombre del tag de los hijos que se buscaran
      *
-     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
+     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y
+     *         no es requerido
      *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Element padre, String ns, String nombreHijos,
-            CanonicalizationEnum canonicalization, int tope) throws FirmaXMLError {
-        return obtenerByteNodo(padre, ns, nombreHijos, true, canonicalization, tope);
+	    CanonicalizationEnum canonicalization, int tope) throws FirmaXMLError {
+	return obtenerByteNodo(padre, ns, nombreHijos, true, canonicalization, tope);
     }
 
     /**
-     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
-     * al namespace.
+     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo
+     * padre, y que se ajusten al namespace.
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos (en la profundidad indicada entre 1 y 5)
-     * @param ns
-     *            namespace en el que deben estar los hijos que se van a buscar (<code>null</code> si el mismo namespace
-     *            que el nodo padre)
-     * @param nombreHijos
-     *            nombre del tag de los hijos que se buscaran
-     * @param requerido
-     *            Si el valor es <code>true</code> y no se encuentra ningún hijo lanzara excepcion
+     * @param padre       nodo padre del que se buscaran los hijos (en la profundidad indicada entre
+     *                    1 y 5)
+     * @param ns          namespace en el que deben estar los hijos que se van a buscar
+     *                    (<code>null</code> si el mismo namespace que el nodo padre)
+     * @param nombreHijos nombre del tag de los hijos que se buscaran
+     * @param requerido   Si el valor es <code>true</code> y no se encuentra ningún hijo lanzara
+     *                    excepcion
      *
-     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
+     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y
+     *         no es requerido
      *
      * @throws FirmaXMLError
      */
-    public static byte[] obtenerByteNodo(Element padre, String ns, String nombreHijos, boolean requerido,
-            CanonicalizationEnum canonicalization, int tope) throws FirmaXMLError {
-        if ((canonicalization == null) || (canonicalization.equals((CanonicalizationEnum.UNKNOWN))))
-            throw new FirmaXMLError("Canonicalization Method desconocido");
+    public static byte[] obtenerByteNodo(Element padre, String ns, String nombreHijos,
+	    boolean requerido, CanonicalizationEnum canonicalization, int tope)
+	    throws FirmaXMLError {
+	if ((canonicalization == null) || (canonicalization.equals((CanonicalizationEnum.UNKNOWN))))
+	    throw new FirmaXMLError("Canonicalization Method desconocido");
 
-        ArrayList<Element> nodesHijos = new ArrayList<Element>();
+	ArrayList<Element> nodesHijos = new ArrayList<Element>();
 
-        if (ns == null)
-            ns = padre.getNamespaceURI();
+	if (ns == null)
+	    ns = padre.getNamespaceURI();
 
-        if (tope <= 0) {
-            NodeList nodosSinTope = padre.getElementsByTagNameNS(ns, nombreHijos);
-            for (int i = 0; i < nodosSinTope.getLength(); ++i) {
-                nodesHijos.add((Element) nodosSinTope.item(i));
-            }
-        } else
-            nodesHijos = obtenerNodos(padre, tope, new NombreNodo(ns, nombreHijos));
+	if (tope <= 0) {
+	    NodeList nodosSinTope = padre.getElementsByTagNameNS(ns, nombreHijos);
+	    for (int i = 0; i < nodosSinTope.getLength(); ++i) {
+		nodesHijos.add((Element) nodosSinTope.item(i));
+	    }
+	} else
+	    nodesHijos = obtenerNodos(padre, tope, new NombreNodo(ns, nombreHijos));
 
-        log.debug(ConstantesXADES.MSG_NUMERO_FIRMAS_DOCUMENTO + nodesHijos.size());
+	log.debug(ConstantesXADES.MSG_NUMERO_FIRMAS_DOCUMENTO + nodesHijos.size());
 
-        if ((nodesHijos.size() == 0) && (requerido)) {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8) + ConstantesXADES.ESPACIO
-                    + I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33) + ConstantesXADES.ESPACIO
-                    + nombreHijos);
-            throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8)
-                    + ConstantesXADES.ESPACIO + I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
-                    + ConstantesXADES.ESPACIO + nombreHijos);
-        }
+	if ((nodesHijos.size() == 0) && (requerido)) {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8)
+		    + ConstantesXADES.ESPACIO
+		    + I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+		    + ConstantesXADES.ESPACIO + nombreHijos);
+	    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8)
+		    + ConstantesXADES.ESPACIO
+		    + I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_33)
+		    + ConstantesXADES.ESPACIO + nombreHijos);
+	}
 
-        if (nodesHijos.size() > 0) {
-            Transforms t = new Transforms(padre.getOwnerDocument());
+	if (nodesHijos.size() > 0) {
+	    Transforms t = new Transforms(padre.getOwnerDocument());
 
-            try {
-                t.addTransform(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-            } catch (TransformationException e) {
-                log.error(e);
-                throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-            }
+	    try {
+		t.addTransform(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+	    } catch (TransformationException e) {
+		log.error("Generic TransformationException", e);
+		throw new FirmaXMLError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	    }
 
-            ByteArrayOutputStream bais = new ByteArrayOutputStream();
+	    ByteArrayOutputStream bais = new ByteArrayOutputStream();
 
-            for (int i = 0; i < nodesHijos.size(); i++) {
-                XMLSignatureInput xmlSignatureInput = new XMLSignatureInput(nodesHijos.get(i));
-                try {
-                    XMLSignatureInput resultado = null;
-                    resultado = t.performTransforms(xmlSignatureInput);
-                    bais.write(resultado.getBytes());
-                } catch (TransformationException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                } catch (CanonicalizationException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                } catch (IOException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                }
-            }
+	    for (int i = 0; i < nodesHijos.size(); i++) {
+		XMLSignatureInput xmlSignatureInput = new XMLSignatureNodeInput(nodesHijos.get(i));
+		try {
+		    XMLSignatureInput resultado = null;
+		    resultado = t.performTransforms(xmlSignatureInput);
+		    bais.write(resultado.getBytes());
+		} catch (TransformationException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		} catch (CanonicalizationException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		} catch (IOException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		}
+	    }
 
-            if (bais.size() > 0)
-                return bais.toByteArray();
-        }
-        return null;
+	    if (bais.size() > 0)
+		return bais.toByteArray();
+	}
+	return null;
     }
 
     /**
-     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
-     * al namespace.
+     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo
+     * padre, y que se ajusten al namespace.
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
-     * @param ns
-     *            namespace en el que deben estar los hijos que se van a buscar (<code>null</code> si el mismo namespace
-     *            que el nodo padre)
-     * @param nombreHijos
-     *            nombre del tag de los hijos que se buscaran
-     * @param tope
-     *            Elemento en el que se para la búsqueda (no se incluira en el array de bytes), <code>null</code> si no
-     *            se quiere tope
+     * @param padre       nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
+     * @param ns          namespace en el que deben estar los hijos que se van a buscar
+     *                    (<code>null</code> si el mismo namespace que el nodo padre)
+     * @param nombreHijos nombre del tag de los hijos que se buscaran
+     * @param tope        Elemento en el que se para la búsqueda (no se incluira en el array de
+     *                    bytes), <code>null</code> si no se quiere tope
      *
-     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
+     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y
+     *         no es requerido
      *
      * @throws FirmaXMLError
      */
     public static byte[] obtenerByteNodo(Element padre, String ns, String nombreHijos, Element tope)
-            throws FirmaXMLError {
-        NodeList nodesHijos = null;
+	    throws FirmaXMLError {
+	NodeList nodesHijos = null;
 
-        if (ns == null)
-            ns = padre.getNamespaceURI();
+	if (ns == null)
+	    ns = padre.getNamespaceURI();
 
-        nodesHijos = padre.getChildNodes();
+	nodesHijos = padre.getChildNodes();
 
-        if (nodesHijos.getLength() > 0) {
-            Transforms t = new Transforms(padre.getOwnerDocument());
+	if (nodesHijos.getLength() > 0) {
+	    Transforms t = new Transforms(padre.getOwnerDocument());
 
-            try {
-                t.addTransform(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-            } catch (TransformationException e) {
-                log.error(e);
-                throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-            }
+	    try {
+		t.addTransform(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+	    } catch (TransformationException e) {
+		log.error("Generic TransformationException", e);
+		throw new FirmaXMLError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	    }
 
-            ByteArrayOutputStream bais = new ByteArrayOutputStream();
+	    ByteArrayOutputStream bais = new ByteArrayOutputStream();
 
-            for (int i = 0; i < nodesHijos.getLength(); i++) {
-                Node nodo = nodesHijos.item(i);
+	    for (int i = 0; i < nodesHijos.getLength(); i++) {
+		Node nodo = nodesHijos.item(i);
 
-                // Busca el siguiente elemento
-                if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                    continue;
+		// Busca el siguiente elemento
+		if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		    continue;
 
-                // si es el elemento tope para de buscar
-                if (tope != null) {
-                    if (tope.isEqualNode(nodo))
-                        break;
-                }
+		// si es el elemento tope para de buscar
+		if (tope != null) {
+		    if (tope.isEqualNode(nodo))
+			break;
+		}
 
-                // comprueba si es un nodo de los buscados
-                if (!nodo.getLocalName().equals(nombreHijos))
-                    continue;
+		// comprueba si es un nodo de los buscados
+		if (!nodo.getLocalName().equals(nombreHijos))
+		    continue;
 
-                if (ns == null) {
-                    if (nodo.getNamespaceURI() != null)
-                        continue;
-                } else if (!ns.equals(nodo.getNamespaceURI()))
-                    continue;
+		if (ns == null) {
+		    if (nodo.getNamespaceURI() != null)
+			continue;
+		} else if (!ns.equals(nodo.getNamespaceURI()))
+		    continue;
 
-                XMLSignatureInput xmlSignatureInput = new XMLSignatureInput(nodo);
-                try {
-                    XMLSignatureInput resultado = null;
-                    resultado = t.performTransforms(xmlSignatureInput);
-                    bais.write(resultado.getBytes());
-                } catch (TransformationException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                } catch (CanonicalizationException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                } catch (IOException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                }
-            }
+		XMLSignatureInput xmlSignatureInput = new XMLSignatureNodeInput(nodo);
+		try {
+		    XMLSignatureInput resultado = null;
+		    resultado = t.performTransforms(xmlSignatureInput);
+		    bais.write(resultado.getBytes());
+		} catch (TransformationException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		} catch (CanonicalizationException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		} catch (IOException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		}
+	    }
 
-            if (bais.size() > 0)
-                return bais.toByteArray();
-        }
-        return null;
+	    if (bais.size() > 0)
+		return bais.toByteArray();
+	}
+	return null;
     }
 
     /**
-     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo padre, y que se ajusten
-     * al namespace.
+     * Devuelve en un array de bytes el contenido de los nodos indicados que sean hijos del nodo
+     * padre, y que se ajusten al namespace.
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
-     * @param nombreHijos
-     *            listado de elementos que se buscaran (pareja de namespace y nombre del elemento)
-     * @param tope
-     *            Elemento en el que se para la búsqueda (no se incluira en el array de bytes), <code>null</code> si no
-     *            se quiere tope
+     * @param padre       nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
+     * @param nombreHijos listado de elementos que se buscaran (pareja de namespace y nombre del
+     *                    elemento)
+     * @param tope        Elemento en el que se para la búsqueda (no se incluira en el array de
+     *                    bytes), <code>null</code> si no se quiere tope
      *
-     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y no es requerido
+     * @return byte array con el contenido de los nodos hijos, <code>null</code> si no tiene hijos y
+     *         no es requerido
      *
      * @throws FirmaXMLError
      */
-    public static byte[] obtenerByteNodo(Element padre, ArrayList<NombreNodo> nombreHijos, Element tope)
-            throws FirmaXMLError {
-        NodeList nodesHijos = null;
+    public static byte[] obtenerByteNodo(Element padre, ArrayList<NombreNodo> nombreHijos,
+	    Element tope) throws FirmaXMLError {
+	NodeList nodesHijos = null;
 
-        nodesHijos = padre.getChildNodes();
+	nodesHijos = padre.getChildNodes();
 
-        if (nodesHijos.getLength() > 0) {
-            Transforms t = new Transforms(padre.getOwnerDocument());
+	if (nodesHijos.getLength() > 0) {
+	    Transforms t = new Transforms(padre.getOwnerDocument());
 
-            try {
-                t.addTransform(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-            } catch (TransformationException e) {
-                log.error(e);
-                throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-            }
+	    try {
+		t.addTransform(Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+	    } catch (TransformationException e) {
+		log.error("Generic TransformationException", e);
+		throw new FirmaXMLError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	    }
 
-            ByteArrayOutputStream bais = new ByteArrayOutputStream();
+	    ByteArrayOutputStream bais = new ByteArrayOutputStream();
 
-            for (int i = 0; i < nodesHijos.getLength(); i++) {
-                Node nodo = nodesHijos.item(i);
+	    for (int i = 0; i < nodesHijos.getLength(); i++) {
+		Node nodo = nodesHijos.item(i);
 
-                // Busca el siguiente elemento
-                if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                    continue;
+		// Busca el siguiente elemento
+		if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		    continue;
 
-                // si es el elemento tope para de buscar
-                if (tope != null) {
-                    if (tope.isEqualNode(nodo))
-                        break;
-                }
+		// si es el elemento tope para de buscar
+		if (tope != null) {
+		    if (tope.isEqualNode(nodo))
+			break;
+		}
 
-                // comprueba si es un nodo de los buscados
-                NombreNodo nombreNodo = new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName());
-                if (nombreHijos.indexOf(nombreNodo) == -1)
-                    continue;
+		// comprueba si es un nodo de los buscados
+		NombreNodo nombreNodo = new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName());
+		if (nombreHijos.indexOf(nombreNodo) == -1)
+		    continue;
 
-                XMLSignatureInput xmlSignatureInput = new XMLSignatureInput(nodo);
-                try {
-                    XMLSignatureInput resultado = null;
-                    resultado = t.performTransforms(xmlSignatureInput);
-                    bais.write(resultado.getBytes());
-                } catch (TransformationException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                } catch (CanonicalizationException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                } catch (IOException ex) {
-                    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                    throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-                }
-            }
+		XMLSignatureInput xmlSignatureInput = new XMLSignatureNodeInput(nodo);
+		try {
+		    XMLSignatureInput resultado = null;
+		    resultado = t.performTransforms(xmlSignatureInput);
+		    bais.write(resultado.getBytes());
+		} catch (TransformationException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		} catch (CanonicalizationException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		} catch (IOException ex) {
+		    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34),
+			    ex);
+		    throw new FirmaXMLError(
+			    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+		}
+	    }
 
-            if (bais.size() > 0)
-                return bais.toByteArray();
-        }
-        return null;
+	    if (bais.size() > 0)
+		return bais.toByteArray();
+	}
+	return null;
     }
 
     /**
-     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan antes
-     * del elemento tope.
+     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre
+     * indicado y estan antes del elemento tope.
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
-     * @param tope
-     *            Elemento en el que se para la búsqueda (no se incluira en el listado), <code>null</code> si no se
-     *            quiere tope
-     * @param nombreHijo
-     *            Namespace y localname de los hijos que se buscaran
+     * @param padre      nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
+     * @param tope       Elemento en el que se para la búsqueda (no se incluira en el listado),
+     *                   <code>null</code> si no se quiere tope
+     * @param nombreHijo Namespace y localname de los hijos que se buscaran
      *
      * @return listado con los elementos encontrados
      */
-    public static ArrayList<Element> obtenerNodos(Element padre, Element tope, NombreNodo nombreHijo) {
-        ArrayList<Element> resultado = new ArrayList<Element>();
-        NodeList nodesHijos = padre.getChildNodes();
+    public static ArrayList<Element> obtenerNodos(Element padre, Element tope,
+	    NombreNodo nombreHijo) {
+	ArrayList<Element> resultado = new ArrayList<Element>();
+	NodeList nodesHijos = padre.getChildNodes();
 
-        for (int i = 0; i < nodesHijos.getLength(); i++) {
-            Node nodo = nodesHijos.item(i);
+	for (int i = 0; i < nodesHijos.getLength(); i++) {
+	    Node nodo = nodesHijos.item(i);
 
-            // Busca el siguiente elemento
-            if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                continue;
+	    // Busca el siguiente elemento
+	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		continue;
 
-            // si es el elemento tope para de buscar
-            if (tope != null) {
-                if (tope.isEqualNode(nodo))
-                    break;
-            }
+	    // si es el elemento tope para de buscar
+	    if (tope != null) {
+		if (tope.isEqualNode(nodo))
+		    break;
+	    }
 
-            // comprueba si es un nodo de los buscados
-            if (new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName()).equals(nombreHijo))
-                resultado.add((Element) nodo);
-        }
-        return resultado;
+	    // comprueba si es un nodo de los buscados
+	    if (new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName()).equals(nombreHijo))
+		resultado.add((Element) nodo);
+	}
+	return resultado;
     }
 
     /**
-     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan antes
-     * del elemento tope.
+     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre
+     * indicado y estan antes del elemento tope.
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
-     * @param tope
-     *            Elemento en el que se para la búsqueda (no se incluira en el listado), <code>null</code> si no se
-     *            quiere tope
-     * @param nombreHijos
-     *            listado de Namespace y localname de los hijos que se buscaran
+     * @param padre       nodo padre del que se buscaran los hijos (solo en un nivel de profundidad)
+     * @param tope        Elemento en el que se para la búsqueda (no se incluira en el listado),
+     *                    <code>null</code> si no se quiere tope
+     * @param nombreHijos listado de Namespace y localname de los hijos que se buscaran
      *
      * @return listado con los elementos encontrados
      *
      * @throws FirmaXMLError
      */
-    public static ArrayList<Element> obtenerNodos(Element padre, Element tope, ArrayList<NombreNodo> nombreHijos)
-            throws FirmaXMLError {
-        ArrayList<Element> resultado = new ArrayList<Element>();
-        NodeList nodesHijos = padre.getChildNodes();
+    public static ArrayList<Element> obtenerNodos(Element padre, Element tope,
+	    ArrayList<NombreNodo> nombreHijos) throws FirmaXMLError {
+	ArrayList<Element> resultado = new ArrayList<Element>();
+	NodeList nodesHijos = padre.getChildNodes();
 
-        for (int i = 0; i < nodesHijos.getLength(); i++) {
-            Node nodo = nodesHijos.item(i);
+	for (int i = 0; i < nodesHijos.getLength(); i++) {
+	    Node nodo = nodesHijos.item(i);
 
-            // Busca el siguiente elemento
-            if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                continue;
+	    // Busca el siguiente elemento
+	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		continue;
 
-            // si es el elemento tope para de buscar
-            if (tope != null) {
-                if (tope.isEqualNode(nodo))
-                    break;
-            }
+	    // si es el elemento tope para de buscar
+	    if (tope != null) {
+		if (tope.isEqualNode(nodo))
+		    break;
+	    }
 
-            // comprueba si es un nodo de los buscados
-            if (nombreHijos.indexOf(new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName())) != -1)
-                resultado.add((Element) nodo);
-        }
-        return resultado;
+	    // comprueba si es un nodo de los buscados
+	    if (nombreHijos
+		    .indexOf(new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName())) != -1)
+		resultado.add((Element) nodo);
+	}
+	return resultado;
     }
 
     /**
-     * Devuelve un array de bytes con el contenido de los elementos indicados (tras una canonalizacion estandar).
+     * Devuelve un array de bytes con el contenido de los elementos indicados (tras una
+     * canonalizacion estandar).
      *
-     * @param nodos
-     *            listado de elementos
+     * @param nodos listado de elementos
      *
      * @return array de bytes
      */
-    public static byte[] obtenerByteNuevo(ArrayList<Element> nodos, CanonicalizationEnum canonicalization)
-            throws FirmaXMLError {
-        if ((nodos == null) || (nodos.size() == 0))
-            return null;
+    public static byte[] obtenerByteNuevo(ArrayList<Element> nodos,
+	    CanonicalizationEnum canonicalization) throws FirmaXMLError {
+	if ((nodos == null) || (nodos.size() == 0))
+	    return null;
 
-        if ((canonicalization == null) || (canonicalization.equals(CanonicalizationEnum.UNKNOWN)))
-            return null;
+	if ((canonicalization == null) || (canonicalization.equals(CanonicalizationEnum.UNKNOWN)))
+	    return null;
 
-        ByteArrayOutputStream bais = new ByteArrayOutputStream();
+	ByteArrayOutputStream bais = new ByteArrayOutputStream();
 
-        Iterator<Element> it = nodos.iterator();
-        while (it.hasNext()) {
-            Element nodo = it.next();
-            try {
-                bais.write(obtenerByte(nodo, canonicalization));
-            } catch (IOException ex) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-            }
-        }
+	Iterator<Element> it = nodos.iterator();
+	while (it.hasNext()) {
+	    Element nodo = it.next();
+	    try {
+		bais.write(obtenerByte(nodo, canonicalization));
+	    } catch (IOException ex) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
+		throw new FirmaXMLError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	    }
+	}
 
-        if (bais.size() > 0)
-            return bais.toByteArray();
-        return null;
+	if (bais.size() > 0)
+	    return bais.toByteArray();
+	return null;
     }
 
     /**
-     * Devuelve un array de bytes con el contenido de los elementos indicados (tras una canonalizacion estandar).
+     * Devuelve un array de bytes con el contenido de los elementos indicados (tras una
+     * canonalizacion estandar).
      *
-     * @param nodos
-     *            listado de elementos
+     * @param nodos listado de elementos
      *
      * @return array de bytes
      */
-    public static byte[] obtenerByte(Element nodo, CanonicalizationEnum canonicalization) throws FirmaXMLError {
-        if (nodo == null)
-            return null;
+    public static byte[] obtenerByte(Element nodo, CanonicalizationEnum canonicalization)
+	    throws FirmaXMLError {
+	if (nodo == null)
+	    return null;
 
-        if ((canonicalization == null) || (canonicalization.equals(CanonicalizationEnum.UNKNOWN)))
-            return null;
+	if ((canonicalization == null) || (canonicalization.equals(CanonicalizationEnum.UNKNOWN)))
+	    return null;
 
-        Transforms t = new Transforms(nodo.getOwnerDocument());
+	Transforms t = new Transforms(nodo.getOwnerDocument());
 
-        try {
-            t.addTransform(canonicalization.toString());
-        } catch (TransformationException e) {
-            log.error(e);
-            throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-        }
+	try {
+	    t.addTransform(canonicalization.toString());
+	} catch (TransformationException e) {
+	    log.error("Generic TransformationException", e);
+	    throw new FirmaXMLError(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	}
 
-        XMLSignatureInput xmlSignatureInput = new XMLSignatureInput(nodo);
-        try {
-            XMLSignatureInput resultado = null;
-            resultado = t.performTransforms(xmlSignatureInput);
-            return resultado.getBytes();
-        } catch (TransformationException ex) {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-            throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-        } catch (CanonicalizationException ex) {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-            throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-        } catch (IOException ex) {
-            log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-            throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-        }
+	XMLSignatureInput xmlSignatureInput = new XMLSignatureNodeInput(nodo);
+	try {
+	    XMLSignatureInput resultado = null;
+	    resultado = t.performTransforms(xmlSignatureInput);
+	    return resultado.getBytes();
+	} catch (TransformationException ex) {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
+	    throw new FirmaXMLError(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	} catch (CanonicalizationException ex) {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
+	    throw new FirmaXMLError(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	} catch (IOException ex) {
+	    log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
+	    throw new FirmaXMLError(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	}
     }
 
     /**
-     * Devuelve un array de bytes con el contenido de los elementos indicados (tras una canonalizacion estandar).
+     * Devuelve un array de bytes con el contenido de los elementos indicados (tras una
+     * canonalizacion estandar).
      *
-     * @param nodos
-     *            listado de elementos
+     * @param nodos listado de elementos
      *
      * @return array de bytes
      */
-    public static byte[] obtenerByte(ArrayList<Element> nodos, CanonicalizationEnum canonicalization)
-            throws FirmaXMLError {
-        if ((nodos == null) || (nodos.size() == 0))
-            return null;
+    public static byte[] obtenerByte(ArrayList<Element> nodos,
+	    CanonicalizationEnum canonicalization) throws FirmaXMLError {
+	if ((nodos == null) || (nodos.size() == 0))
+	    return null;
 
-        if ((canonicalization == null) || (canonicalization.equals(CanonicalizationEnum.UNKNOWN)))
-            return null;
+	if ((canonicalization == null) || (canonicalization.equals(CanonicalizationEnum.UNKNOWN)))
+	    return null;
 
-        Transforms t = new Transforms(nodos.get(0).getOwnerDocument());
+	Transforms t = new Transforms(nodos.get(0).getOwnerDocument());
 
-        try {
-            t.addTransform(canonicalization.toString());
-        } catch (TransformationException e) {
-            log.error(e);
-            throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-        }
+	try {
+	    t.addTransform(canonicalization.toString());
+	} catch (TransformationException e) {
+	    log.error("Generic TransformationException", e);
+	    throw new FirmaXMLError(
+		    I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	}
 
-        ByteArrayOutputStream bais = new ByteArrayOutputStream();
+	ByteArrayOutputStream bais = new ByteArrayOutputStream();
 
-        Iterator<Element> it = nodos.iterator();
-        while (it.hasNext()) {
-            Element nodo = it.next();
+	Iterator<Element> it = nodos.iterator();
+	while (it.hasNext()) {
+	    Element nodo = it.next();
 
-            XMLSignatureInput xmlSignatureInput = new XMLSignatureInput(nodo);
-            try {
-                XMLSignatureInput resultado = null;
-                resultado = t.performTransforms(xmlSignatureInput);
-                bais.write(resultado.getBytes());
-            } catch (TransformationException ex) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-            } catch (CanonicalizationException ex) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-            } catch (IOException ex) {
-                log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
-                throw new FirmaXMLError(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
-            }
-        }
+	    XMLSignatureInput xmlSignatureInput = new XMLSignatureNodeInput(nodo);
+	    try {
+		XMLSignatureInput resultado = null;
+		resultado = t.performTransforms(xmlSignatureInput);
+		bais.write(resultado.getBytes());
+	    } catch (TransformationException ex) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
+		throw new FirmaXMLError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	    } catch (CanonicalizationException ex) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
+		throw new FirmaXMLError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	    } catch (IOException ex) {
+		log.error(I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_34), ex);
+		throw new FirmaXMLError(
+			I18n.getResource(ConstantesXADES.LIBRERIAXADES_FIRMAXML_ERROR_8));
+	    }
+	}
 
-        if (bais.size() > 0)
-            return bais.toByteArray();
-        return null;
+	if (bais.size() > 0)
+	    return bais.toByteArray();
+	return null;
     }
 
     /**
-     * Devuelve un listado con las ID de los elementos. Si no encuentra un atributo que sea ID, busca entre los
-     * atributos alguno que tenga la <i>forma</i> de ID.
+     * Devuelve un listado con las ID de los elementos. Si no encuentra un atributo que sea ID,
+     * busca entre los atributos alguno que tenga la <i>forma</i> de ID.
      *
-     * @param elementos
-     *            listado con los elementos de los cuales obtener las IDs
+     * @param elementos listado con los elementos de los cuales obtener las IDs
      *
      * @return
      */
     public static ArrayList<String> obtenerIDs(ArrayList<Element> elementos) {
-        if (elementos == null)
-            return null;
-        ArrayList<String> resultado = new ArrayList<String>();
-        Iterator<Element> it = elementos.iterator();
-        while (it.hasNext()) {
-            Element elemento = it.next();
-            boolean encontrado = false;
-            NamedNodeMap map = elemento.getAttributes();
-            for (int i = 0; i < map.getLength(); i++) {
-                Attr attr = (Attr) map.item(i);
-                if (attr.isId()) {
-                    resultado.add(attr.getValue());
-                    encontrado = true;
-                    break;
-                }
-            }
-            if (!encontrado) {
-                for (int i = 0; i < IDs.length; i++) {
-                    if (elemento.hasAttribute(IDs[i])) {
-                        resultado.add(elemento.getAttribute(IDs[i]));
-                        break;
-                    }
-                }
-            }
-        }
-        return resultado;
+	if (elementos == null)
+	    return null;
+	ArrayList<String> resultado = new ArrayList<String>();
+	Iterator<Element> it = elementos.iterator();
+	while (it.hasNext()) {
+	    Element elemento = it.next();
+	    boolean encontrado = false;
+	    NamedNodeMap map = elemento.getAttributes();
+	    for (int i = 0; i < map.getLength(); i++) {
+		Attr attr = (Attr) map.item(i);
+		if (attr.isId()) {
+		    resultado.add(attr.getValue());
+		    encontrado = true;
+		    break;
+		}
+	    }
+	    if (!encontrado) {
+		for (int i = 0; i < IDs.length; i++) {
+		    if (elemento.hasAttribute(IDs[i])) {
+			resultado.add(elemento.getAttribute(IDs[i]));
+			break;
+		    }
+		}
+	    }
+	}
+	return resultado;
     }
 
     /**
-     * Busca en una lista de nodos un elemento que tenga un atributo con nombre <b>Id</b> con el valor especificado
+     * Busca en una lista de nodos un elemento que tenga un atributo con nombre <b>Id</b> con el
+     * valor especificado
      *
      * @param id
      *
      * @return
      */
     public static Element getElementById(NodeList list, String id) {
-        Element resultado = null;
-        if (list != null) {
-            int length = list.getLength();
-            for (int i = 0; i < length; i++) {
-                Node node = list.item(i);
-                // AppPerfect: Falso positivo
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    Element el = (Element) node;
-                    if (id.equals(el.getAttribute(ConstantesXADES.ID))) {
-                        resultado = el;
-                        break;
-                    }
-                }
-            }
-        }
-        return resultado;
+	Element resultado = null;
+	if (list != null) {
+	    int length = list.getLength();
+	    for (int i = 0; i < length; i++) {
+		Node node = list.item(i);
+		// AppPerfect: Falso positivo
+		if (node.getNodeType() == Node.ELEMENT_NODE) {
+		    Element el = (Element) node;
+		    if (id.equals(el.getAttribute(ConstantesXADES.ID))) {
+			resultado = el;
+			break;
+		    }
+		}
+	    }
+	}
+	return resultado;
     }
 
     /**
@@ -633,72 +652,79 @@ public class UtilidadTratarNodo {
      * @return
      */
     private static Element exploreElementById(Element el, String id) {
-        if (el != null) {
-            for (int i = 0; i < IDs.length; i++) {
-                if (id.equals(el.getAttribute(IDs[i]))) {
-                    return el;
-                }
-            }
-            // explora los hijos del nodo
-            NodeList nodes = el.getChildNodes();
-            for (int i = 0; i < nodes.getLength(); i++) {
-                Node nodo = nodes.item(i);
-                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
-                    Element temp = exploreElementById((Element) nodo, id);
-                    if (temp != null)
-                        return temp;
-                }
-            }
-        }
-        return null;
+	if (el != null) {
+	    for (int i = 0; i < IDs.length; i++) {
+		if (id.equals(el.getAttribute(IDs[i]))) {
+		    return el;
+		}
+	    }
+	    // explora los hijos del nodo
+	    NodeList nodes = el.getChildNodes();
+	    for (int i = 0; i < nodes.getLength(); i++) {
+		Node nodo = nodes.item(i);
+		if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+		    Element temp = exploreElementById((Element) nodo, id);
+		    if (temp != null)
+			return temp;
+		}
+	    }
+	}
+	return null;
     }
 
     /**
-     * Busca un nodo que tenga la Id indicada. Busca la id en cualquier atributo que tenga la forma Id, ID, o id.
+     * Busca un nodo que tenga la Id indicada. Busca la id en cualquier atributo que tenga la forma
+     * Id, ID, o id.
      *
      * @param doc
      * @param id
      *
-     * @return el elemento con la id indicada, <code>null</code> si no hay ningún elemento con esa id.
+     * @return el elemento con la id indicada, <code>null</code> si no hay ningún elemento con esa
+     *         id.
      */
     public static Element getElementById(Document doc, String id) {
-        if ((doc == null) || (id == null)) {
-            return null;
-        }
-        id = (id != null) ? ((id.startsWith("#"))
-                ? ((id.startsWith(XPOINTER_ID)) ? id.substring(XPOINTER_ID.length(), id.length() - 2) : id.substring(1))
-                : id) : null;
-        // Si es id = "" lo toma como el nodo raíz
-        if (id.length() == 0) {
-            return doc.getDocumentElement();
-        }
-        Element el = doc.getElementById(id);
-        if (el == null) {
-            el = exploreElementById(doc.getDocumentElement(), id);
-        }
-        return el;
+	if ((doc == null) || (id == null)) {
+	    return null;
+	}
+	id = (id != null)
+		? ((id.startsWith("#"))
+			? ((id.startsWith(XPOINTER_ID))
+				? id.substring(XPOINTER_ID.length(), id.length() - 2)
+				: id.substring(1))
+			: id)
+		: null;
+	// Si es id = "" lo toma como el nodo raíz
+	if (id.length() == 0) {
+	    return doc.getDocumentElement();
+	}
+	Element el = doc.getElementById(id);
+	if (el == null) {
+	    el = exploreElementById(doc.getDocumentElement(), id);
+	}
+	return el;
     }
 
     /**
-     * Busca un nodo que tenga la Id indicada que sea hijo del nodo indicado. Busca la id en cualquier atributo que
-     * tenga la forma Id, ID, o id.
+     * Busca un nodo que tenga la Id indicada que sea hijo del nodo indicado. Busca la id en
+     * cualquier atributo que tenga la forma Id, ID, o id.
      *
      * @param doc
      * @param id
      *
-     * @return el elemento con la id indicada, <code>null</code> si no hay ningún elemento con esa id.
+     * @return el elemento con la id indicada, <code>null</code> si no hay ningún elemento con esa
+     *         id.
      */
     public static Element getElementById(Element padre, String id) {
-        Element el = getElementById(padre.getOwnerDocument(), id);
-        // Comprueba que el nodo encontrado es hijo
-        if (el != null) {
-            Node temp = el;
-            while ((temp != null) && (!temp.isSameNode(padre)))
-                temp = temp.getParentNode();
-            if (temp != null)
-                return el;
-        }
-        return null;
+	Element el = getElementById(padre.getOwnerDocument(), id);
+	// Comprueba que el nodo encontrado es hijo
+	if (el != null) {
+	    Node temp = el;
+	    while ((temp != null) && (!temp.isSameNode(padre)))
+		temp = temp.getParentNode();
+	    if (temp != null)
+		return el;
+	}
+	return null;
     }
 
     /**
@@ -706,44 +732,40 @@ public class UtilidadTratarNodo {
      * Comprueba si el nodo hijo indicado es hijo del nodo padre indicado.
      * </p>
      *
-     * @param child
-     *            Elemento hijo
-     * @param parent
-     *            Elemento que se comprueba si es el padre
+     * @param child  Elemento hijo
+     * @param parent Elemento que se comprueba si es el padre
      *
      * @return <code>true</code> si el hijo es hijo del padre
      */
     public static boolean isChildNode(Element child, Element parent) {
-        Node temp = child;
-        while ((temp != null) && (!temp.isSameNode(parent))) {
-            temp = temp.getParentNode();
-        }
-        return (temp != null);
+	Node temp = child;
+	while ((temp != null) && (!temp.isSameNode(parent))) {
+	    temp = temp.getParentNode();
+	}
+	return (temp != null);
     }
 
     /**
      * <p>
-     * Comprueba si el nodo hijo indicado no es hijo de un nodo padre que se ajuste al tipo de nodo indicado.
+     * Comprueba si el nodo hijo indicado no es hijo de un nodo padre que se ajuste al tipo de nodo
+     * indicado.
      * </p>
      *
-     * @param child
-     *            Elemento hijo
-     * @param parent
-     *            Tipo de elemento que se comprueba si es el padre
-     * @param top
-     *            Tope de elemento padre del que no se pasara buscando padres
+     * @param child  Elemento hijo
+     * @param parent Tipo de elemento que se comprueba si es el padre
+     * @param top    Tope de elemento padre del que no se pasara buscando padres
      *
      * @return <code>true</code> si el hijo es hijo del padre
      */
     public static boolean isChildNode(Element child, NombreNodo parent, Element top) {
-        Node temp = child;
-        while ((temp != null) && (!temp.isSameNode(top))) {
-            if (parent.equals(temp)) {
-                break;
-            }
-            temp = temp.getParentNode();
-        }
-        return parent.equals(temp);
+	Node temp = child;
+	while ((temp != null) && (!temp.isSameNode(top))) {
+	    if (parent.equals(temp)) {
+		break;
+	    }
+	    temp = temp.getParentNode();
+	}
+	return parent.equals(temp);
     }
 
     /**
@@ -755,62 +777,62 @@ public class UtilidadTratarNodo {
      * @return
      */
     public static String newID(Document doc, String prefix) {
-        String newID = prefix + rnd.nextInt(RND_MAX_SIZE);
-        while (getElementById(doc, newID) != null)
-            newID = prefix + rnd.nextInt(RND_MAX_SIZE);
-        return newID;
+	String newID = prefix + rnd.nextInt(RND_MAX_SIZE);
+	while (getElementById(doc, newID) != null)
+	    newID = prefix + rnd.nextInt(RND_MAX_SIZE);
+	return newID;
     }
 
     /**
-     * Método para obtener el primer nodo de tipo Element hijo del nodo dado. En la búsqueda se excluyen los nodos de
-     * texto "vacíos" (con caracteres de retorno de carro o espacios), los nodos Attribute y los nodos de comentario
+     * Método para obtener el primer nodo de tipo Element hijo del nodo dado. En la búsqueda se
+     * excluyen los nodos de texto "vacíos" (con caracteres de retorno de carro o espacios), los
+     * nodos Attribute y los nodos de comentario
      *
-     * @param Element
-     *            .- Nodo padre en el que buscar el primer hijo de tipo Element
+     * @param Element .- Nodo padre en el que buscar el primer hijo de tipo Element
      */
     public static Element getFirstElementChild(Node node, boolean strict) {
-        Node nodeTemp = node.getFirstChild();
+	Node nodeTemp = node.getFirstChild();
 
-        while ((nodeTemp != null) && (nodeTemp.getNodeType() != Node.ELEMENT_NODE)) {
-            if (strict) {
-                if (nodeTemp.getNodeType() == Node.TEXT_NODE) {
-                    String text = nodeTemp.getNodeValue().trim();
-                    text = text.replaceAll("/n", ConstantesXADES.CADENA_VACIA);
-                    text = text.replaceAll("/r", ConstantesXADES.CADENA_VACIA);
-                    text = text.replaceAll(ConstantesXADES.ESPACIO, ConstantesXADES.CADENA_VACIA);
-                    if (!text.equals(ConstantesXADES.CADENA_VACIA))
-                        return null;
-                }
-            }
-            nodeTemp = nodeTemp.getNextSibling();
-        }
-        return (Element) nodeTemp;
+	while ((nodeTemp != null) && (nodeTemp.getNodeType() != Node.ELEMENT_NODE)) {
+	    if (strict) {
+		if (nodeTemp.getNodeType() == Node.TEXT_NODE) {
+		    String text = nodeTemp.getNodeValue().trim();
+		    text = text.replaceAll("/n", ConstantesXADES.CADENA_VACIA);
+		    text = text.replaceAll("/r", ConstantesXADES.CADENA_VACIA);
+		    text = text.replaceAll(ConstantesXADES.ESPACIO, ConstantesXADES.CADENA_VACIA);
+		    if (!text.equals(ConstantesXADES.CADENA_VACIA))
+			return null;
+		}
+	    }
+	    nodeTemp = nodeTemp.getNextSibling();
+	}
+	return (Element) nodeTemp;
     }
 
     /**
-     * Método para obtener el primer nodo de tipo Element vecino del nodo dado. En la búsqueda se excluyen nodos de
-     * texto "vacíos" (con caracteres de retorno de carro o espacios), los nodos Attribute y los nodos de comentario
+     * Método para obtener el primer nodo de tipo Element vecino del nodo dado. En la búsqueda se
+     * excluyen nodos de texto "vacíos" (con caracteres de retorno de carro o espacios), los nodos
+     * Attribute y los nodos de comentario
      *
-     * @param Element
-     *            .- Nodo en el que buscar su primer vecino de tipo Element
+     * @param Element .- Nodo en el que buscar su primer vecino de tipo Element
      */
     public static Element getNextElementSibling(Node node, boolean strict) {
-        Node nodeTemp = node.getNextSibling();
+	Node nodeTemp = node.getNextSibling();
 
-        while ((nodeTemp != null) && (nodeTemp.getNodeType() != Node.ELEMENT_NODE)) {
-            if (strict) {
-                if (nodeTemp.getNodeType() == Node.TEXT_NODE) {
-                    String text = nodeTemp.getNodeValue().trim();
-                    text = text.replaceAll("/n", ConstantesXADES.CADENA_VACIA);
-                    text = text.replaceAll("/r", ConstantesXADES.CADENA_VACIA);
-                    text = text.replaceAll(ConstantesXADES.ESPACIO, ConstantesXADES.CADENA_VACIA);
-                    if (!text.equals(ConstantesXADES.CADENA_VACIA))
-                        return null;
-                }
-            }
-            nodeTemp = nodeTemp.getNextSibling();
-        }
-        return (Element) nodeTemp;
+	while ((nodeTemp != null) && (nodeTemp.getNodeType() != Node.ELEMENT_NODE)) {
+	    if (strict) {
+		if (nodeTemp.getNodeType() == Node.TEXT_NODE) {
+		    String text = nodeTemp.getNodeValue().trim();
+		    text = text.replaceAll("/n", ConstantesXADES.CADENA_VACIA);
+		    text = text.replaceAll("/r", ConstantesXADES.CADENA_VACIA);
+		    text = text.replaceAll(ConstantesXADES.ESPACIO, ConstantesXADES.CADENA_VACIA);
+		    if (!text.equals(ConstantesXADES.CADENA_VACIA))
+			return null;
+		}
+	    }
+	    nodeTemp = nodeTemp.getNextSibling();
+	}
+	return (Element) nodeTemp;
     }
 
     /**
@@ -822,250 +844,245 @@ public class UtilidadTratarNodo {
      */
     public static ArrayList<Element> getElementChildNodes(Element nodo, boolean strict) {
 
-        ArrayList<Element> retorno = new ArrayList<Element>();
+	ArrayList<Element> retorno = new ArrayList<Element>();
 
-        Element hijo = getFirstElementChild(nodo, strict);
-        int tope = nodo.getChildNodes().getLength();
+	Element hijo = getFirstElementChild(nodo, strict);
+	int tope = nodo.getChildNodes().getLength();
 
-        for (int i = 0; i < tope; ++i) {
-            if (hijo == null)
-                break;
-            retorno.add(hijo);
-            hijo = getNextElementSibling(hijo, strict);
-        }
+	for (int i = 0; i < tope; ++i) {
+	    if (hijo == null)
+		break;
+	    retorno.add(hijo);
+	    hijo = getNextElementSibling(hijo, strict);
+	}
 
-        return retorno;
+	return retorno;
     }
 
     /**
-     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan dentro
-     * del límite establecido por tope.
+     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre
+     * indicado y estan dentro del límite establecido por tope.
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos, nietos, bisnietos, etc... según el nivel de profundidad
-     * @param tope
-     *            int Numero de niveles de profundidad para la búsqueda mínimo 1 y maximo 5.
-     * @param nombreHijos
-     *            Namespace y localname de los hijos que se buscaran
+     * @param padre       nodo padre del que se buscaran los hijos, nietos, bisnietos, etc... según
+     *                    el nivel de profundidad
+     * @param tope        int Numero de niveles de profundidad para la búsqueda mínimo 1 y maximo 5.
+     * @param nombreHijos Namespace y localname de los hijos que se buscaran
      *
      * @return listado con los elementos encontrados
      *
      * @throws FirmaXMLError
      */
     public static ArrayList<Element> obtenerNodos(Element padre, int tope, NombreNodo nombreHijos)
-            throws FirmaXMLError {
-        // TODO: corregir
-        ArrayList<Element> resultado = new ArrayList<Element>();
-        NodeList nodesHijos = padre.getChildNodes();
+	    throws FirmaXMLError {
+	// TODO: corregir
+	ArrayList<Element> resultado = new ArrayList<Element>();
+	NodeList nodesHijos = padre.getChildNodes();
 
-        if (tope < 1)
-            tope = 1;
+	if (tope < 1)
+	    tope = 1;
 
-        for (int i = 0; i < nodesHijos.getLength(); i++) {
-            Node nodo = nodesHijos.item(i);
+	for (int i = 0; i < nodesHijos.getLength(); i++) {
+	    Node nodo = nodesHijos.item(i);
 
-            // Busca el siguiente elemento (Se excluyen los demas tipos de nodo)
-            if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                continue;
+	    // Busca el siguiente elemento (Se excluyen los demas tipos de nodo)
+	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		continue;
 
-            // comprueba si es un nodo de los buscados
-            if (nombreHijos.equals(new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName())))
-                resultado.add((Element) nodo);
+	    // comprueba si es un nodo de los buscados
+	    if (nombreHijos.equals(new NombreNodo(nodo.getNamespaceURI(), nodo.getLocalName())))
+		resultado.add((Element) nodo);
 
-            if (tope > 1) { // Si se debe buscar en el segundo nivel
-                NodeList nodosHijos2 = nodo.getChildNodes();
-                for (int j = 0; j < nodosHijos2.getLength(); j++) {
-                    Node nodo2 = nodosHijos2.item(j);
+	    if (tope > 1) { // Si se debe buscar en el segundo nivel
+		NodeList nodosHijos2 = nodo.getChildNodes();
+		for (int j = 0; j < nodosHijos2.getLength(); j++) {
+		    Node nodo2 = nodosHijos2.item(j);
 
-                    // Busca el siguiente elemento
-                    if (nodo2.getNodeType() != Node.ELEMENT_NODE)
-                        continue;
+		    // Busca el siguiente elemento
+		    if (nodo2.getNodeType() != Node.ELEMENT_NODE)
+			continue;
 
-                    // comprueba si es un nodo de los buscados
-                    if (nombreHijos.equals(new NombreNodo(nodo2.getNamespaceURI(), nodo2.getLocalName())))
-                        resultado.add((Element) nodo2);
+		    // comprueba si es un nodo de los buscados
+		    if (nombreHijos
+			    .equals(new NombreNodo(nodo2.getNamespaceURI(), nodo2.getLocalName())))
+			resultado.add((Element) nodo2);
 
-                    if (tope > 2) { // Si se debe buscar en el tercer nivel
-                        NodeList nodosHijos3 = nodo2.getChildNodes();
-                        for (int k = 0; k < nodosHijos3.getLength(); k++) {
-                            Node nodo3 = nodosHijos3.item(k);
+		    if (tope > 2) { // Si se debe buscar en el tercer nivel
+			NodeList nodosHijos3 = nodo2.getChildNodes();
+			for (int k = 0; k < nodosHijos3.getLength(); k++) {
+			    Node nodo3 = nodosHijos3.item(k);
 
-                            // Busca el siguiente elemento
-                            if (nodo3.getNodeType() != Node.ELEMENT_NODE)
-                                continue;
+			    // Busca el siguiente elemento
+			    if (nodo3.getNodeType() != Node.ELEMENT_NODE)
+				continue;
 
-                            // comprueba si es un nodo de los buscados
-                            if (nombreHijos.equals(new NombreNodo(nodo3.getNamespaceURI(), nodo3.getLocalName())))
-                                resultado.add((Element) nodo3);
+			    // comprueba si es un nodo de los buscados
+			    if (nombreHijos.equals(
+				    new NombreNodo(nodo3.getNamespaceURI(), nodo3.getLocalName())))
+				resultado.add((Element) nodo3);
 
-                            if (tope > 3) { // Si se debe buscar en el cuarto nivel
-                                NodeList nodosHijos4 = nodo3.getChildNodes();
-                                for (int l = 0; l < nodosHijos4.getLength(); l++) {
-                                    Node nodo4 = nodosHijos4.item(l);
+			    if (tope > 3) { // Si se debe buscar en el cuarto nivel
+				NodeList nodosHijos4 = nodo3.getChildNodes();
+				for (int l = 0; l < nodosHijos4.getLength(); l++) {
+				    Node nodo4 = nodosHijos4.item(l);
 
-                                    // Busca el siguiente elemento
-                                    if (nodo4.getNodeType() != Node.ELEMENT_NODE)
-                                        continue;
+				    // Busca el siguiente elemento
+				    if (nodo4.getNodeType() != Node.ELEMENT_NODE)
+					continue;
 
-                                    // comprueba si es un nodo de los buscados
-                                    if (nombreHijos
-                                            .equals(new NombreNodo(nodo4.getNamespaceURI(), nodo4.getLocalName())))
-                                        resultado.add((Element) nodo4);
+				    // comprueba si es un nodo de los buscados
+				    if (nombreHijos.equals(new NombreNodo(nodo4.getNamespaceURI(),
+					    nodo4.getLocalName())))
+					resultado.add((Element) nodo4);
 
-                                    if (tope > 4) { // Si se debe buscar en el quinto nivel
-                                        NodeList nodosHijos5 = nodo4.getChildNodes();
-                                        for (int m = 0; m < nodosHijos5.getLength(); m++) {
-                                            Node nodo5 = nodosHijos5.item(m);
+				    if (tope > 4) { // Si se debe buscar en el quinto nivel
+					NodeList nodosHijos5 = nodo4.getChildNodes();
+					for (int m = 0; m < nodosHijos5.getLength(); m++) {
+					    Node nodo5 = nodosHijos5.item(m);
 
-                                            // Busca el siguiente elemento
-                                            if (nodo5.getNodeType() != Node.ELEMENT_NODE)
-                                                continue;
+					    // Busca el siguiente elemento
+					    if (nodo5.getNodeType() != Node.ELEMENT_NODE)
+						continue;
 
-                                            // comprueba si es un nodo de los buscados
-                                            if (nombreHijos.equals(
-                                                    new NombreNodo(nodo5.getNamespaceURI(), nodo5.getLocalName())))
-                                                resultado.add((Element) nodo5);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+					    // comprueba si es un nodo de los buscados
+					    if (nombreHijos.equals(new NombreNodo(
+						    nodo5.getNamespaceURI(), nodo5.getLocalName())))
+						resultado.add((Element) nodo5);
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
 
-        return resultado;
+	return resultado;
     }
 
     /**
-     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre indicado y estan dentro
-     * del límite establecido por tope.
+     * Devuelve un listado con los elementos quen siendo hijos del nodo padre tienen el nombre
+     * indicado y estan dentro del límite establecido por tope.
      *
-     * @param padre
-     *            nodo padre del que se buscaran los hijos, nietos, bisnietos, etc... según el nivel de profundidad
-     * @param tope
-     *            int Numero de niveles de profundidad para la búsqueda mínimo 1 y maximo 5.
-     * @param nombreHijos
-     *            localname de los hijos que se buscaran
+     * @param padre       nodo padre del que se buscaran los hijos, nietos, bisnietos, etc... según
+     *                    el nivel de profundidad
+     * @param tope        int Numero de niveles de profundidad para la búsqueda mínimo 1 y maximo 5.
+     * @param nombreHijos localname de los hijos que se buscaran
      *
      * @return listado con los elementos encontrados
      *
      * @throws FirmaXMLError
      */
-    public static ArrayList<Element> obtenerNodos(Element padre, int tope, String nombreHijos) throws FirmaXMLError {
-        // TODO: corregir
-        ArrayList<Element> resultado = new ArrayList<Element>();
-        NodeList nodesHijos = padre.getChildNodes();
+    public static ArrayList<Element> obtenerNodos(Element padre, int tope, String nombreHijos)
+	    throws FirmaXMLError {
+	// TODO: corregir
+	ArrayList<Element> resultado = new ArrayList<Element>();
+	NodeList nodesHijos = padre.getChildNodes();
 
-        if (tope < 1)
-            tope = 1;
+	if (tope < 1)
+	    tope = 1;
 
-        for (int i = 0; i < nodesHijos.getLength(); i++) {
-            Node nodo = nodesHijos.item(i);
+	for (int i = 0; i < nodesHijos.getLength(); i++) {
+	    Node nodo = nodesHijos.item(i);
 
-            // Busca el siguiente elemento (Se excluyen los demas tipos de nodo)
-            if (nodo.getNodeType() != Node.ELEMENT_NODE)
-                continue;
+	    // Busca el siguiente elemento (Se excluyen los demas tipos de nodo)
+	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
+		continue;
 
-            // comprueba si es un nodo de los buscados
-            if (nombreHijos.equals(nodo.getLocalName()))
-                resultado.add((Element) nodo);
+	    // comprueba si es un nodo de los buscados
+	    if (nombreHijos.equals(nodo.getLocalName()))
+		resultado.add((Element) nodo);
 
-            if (tope > 1) { // Si se debe buscar en el segundo nivel
-                NodeList nodosHijos2 = nodo.getChildNodes();
-                for (int j = 0; j < nodosHijos2.getLength(); j++) {
-                    Node nodo2 = nodosHijos2.item(j);
+	    if (tope > 1) { // Si se debe buscar en el segundo nivel
+		NodeList nodosHijos2 = nodo.getChildNodes();
+		for (int j = 0; j < nodosHijos2.getLength(); j++) {
+		    Node nodo2 = nodosHijos2.item(j);
 
-                    // Busca el siguiente elemento
-                    if (nodo2.getNodeType() != Node.ELEMENT_NODE)
-                        continue;
+		    // Busca el siguiente elemento
+		    if (nodo2.getNodeType() != Node.ELEMENT_NODE)
+			continue;
 
-                    // comprueba si es un nodo de los buscados
-                    if (nombreHijos.equals(nodo2.getLocalName()))
-                        resultado.add((Element) nodo2);
+		    // comprueba si es un nodo de los buscados
+		    if (nombreHijos.equals(nodo2.getLocalName()))
+			resultado.add((Element) nodo2);
 
-                    if (tope > 2) { // Si se debe buscar en el tercer nivel
-                        NodeList nodosHijos3 = nodo2.getChildNodes();
-                        for (int k = 0; k < nodosHijos3.getLength(); k++) {
-                            Node nodo3 = nodosHijos3.item(k);
+		    if (tope > 2) { // Si se debe buscar en el tercer nivel
+			NodeList nodosHijos3 = nodo2.getChildNodes();
+			for (int k = 0; k < nodosHijos3.getLength(); k++) {
+			    Node nodo3 = nodosHijos3.item(k);
 
-                            // Busca el siguiente elemento
-                            if (nodo3.getNodeType() != Node.ELEMENT_NODE)
-                                continue;
+			    // Busca el siguiente elemento
+			    if (nodo3.getNodeType() != Node.ELEMENT_NODE)
+				continue;
 
-                            // comprueba si es un nodo de los buscados
-                            if (nombreHijos.equals(nodo3.getLocalName()))
-                                resultado.add((Element) nodo3);
+			    // comprueba si es un nodo de los buscados
+			    if (nombreHijos.equals(nodo3.getLocalName()))
+				resultado.add((Element) nodo3);
 
-                            if (tope > 3) { // Si se debe buscar en el cuarto nivel
-                                NodeList nodosHijos4 = nodo3.getChildNodes();
-                                for (int l = 0; l < nodosHijos4.getLength(); l++) {
-                                    Node nodo4 = nodosHijos4.item(l);
+			    if (tope > 3) { // Si se debe buscar en el cuarto nivel
+				NodeList nodosHijos4 = nodo3.getChildNodes();
+				for (int l = 0; l < nodosHijos4.getLength(); l++) {
+				    Node nodo4 = nodosHijos4.item(l);
 
-                                    // Busca el siguiente elemento
-                                    if (nodo4.getNodeType() != Node.ELEMENT_NODE)
-                                        continue;
+				    // Busca el siguiente elemento
+				    if (nodo4.getNodeType() != Node.ELEMENT_NODE)
+					continue;
 
-                                    // comprueba si es un nodo de los buscados
-                                    if (nombreHijos.equals(nodo4.getLocalName()))
-                                        resultado.add((Element) nodo4);
+				    // comprueba si es un nodo de los buscados
+				    if (nombreHijos.equals(nodo4.getLocalName()))
+					resultado.add((Element) nodo4);
 
-                                    if (tope > 4) { // Si se debe buscar en el quinto nivel
-                                        NodeList nodosHijos5 = nodo4.getChildNodes();
-                                        for (int m = 0; m < nodosHijos5.getLength(); m++) {
-                                            Node nodo5 = nodosHijos5.item(m);
+				    if (tope > 4) { // Si se debe buscar en el quinto nivel
+					NodeList nodosHijos5 = nodo4.getChildNodes();
+					for (int m = 0; m < nodosHijos5.getLength(); m++) {
+					    Node nodo5 = nodosHijos5.item(m);
 
-                                            // Busca el siguiente elemento
-                                            if (nodo5.getNodeType() != Node.ELEMENT_NODE)
-                                                continue;
+					    // Busca el siguiente elemento
+					    if (nodo5.getNodeType() != Node.ELEMENT_NODE)
+						continue;
 
-                                            // comprueba si es un nodo de los buscados
-                                            if (nombreHijos.equals(nodo5.getLocalName()))
-                                                resultado.add((Element) nodo5);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+					    // comprueba si es un nodo de los buscados
+					    if (nombreHijos.equals(nodo5.getLocalName()))
+						resultado.add((Element) nodo5);
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
 
-        return resultado;
+	return resultado;
     }
 
     /**
      * <p>
-     * Escribe el documento a un flujo de salida. Este método es la exposicion pública de un método de la libreria
-     * XMLSec de Apache. Este método no añade el preambulo de XML
+     * Escribe el documento a un flujo de salida. Este método es la exposicion pública de un método
+     * de la libreria XMLSec de Apache. Este método no añade el preambulo de XML
      * </p>
      *
-     * @param document
-     *            El documento a salvar
-     * @param outputStream
-     *            El flujo de salida path del fichero donde se quiere escribir.
+     * @param document     El documento a salvar
+     * @param outputStream El flujo de salida path del fichero donde se quiere escribir.
      */
     public static void saveDocumentToOutputStream(Document document, OutputStream outputStream) {
-        org.apache.xml.security.utils.XMLUtils.outputDOM(document, outputStream);
+	org.apache.xml.security.utils.XMLUtils.outputDOM(document, outputStream);
     }
 
     /**
      * <p>
-     * Escribe el documento a un flujo de salida. Este método es la exposicion pública de un método de la libreria
-     * XMLSec de Apache.
+     * Escribe el documento a un flujo de salida. Este método es la exposicion pública de un método
+     * de la libreria XMLSec de Apache.
      * </p>
      *
-     * @param document
-     *            El documento a salvar
-     * @param outputStream
-     *            El flujo de salida path del fichero donde se quiere escribir.
-     * @param addPreamble
-     *            Si se desea añadir el preambulo de XML.
+     * @param document     El documento a salvar
+     * @param outputStream El flujo de salida path del fichero donde se quiere escribir.
+     * @param addPreamble  Si se desea añadir el preambulo de XML.
      */
-    public static void saveDocumentToOutputStream(Document document, OutputStream outputStream, boolean addPreamble) {
-        org.apache.xml.security.utils.XMLUtils.outputDOM(document, outputStream, addPreamble);
+    public static void saveDocumentToOutputStream(Document document, OutputStream outputStream,
+	    boolean addPreamble) {
+	org.apache.xml.security.utils.XMLUtils.outputDOM(document, outputStream, addPreamble);
     }
 
 }

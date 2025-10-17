@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -37,9 +33,9 @@ public class AbstractXadesURIElement extends AbstractXADESElement {
     private String nameElement;
 
     public AbstractXadesURIElement(XAdESSchemas schema, String nameElement, URI data) {
-        super(schema);
-        this.nameElement = nameElement;
-        this.data = new XMLDataURIType(data);
+	super(schema);
+	this.nameElement = nameElement;
+	this.data = new XMLDataURIType(data);
     }
 
     /**
@@ -48,8 +44,8 @@ public class AbstractXadesURIElement extends AbstractXADESElement {
      * @param schema
      */
     public AbstractXadesURIElement(XAdESSchemas schema, String nameElement) {
-        super(schema);
-        this.nameElement = nameElement;
+	super(schema);
+	this.nameElement = nameElement;
     }
 
     /**
@@ -57,11 +53,13 @@ public class AbstractXadesURIElement extends AbstractXADESElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        if (data == null)
-            throw new InvalidInfoNodeException("Informacion insuficiente para escribir elemento " + nameElement);
-        Element res = doc.createElementNS(schema.getSchemaUri(), namespaceXAdES + ":" + nameElement);
-        data.addContent(res);
-        return res;
+	if (data == null)
+	    throw new InvalidInfoNodeException(
+		    "Informacion insuficiente para escribir elemento " + nameElement);
+	Element res = doc.createElementNS(schema.getSchemaUri(),
+		namespaceXAdES + ":" + nameElement);
+	data.addContent(res);
+	return res;
     }
 
     /**
@@ -69,8 +67,9 @@ public class AbstractXadesURIElement extends AbstractXADESElement {
      *      java.lang.String)
      */
     @Override
-    public Element createElement(Document doc, String namespaceXAdES) throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXAdES);
+    public Element createElement(Document doc, String namespaceXAdES)
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -78,13 +77,13 @@ public class AbstractXadesURIElement extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof AbstractXadesURIElement) {
-            AbstractXadesURIElement desc = (AbstractXadesURIElement) obj;
-            if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data)))
-                return true;
-        } else
-            return data.equals(obj);
-        return false;
+	if (obj instanceof AbstractXadesURIElement) {
+	    AbstractXadesURIElement desc = (AbstractXadesURIElement) obj;
+	    if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data)))
+		return true;
+	} else
+	    return data.equals(obj);
+	return false;
     }
 
     /**
@@ -92,22 +91,22 @@ public class AbstractXadesURIElement extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, schema.getSchemaUri(), nameElement);
-        data = new XMLDataURIType(null);
-        data.load(element);
+	checkElementName(element, schema.getSchemaUri(), nameElement);
+	data = new XMLDataURIType(null);
+	data.load(element);
     }
 
     public void setValue(URI value) {
-        if (data == null)
-            data = new XMLDataURIType(value);
-        else
-            data.setValue(value);
+	if (data == null)
+	    data = new XMLDataURIType(value);
+	else
+	    data.setValue(value);
     }
 
     public URI getValue() {
-        if (data != null)
-            return data.getValue();
-        return null;
+	if (data != null)
+	    return data.getValue();
+	return null;
     }
 
     /**
@@ -115,7 +114,7 @@ public class AbstractXadesURIElement extends AbstractXADESElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), schema.getSchemaUri(), nameElement);
+	return isElementName(nodeToElement(node), schema.getSchemaUri(), nameElement);
     }
 
 }

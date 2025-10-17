@@ -1,24 +1,20 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.utils;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.mityc.javasign.ConstantsAPI;
 
@@ -34,7 +30,7 @@ import es.mityc.javasign.ConstantsAPI;
 public final class OSTool {
 
     /** Logger. */
-    private static final Log LOGGER = LogFactory.getLog(OSTool.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OSTool.class);
 
     /** Cadena vacía. */
     private static final String STRING_EMPTY = "";
@@ -63,196 +59,207 @@ public final class OSTool {
     // private static final String PKCS12 = "PKCS12";
 
     /** Nombres de sistemas operativos Windows de tipo 4.0. */
-    public static final String[] WINDOWS4_NAMES = { "windows 95", "windows 98", "windows 2000", "windows 9x" };
+    public static final String[] WINDOWS4_NAMES = {
+	    "windows 95", "windows 98", "windows 2000", "windows 9x" };
     /** Nombres de sistemas operativos Windows de tipo 5.0. */
-    public static final String[] WINDOWS5_NAMES = { "windows 2000", "windows xp", "windows 2003", "windows nt" };
+    public static final String[] WINDOWS5_NAMES = {
+	    "windows 2000", "windows xp", "windows 2003", "windows nt" };
     /** Nombres de sistemas operativos Windows de tipo 6.0. */
-    public static final String[] WINDOWS6_NAMES = { "windows vista", "windows 7", "windows server 2008",
-            "windows server 2008 r2" };
+    public static final String[] WINDOWS6_NAMES = {
+	    "windows vista", "windows 7", "windows server 2008", "windows server 2008 r2" };
     /** Versiones de sistemas operativos Windows. */
-    public static final String[] WINDOWS_VERSIONS = { "4", "5", "6" };
+    public static final String[] WINDOWS_VERSIONS = {
+	    "4", "5", "6" };
     /** Arquitecturas de 64 bits de windows. */
-    public static final String[] WINDOWS_ARCHS_64BITS = { "ia64", "amd64" };
+    public static final String[] WINDOWS_ARCHS_64BITS = {
+	    "ia64", "amd64" };
     /** Cuando no es capaz de encontrar la version de windows devuelve este valor: 5. */
     private static final int WINDOWS_DEFAULT_VERSION = 5;
     /** Versiones de sistemas operativos Linux. */
-    public static final String[] LINUX_VERSIONS = { "24", "26" };
+    public static final String[] LINUX_VERSIONS = {
+	    "24", "26" };
     /** Versiones de sistemas operativos Mac OS X. */
-    public static final String[] MACOSX_VERSIONS = { "104", "105", "106" };
+    public static final String[] MACOSX_VERSIONS = {
+	    "104", "105", "106" };
     /** Arquitecturas de 64 bits de Mac OS X. */
-    public static final String[] MACOSX_ARCHS_64BITS = { "x86_64" };
+    public static final String[] MACOSX_ARCHS_64BITS = {
+	    "x86_64" };
     /** Arquitecturas de 64 bits de la maquina virtual. */
-    public static final String[] SUN_ARCHS = { "32", "64" };
+    public static final String[] SUN_ARCHS = {
+	    "32", "64" };
 
     /** Enumerado de sistemas operativos reconocidos. */
     public enum OS_NAMES {
-        UNKNOWN, WINDOWS, LINUX, MAC_OS_X
+	UNKNOWN, WINDOWS, LINUX, MAC_OS_X
     };
 
     /** Enumerado de version en bits del sistema operativo. */
     public enum OS_BITS {
-        UNKNOWN, OS32BITS, OS64BITS
+	UNKNOWN, OS32BITS, OS64BITS
     };
 
     /** Enumerado de sistemas operativos reconocidos. */
     public enum OS {
-        /** Sistema operativo desconocido. */
-        UNKNOWN(OS_NAMES.UNKNOWN, STRING_EMPTY, OS_BITS.UNKNOWN, "unknown"),
-        /** Windows 4.x 32 bits. */
-        WIN_4_32(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[0], OS_BITS.OS32BITS, "Windows 4.0 32bits"),
-        /** Windows 4.x 64 bits. */
-        WIN_4_64(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[0], OS_BITS.OS64BITS, "Windows 4.0 64bits"),
-        /** Windows 5.x 32 bits. */
-        WIN_5_32(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS32BITS, "Windows 5.0 32bits"),
-        /** Windows 5.x 64 bits. */
-        WIN_5_64(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS64BITS, "Windows 5.0 64bits"),
-        /** Windows 5.x 32 bits. */
-        WIN_6_32(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS32BITS, "Windows 6.0 32bits"),
-        /** Windows 5.x 64 bits. */
-        WIN_6_64(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS64BITS, "Windows 6.0 64bits"),
-        /** Linux 2.4 32 bits. */
-        LIN_24_32(OS_NAMES.LINUX, LINUX_VERSIONS[0], OS_BITS.OS32BITS, "Linux 2.4 32bits"),
-        /** Linux 2.4 64 bits. */
-        LIN_24_64(OS_NAMES.LINUX, LINUX_VERSIONS[0], OS_BITS.OS64BITS, "Linux 2.4 64bits"),
-        /** Linux 2.6 32 bits. */
-        LIN_26_32(OS_NAMES.LINUX, LINUX_VERSIONS[1], OS_BITS.OS32BITS, "Linux 2.6 32bits"),
-        /** Linux 2.6 64 bits. */
-        LIN_26_64(OS_NAMES.LINUX, LINUX_VERSIONS[1], OS_BITS.OS64BITS, "Linux 2.6 64bits"),
-        /** Mac OS X 10.4 32 bits. */
-        MACOSX_104_32(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[0], OS_BITS.OS32BITS, "Mac OS X 10.4 32bits"),
-        /** Mac OS X 10.4 64 bits. */
-        MACOSX_104_64(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[0], OS_BITS.OS64BITS, "Mac OS X 10.4 64bits"),
-        /** Mac OS X 10.5 32 bits. */
-        MACOSX_105_32(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS32BITS, "Mac OS X 10.5 32bits"),
-        /** Mac OS X 10.5 64 bits. */
-        MACOSX_105_64(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS64BITS, "Mac OS X 10.5 64bits"),
-        /** Mac OS X 10.6 32 bits. */
-        MACOSX_106_32(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS32BITS, "Mac OS X 10.6 32bits"),
-        /** Mac OS X 10.6 64 bits. */
-        MACOSX_106_64(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS64BITS, "Mac OS X 10.6 64bits");
+	/** Sistema operativo desconocido. */
+	UNKNOWN(OS_NAMES.UNKNOWN, STRING_EMPTY, OS_BITS.UNKNOWN, "unknown"),
+	/** Windows 4.x 32 bits. */
+	WIN_4_32(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[0], OS_BITS.OS32BITS, "Windows 4.0 32bits"),
+	/** Windows 4.x 64 bits. */
+	WIN_4_64(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[0], OS_BITS.OS64BITS, "Windows 4.0 64bits"),
+	/** Windows 5.x 32 bits. */
+	WIN_5_32(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS32BITS, "Windows 5.0 32bits"),
+	/** Windows 5.x 64 bits. */
+	WIN_5_64(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS64BITS, "Windows 5.0 64bits"),
+	/** Windows 5.x 32 bits. */
+	WIN_6_32(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS32BITS, "Windows 6.0 32bits"),
+	/** Windows 5.x 64 bits. */
+	WIN_6_64(OS_NAMES.WINDOWS, WINDOWS_VERSIONS[1], OS_BITS.OS64BITS, "Windows 6.0 64bits"),
+	/** Linux 2.4 32 bits. */
+	LIN_24_32(OS_NAMES.LINUX, LINUX_VERSIONS[0], OS_BITS.OS32BITS, "Linux 2.4 32bits"),
+	/** Linux 2.4 64 bits. */
+	LIN_24_64(OS_NAMES.LINUX, LINUX_VERSIONS[0], OS_BITS.OS64BITS, "Linux 2.4 64bits"),
+	/** Linux 2.6 32 bits. */
+	LIN_26_32(OS_NAMES.LINUX, LINUX_VERSIONS[1], OS_BITS.OS32BITS, "Linux 2.6 32bits"),
+	/** Linux 2.6 64 bits. */
+	LIN_26_64(OS_NAMES.LINUX, LINUX_VERSIONS[1], OS_BITS.OS64BITS, "Linux 2.6 64bits"),
+	/** Mac OS X 10.4 32 bits. */
+	MACOSX_104_32(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[0], OS_BITS.OS32BITS,
+		"Mac OS X 10.4 32bits"),
+	/** Mac OS X 10.4 64 bits. */
+	MACOSX_104_64(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[0], OS_BITS.OS64BITS,
+		"Mac OS X 10.4 64bits"),
+	/** Mac OS X 10.5 32 bits. */
+	MACOSX_105_32(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS32BITS,
+		"Mac OS X 10.5 32bits"),
+	/** Mac OS X 10.5 64 bits. */
+	MACOSX_105_64(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS64BITS,
+		"Mac OS X 10.5 64bits"),
+	/** Mac OS X 10.6 32 bits. */
+	MACOSX_106_32(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS32BITS,
+		"Mac OS X 10.6 32bits"),
+	/** Mac OS X 10.6 64 bits. */
+	MACOSX_106_64(OS_NAMES.MAC_OS_X, MACOSX_VERSIONS[1], OS_BITS.OS64BITS,
+		"Mac OS X 10.6 64bits");
 
-        /** Nombre genérico del sistema operativo. */
-        private OS_NAMES osvalue;
-        /** Version del kernel del sistema operativo. */
-        private String version;
-        /** Bits de compilacion del kernel del sistema operativo. */
-        private OS_BITS bits;
-        /** Cadena descriptiva del sistema operativo. */
-        private String desc;
+	/** Nombre genérico del sistema operativo. */
+	private OS_NAMES osvalue;
+	/** Version del kernel del sistema operativo. */
+	private String version;
+	/** Bits de compilacion del kernel del sistema operativo. */
+	private OS_BITS bits;
+	/** Cadena descriptiva del sistema operativo. */
+	private String desc;
 
-        /**
-         * <p>
-         * Constructor.
-         * </p>
-         *
-         * @param osname
-         *            Familia del sistema operativo
-         * @param osversion
-         *            Version del kernel del sistema operativo
-         * @param osbits
-         *            Bits de la compilacion del kernel
-         * @param description
-         *            Cadena descriptiva del sistema operativo
-         */
-        private OS(final OS_NAMES osname, final String osversion, final OS_BITS osbits, final String description) {
-            this.osvalue = osname;
-            this.version = osversion;
-            this.bits = osbits;
-            this.desc = new String(description);
-        }
+	/**
+	 * <p>
+	 * Constructor.
+	 * </p>
+	 *
+	 * @param osname      Familia del sistema operativo
+	 * @param osversion   Version del kernel del sistema operativo
+	 * @param osbits      Bits de la compilacion del kernel
+	 * @param description Cadena descriptiva del sistema operativo
+	 */
+	private OS(final OS_NAMES osname, final String osversion, final OS_BITS osbits,
+		final String description) {
+	    this.osvalue = osname;
+	    this.version = osversion;
+	    this.bits = osbits;
+	    this.desc = new String(description);
+	}
 
-        /**
-         * <p>
-         * Indica si el sistema operativo pertenece a la familia Windows.
-         * </p>
-         *
-         * @return <code>true</code> si es de la familia Windows, <code>false</code> en otro caso
-         */
-        public boolean isWindows() {
-            if (OS_NAMES.WINDOWS.equals(osvalue)) {
-                return true;
-            }
-            return false;
-        }
+	/**
+	 * <p>
+	 * Indica si el sistema operativo pertenece a la familia Windows.
+	 * </p>
+	 *
+	 * @return <code>true</code> si es de la familia Windows, <code>false</code> en otro caso
+	 */
+	public boolean isWindows() {
+	    if (OS_NAMES.WINDOWS.equals(osvalue)) {
+		return true;
+	    }
+	    return false;
+	}
 
-        /**
-         * <p>
-         * Indica si el sistema operativo pertenece a la familia Linux.
-         * </p>
-         *
-         * @return <code>true</code> si es de la familia Linux, <code>false</code> en otro caso
-         */
-        public boolean isLinux() {
-            if (OS_NAMES.LINUX.equals(osvalue)) {
-                return true;
-            }
-            return false;
-        }
+	/**
+	 * <p>
+	 * Indica si el sistema operativo pertenece a la familia Linux.
+	 * </p>
+	 *
+	 * @return <code>true</code> si es de la familia Linux, <code>false</code> en otro caso
+	 */
+	public boolean isLinux() {
+	    if (OS_NAMES.LINUX.equals(osvalue)) {
+		return true;
+	    }
+	    return false;
+	}
 
-        /**
-         * <p>
-         * Indica si el sistema operativo pertenece a la familia Mac OS X.
-         * </p>
-         *
-         * @return <code>true</code> si es de la familia Mac OS X, <code>false</code> en otro caso
-         */
-        public boolean isMacOsX() {
-            if (OS_NAMES.MAC_OS_X.equals(osvalue)) {
-                return true;
-            }
-            return false;
-        }
+	/**
+	 * <p>
+	 * Indica si el sistema operativo pertenece a la familia Mac OS X.
+	 * </p>
+	 *
+	 * @return <code>true</code> si es de la familia Mac OS X, <code>false</code> en otro caso
+	 */
+	public boolean isMacOsX() {
+	    if (OS_NAMES.MAC_OS_X.equals(osvalue)) {
+		return true;
+	    }
+	    return false;
+	}
 
-        /**
-         * <p>
-         * Indica si el kernel del sistema operativo es de 32 bits.
-         * </p>
-         *
-         * @return <code>true</code> si el kernel es de 32 bits, <code>false</code> en otro caso
-         */
-        public boolean is32bits() {
-            if (OS_BITS.OS32BITS.equals(bits)) {
-                return true;
-            }
-            return false;
-        }
+	/**
+	 * <p>
+	 * Indica si el kernel del sistema operativo es de 32 bits.
+	 * </p>
+	 *
+	 * @return <code>true</code> si el kernel es de 32 bits, <code>false</code> en otro caso
+	 */
+	public boolean is32bits() {
+	    if (OS_BITS.OS32BITS.equals(bits)) {
+		return true;
+	    }
+	    return false;
+	}
 
-        /**
-         * <p>
-         * Indica si el kernel del sistema operativo es de 64 bits.
-         * </p>
-         *
-         * @return <code>true</code> si el kernel es de 64 bits, <code>false</code> en otro caso
-         */
-        public boolean is64bits() {
-            if (OS_BITS.OS64BITS.equals(bits)) {
-                return true;
-            }
-            return false;
-        }
+	/**
+	 * <p>
+	 * Indica si el kernel del sistema operativo es de 64 bits.
+	 * </p>
+	 *
+	 * @return <code>true</code> si el kernel es de 64 bits, <code>false</code> en otro caso
+	 */
+	public boolean is64bits() {
+	    if (OS_BITS.OS64BITS.equals(bits)) {
+		return true;
+	    }
+	    return false;
+	}
 
-        /**
-         * <p>
-         * Devuelve la version del sistema operativo dentro de la familia.
-         * </p>
-         *
-         * @return Cadena con la version del sistema operativo
-         */
-        public String getVersion() {
-            return version;
-        }
+	/**
+	 * <p>
+	 * Devuelve la version del sistema operativo dentro de la familia.
+	 * </p>
+	 *
+	 * @return Cadena con la version del sistema operativo
+	 */
+	public String getVersion() {
+	    return version;
+	}
 
-        /**
-         * <p>
-         * Devuelve una cadena descriptiva del sistema operativo descrito por el enumerado.
-         * </p>
-         *
-         * @return cadena descriptiva del SO
-         */
-        @Override
-        public String toString() {
-            return desc;
-        }
+	/**
+	 * <p>
+	 * Devuelve una cadena descriptiva del sistema operativo descrito por el enumerado.
+	 * </p>
+	 *
+	 * @return cadena descriptiva del SO
+	 */
+	@Override
+	public String toString() {
+	    return desc;
+	}
     }
 
     /**
@@ -271,20 +278,21 @@ public final class OSTool {
      * Comprueba si el windows es de 64 bits.
      * </p>
      *
-     * @return <code>true</code> si el windows es reconocido de 64bits, <code>false</code> en otro caso
+     * @return <code>true</code> si el windows es reconocido de 64bits, <code>false</code> en otro
+     *         caso
      */
     private static boolean isWindows64bits() {
-        boolean res = isSun64bits();
-        if (!res) {
-            String osArch = System.getProperty(OS_ARCH).toLowerCase();
-            for (int i = 0; i < WINDOWS_ARCHS_64BITS.length; i++) {
-                if (osArch.startsWith(WINDOWS_ARCHS_64BITS[i])) {
-                    res = true;
-                    break;
-                }
-            }
-        }
-        return res;
+	boolean res = isSun64bits();
+	if (!res) {
+	    String osArch = System.getProperty(OS_ARCH).toLowerCase();
+	    for (int i = 0; i < WINDOWS_ARCHS_64BITS.length; i++) {
+		if (osArch.startsWith(WINDOWS_ARCHS_64BITS[i])) {
+		    res = true;
+		    break;
+		}
+	    }
+	}
+	return res;
     }
 
     /**
@@ -292,20 +300,21 @@ public final class OSTool {
      * Comprueba si el Mac OS X es de 64 bits.
      * </p>
      *
-     * @return <code>true</code> si el Mac OS X es reconocido de 64bits, <code>false</code> en otro caso
+     * @return <code>true</code> si el Mac OS X es reconocido de 64bits, <code>false</code> en otro
+     *         caso
      */
     private static boolean isMacosx64bits() {
-        boolean res = isSun64bits();
-        if (!res) {
-            String osArch = System.getProperty(OS_ARCH).toLowerCase();
-            for (int i = 0; i < MACOSX_ARCHS_64BITS.length; i++) {
-                if (osArch.startsWith(MACOSX_ARCHS_64BITS[i])) {
-                    res = true;
-                    break;
-                }
-            }
-        }
-        return res;
+	boolean res = isSun64bits();
+	if (!res) {
+	    String osArch = System.getProperty(OS_ARCH).toLowerCase();
+	    for (int i = 0; i < MACOSX_ARCHS_64BITS.length; i++) {
+		if (osArch.startsWith(MACOSX_ARCHS_64BITS[i])) {
+		    res = true;
+		    break;
+		}
+	    }
+	}
+	return res;
     }
 
     /**
@@ -316,12 +325,12 @@ public final class OSTool {
      * @return <code>true</code> si la propiedad <code>sun.arch.data.model</code>
      */
     private static boolean isSun64bits() {
-        boolean res = false;
-        String osArch = System.getProperty(OS_ARCH_ALTERNATIVE).toLowerCase();
-        if (osArch.startsWith(SUN_ARCHS[1])) {
-            res = true;
-        }
-        return res;
+	boolean res = false;
+	String osArch = System.getProperty(OS_ARCH_ALTERNATIVE).toLowerCase();
+	if (osArch.startsWith(SUN_ARCHS[1])) {
+	    res = true;
+	}
+	return res;
     }
 
     /**
@@ -332,13 +341,13 @@ public final class OSTool {
      * @return en la version <code>major.minor</code> de windows devuelve <code>major</code>
      */
     private static int getWindowsMajorVersion() {
-        int version = WINDOWS_DEFAULT_VERSION;
-        String osVersion = System.getProperty(OS_VERSION);
-        try {
-            version = Integer.parseInt(osVersion.substring(osVersion.indexOf(".")));
-        } catch (NumberFormatException ex) {
-        }
-        return version;
+	int version = WINDOWS_DEFAULT_VERSION;
+	String osVersion = System.getProperty(OS_VERSION);
+	try {
+	    version = Integer.parseInt(osVersion.substring(osVersion.indexOf(".")));
+	} catch (NumberFormatException ex) {
+	}
+	return version;
     }
 
     /**
@@ -349,92 +358,92 @@ public final class OSTool {
      * @return enumerado SO con el sistema operativo detectado
      */
     public static OS askSO() {
-        OS res = OS.UNKNOWN;
-        // Obtiene el sistema operativo de las propiedades de sistema
-        String osName = System.getProperty(OS_NAME);
-        LOGGER.debug("SO: " + osName);
-        if (osName.toLowerCase().startsWith(WIN)) {
-            switch (getWindowsMajorVersion()) {
-            case 5:
-                if (isWindows64bits()) {
-                    res = OS.WIN_5_64;
-                } else {
-                    res = OS.WIN_5_32;
-                }
-                break;
-            case 6:
-                if (isWindows64bits()) {
-                    res = OS.WIN_6_64;
-                } else {
-                    res = OS.WIN_6_32;
-                }
-                break;
-            case 4:
-            default:
-                if (isWindows64bits()) {
-                    res = OS.WIN_4_64;
-                } else {
-                    res = OS.WIN_4_32;
-                }
-                break;
-            }
-            LOGGER.trace("Es un windows: " + res);
-        } else if (osName.toLowerCase().startsWith(LINUX)) {
-            LOGGER.trace("Es un linux");
-            String osVersion = System.getProperty(OS_VERSION);
-            if (osVersion.startsWith(LINUX_VERSIONS[0])) {
-                if (isSun64bits()) {
-                    res = OS.LIN_24_64;
-                } else {
-                    res = OS.LIN_24_32;
-                }
-            } else if (osVersion.startsWith(LINUX_VERSIONS[1])) {
-                if (isSun64bits()) {
-                    res = OS.LIN_26_64;
-                } else {
-                    res = OS.LIN_26_32;
-                }
-            } else {
-                // Si no encuentra qué version es, le aplica la última conocida
-                if (isSun64bits()) {
-                    res = OS.LIN_26_64;
-                } else {
-                    res = OS.LIN_26_32;
-                }
-                // res = OS.UNKNOWN;
-            }
-        } else if (osName.toLowerCase().startsWith(MAC_OS)) {
-            LOGGER.trace("Es un Mac OS X");
-            String osVersion = System.getProperty(OS_VERSION);
-            if (osVersion.startsWith(MACOSX_VERSIONS[0])) {
-                if (isMacosx64bits()) {
-                    res = OS.MACOSX_104_64;
-                } else {
-                    res = OS.MACOSX_104_32;
-                }
-            } else if (osVersion.startsWith(MACOSX_VERSIONS[1])) {
-                if (isMacosx64bits()) {
-                    res = OS.MACOSX_105_64;
-                } else {
-                    res = OS.MACOSX_105_32;
-                }
-            } else if (osVersion.startsWith(MACOSX_VERSIONS[2])) {
-                if (isMacosx64bits()) {
-                    res = OS.MACOSX_106_64;
-                } else {
-                    res = OS.MACOSX_106_32;
-                }
-            } else {
-                // Si no encuentra qué version es, le aplica la última conocida
-                if (isMacosx64bits()) {
-                    res = OS.MACOSX_106_64;
-                } else {
-                    res = OS.MACOSX_106_32;
-                }
-                // res = OS.UNKNOWN;
-            }
-        }
-        return res;
+	OS res = OS.UNKNOWN;
+	// Obtiene el sistema operativo de las propiedades de sistema
+	String osName = System.getProperty(OS_NAME);
+	LOGGER.debug("SO: " + osName);
+	if (osName.toLowerCase().startsWith(WIN)) {
+	    switch (getWindowsMajorVersion()) {
+	    case 5:
+		if (isWindows64bits()) {
+		    res = OS.WIN_5_64;
+		} else {
+		    res = OS.WIN_5_32;
+		}
+		break;
+	    case 6:
+		if (isWindows64bits()) {
+		    res = OS.WIN_6_64;
+		} else {
+		    res = OS.WIN_6_32;
+		}
+		break;
+	    case 4:
+	    default:
+		if (isWindows64bits()) {
+		    res = OS.WIN_4_64;
+		} else {
+		    res = OS.WIN_4_32;
+		}
+		break;
+	    }
+	    LOGGER.trace("Es un windows: " + res);
+	} else if (osName.toLowerCase().startsWith(LINUX)) {
+	    LOGGER.trace("Es un linux");
+	    String osVersion = System.getProperty(OS_VERSION);
+	    if (osVersion.startsWith(LINUX_VERSIONS[0])) {
+		if (isSun64bits()) {
+		    res = OS.LIN_24_64;
+		} else {
+		    res = OS.LIN_24_32;
+		}
+	    } else if (osVersion.startsWith(LINUX_VERSIONS[1])) {
+		if (isSun64bits()) {
+		    res = OS.LIN_26_64;
+		} else {
+		    res = OS.LIN_26_32;
+		}
+	    } else {
+		// Si no encuentra qué version es, le aplica la última conocida
+		if (isSun64bits()) {
+		    res = OS.LIN_26_64;
+		} else {
+		    res = OS.LIN_26_32;
+		}
+		// res = OS.UNKNOWN;
+	    }
+	} else if (osName.toLowerCase().startsWith(MAC_OS)) {
+	    LOGGER.trace("Es un Mac OS X");
+	    String osVersion = System.getProperty(OS_VERSION);
+	    if (osVersion.startsWith(MACOSX_VERSIONS[0])) {
+		if (isMacosx64bits()) {
+		    res = OS.MACOSX_104_64;
+		} else {
+		    res = OS.MACOSX_104_32;
+		}
+	    } else if (osVersion.startsWith(MACOSX_VERSIONS[1])) {
+		if (isMacosx64bits()) {
+		    res = OS.MACOSX_105_64;
+		} else {
+		    res = OS.MACOSX_105_32;
+		}
+	    } else if (osVersion.startsWith(MACOSX_VERSIONS[2])) {
+		if (isMacosx64bits()) {
+		    res = OS.MACOSX_106_64;
+		} else {
+		    res = OS.MACOSX_106_32;
+		}
+	    } else {
+		// Si no encuentra qué version es, le aplica la última conocida
+		if (isMacosx64bits()) {
+		    res = OS.MACOSX_106_64;
+		} else {
+		    res = OS.MACOSX_106_32;
+		}
+		// res = OS.UNKNOWN;
+	    }
+	}
+	return res;
     }
 
     /**
@@ -445,16 +454,16 @@ public final class OSTool {
      * @return elemento del enumerado con los datos del sistema operativo
      */
     public static OS getSO() {
-        return actualSO;
+	return actualSO;
     }
 
     /** Indica si se esta ejecutando bajo un plugin de Java. */
     private static boolean javaplugin = false;
     static {
-        String pluginVersion = System.getProperty(JAVAPLUGIN_VERSION);
-        if (pluginVersion != null) {
-            javaplugin = true;
-        }
+	String pluginVersion = System.getProperty(JAVAPLUGIN_VERSION);
+	if (pluginVersion != null) {
+	    javaplugin = true;
+	}
     }
 
     /**
@@ -462,10 +471,11 @@ public final class OSTool {
      * Indica si la clase se esta ejecutando desde un plugin (applet, jsdl, etc).
      * </p>
      *
-     * @return <code>true</code> si se esta ejecutando desde un plugin, <code>false</code> en otro caso
+     * @return <code>true</code> si se esta ejecutando desde un plugin, <code>false</code> en otro
+     *         caso
      */
     public static boolean isPlugin() {
-        return javaplugin;
+	return javaplugin;
     }
 
     /**
@@ -481,10 +491,10 @@ public final class OSTool {
      */
     @Deprecated
     public static boolean isOSLinux() {
-        if (System.getProperty(OS_NAME).toLowerCase().startsWith(LINUX)) {
-            return true;
-        }
-        return false;
+	if (System.getProperty(OS_NAME).toLowerCase().startsWith(LINUX)) {
+	    return true;
+	}
+	return false;
     }
 
     /**
@@ -500,10 +510,10 @@ public final class OSTool {
      */
     @Deprecated
     public static boolean isOSWindows() {
-        if (System.getProperty(OS_NAME).toLowerCase().startsWith(WIN)) {
-            return true;
-        }
-        return false;
+	if (System.getProperty(OS_NAME).toLowerCase().startsWith(WIN)) {
+	    return true;
+	}
+	return false;
     }
 
     /**
@@ -514,14 +524,14 @@ public final class OSTool {
      * @return directorio raíz del usuario
      */
     public static String getUserHome() {
-        String home = System.getProperty(ConstantsAPI.SYSTEM_PROPERTY_USER_HOME);
-        if (isOSWindows()) {
-            // encontrar la unidad de instalacion
-            String path = home.substring(0, home.indexOf(STRING_BACKSLASH));
-            return path.replace('\\', '/');
-        } else {
-            return home;
-        }
+	String home = System.getProperty(ConstantsAPI.SYSTEM_PROPERTY_USER_HOME);
+	if (isOSWindows()) {
+	    // encontrar la unidad de instalacion
+	    String path = home.substring(0, home.indexOf(STRING_BACKSLASH));
+	    return path.replace('\\', '/');
+	} else {
+	    return home;
+	}
     }
 
     /**
@@ -532,7 +542,7 @@ public final class OSTool {
      * @return Nombre del usuario
      */
     public static String getUserName() {
-        return System.getProperty(USER_NAME);
+	return System.getProperty(USER_NAME);
     }
 
     /**
@@ -546,11 +556,11 @@ public final class OSTool {
      */
     @Deprecated
     public static String getFileSeparator() {
-        if (isOSWindows()) {
-            return System.getProperty(FILE_SEPARATOR).replace('\\', '/');
-        } else {
-            return System.getProperty(FILE_SEPARATOR);
-        }
+	if (isOSWindows()) {
+	    return System.getProperty(FILE_SEPARATOR).replace('\\', '/');
+	} else {
+	    return System.getProperty(FILE_SEPARATOR);
+	}
     }
 
     /**
@@ -561,7 +571,7 @@ public final class OSTool {
      * @return directorio temporal
      */
     public static String getTempDir() {
-        return System.getProperty(ConstantsAPI.SYSTEM_PROPERTY_TMP_DIR);
+	return System.getProperty(ConstantsAPI.SYSTEM_PROPERTY_TMP_DIR);
     }
 
     /**
@@ -572,6 +582,6 @@ public final class OSTool {
      * @return directorio Home
      */
     public static String getHomeDir() {
-        return getUserHome();
+	return getUserHome();
     }
 }

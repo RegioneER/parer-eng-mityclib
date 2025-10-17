@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.transform;
@@ -47,23 +43,24 @@ public class XPathTransformData implements ITransformData {
      * @param path
      */
     public void addPath(String path) {
-        paths.add(path);
+	paths.add(path);
     }
 
     /**
      * @see es.mityc.javasign.xml.transform.ITransformData#getExtraData(org.w3c.dom.Document))
      */
     public NodeList getExtraData(Document doc) {
-        SimpleNodeList nl = null;
-        if (paths.size() > 0) {
-            nl = new SimpleNodeList();
-            for (String path : paths) {
-                Element pathElement = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG, "ds:XPath");
-                pathElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ds", ConstantesXADES.SCHEMA_DSIG);
-                pathElement.setTextContent(path);
-                nl.addNode(pathElement);
-            }
-        }
-        return nl;
+	SimpleNodeList nl = null;
+	if (paths.size() > 0) {
+	    nl = new SimpleNodeList();
+	    for (String path : paths) {
+		Element pathElement = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG, "ds:XPath");
+		pathElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ds",
+			ConstantesXADES.SCHEMA_DSIG);
+		pathElement.setTextContent(path);
+		nl.addNode(pathElement);
+	    }
+	}
+	return nl;
     }
 }

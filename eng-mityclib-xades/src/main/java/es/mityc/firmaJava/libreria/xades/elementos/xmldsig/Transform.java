@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xmldsig;
@@ -36,14 +32,14 @@ public class Transform extends TransformType {
      * @param algorithm
      */
     public Transform(String algorithm) {
-        super(algorithm);
+	super(algorithm);
     }
 
     /**
      * @param namespaceXDSig
      */
     public Transform() {
-        super();
+	super();
     }
 
     /**
@@ -51,8 +47,8 @@ public class Transform extends TransformType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.TRANSFORM);
-        super.load(element);
+	checkElementName(element, ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.TRANSFORM);
+	super.load(element);
     }
 
     /**
@@ -60,7 +56,8 @@ public class Transform extends TransformType {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.TRANSFORM);
+	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
+		ConstantesXADES.TRANSFORM);
     }
 
     /**
@@ -68,10 +65,10 @@ public class Transform extends TransformType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-                namespaceXDsig + ":" + ConstantesXADES.TRANSFORM);
-        super.addContent(res, namespaceXDsig);
-        return res;
+	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+		namespaceXDsig + ":" + ConstantesXADES.TRANSFORM);
+	super.addContent(res, namespaceXDsig);
+	return res;
     }
 
     /**
@@ -79,8 +76,9 @@ public class Transform extends TransformType {
      *      java.lang.String)
      */
     @Override
-    public Element createElement(Document doc, String namespaceXDsig) throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXDsig);
+    public Element createElement(Document doc, String namespaceXDsig)
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXDsig);
     }
 
 }

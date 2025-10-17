@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.refs;
@@ -41,63 +37,58 @@ public class ObjectToSign {
     /**
      * Permite pasar un objeto a firmar, junto con la informacion sobre dicho objeto a firmar.
      *
-     * @param objectToSign
-     *            .- Objeto a firmar
-     * @param desc
-     *            .- Descripcion del objeto a firmar
-     * @param id
-     *            .- Objecto identificador del objeto descrito
-     * @param mimeType
-     *            .- Tipo MIME del objeto descrito
-     * @param encoding
-     *            .- Codificacion en la firma del objeto descrito
+     * @param objectToSign .- Objeto a firmar
+     * @param desc         .- Descripcion del objeto a firmar
+     * @param id           .- Objecto identificador del objeto descrito
+     * @param mimeType     .- Tipo MIME del objeto descrito
+     * @param encoding     .- Codificacion en la firma del objeto descrito
      */
-    public ObjectToSign(AbstractObjectToSign objectToSign, String desc, ObjectIdentifier id, String mimeType,
-            URI encoding) {
-        this.objectToSign = objectToSign;
-        this.description = desc;
-        this.objectIdentifier = id;
-        this.extraData = new ExtraObjectData(mimeType, encoding);
+    public ObjectToSign(AbstractObjectToSign objectToSign, String desc, ObjectIdentifier id,
+	    String mimeType, URI encoding) {
+	this.objectToSign = objectToSign;
+	this.description = desc;
+	this.objectIdentifier = id;
+	this.extraData = new ExtraObjectData(mimeType, encoding);
     }
 
     public void setObjectToSign(AbstractObjectToSign objectToSign) {
-        this.objectToSign = objectToSign;
+	this.objectToSign = objectToSign;
     }
 
     public AbstractObjectToSign getObjectToSign() {
-        return this.objectToSign;
+	return this.objectToSign;
     }
 
     public String getDescription() {
-        return description;
+	return description;
     }
 
     public void setDescription(String descripcion) {
-        this.description = descripcion;
+	this.description = descripcion;
     }
 
     public ObjectIdentifier getObjectIdentifier() {
-        return objectIdentifier;
+	return objectIdentifier;
     }
 
     public void setObjectIdentifier(ObjectIdentifier identificador) {
-        this.objectIdentifier = identificador;
+	this.objectIdentifier = identificador;
     }
 
     public String getMimeType() {
-        return extraData.getMimeType();
+	return extraData.getMimeType();
     }
 
     public URI getEncoding() {
-        return extraData.getEncoding();
+	return extraData.getEncoding();
     }
 
     public String getId() {
-        return id;
+	return id;
     }
 
     public void setId(String id) {
-        this.id = id;
+	this.id = id;
     }
 
 }

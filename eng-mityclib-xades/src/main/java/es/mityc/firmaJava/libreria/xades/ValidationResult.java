@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades;
@@ -36,8 +32,8 @@ public class ValidationResult {
      * Crea una nueva instancia de ValidationResult()
      */
     public ValidationResult() {
-        this.validado = false;
-        this.log = new ArrayList<String>();
+	this.validado = false;
+	this.log = new ArrayList<String>();
     }
 
     /**
@@ -46,7 +42,7 @@ public class ValidationResult {
      * @return
      */
     public ArrayList getLog() {
-        return log;
+	return log;
     }
 
     /**
@@ -55,7 +51,7 @@ public class ValidationResult {
      * @param log
      */
     public void setLog(ArrayList log) {
-        this.log = log;
+	this.log = log;
     }
 
     /**
@@ -64,7 +60,7 @@ public class ValidationResult {
      * @return
      */
     public boolean isValidate() {
-        return validado;
+	return validado;
     }
 
     /**
@@ -73,14 +69,14 @@ public class ValidationResult {
      * @param validado
      */
     public void setValidate(boolean validado) {
-        this.validado = validado;
+	this.validado = validado;
     }
 
     /**
      * Este metodo añade un nuevo log a la lista
      */
     public void addLog(String log) {
-        this.log.add(log);
+	this.log.add(log);
     }
 
     /**
@@ -89,13 +85,13 @@ public class ValidationResult {
      * @return
      */
     public String writeLog() {
-        StringBuffer log = new StringBuffer();
-        for (Iterator<String> it = this.log.iterator(); it.hasNext();) {
-            String _log = it.next();
-            log.append(_log);
-            log.append(ConstantesXADES.NUEVA_LINEA);
-        }
-        return log.toString();
+	StringBuffer log = new StringBuffer();
+	for (Iterator<String> it = this.log.iterator(); it.hasNext();) {
+	    String _log = it.next();
+	    log.append(_log);
+	    log.append(ConstantesXADES.NUEVA_LINEA);
+	}
+	return log.toString();
     }
 
 }

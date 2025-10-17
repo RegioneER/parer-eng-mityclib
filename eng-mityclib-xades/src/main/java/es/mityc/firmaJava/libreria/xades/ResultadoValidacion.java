@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades;
@@ -50,21 +46,22 @@ public class ResultadoValidacion { // implements ConstantesXADES
     /**
      * Crea una nueva instancia de ValidationResult()
      *
-     * Los datos que contiene son: boolean validado.- Estado de validez de la firma ResultadoEnum resultado.- Estructura
-     * de datos de resultado de validacion String log .- AlmacÃ©n de mensajes a mostrar en cliente String nivelValido .-
-     * Mensaje con el Ãºltimo nivel XAdES valido EnumFormatoFirma EnumNivel.- Nivel XAdES de la firma (sin validar)
-     * Document doc .- El documento de firma DatosFirma datosFirma.- Estructura de datos de firma URI baseURI .- URI de
-     * base de la firma (ruta donde se encuentra) ArrayList<String> firmados.- Ficheros firmados por la firma
-     * ArrayList<ResultadoValidacion> contrafirmadoPor .- Nodos que contrafirman a Ã©sta firma String certRevokedMsg .-
-     * Causa de invalidez de un certificado
+     * Los datos que contiene son: boolean validado.- Estado de validez de la firma ResultadoEnum
+     * resultado.- Estructura de datos de resultado de validacion String log .- AlmacÃ©n de mensajes
+     * a mostrar en cliente String nivelValido .- Mensaje con el Ãºltimo nivel XAdES valido
+     * EnumFormatoFirma EnumNivel.- Nivel XAdES de la firma (sin validar) Document doc .- El
+     * documento de firma DatosFirma datosFirma.- Estructura de datos de firma URI baseURI .- URI de
+     * base de la firma (ruta donde se encuentra) ArrayList<String> firmados.- Ficheros firmados por
+     * la firma ArrayList<ResultadoValidacion> contrafirmadoPor .- Nodos que contrafirman a Ã©sta
+     * firma String certRevokedMsg .- Causa de invalidez de un certificado
      */
     public ResultadoValidacion() {
-        this.validado = false;
-        this.resultado = ResultadoEnum.UNKNOWN;
-        this.log = ConstantesXADES.CADENA_VACIA;
-        this.nivelValido = ConstantesXADES.CADENA_VACIA;
-        this.firmados = new ArrayList<String>();
-        this.contrafirmadoPor = new ArrayList<ResultadoValidacion>();
+	this.validado = false;
+	this.resultado = ResultadoEnum.UNKNOWN;
+	this.log = ConstantesXADES.CADENA_VACIA;
+	this.nivelValido = ConstantesXADES.CADENA_VACIA;
+	this.firmados = new ArrayList<String>();
+	this.contrafirmadoPor = new ArrayList<ResultadoValidacion>();
 
     }
 
@@ -73,7 +70,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public String getLog() {
-        return log;
+	return log;
     }
 
     /**
@@ -81,7 +78,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param log
      */
     public void setLog(String log) {
-        this.log = this.log.length() == 0 ? log : this.log + " - " + log;
+	this.log = this.log.length() == 0 ? log : this.log + " - " + log;
     }
 
     /**
@@ -89,7 +86,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public boolean isValidate() {
-        return validado;
+	return validado;
     }
 
     /**
@@ -97,23 +94,23 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param validado
      */
     public void setValidate(boolean validado) {
-        this.validado = validado;
+	this.validado = validado;
     }
 
     public ResultadoEnum getResultado() {
-        return resultado;
+	return resultado;
     }
 
     public void setResultado(ResultadoEnum resultado) {
-        this.resultado = resultado;
+	this.resultado = resultado;
     }
 
     public Document getDoc() {
-        return doc;
+	return doc;
     }
 
     public void setDoc(Document doc) {
-        this.doc = doc;
+	this.doc = doc;
     }
 
     /**
@@ -121,7 +118,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public String getNivelValido() {
-        return nivelValido;
+	return nivelValido;
     }
 
     /**
@@ -129,7 +126,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param log
      */
     public void setNivelValido(String nivelValido) {
-        this.nivelValido = nivelValido;
+	this.nivelValido = nivelValido;
     }
 
     /**
@@ -137,7 +134,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public DatosFirma getDatosFirma() {
-        return datosFirma;
+	return datosFirma;
     }
 
     /**
@@ -145,7 +142,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param datosFirma
      */
     public void setDatosFirma(DatosFirma datosFirma) {
-        this.datosFirma = datosFirma;
+	this.datosFirma = datosFirma;
     }
 
     /**
@@ -154,7 +151,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return EnumNivel
      */
     public EnumFormatoFirma getEnumNivel() {
-        return EnumNivel;
+	return EnumNivel;
     }
 
     /**
@@ -163,7 +160,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param enumNivel
      */
     public void setEnumNivel(EnumFormatoFirma enumNivel) {
-        EnumNivel = enumNivel;
+	EnumNivel = enumNivel;
     }
 
     /**
@@ -172,7 +169,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return URI
      */
     public URI getBaseURI() {
-        return baseURI;
+	return baseURI;
     }
 
     /**
@@ -181,7 +178,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param URI
      */
     public void setBaseURI(URI baseURI) {
-        this.baseURI = baseURI;
+	this.baseURI = baseURI;
     }
 
     /**
@@ -190,14 +187,14 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return ArrayList<String> .- ArrayList de URIs
      */
     public ArrayList<String> getFirmados() {
-        return firmados;
+	return firmados;
     }
 
     /**
      * Establece la lista de nodos (externos a la firma) firmados
      */
     public void setFirmados(ArrayList<String> firmados) {
-        this.firmados = firmados;
+	this.firmados = firmados;
     }
 
     /**
@@ -206,7 +203,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return ArrayList<ResultadoValidacion>
      */
     public ArrayList<ResultadoValidacion> getContrafirmadoPor() {
-        return contrafirmadoPor;
+	return contrafirmadoPor;
     }
 
     /**
@@ -215,17 +212,18 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param ArrayList<ResultadoValidacion>
      */
     public void setContrafirmadoPor(ArrayList<ResultadoValidacion> contrafirmadoPor) {
-        this.contrafirmadoPor = contrafirmadoPor;
+	this.contrafirmadoPor = contrafirmadoPor;
     }
 
     /**
-     * AÃ±ade al array de resultados de validacion de las firmas que contrafirman a Ã©sta otro resultado de validacion
+     * AÃ±ade al array de resultados de validacion de las firmas que contrafirman a Ã©sta otro
+     * resultado de validacion
      *
      * @param ResultadoValidacion
      */
     public void addContrafirmadoPor(ResultadoValidacion contrafirmadoPor) {
-        if (contrafirmadoPor != null)
-            this.contrafirmadoPor.add(contrafirmadoPor);
+	if (contrafirmadoPor != null)
+	    this.contrafirmadoPor.add(contrafirmadoPor);
     }
 
     /**
@@ -234,24 +232,23 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return Estado del certificado de firma, o <code>null</code> si no se ha obtenido.
      */
     public ICertStatus getCertStatus() {
-        return certStatus;
+	return certStatus;
     }
 
     /**
      * Establece el estado del certificado firmante.
      *
-     * @param certStatus
-     *            Estado del certificado firmante, <code>null</code> si no se ha obtenido
+     * @param certStatus Estado del certificado firmante, <code>null</code> si no se ha obtenido
      */
     public void setCertStatus(ICertStatus certStatus) {
-        this.certStatus = certStatus;
+	this.certStatus = certStatus;
     }
 
     public XMLSignature getXmlSignature() {
-        return xmlSignature;
+	return xmlSignature;
     }
 
     public void setXmlSignature(XMLSignature xmlSignature) {
-        this.xmlSignature = xmlSignature;
+	this.xmlSignature = xmlSignature;
     }
 }

@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria;
@@ -755,10 +751,12 @@ public interface ConstantesXADES {
     public final static int DONT_BREAK_LINES = 8;
 
     /**
-     * Encode using Base64-like encoding that is URL- and Filename-safe as described in Section 4 of RFC3548:
-     * <a href="http://www.faqs.org/rfcs/rfc3548.html">http://www.faqs.org/rfcs/rfc3548.html</a>. It is important to
-     * note that data encoded this way is <em>not</em> officially valid Base64, or at the very least should not be
-     * called Base64 without also specifying that is was encoded using the URL- and Filename-safe dialect.
+     * Encode using Base64-like encoding that is URL- and Filename-safe as described in Section 4 of
+     * RFC3548:
+     * <a href="http://www.faqs.org/rfcs/rfc3548.html">http://www.faqs.org/rfcs/rfc3548.html</a>. It
+     * is important to note that data encoded this way is <em>not</em> officially valid Base64, or
+     * at the very least should not be called Base64 without also specifying that is was encoded
+     * using the URL- and Filename-safe dialect.
      */
     public final static int URL_SAFE = 16;
 

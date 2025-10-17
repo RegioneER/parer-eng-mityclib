@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.certificate;
@@ -47,7 +43,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * @see es.mityc.javasign.certificate.ICertStatus#getCertificate()
      */
     public X509Certificate getCertificate() {
-        return certificate;
+	return certificate;
     }
 
     /**
@@ -74,7 +70,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * @see es.mityc.javasign.certificate.ICertStatus#getRevokedInfo()
      */
     public RevokedInfo getRevokedInfo() {
-        return (revokedInfo != null) ? (RevokedInfo) revokedInfo.clone() : null;
+	return (revokedInfo != null) ? (RevokedInfo) revokedInfo.clone() : null;
     }
 
     /**
@@ -82,12 +78,13 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * Estado del certificado.
      * </p>
      *
-     * @return estado del certificado según el enumerado {@link es.mityc.javasign.certificate.ICertStatus.CERT_STATUS}
+     * @return estado del certificado según el enumerado
+     *         {@link es.mityc.javasign.certificate.ICertStatus.CERT_STATUS}
      *
      * @see es.mityc.javasign.certificate.ICertStatus#getStatus()
      */
     public CERT_STATUS getStatus() {
-        return certStatus;
+	return certStatus;
     }
 
     /**
@@ -95,12 +92,11 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * Establece el estado del certificado.
      * </p>
      *
-     * @param status
-     *            Estado del certificado según el enumerado
-     *            {@link es.mityc.javasign.certificate.ICertStatus.CERT_STATUS}
+     * @param status Estado del certificado según el enumerado
+     *               {@link es.mityc.javasign.certificate.ICertStatus.CERT_STATUS}
      */
     protected void setCertStatus(final CERT_STATUS status) {
-        this.certStatus = status;
+	this.certStatus = status;
     }
 
     /**
@@ -108,11 +104,10 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * Establece informacion sobre el motivo de revocacion del certificado.
      * </p>
      *
-     * @param ri
-     *            Informacion de revocacion
+     * @param ri Informacion de revocacion
      */
     protected void setRevokedInfo(final RevokedInfo ri) {
-        this.revokedInfo = (RevokedInfo) ri.clone();
+	this.revokedInfo = (RevokedInfo) ri.clone();
     }
 
     /**
@@ -120,11 +115,10 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * Establece el certificado sobre el que se realiza la consulta de estado.
      * </p>
      *
-     * @param cert
-     *            Certificado consultado
+     * @param cert Certificado consultado
      */
     protected void setCertificate(final X509Certificate cert) {
-        this.certificate = cert;
+	this.certificate = cert;
     }
 
 }

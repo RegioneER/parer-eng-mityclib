@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.transform;
@@ -41,15 +37,13 @@ public class Transform {
      * Construye una transformada general con el algoritmo indicado.
      * </p>
      *
-     * @param alg
-     *            Algoritmo de la transformada
-     * @param extraData
-     *            Generador de los nodos de informacion extra, <code>null</code> si no hay informacion extra para la
-     *            transformada
+     * @param alg       Algoritmo de la transformada
+     * @param extraData Generador de los nodos de informacion extra, <code>null</code> si no hay
+     *                  informacion extra para la transformada
      */
     public Transform(String alg, ITransformData extraData) {
-        this.algorithm = alg;
-        this.data = extraData;
+	this.algorithm = alg;
+	this.data = extraData;
     }
 
     /**
@@ -60,7 +54,7 @@ public class Transform {
      * @param extraData
      */
     protected void setTransformData(ITransformData extraData) {
-        this.data = extraData;
+	this.data = extraData;
     }
 
     /**
@@ -71,7 +65,7 @@ public class Transform {
      * @return the algorithm
      */
     public String getAlgorithm() {
-        return algorithm;
+	return algorithm;
     }
 
     /**
@@ -79,17 +73,16 @@ public class Transform {
      * Devuelve el listado de nodos de informacion extra que necesita la transformada.
      * </p>
      *
-     * @param doc
-     *            Documento en el que ira la transformada
+     * @param doc Documento en el que ira la transformada
      *
      * @return listado de nodos
      */
     public NodeList getExtraData(Document doc) {
-        NodeList nl = null;
-        if (data != null) {
-            nl = data.getExtraData(doc);
-        }
-        return nl;
+	NodeList nl = null;
+	if (data != null) {
+	    nl = data.getExtraData(doc);
+	}
+	return nl;
     }
 
 }

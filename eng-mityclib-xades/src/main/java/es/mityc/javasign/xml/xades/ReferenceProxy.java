@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.xml.xades;
@@ -51,11 +47,10 @@ public class ReferenceProxy {
      * Construye una instancia proxy a un Reference.
      * </p>
      *
-     * @param ref
-     *            referencia
+     * @param ref referencia
      */
     public ReferenceProxy(Reference ref) {
-        this.reference = ref;
+	this.reference = ref;
     }
 
     /**
@@ -66,7 +61,7 @@ public class ReferenceProxy {
      * @return id
      */
     public String getID() {
-        return reference.getId();
+	return reference.getId();
     }
 
     /**
@@ -77,7 +72,7 @@ public class ReferenceProxy {
      * @return URI
      */
     public String getURI() {
-        return reference.getURI();
+	return reference.getURI();
     }
 
     /**
@@ -88,24 +83,24 @@ public class ReferenceProxy {
      * @return
      */
     public List<TransformProxy> getTransforms() {
-        ArrayList<TransformProxy> proxys = new ArrayList<TransformProxy>();
-        Transforms trans = null;
-        try {
-            trans = reference.getTransforms();
-        } catch (XMLSignatureException ex) {
-        } catch (InvalidTransformException ex) {
-        } catch (TransformationException ex) {
-        } catch (XMLSecurityException ex) {
-        }
-        if (trans != null) {
-            for (int i = 0; i < trans.getLength(); i++) {
-                try {
-                    proxys.add(new TransformProxy(trans.item(i)));
-                } catch (TransformationException ex) {
-                }
-            }
-        }
-        return proxys;
+	ArrayList<TransformProxy> proxys = new ArrayList<TransformProxy>();
+	Transforms trans = null;
+	try {
+	    trans = reference.getTransforms();
+	} catch (XMLSignatureException ex) {
+	} catch (InvalidTransformException ex) {
+	} catch (TransformationException ex) {
+	} catch (XMLSecurityException ex) {
+	}
+	if (trans != null) {
+	    for (int i = 0; i < trans.getLength(); i++) {
+		try {
+		    proxys.add(new TransformProxy(trans.item(i)));
+		} catch (TransformationException ex) {
+		}
+	    }
+	}
+	return proxys;
     }
 
     /**
@@ -116,15 +111,15 @@ public class ReferenceProxy {
      * @return byte[] con los datos, <code>null</code> si se produce un error en el acceso
      */
     public byte[] getBytes() {
-        byte[] data = null;
-        try {
-            XMLSignatureInput si = reference.getContentsAfterTransformation();
-            data = si.getBytes();
-        } catch (XMLSignatureException ex) {
-        } catch (CanonicalizationException ex) {
-        } catch (IOException ex) {
-        }
-        return data;
+	byte[] data = null;
+	try {
+	    XMLSignatureInput si = reference.getContentsAfterTransformation();
+	    data = si.getBytes();
+	} catch (XMLSignatureException ex) {
+	} catch (CanonicalizationException ex) {
+	} catch (IOException ex) {
+	}
+	return data;
     }
 
     /**
@@ -132,16 +127,15 @@ public class ReferenceProxy {
      * Escribe el contenido del nodo referenciado en un stream de salida.
      * </p>
      *
-     * @param os
-     *            Stream de salida
+     * @param os Stream de salida
      */
     public void writeToStream(OutputStream os) throws IOException {
-        try {
-            XMLSignatureInput si = reference.getContentsAfterTransformation();
-            si.updateOutputStream(os);
-        } catch (XMLSignatureException ex) {
-        } catch (CanonicalizationException ex) {
-        }
+	try {
+	    XMLSignatureInput si = reference.getContentsAfterTransformation();
+	    si.write(os);
+	} catch (XMLSignatureException ex) {
+	} catch (CanonicalizationException ex) {
+	}
     }
 
     /**
@@ -152,7 +146,7 @@ public class ReferenceProxy {
      * @return Element
      */
     public Element getElement() {
-        return reference.getElement();
+	return reference.getElement();
     }
 
 }

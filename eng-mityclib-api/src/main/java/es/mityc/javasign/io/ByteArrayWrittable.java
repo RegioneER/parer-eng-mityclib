@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.javasign.io;
@@ -40,7 +36,7 @@ public class ByteArrayWrittable implements IWriter {
      * </p>
      */
     public ByteArrayWrittable() {
-        baos = new ByteArrayOutputStream();
+	baos = new ByteArrayOutputStream();
     }
 
     /**
@@ -48,15 +44,12 @@ public class ByteArrayWrittable implements IWriter {
      * Escribe nuevos datos en el buffer de escritura.
      * </p>
      *
-     * @param b
-     *            array de bytes que contiene los datos que hay que escribir
-     * @param off
-     *            Offset en el array de bytes
-     * @param len
-     *            Número de bytes a escribir
+     * @param b   array de bytes que contiene los datos que hay que escribir
+     * @param off Offset en el array de bytes
+     * @param len Número de bytes a escribir
      */
     public void write(final byte[] b, final int off, final int len) {
-        baos.write(b, off, len);
+	baos.write(b, off, len);
     }
 
     /**
@@ -64,13 +57,12 @@ public class ByteArrayWrittable implements IWriter {
      * Asegura que los datos que estan en bufferes temporales se guarden.
      * </p>
      *
-     * @throws IOException
-     *             Lanzada cuando no se han podido asegurar los datos
+     * @throws IOException Lanzada cuando no se han podido asegurar los datos
      *
      * @see es.mityc.javasign.io.IWriter#flush()
      */
     public void flush() throws IOException {
-        baos.flush();
+	baos.flush();
     }
 
     /**
@@ -81,7 +73,7 @@ public class ByteArrayWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#reset()
      */
     public void reset() {
-        baos.reset();
+	baos.reset();
     }
 
     /**
@@ -94,7 +86,7 @@ public class ByteArrayWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#size()
      */
     public int size() {
-        return baos.size();
+	return baos.size();
     }
 
     /**
@@ -107,6 +99,6 @@ public class ByteArrayWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#toByteArray()
      */
     public byte[] toByteArray() {
-        return baos.toByteArray();
+	return baos.toByteArray();
     }
 }

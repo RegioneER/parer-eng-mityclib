@@ -1,18 +1,14 @@
 /*
  * Engineering Ingegneria Informatica S.p.A.
  *
- * Copyright (C) 2023 Regione Emilia-Romagna
- * <p/>
- * This program is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Affero General Public License as published by the Free Software Foundation,
- * either version 3 of the License, or (at your option) any later version.
- * <p/>
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Affero General Public License for more details.
- * <p/>
- * You should have received a copy of the GNU Affero General Public License along with this program.
- * If not, see <https://www.gnu.org/licenses/>.
+ * Copyright (C) 2023 Regione Emilia-Romagna <p/> This program is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version. <p/> This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the GNU Affero General Public License for more details. <p/> You should
+ * have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see <https://www.gnu.org/licenses/>.
  */
 
 package es.mityc.firmaJava.libreria.xades.elementos.xades;
@@ -44,7 +40,7 @@ public class EncapsulatedCRLValue extends EncapsulatedPKIDataType {
      * @param schema
      */
     public EncapsulatedCRLValue(XAdESSchemas schema) {
-        super(schema);
+	super(schema);
     }
 
     /**
@@ -52,16 +48,17 @@ public class EncapsulatedCRLValue extends EncapsulatedPKIDataType {
      * @param id
      */
     public EncapsulatedCRLValue(XAdESSchemas schema, String id) {
-        super(schema, id);
+	super(schema, id);
     }
 
-    public EncapsulatedCRLValue(XAdESSchemas schema, String id, X509CRL crl) throws InvalidInfoNodeException {
-        super(schema, id);
-        try {
-            setValue(new String(Base64Coder.encode(crl.getEncoded())));
-        } catch (CRLException ex) {
-            throw new InvalidInfoNodeException("Error al extraer la informacion de la crl", ex);
-        }
+    public EncapsulatedCRLValue(XAdESSchemas schema, String id, X509CRL crl)
+	    throws InvalidInfoNodeException {
+	super(schema, id);
+	try {
+	    setValue(new String(Base64Coder.encode(crl.getEncoded())));
+	} catch (CRLException ex) {
+	    throw new InvalidInfoNodeException("Error al extraer la informacion de la crl", ex);
+	}
     }
 
     /**
@@ -69,55 +66,59 @@ public class EncapsulatedCRLValue extends EncapsulatedPKIDataType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_ENCAPSULATED_CRL_VALUE);
-        super.load(element);
+	checkElementName(element, schema.getSchemaUri(),
+		ConstantesXADES.XADES_TAG_ENCAPSULATED_CRL_VALUE);
+	super.load(element);
 
-        // Si no esta en DER esta mal
-        EncodingEnum encoding = getEncoding();
-        if ((encoding != null) && (!encoding.equals(EncodingEnum.DER_ENCODED)))
-            throw new InvalidInfoNodeException("El contenido de EncapsulatedCRLValue debe estar en la codificacion "
-                    + EncodingEnum.DER_ENCODED.getEncodingUri().toString());
+	// Si no esta en DER esta mal
+	EncodingEnum encoding = getEncoding();
+	if ((encoding != null) && (!encoding.equals(EncodingEnum.DER_ENCODED)))
+	    throw new InvalidInfoNodeException(
+		    "El contenido de EncapsulatedCRLValue debe estar en la codificacion "
+			    + EncodingEnum.DER_ENCODED.getEncodingUri().toString());
 
-        // Comprueba que el valor recogido es un una CRL X.509
-        X509CRL crl;
-        try {
-            crl = getX509CRL();
-        } catch (CRLException ex) {
-            throw new InvalidInfoNodeException("El contenido de EncapsulatedCRLValue no es un certificado X509 valido",
-                    ex);
-        }
-        if (crl == null) {
-            throw new InvalidInfoNodeException("El contenido de EncapsulatedCRLValue no es un certificado X509 valido");
-        }
+	// Comprueba que el valor recogido es un una CRL X.509
+	X509CRL crl;
+	try {
+	    crl = getX509CRL();
+	} catch (CRLException ex) {
+	    throw new InvalidInfoNodeException(
+		    "El contenido de EncapsulatedCRLValue no es un certificado X509 valido", ex);
+	}
+	if (crl == null) {
+	    throw new InvalidInfoNodeException(
+		    "El contenido de EncapsulatedCRLValue no es un certificado X509 valido");
+	}
     }
 
     public X509CRL getX509CRL() throws CRLException {
-        String value = getValue();
-        if (value != null) {
-            byte[] data;
-            try {
-                data = Base64Coder.decode(value);
-            } catch (IllegalArgumentException ex) {
-                throw new CRLException("Contenido base64 de EncapsulatedCRLValue invalido", ex);
-            }
-            ByteArrayInputStream bais = new ByteArrayInputStream(data);
+	String value = getValue();
+	if (value != null) {
+	    byte[] data;
+	    try {
+		data = Base64Coder.decode(value);
+	    } catch (IllegalArgumentException ex) {
+		throw new CRLException("Contenido base64 de EncapsulatedCRLValue invalido", ex);
+	    }
+	    ByteArrayInputStream bais = new ByteArrayInputStream(data);
 
-            CertificateFactory cf;
-            try {
-                cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
-            } catch (CertificateException ex) {
-                throw new CRLException(ex);
-            }
-            CRL crl = cf.generateCRL(bais);
-            if (crl instanceof X509CRL)
-                return (X509CRL) crl;
-            throw new CRLException("Contenido base64 de EncapsulatedCRLValue no es una CRL del tipo X.509");
-        } else
-            return null;
+	    CertificateFactory cf;
+	    try {
+		cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
+	    } catch (CertificateException ex) {
+		throw new CRLException(ex);
+	    }
+	    CRL crl = cf.generateCRL(bais);
+	    if (crl instanceof X509CRL)
+		return (X509CRL) crl;
+	    throw new CRLException(
+		    "Contenido base64 de EncapsulatedCRLValue no es una CRL del tipo X.509");
+	} else
+	    return null;
     }
 
     public void setX509Certificate(X509Certificate certificate) throws CertificateException {
-        setValue(new String(Base64Coder.encode(certificate.getEncoded())));
+	setValue(new String(Base64Coder.encode(certificate.getEncoded())));
     }
 
     /**
@@ -125,8 +126,8 @@ public class EncapsulatedCRLValue extends EncapsulatedPKIDataType {
      */
     @Override
     public boolean isThisNode(Node node) {
-        return isElementName(nodeToElement(node), schema.getSchemaUri(),
-                ConstantesXADES.XADES_TAG_ENCAPSULATED_CRL_VALUE);
+	return isElementName(nodeToElement(node), schema.getSchemaUri(),
+		ConstantesXADES.XADES_TAG_ENCAPSULATED_CRL_VALUE);
     }
 
     /**
@@ -134,8 +135,9 @@ public class EncapsulatedCRLValue extends EncapsulatedPKIDataType {
      *      java.lang.String)
      */
     @Override
-    public Element createElement(Document doc, String namespaceXAdES) throws InvalidInfoNodeException {
-        return super.createElement(doc, namespaceXAdES);
+    public Element createElement(Document doc, String namespaceXAdES)
+	    throws InvalidInfoNodeException {
+	return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -143,10 +145,10 @@ public class EncapsulatedCRLValue extends EncapsulatedPKIDataType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-        Element res = doc.createElementNS(schema.getSchemaUri(),
-                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_ENCAPSULATED_CRL_VALUE);
-        super.addContent(res, namespaceXAdES);
-        return res;
+	Element res = doc.createElementNS(schema.getSchemaUri(),
+		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_ENCAPSULATED_CRL_VALUE);
+	super.addContent(res, namespaceXAdES);
+	return res;
     }
 
 }
