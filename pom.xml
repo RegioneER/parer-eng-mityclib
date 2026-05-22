@@ -23,6 +23,21 @@
     <version>7.2.0</version>
   </parent>
 
+	
+ <distributionManagement>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/RegioneER/parer-eng-mityclib</url>
+    </repository>      
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/RegioneER/parer-framework-parerpom</url>
+    </repository>
+  </repositories>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
