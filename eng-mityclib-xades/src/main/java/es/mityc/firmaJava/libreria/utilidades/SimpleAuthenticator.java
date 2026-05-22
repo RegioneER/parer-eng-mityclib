@@ -29,14 +29,14 @@ public class SimpleAuthenticator extends Authenticator {
     private transient String password;
 
     public SimpleAuthenticator(String username, String password) {
-	super();
-	this.username = username;
-	this.password = password;
+        super();
+        this.username = username;
+        this.password = password;
     }
 
     @Override
     protected PasswordAuthentication getPasswordAuthentication() {
-	return new PasswordAuthentication(username, password.toCharArray());
+        return new PasswordAuthentication(username, password.toCharArray());
     }
 
 }

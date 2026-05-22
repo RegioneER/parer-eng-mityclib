@@ -46,7 +46,7 @@ public class InjectableInputStream extends InputStream {
      * @param inputStream InputStream del que se leen los datos
      */
     public InjectableInputStream(InputStream inputStream) {
-	this.is = inputStream;
+        this.is = inputStream;
     }
 
     /**
@@ -62,7 +62,7 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public int read() throws IOException {
-	return is.read();
+        return is.read();
     }
 
     /**
@@ -83,12 +83,12 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public int read(byte[] b, final int off, final int len) throws IOException {
-	int res = is.read(b, off, len);
-	if ((!isEnded()) && (res == -1)) {
-	    return 0;
-	} else {
-	    return res;
-	}
+        int res = is.read(b, off, len);
+        if ((!isEnded()) && (res == -1)) {
+            return 0;
+        } else {
+            return res;
+        }
     }
 
     /**
@@ -97,7 +97,7 @@ public class InjectableInputStream extends InputStream {
      * </p>
      */
     public void endStream() {
-	ended = true;
+        ended = true;
     }
 
     /**
@@ -109,7 +109,7 @@ public class InjectableInputStream extends InputStream {
      *         caso contrario
      */
     public boolean isEnded() {
-	return ended;
+        return ended;
     }
 
     /**
@@ -125,7 +125,7 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public int available() throws IOException {
-	return is.available();
+        return is.available();
     }
 
     /**
@@ -139,11 +139,11 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public void close() throws IOException {
-	InputStream in = is;
-	is = null;
-	if (in != null) {
-	    in.close();
-	}
+        InputStream in = is;
+        is = null;
+        if (in != null) {
+            in.close();
+        }
     }
 
     /**
@@ -161,7 +161,7 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public synchronized void mark(final int readlimit) {
-	is.mark(readlimit);
+        is.mark(readlimit);
     }
 
     /**
@@ -175,7 +175,7 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public synchronized void reset() throws IOException {
-	is.reset();
+        is.reset();
     }
 
     /**
@@ -193,7 +193,7 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public long skip(final long n) throws IOException {
-	return is.skip(n);
+        return is.skip(n);
     }
 
     /**
@@ -207,6 +207,6 @@ public class InjectableInputStream extends InputStream {
      */
     @Override
     public boolean markSupported() {
-	return is.markSupported();
+        return is.markSupported();
     }
 }

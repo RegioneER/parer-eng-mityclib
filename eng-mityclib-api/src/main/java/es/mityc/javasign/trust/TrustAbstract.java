@@ -35,7 +35,7 @@ public abstract class TrustAbstract {
      * @return Instancia del validador
      */
     public static TrustAbstract getInstance() {
-	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     /**

@@ -33,31 +33,31 @@ public class DigestValue extends AbstractXDsigElement {
     private String value;
 
     public DigestValue() {
-	super();
+        super();
     }
 
     /**
      * @param namespaceXDSig
      */
     public DigestValue(String value) {
-	super();
-	setValue(value);
+        super();
+        setValue(value);
     }
 
     /**
      * @return the value
      */
     public String getValue() {
-	return value;
+        return value;
     }
 
     /**
      * @param value the value to set
      */
     public void setValue(String value) {
-	this.value = value;
-	if (this.value != null)
-	    this.value = this.value.replace(" ", "").replace("\n", "").replace("\r", "");
+        this.value = value;
+        if (this.value != null)
+            this.value = this.value.replace(" ", "").replace("\n", "").replace("\r", "");
     }
 
     /**
@@ -65,13 +65,13 @@ public class DigestValue extends AbstractXDsigElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	if (value == null)
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir elemento DigestValue");
-	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-		namespaceXDsig + ":" + ConstantesXADES.DIGEST_VALUE);
-	res.setTextContent(value);
-	return res;
+        if (value == null)
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir elemento DigestValue");
+        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+                namespaceXDsig + ":" + ConstantesXADES.DIGEST_VALUE);
+        res.setTextContent(value);
+        return res;
     }
 
     /**
@@ -80,8 +80,8 @@ public class DigestValue extends AbstractXDsigElement {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig);
     }
 
     /**
@@ -89,12 +89,12 @@ public class DigestValue extends AbstractXDsigElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof DigestValue) {
-	    DigestValue huella = (DigestValue) obj;
-	    if (value.equals(huella.value))
-		return true;
-	}
-	return false;
+        if (obj instanceof DigestValue) {
+            DigestValue huella = (DigestValue) obj;
+            if (value.equals(huella.value))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -102,18 +102,18 @@ public class DigestValue extends AbstractXDsigElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, ConstantesXADES.SCHEMA_DSIG,
-		ConstantesXADES.LIBRERIAXADES_DIGESTVALUE);
+        checkElementName(element, ConstantesXADES.SCHEMA_DSIG,
+                ConstantesXADES.LIBRERIAXADES_DIGESTVALUE);
 
-	Node node = getFirstNonvoidNode(element);
-	if ((node == null) || (node.getNodeType() != Node.TEXT_NODE))
-	    throw new InvalidInfoNodeException(
-		    "Nodo DigestValue no contiene CDATA como primer valor");
+        Node node = getFirstNonvoidNode(element);
+        if ((node == null) || (node.getNodeType() != Node.TEXT_NODE))
+            throw new InvalidInfoNodeException(
+                    "Nodo DigestValue no contiene CDATA como primer valor");
 
-	this.value = node.getNodeValue();
-	if (this.value == null)
-	    throw new InvalidInfoNodeException("Contenido de valor de digest vacío");
-	this.value = this.value.replace(" ", "").replace("\n", "").replace("\r", "");
+        this.value = node.getNodeValue();
+        if (this.value == null)
+            throw new InvalidInfoNodeException("Contenido de valor de digest vacío");
+        this.value = this.value.replace(" ", "").replace("\n", "").replace("\r", "");
     }
 
     /**
@@ -121,8 +121,8 @@ public class DigestValue extends AbstractXDsigElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
-		ConstantesXADES.LIBRERIAXADES_DIGESTVALUE);
+        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
+                ConstantesXADES.LIBRERIAXADES_DIGESTVALUE);
     }
 
 }

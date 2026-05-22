@@ -31,29 +31,29 @@ public class X509IssuerSerialType extends AbstractXDsigElement {
     private X509SerialNumber serialNumber;
 
     public X509IssuerSerialType() {
-	super();
+        super();
     }
 
     public X509IssuerSerialType(String issuerName, BigInteger serialNumber) {
-	super();
-	this.issuerName = new X509IssuerName(issuerName);
-	this.serialNumber = new X509SerialNumber(serialNumber);
+        super();
+        this.issuerName = new X509IssuerName(issuerName);
+        this.serialNumber = new X509SerialNumber(serialNumber);
     }
 
     public void setIssuerName(String issuerName) {
-	this.issuerName = new X509IssuerName(issuerName);
+        this.issuerName = new X509IssuerName(issuerName);
     }
 
     public void setSerialNumber(BigInteger serialNumber) {
-	this.serialNumber = new X509SerialNumber(serialNumber);
+        this.serialNumber = new X509SerialNumber(serialNumber);
     }
 
     public String getIssuerName() {
-	return (issuerName != null) ? issuerName.getValue() : null;
+        return (issuerName != null) ? issuerName.getValue() : null;
     }
 
     public BigInteger getSerialNumber() {
-	return (serialNumber != null) ? serialNumber.getValue() : null;
+        return (serialNumber != null) ? serialNumber.getValue() : null;
     }
 
     /**
@@ -62,7 +62,7 @@ public class X509IssuerSerialType extends AbstractXDsigElement {
      */
     @Override
     public void addContent(Element element, String namespaceXDsig) throws InvalidInfoNodeException {
-	super.addContent(element, namespaceXDsig);
+        super.addContent(element, namespaceXDsig);
     }
 
     /**
@@ -70,12 +70,12 @@ public class X509IssuerSerialType extends AbstractXDsigElement {
      */
     @Override
     protected void addContent(Element element) throws InvalidInfoNodeException {
-	if ((issuerName == null) || (serialNumber == null)) {
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir nodo X509IssuerSerialType");
-	}
-	element.appendChild(issuerName.createElement(element.getOwnerDocument(), namespaceXDsig));
-	element.appendChild(serialNumber.createElement(element.getOwnerDocument(), namespaceXDsig));
+        if ((issuerName == null) || (serialNumber == null)) {
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir nodo X509IssuerSerialType");
+        }
+        element.appendChild(issuerName.createElement(element.getOwnerDocument(), namespaceXDsig));
+        element.appendChild(serialNumber.createElement(element.getOwnerDocument(), namespaceXDsig));
     }
 
     /**
@@ -83,17 +83,17 @@ public class X509IssuerSerialType extends AbstractXDsigElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof X509IssuerSerialType) {
-	    X509IssuerSerialType ist = (X509IssuerSerialType) obj;
-	    if ((serialNumber == null) || (issuerName == null))
-		return false;
-	    if (!issuerName.equals(ist.issuerName))
-		return false;
-	    if (!serialNumber.equals(ist.serialNumber))
-		return false;
-	    return true;
-	}
-	return false;
+        if (obj instanceof X509IssuerSerialType) {
+            X509IssuerSerialType ist = (X509IssuerSerialType) obj;
+            if ((serialNumber == null) || (issuerName == null))
+                return false;
+            if (!issuerName.equals(ist.issuerName))
+                return false;
+            if (!serialNumber.equals(ist.serialNumber))
+                return false;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -101,25 +101,25 @@ public class X509IssuerSerialType extends AbstractXDsigElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	Node node = getFirstNonvoidNode(element);
+        Node node = getFirstNonvoidNode(element);
 
-	X509IssuerName name = new X509IssuerName();
-	if (!name.isThisNode(node)) {
-	    throw new InvalidInfoNodeException(
-		    "Se esperaba nodo X509IssuerName en X509IssuerSerialType");
-	}
-	name.load((Element) node);
+        X509IssuerName name = new X509IssuerName();
+        if (!name.isThisNode(node)) {
+            throw new InvalidInfoNodeException(
+                    "Se esperaba nodo X509IssuerName en X509IssuerSerialType");
+        }
+        name.load((Element) node);
 
-	node = getNextNonvoidNode(node);
-	X509SerialNumber serial = new X509SerialNumber(null);
-	if (!serial.isThisNode(node)) {
-	    throw new InvalidInfoNodeException(
-		    "Se esperaba nodo X509SerialNumber en X509IssuerSerialType");
-	}
-	serial.load((Element) node);
+        node = getNextNonvoidNode(node);
+        X509SerialNumber serial = new X509SerialNumber(null);
+        if (!serial.isThisNode(node)) {
+            throw new InvalidInfoNodeException(
+                    "Se esperaba nodo X509SerialNumber en X509IssuerSerialType");
+        }
+        serial.load((Element) node);
 
-	this.issuerName = name;
-	this.serialNumber = serial;
+        this.issuerName = name;
+        this.serialNumber = serial;
     }
 
 }

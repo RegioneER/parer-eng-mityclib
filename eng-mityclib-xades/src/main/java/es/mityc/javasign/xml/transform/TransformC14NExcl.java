@@ -27,6 +27,6 @@ import es.mityc.javasign.xml.xades.TransformProxy;
 public class TransformC14NExcl extends Transform {
     /** Constructor. */
     public TransformC14NExcl() {
-	super(TransformProxy.TRANSFORM_C14N_EXCL_OMIT_COMMENTS, null);
+        super(TransformProxy.TRANSFORM_C14N_EXCL_OMIT_COMMENTS, null);
     }
 }

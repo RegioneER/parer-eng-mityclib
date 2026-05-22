@@ -68,116 +68,116 @@ public class DatosFirma {
      *        firmados
      */
     public DatosFirma(CertPath cadenaFirma, ConfianzaEnum esCAdenaConfianza,
-	    DatosTipoFirma tipoFirma, ArrayList<DatosSelloTiempo> datosSelloTiempo,
-	    ArrayList<DatosCRL> datosCRL, ArrayList<DatosOCSP> datosOCSP, Date fechaFirma,
-	    ArrayList<String> roles, ArrayList<PolicyResult> politicas, XAdESSchemas esquema,
-	    String sigValueId, ArrayList<String> contraFirma,
-	    ArrayList<DatosNodosFirmados> datosFicheros) {
+            DatosTipoFirma tipoFirma, ArrayList<DatosSelloTiempo> datosSelloTiempo,
+            ArrayList<DatosCRL> datosCRL, ArrayList<DatosOCSP> datosOCSP, Date fechaFirma,
+            ArrayList<String> roles, ArrayList<PolicyResult> politicas, XAdESSchemas esquema,
+            String sigValueId, ArrayList<String> contraFirma,
+            ArrayList<DatosNodosFirmados> datosFicheros) {
 
-	this.cadenaFirma = cadenaFirma;
-	this.esCadenaConfianza = esCAdenaConfianza;
-	this.datosSelloTiempo = datosSelloTiempo;
-	this.datosCRL = datosCRL;
-	this.datosOCSP = datosOCSP;
-	this.fechaFirma = fechaFirma;
-	this.roles = roles;
-	this.politicas = politicas;
-	this.esquema = esquema;
-	this.sigValueId = sigValueId;
-	this.contraFirma = contraFirma;
-	this.datosNodos = datosFicheros;
+        this.cadenaFirma = cadenaFirma;
+        this.esCadenaConfianza = esCAdenaConfianza;
+        this.datosSelloTiempo = datosSelloTiempo;
+        this.datosCRL = datosCRL;
+        this.datosOCSP = datosOCSP;
+        this.fechaFirma = fechaFirma;
+        this.roles = roles;
+        this.politicas = politicas;
+        this.esquema = esquema;
+        this.sigValueId = sigValueId;
+        this.contraFirma = contraFirma;
+        this.datosNodos = datosFicheros;
     }
 
     public CertPath getCadenaFirma() {
-	return cadenaFirma;
+        return cadenaFirma;
     }
 
     public void setCadenaFirma(CertPath cadenaFirma) {
-	this.cadenaFirma = cadenaFirma;
+        this.cadenaFirma = cadenaFirma;
     }
 
     public ConfianzaEnum esCadenaConfianza() {
-	return esCadenaConfianza;
+        return esCadenaConfianza;
     }
 
     public void setEsCadenaConfianza(ConfianzaEnum esCadenaConfianza) {
-	this.esCadenaConfianza = esCadenaConfianza;
+        this.esCadenaConfianza = esCadenaConfianza;
     }
 
     public ArrayList<DatosOCSP> getDatosOCSP() {
-	if (datosOCSP != null)
-	    return datosOCSP;
-	else
-	    return new ArrayList<DatosOCSP>();
+        if (datosOCSP != null)
+            return datosOCSP;
+        else
+            return new ArrayList<DatosOCSP>();
     }
 
     public void setDatosOCSP(ArrayList<DatosOCSP> datosOCSP) {
-	this.datosOCSP = datosOCSP;
+        this.datosOCSP = datosOCSP;
     }
 
     public ArrayList<DatosCRL> getDatosCRL() {
-	return datosCRL;
+        return datosCRL;
     }
 
     public void setDatosCRL(ArrayList<DatosCRL> datosCRL) {
-	this.datosCRL = datosCRL;
+        this.datosCRL = datosCRL;
     }
 
     public ArrayList<DatosSelloTiempo> getDatosSelloTiempo() {
-	if (datosSelloTiempo != null)
-	    return datosSelloTiempo;
-	else
-	    return new ArrayList<DatosSelloTiempo>();
+        if (datosSelloTiempo != null)
+            return datosSelloTiempo;
+        else
+            return new ArrayList<DatosSelloTiempo>();
     }
 
     public void setDatosSelloTiempo(ArrayList<DatosSelloTiempo> datosSelloTiempo) {
-	this.datosSelloTiempo = datosSelloTiempo;
+        this.datosSelloTiempo = datosSelloTiempo;
     }
 
     public Date getFechaFirma() {
-	return fechaFirma;
+        return fechaFirma;
     }
 
     public void setFechaFirma(Date fechaFirma) {
-	this.fechaFirma = fechaFirma;
+        this.fechaFirma = fechaFirma;
     }
 
     public ArrayList<String> getRoles() {
-	if (roles != null)
-	    return roles;
-	else
-	    return new ArrayList<String>();
+        if (roles != null)
+            return roles;
+        else
+            return new ArrayList<String>();
     }
 
     public void setRoles(ArrayList<String> roles) {
-	this.roles = roles;
+        this.roles = roles;
     }
 
     public ArrayList<PolicyResult> getPoliticas() {
-	if (politicas != null)
-	    return politicas;
-	else
-	    return new ArrayList<PolicyResult>();
+        if (politicas != null)
+            return politicas;
+        else
+            return new ArrayList<PolicyResult>();
     }
 
     public void setPoliticas(ArrayList<PolicyResult> politicas) {
-	this.politicas = politicas;
+        this.politicas = politicas;
     }
 
     public XAdESSchemas getEsquema() {
-	return esquema;
+        return esquema;
     }
 
     public void setEsquema(XAdESSchemas esquema) {
-	this.esquema = esquema;
+        this.esquema = esquema;
     }
 
     public DatosTipoFirma getTipoFirma() {
-	return tipoFirma;
+        return tipoFirma;
     }
 
     public void setTipoFirma(DatosTipoFirma tipoFirma) {
-	this.tipoFirma = tipoFirma;
+        this.tipoFirma = tipoFirma;
     }
 
     /**
@@ -186,35 +186,35 @@ public class DatosFirma {
      * @return String
      */
     public String getSigValueId() {
-	return sigValueId;
+        return sigValueId;
     }
 
     /**
      * Establece el identificador del nodo signatureValue
      */
     public void setSigValueId(String sigValueId) {
-	this.sigValueId = sigValueId;
+        this.sigValueId = sigValueId;
     }
 
     /**
      * Devuelve la estructura de firmas contrafirmadas por esta firma
      */
     public ArrayList<String> getContraFirma() {
-	return contraFirma;
+        return contraFirma;
     }
 
     /**
      * Establece la estructura de firmas contrafirmadas por esta firma
      */
     public void setContraFirma(ArrayList<String> contraFirma) {
-	this.contraFirma = contraFirma;
+        this.contraFirma = contraFirma;
     }
 
     /**
      * @return ArrayList con los datos de los nodos firmados
      */
     public List<DatosNodosFirmados> getDatosNodosFirmados() {
-	return datosNodos;
+        return datosNodos;
     }
 
     /**
@@ -225,22 +225,22 @@ public class DatosFirma {
      * @return ArrayList con los datos de los nodos
      */
     public List<DatosNodosFirmados> getDatosNodosNoSignFirmados() {
-	ArrayList<DatosNodosFirmados> res = new ArrayList<DatosNodosFirmados>();
-	if (datosNodos != null) {
-	    for (DatosNodosFirmados dnf : datosNodos) {
-		if (!dnf.isSignInternal()) {
-		    res.add(dnf);
-		}
-	    }
-	}
-	return res;
+        ArrayList<DatosNodosFirmados> res = new ArrayList<DatosNodosFirmados>();
+        if (datosNodos != null) {
+            for (DatosNodosFirmados dnf : datosNodos) {
+                if (!dnf.isSignInternal()) {
+                    res.add(dnf);
+                }
+            }
+        }
+        return res;
     }
 
     /**
      * @param datosFicheros.- ArrayList con los datos de los nodos firmados
      */
     public void setDatosNodosFirmados(ArrayList<DatosNodosFirmados> datosNodos) {
-	this.datosNodos = datosNodos;
+        this.datosNodos = datosNodos;
     }
 
     /**
@@ -251,10 +251,10 @@ public class DatosFirma {
      * @param datosNodo Datos del nodo firmado
      */
     public void addDatosNodoFirmado(DatosNodosFirmados datosNodo) {
-	if (this.datosNodos == null) {
-	    this.datosNodos = new ArrayList<DatosNodosFirmados>();
-	}
-	datosNodos.add(datosNodo);
+        if (this.datosNodos == null) {
+            this.datosNodos = new ArrayList<DatosNodosFirmados>();
+        }
+        datosNodos.add(datosNodo);
     }
 
     /**
@@ -267,16 +267,16 @@ public class DatosFirma {
      * @return Datos del nodo firmado
      */
     public DatosNodosFirmados getDatosNodoFimadoByReferenceId(String id) {
-	DatosNodosFirmados dnf = null;
-	if ((datosNodos != null) && (id != null)) {
-	    for (DatosNodosFirmados datos : datosNodos) {
-		if (id.equals(datos.getIdReference())) {
-		    dnf = datos;
-		    break;
-		}
-	    }
-	}
-	return dnf;
+        DatosNodosFirmados dnf = null;
+        if ((datosNodos != null) && (id != null)) {
+            for (DatosNodosFirmados datos : datosNodos) {
+                if (id.equals(datos.getIdReference())) {
+                    dnf = datos;
+                    break;
+                }
+            }
+        }
+        return dnf;
     }
 
     /**
@@ -289,16 +289,16 @@ public class DatosFirma {
      * @return Datos del nodo firmado
      */
     public DatosNodosFirmados getDatosNodoFimadoById(String id) {
-	DatosNodosFirmados dnf = null;
-	if ((datosNodos != null) && (id != null)) {
-	    for (DatosNodosFirmados datos : datosNodos) {
-		if (id.equals(datos.getId())) {
-		    dnf = datos;
-		    break;
-		}
-	    }
-	}
-	return dnf;
+        DatosNodosFirmados dnf = null;
+        if ((datosNodos != null) && (id != null)) {
+            for (DatosNodosFirmados datos : datosNodos) {
+                if (id.equals(datos.getId())) {
+                    dnf = datos;
+                    break;
+                }
+            }
+        }
+        return dnf;
     }
 
 }

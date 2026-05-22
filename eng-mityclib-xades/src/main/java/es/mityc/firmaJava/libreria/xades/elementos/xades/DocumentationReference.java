@@ -30,7 +30,7 @@ public class DocumentationReference extends AbstractXadesURIElement {
      * @param data
      */
     public DocumentationReference(XAdESSchemas schema, URI data) {
-	super(schema, ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCE, data);
+        super(schema, ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCE, data);
     }
 
     /**
@@ -38,7 +38,7 @@ public class DocumentationReference extends AbstractXadesURIElement {
      * @param nameElement
      */
     public DocumentationReference(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCE);
+        super(schema, ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCE);
     }
 
 }

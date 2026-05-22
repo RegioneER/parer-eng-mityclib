@@ -27,30 +27,30 @@ public enum CanonicalizationEnum {
     private String value;
 
     private CanonicalizationEnum(String value) {
-	this.value = value;
+        this.value = value;
     }
 
     @Override
     public String toString() {
-	return value;
+        return value;
     }
 
     public static CanonicalizationEnum getCanonicalization(String value) {
-	if (value != null) {
-	    if (Transforms.TRANSFORM_C14N_OMIT_COMMENTS.equals(value))
-		return C14N_OMIT_COMMENTS;
-	    else if (Transforms.TRANSFORM_C14N_WITH_COMMENTS.equals(value))
-		return C14N_WITH_COMMENTS;
-	    else if (Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS.equals(value))
-		return C14N_EXCL_OMIT_COMMENTS;
-	    else if (Transforms.TRANSFORM_C14N_EXCL_WITH_COMMENTS.equals(value))
-		return C14N_EXCL_WITH_COMMENTS;
-	    else if (Transforms.TRANSFORM_C14N11_OMIT_COMMENTS.equals(value))
-		return C14N11_OMIT_COMMENTS;
-	    else if (Transforms.TRANSFORM_C14N11_WITH_COMMENTS.equals(value))
-		return C14N11_WITH_COMMENTS;
-	}
-	return UNKNOWN;
+        if (value != null) {
+            if (Transforms.TRANSFORM_C14N_OMIT_COMMENTS.equals(value))
+                return C14N_OMIT_COMMENTS;
+            else if (Transforms.TRANSFORM_C14N_WITH_COMMENTS.equals(value))
+                return C14N_WITH_COMMENTS;
+            else if (Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS.equals(value))
+                return C14N_EXCL_OMIT_COMMENTS;
+            else if (Transforms.TRANSFORM_C14N_EXCL_WITH_COMMENTS.equals(value))
+                return C14N_EXCL_WITH_COMMENTS;
+            else if (Transforms.TRANSFORM_C14N11_OMIT_COMMENTS.equals(value))
+                return C14N11_OMIT_COMMENTS;
+            else if (Transforms.TRANSFORM_C14N11_WITH_COMMENTS.equals(value))
+                return C14N11_WITH_COMMENTS;
+        }
+        return UNKNOWN;
     }
 
 }

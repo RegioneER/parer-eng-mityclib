@@ -32,7 +32,7 @@ public class CertStatusException extends SignMITyCException {
      * </p>
      */
     public CertStatusException() {
-	super();
+        super();
     }
 
     /**
@@ -43,7 +43,7 @@ public class CertStatusException extends SignMITyCException {
      * @param message Mensaje de error
      */
     public CertStatusException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -54,7 +54,7 @@ public class CertStatusException extends SignMITyCException {
      * @param cause Causa de la excepcion
      */
     public CertStatusException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -66,7 +66,7 @@ public class CertStatusException extends SignMITyCException {
      * @param cause   Causa de la excepcion
      */
     public CertStatusException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

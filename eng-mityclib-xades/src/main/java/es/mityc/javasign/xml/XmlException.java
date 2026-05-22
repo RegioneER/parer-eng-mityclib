@@ -21,21 +21,21 @@ package es.mityc.javasign.xml;
 public class XmlException extends Exception {
 
     public XmlException() {
-	super();
+        super();
     }
 
     /**
      * @param message
      */
     public XmlException(String message) {
-	super(message);
+        super(message);
     }
 
     /**
      * @param cause
      */
     public XmlException(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -43,7 +43,7 @@ public class XmlException extends Exception {
      * @param cause
      */
     public XmlException(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

@@ -77,18 +77,18 @@ public final class SignFactory {
      * </p>
      */
     private SignFactory() {
-	// Carga las propiedades
-	InputStream is = getClassLoader().getResourceAsStream(SIGN_FILE_CONF);
-	if (is != null) {
-	    try {
-		props = new Properties();
-		props.load(is);
-	    } catch (IOException ex) {
-		LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_1));
-	    }
-	} else {
-	    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_1));
-	}
+        // Carga las propiedades
+        InputStream is = getClassLoader().getResourceAsStream(SIGN_FILE_CONF);
+        if (is != null) {
+            try {
+                props = new Properties();
+                props.load(is);
+            } catch (IOException ex) {
+                LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_1));
+            }
+        } else {
+            LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_1));
+        }
     }
 
     /**
@@ -102,30 +102,30 @@ public final class SignFactory {
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
-	try {
-	    ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
-		public ClassLoader run() {
-		    ClassLoader classLoader = null;
-		    try {
-			classLoader = Thread.currentThread().getContextClassLoader();
-		    } catch (SecurityException ex) {
-		    }
-		    return classLoader;
-		}
-	    });
-	    if (cl != null) {
-		return cl;
-	    }
-	} catch (Exception ex) {
-	}
-	return SignFactory.class.getClassLoader();
+        try {
+            ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+                public ClassLoader run() {
+                    ClassLoader classLoader = null;
+                    try {
+                        classLoader = Thread.currentThread().getContextClassLoader();
+                    } catch (SecurityException ex) {
+                    }
+                    return classLoader;
+                }
+            });
+            if (cl != null) {
+                return cl;
+            }
+        } catch (Exception ex) {
+        }
+        return SignFactory.class.getClassLoader();
     }
 
     /**
      * Para evitar problemas de sincronismo se instancia la primera vez que se referencia
      */
     static {
-	instance = getInstance();
+        instance = getInstance();
     }
 
     /**
@@ -134,10 +134,10 @@ public final class SignFactory {
      * @return Instancia de la factoría
      */
     public static SignFactory getInstance() {
-	if (instance == null) {
-	    instance = new SignFactory();
-	}
-	return instance;
+        if (instance == null) {
+            instance = new SignFactory();
+        }
+        return instance;
     }
 
     /**
@@ -149,58 +149,58 @@ public final class SignFactory {
      *         asociado o no se puede instanciar.
      */
     public ISignFacade getSignFacade() {
-	ISignFacade signFacade = null;
-	if (props != null) {
-	    String classname = props.getProperty(PROP_FACADE_CLASS);
-	    if ((classname != null) && (!"".equals(classname.trim()))) {
-		try {
-		    ClassLoader cl = getClassLoader();
-		    Class<?> classTemp = null;
-		    if (cl != null) {
-			classTemp = cl.loadClass(classname);
-		    } else {
-			classTemp = Class.forName(classname);
-		    }
-		    if (classTemp != null) {
-			signFacade = (ISignFacade) classTemp.getConstructor((Class[]) null)
-				.newInstance();
-		    }
-		} catch (InstantiationException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_2));
-		    if (LOG.isDebugEnabled()) {
-			LOG.error("", ex);
-		    }
-		} catch (InvocationTargetException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_2));
-		    if (LOG.isDebugEnabled()) {
-			LOG.error("", ex);
-		    }
-		} catch (IllegalAccessException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_3));
-		    if (LOG.isDebugEnabled()) {
-			LOG.error("", ex);
-		    }
-		} catch (ClassNotFoundException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_4, classname));
-		    if (LOG.isDebugEnabled()) {
-			LOG.error("", ex);
-		    }
-		} catch (ClassCastException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_5));
-		    if (LOG.isDebugEnabled()) {
-			LOG.error("", ex);
-		    }
-		} catch (NoSuchMethodException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_5));
-		    if (LOG.isDebugEnabled()) {
-			LOG.error("", ex);
-		    }
-		}
-	    } else {
-		LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_6));
-	    }
-	}
-	return signFacade;
+        ISignFacade signFacade = null;
+        if (props != null) {
+            String classname = props.getProperty(PROP_FACADE_CLASS);
+            if ((classname != null) && (!"".equals(classname.trim()))) {
+                try {
+                    ClassLoader cl = getClassLoader();
+                    Class<?> classTemp = null;
+                    if (cl != null) {
+                        classTemp = cl.loadClass(classname);
+                    } else {
+                        classTemp = Class.forName(classname);
+                    }
+                    if (classTemp != null) {
+                        signFacade = (ISignFacade) classTemp.getConstructor((Class[]) null)
+                                .newInstance();
+                    }
+                } catch (InstantiationException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_2));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("", ex);
+                    }
+                } catch (InvocationTargetException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_2));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("", ex);
+                    }
+                } catch (IllegalAccessException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_3));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("", ex);
+                    }
+                } catch (ClassNotFoundException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_4, classname));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("", ex);
+                    }
+                } catch (ClassCastException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_5));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("", ex);
+                    }
+                } catch (NoSuchMethodException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_5));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.error("", ex);
+                    }
+                }
+            } else {
+                LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_BRIDGE_6));
+            }
+        }
+        return signFacade;
     }
 
 }

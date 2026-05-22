@@ -79,21 +79,21 @@ public class PoliciesManager {
      * @version 1.0
      */
     public class PolicyKey {
-	/** URI que identifica la política. */
-	public URI uri;
-	/** clave textual para identificar la política. */
-	public String hash;
+        /** URI que identifica la política. */
+        public URI uri;
+        /** clave textual para identificar la política. */
+        public String hash;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param uri  Uri identificativa de la política
-	 * @param hash Clave textual identificativa de la política
-	 */
-	public PolicyKey(URI uri, String hash) {
-	    this.uri = uri;
-	    this.hash = hash;
-	}
+        /**
+         * Constructor.
+         *
+         * @param uri  Uri identificativa de la política
+         * @param hash Clave textual identificativa de la política
+         */
+        public PolicyKey(URI uri, String hash) {
+            this.uri = uri;
+            this.hash = hash;
+        }
     }
 
     /**
@@ -107,7 +107,7 @@ public class PoliciesManager {
      * @return Clave identificadora para buscar una política
      */
     public PolicyKey newPolicyKey(URI uri, String hash) {
-	return new PolicyKey(uri, hash);
+        return new PolicyKey(uri, hash);
     }
 
     /** Logger. */
@@ -127,8 +127,8 @@ public class PoliciesManager {
      *
      */
     private PoliciesManager() {
-	// Carga los gestionadores de políticas
-	loadManagers();
+        // Carga los gestionadores de políticas
+        loadManagers();
     }
 
     /**
@@ -136,62 +136,62 @@ public class PoliciesManager {
      * <code>META-INF/xades/policy.properties</code>
      */
     private void loadManagers() {
-	ClassLoader cl = getClassLoader();
-	try {
-	    // cambia el orden del listado de recursos
-	    ArrayList<URL> resources = new ArrayList<URL>();
-	    Enumeration<URL> en = cl.getResources(POLICY_FILE_CONF);
-	    while (en.hasMoreElements()) {
-		resources.add(0, en.nextElement());
-	    }
-	    // carga cada conjunto de propiedades de atras hacia adelante para respetar el orden del
-	    // classpath
-	    Properties base = null;
-	    Iterator<URL> itResources = resources.iterator();
-	    while (itResources.hasNext()) {
-		URL url = itResources.next();
-		try {
-		    InputStream is = url.openStream();
-		    Properties properties = new Properties(base);
-		    properties.load(is);
-		    base = properties;
-		} catch (IOException ex) {
-		    logger.error(i18n.getLocalMessage(ConstantsXAdES.I18N_POLICY_2, url,
-			    ex.getMessage()));
-		}
-	    }
-	    props = base;
-	} catch (IOException ex) {
-	    logger.error(i18n.getLocalMessage(ConstantsXAdES.I18N_POLICY_1, ex.getMessage()));
-	}
+        ClassLoader cl = getClassLoader();
+        try {
+            // cambia el orden del listado de recursos
+            ArrayList<URL> resources = new ArrayList<URL>();
+            Enumeration<URL> en = cl.getResources(POLICY_FILE_CONF);
+            while (en.hasMoreElements()) {
+                resources.add(0, en.nextElement());
+            }
+            // carga cada conjunto de propiedades de atras hacia adelante para respetar el orden del
+            // classpath
+            Properties base = null;
+            Iterator<URL> itResources = resources.iterator();
+            while (itResources.hasNext()) {
+                URL url = itResources.next();
+                try {
+                    InputStream is = url.openStream();
+                    Properties properties = new Properties(base);
+                    properties.load(is);
+                    base = properties;
+                } catch (IOException ex) {
+                    logger.error(i18n.getLocalMessage(ConstantsXAdES.I18N_POLICY_2, url,
+                            ex.getMessage()));
+                }
+            }
+            props = base;
+        } catch (IOException ex) {
+            logger.error(i18n.getLocalMessage(ConstantsXAdES.I18N_POLICY_1, ex.getMessage()));
+        }
 
     }
 
     private static ClassLoader getClassLoader() {
-	try {
-	    ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
-		public ClassLoader run() {
-		    ClassLoader classLoader = null;
-		    try {
-			classLoader = Thread.currentThread().getContextClassLoader();
-		    } catch (SecurityException ex) {
-		    }
-		    return classLoader;
-		}
-	    });
-	    if (cl != null) {
-		return cl;
-	    }
-	} catch (Exception ex) {
-	}
-	return PoliciesManager.class.getClassLoader();
+        try {
+            ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+                public ClassLoader run() {
+                    ClassLoader classLoader = null;
+                    try {
+                        classLoader = Thread.currentThread().getContextClassLoader();
+                    } catch (SecurityException ex) {
+                    }
+                    return classLoader;
+                }
+            });
+            if (cl != null) {
+                return cl;
+            }
+        } catch (Exception ex) {
+        }
+        return PoliciesManager.class.getClassLoader();
     }
 
     /**
      * Para evitar problemas de sincronismo se instancia la primera vez que se referencia
      */
     static {
-	instance = getInstance();
+        instance = getInstance();
     }
 
     /**
@@ -200,10 +200,10 @@ public class PoliciesManager {
      * @return
      */
     public static PoliciesManager getInstance() {
-	if (instance == null) {
-	    instance = new PoliciesManager();
-	}
-	return instance;
+        if (instance == null) {
+            instance = new PoliciesManager();
+        }
+        return instance;
     }
 
     /**
@@ -219,7 +219,7 @@ public class PoliciesManager {
      *         cache, singleton, instanciador propio del validador)
      */
     public IValidacionPolicy getValidadorPolicy(PolicyKey clave) {
-	return getValidadorPolicy(clave, true);
+        return getValidadorPolicy(clave, true);
     }
 
     /**
@@ -237,59 +237,59 @@ public class PoliciesManager {
      *         cache, singleton, instanciador propio del validador)
      */
     public IValidacionPolicy getValidadorPolicy(PolicyKey clave, boolean defaultManager) {
-	IValidacionPolicy policyManager = null;
-	if (props != null) {
-	    try {
-		String classname = props.getProperty(clave.hash);
-		if (classname != null) {
-		    try {
-			ClassLoader cl = getClassLoader();
-			Class<?> manager = null;
-			if (cl != null) {
-			    manager = cl.loadClass(classname);
-			} else {
-			    manager = Class.forName(classname);
-			}
-			if (manager != null) {
-			    policyManager = (IValidacionPolicy) manager.newInstance();
-			}
-		    } catch (InstantiationException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_INSTANCIA
-				+ clave.hash + ConstantesXADES.COMA_ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    } catch (IllegalAccessException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_PERMISOS
-				+ clave.hash + ConstantesXADES.COMA_ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    } catch (ClassNotFoundException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_CLAVE
-				+ clave.hash + ConstantesXADES.COMA_ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    } catch (ClassCastException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_TIPO
-				+ clave.hash + ConstantesXADES.ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    }
-		    // Si no consigue un manager, al menos informa con el genérico
-		    if (policyManager == null)
-			policyManager = new GeneralPolicyManager();
-		}
-	    } catch (MissingResourceException ex) {
-		logger.error(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_VALIDADOR + clave);
-	    }
-	    // Si no consigue un manager, al menos informa con el genérico
-	    if (policyManager == null)
-		policyManager = new GeneralPolicyManager();
-	}
-	return policyManager;
+        IValidacionPolicy policyManager = null;
+        if (props != null) {
+            try {
+                String classname = props.getProperty(clave.hash);
+                if (classname != null) {
+                    try {
+                        ClassLoader cl = getClassLoader();
+                        Class<?> manager = null;
+                        if (cl != null) {
+                            manager = cl.loadClass(classname);
+                        } else {
+                            manager = Class.forName(classname);
+                        }
+                        if (manager != null) {
+                            policyManager = (IValidacionPolicy) manager.newInstance();
+                        }
+                    } catch (InstantiationException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_INSTANCIA
+                                + clave.hash + ConstantesXADES.COMA_ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    } catch (IllegalAccessException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_PERMISOS
+                                + clave.hash + ConstantesXADES.COMA_ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    } catch (ClassNotFoundException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_CLAVE
+                                + clave.hash + ConstantesXADES.COMA_ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    } catch (ClassCastException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_TIPO
+                                + clave.hash + ConstantesXADES.ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    }
+                    // Si no consigue un manager, al menos informa con el genérico
+                    if (policyManager == null)
+                        policyManager = new GeneralPolicyManager();
+                }
+            } catch (MissingResourceException ex) {
+                logger.error(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_VALIDADOR + clave);
+            }
+            // Si no consigue un manager, al menos informa con el genérico
+            if (policyManager == null)
+                policyManager = new GeneralPolicyManager();
+        }
+        return policyManager;
     }
 
     /**
@@ -305,52 +305,52 @@ public class PoliciesManager {
      *         cache, singleton, instanciador propio del escritor)
      */
     public IFirmaPolicy getEscritorPolicy(String clave) {
-	IFirmaPolicy policyManager = null;
-	if (props != null) {
-	    try {
-		String classname = props.getProperty(clave);
-		if (classname != null) {
-		    try {
-			ClassLoader cl = getClassLoader();
-			Class<?> manager = null;
-			if (cl != null) {
-			    manager = cl.loadClass(classname);
-			} else {
-			    manager = Class.forName(classname);
-			}
-			if (manager != null) {
-			    policyManager = (IFirmaPolicy) manager.newInstance();
-			}
-		    } catch (InstantiationException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_INSTANCIA
-				+ clave + ConstantesXADES.COMA_ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    } catch (IllegalAccessException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_PERMISOS + clave
-				+ ConstantesXADES.COMA_ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    } catch (ClassNotFoundException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_CLAVE + clave
-				+ ConstantesXADES.COMA_ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    } catch (ClassCastException e) {
-			logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_TIPO + clave
-				+ ConstantesXADES.ESPACIO + classname
-				+ ConstantesXADES.CIERRA_PARENTESIS);
-			if (logger.isDebugEnabled())
-			    logger.debug("", e);
-		    }
-		}
-	    } catch (MissingResourceException ex) {
-		logger.error(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_VALIDADOR + clave);
-	    }
-	}
-	return policyManager;
+        IFirmaPolicy policyManager = null;
+        if (props != null) {
+            try {
+                String classname = props.getProperty(clave);
+                if (classname != null) {
+                    try {
+                        ClassLoader cl = getClassLoader();
+                        Class<?> manager = null;
+                        if (cl != null) {
+                            manager = cl.loadClass(classname);
+                        } else {
+                            manager = Class.forName(classname);
+                        }
+                        if (manager != null) {
+                            policyManager = (IFirmaPolicy) manager.newInstance();
+                        }
+                    } catch (InstantiationException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_INSTANCIA
+                                + clave + ConstantesXADES.COMA_ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    } catch (IllegalAccessException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_PERMISOS + clave
+                                + ConstantesXADES.COMA_ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    } catch (ClassNotFoundException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_CLAVE + clave
+                                + ConstantesXADES.COMA_ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    } catch (ClassCastException e) {
+                        logger.warn(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_TIPO + clave
+                                + ConstantesXADES.ESPACIO + classname
+                                + ConstantesXADES.CIERRA_PARENTESIS);
+                        if (logger.isDebugEnabled())
+                            logger.debug("", e);
+                    }
+                }
+            } catch (MissingResourceException ex) {
+                logger.error(ConstantesXADES.LIBRERIAXADES_POLICY_MANAGER_NO_VALIDADOR + clave);
+            }
+        }
+        return policyManager;
     }
 }

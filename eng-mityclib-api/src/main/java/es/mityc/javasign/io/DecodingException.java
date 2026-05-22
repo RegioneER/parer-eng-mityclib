@@ -42,7 +42,7 @@ public class DecodingException extends IOException {
      * @param message Mensaje de error
      */
     public DecodingException(final String message) {
-	super(message);
+        super(message);
     }
 
 }

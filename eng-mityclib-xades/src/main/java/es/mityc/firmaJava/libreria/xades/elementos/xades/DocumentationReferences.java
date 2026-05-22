@@ -33,7 +33,7 @@ public class DocumentationReferences extends DocumentationReferencesType {
      * @param schema
      */
     public DocumentationReferences(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -41,7 +41,7 @@ public class DocumentationReferences extends DocumentationReferencesType {
      * @param list
      */
     public DocumentationReferences(XAdESSchemas schema, ArrayList<DocumentationReference> list) {
-	super(schema, list);
+        super(schema, list);
     }
 
     /**
@@ -49,9 +49,9 @@ public class DocumentationReferences extends DocumentationReferencesType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCES);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCES);
+        super.load(element);
     }
 
     /**
@@ -59,8 +59,8 @@ public class DocumentationReferences extends DocumentationReferencesType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCES);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCES);
     }
 
     /**
@@ -69,8 +69,8 @@ public class DocumentationReferences extends DocumentationReferencesType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -78,10 +78,10 @@ public class DocumentationReferences extends DocumentationReferencesType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCES);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_DOCUMENTATION_REFERENCES);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

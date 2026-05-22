@@ -35,7 +35,7 @@ public class FirmaXMLError extends Exception {
      * @param msg El mensaje de detalle.
      */
     public FirmaXMLError(String msg) {
-	super(msg);
+        super(msg);
     }
 
     /**
@@ -44,7 +44,7 @@ public class FirmaXMLError extends Exception {
      * @param e Exception
      */
     public FirmaXMLError(Exception e) {
-	super(e);
+        super(e);
     }
 
     /**
@@ -52,14 +52,14 @@ public class FirmaXMLError extends Exception {
      * @param cause
      */
     public FirmaXMLError(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
     /**
      * @param cause
      */
     public FirmaXMLError(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
 }

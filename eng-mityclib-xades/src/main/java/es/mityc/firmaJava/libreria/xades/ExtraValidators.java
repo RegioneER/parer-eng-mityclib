@@ -53,95 +53,95 @@ public class ExtraValidators {
      * @param trusterCerts
      */
     public ExtraValidators(List<IValidacionPolicy> policies, ICertStatusRecoverer certStatus,
-	    TrustAbstract trusterCerts) {
-	super();
-	this.policies = policies;
-	this.certStatus = certStatus;
-	this.trusterCerts = trusterCerts;
+            TrustAbstract trusterCerts) {
+        super();
+        this.policies = policies;
+        this.certStatus = certStatus;
+        this.trusterCerts = trusterCerts;
     }
 
     /**
      * @return the policies
      */
     public List<IValidacionPolicy> getPolicies() {
-	return policies;
+        return policies;
     }
 
     /**
      * @param policies the policies to set
      */
     public void setPolicies(List<IValidacionPolicy> policies) {
-	this.policies = policies;
+        this.policies = policies;
     }
 
     /**
      * @return the certStatus
      */
     public ICertStatusRecoverer getCertStatus() {
-	return certStatus;
+        return certStatus;
     }
 
     /**
      * @param certStatus the certStatus to set
      */
     public void setCertStatus(ICertStatusRecoverer certStatus) {
-	this.certStatus = certStatus;
+        this.certStatus = certStatus;
     }
 
     /**
      * @return the trusterOCSP
      */
     public TrustAbstract getTrusterOCSP() {
-	return trusterOCSP;
+        return trusterOCSP;
     }
 
     /**
      * @param trusterOCSP the trusterOCSP to set
      */
     public void setTrusterOCSP(TrustAbstract trusterOCSP) {
-	this.trusterOCSP = trusterOCSP;
+        this.trusterOCSP = trusterOCSP;
     }
 
     /**
      * @return the trusterCRL
      */
     public TrustAbstract getTrusterCRL() {
-	return trusterCRL;
+        return trusterCRL;
     }
 
     /**
      * @param trusterCRL the trusterCRL to set
      */
     public void setTrusterCRL(TrustAbstract trusterCRL) {
-	this.trusterCRL = trusterCRL;
+        this.trusterCRL = trusterCRL;
     }
 
     /**
      * @return the trusterCerts
      */
     public TrustAbstract getTrusterCerts() {
-	return trusterCerts;
+        return trusterCerts;
     }
 
     /**
      * @param trusterCerts the trusterCerts to set
      */
     public void setTrusterCerts(TrustAbstract trusterCerts) {
-	this.trusterCerts = trusterCerts;
+        this.trusterCerts = trusterCerts;
     }
 
     /**
      * @return the trusterTSA
      */
     public TrustAbstract getTrusterTSA() {
-	return trusterTSA;
+        return trusterTSA;
     }
 
     /**
      * @param trusterTSA the trusterTSA to set
      */
     public void setTrusterTSA(TrustAbstract trusterTSA) {
-	this.trusterTSA = trusterTSA;
+        this.trusterTSA = trusterTSA;
     }
 
 }

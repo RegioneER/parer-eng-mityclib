@@ -40,7 +40,7 @@ public class I18n implements ConstantesTSA {
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(final String key) {
-	return getResource(key, locale);
+        return getResource(key, locale);
     }
 
     /**
@@ -54,7 +54,7 @@ public class I18n implements ConstantesTSA {
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(final String key, final Locale locale) {
-	return ResourceBundle.getBundle(NOMBRE_LIBRERIA, locale).getString(key);
+        return ResourceBundle.getBundle(NOMBRE_LIBRERIA, locale).getString(key);
     }
 
     /**
@@ -65,7 +65,7 @@ public class I18n implements ConstantesTSA {
      * @return Locale que se utiliza en ese momento
      */
     public static Locale getLocale() {
-	return locale;
+        return locale;
     }
 
     /**
@@ -76,7 +76,7 @@ public class I18n implements ConstantesTSA {
      * @param _locale Locale que se utilizara en las traducciones
      */
     public static void setLocale(final Locale _locale) {
-	locale = _locale;
+        locale = _locale;
     }
 
     /**
@@ -88,6 +88,6 @@ public class I18n implements ConstantesTSA {
      * @param dialect Dialecto del idioma
      */
     public static void setLocaleCountry(final String country, final String dialect) {
-	locale = new Locale(country, dialect);
+        locale = new Locale(country, dialect);
     }
 }

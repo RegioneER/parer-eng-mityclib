@@ -51,7 +51,7 @@ public class TransformProxy {
      * @param ref Referencia
      */
     public TransformProxy(Transform ref) {
-	this.transform = ref;
+        this.transform = ref;
     }
 
     /**
@@ -62,7 +62,7 @@ public class TransformProxy {
      * @return URI de la transformada
      */
     public String getURI() {
-	return transform.getURI();
+        return transform.getURI();
     }
 
     /**
@@ -75,15 +75,15 @@ public class TransformProxy {
      * @return true si es una canonicalizacion
      */
     public static boolean isCanonicalization(TransformProxy trans) {
-	String uri = trans.getURI();
-	if ((uri.equals(TRANSFORM_C14N_OMIT_COMMENTS)) || (uri.equals(TRANSFORM_C14N_WITH_COMMENTS))
-		|| (uri.equals(TRANSFORM_C14N11_OMIT_COMMENTS))
-		|| (uri.equals(TRANSFORM_C14N11_WITH_COMMENTS))
-		|| (uri.equals(TRANSFORM_C14N_EXCL_OMIT_COMMENTS))
-		|| (uri.equals(TRANSFORM_C14N_EXCL_WITH_COMMENTS))) {
-	    return true;
-	}
-	return false;
+        String uri = trans.getURI();
+        if ((uri.equals(TRANSFORM_C14N_OMIT_COMMENTS)) || (uri.equals(TRANSFORM_C14N_WITH_COMMENTS))
+                || (uri.equals(TRANSFORM_C14N11_OMIT_COMMENTS))
+                || (uri.equals(TRANSFORM_C14N11_WITH_COMMENTS))
+                || (uri.equals(TRANSFORM_C14N_EXCL_OMIT_COMMENTS))
+                || (uri.equals(TRANSFORM_C14N_EXCL_WITH_COMMENTS))) {
+            return true;
+        }
+        return false;
     }
 
 }

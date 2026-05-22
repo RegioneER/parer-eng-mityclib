@@ -39,9 +39,9 @@ public class PolicyImplied implements IFirmaPolicy {
      *      java.lang.String, java.lang.String, es.mityc.firmaJava.libreria.xades.XAdESSchemas)
      */
     public void writePolicyNode(Element nodoFirma, String namespaceDS, String namespaceXAdES,
-	    XAdESSchemas schema) throws PolicyException {
-	SignaturePolicyIdentifier spi = new SignaturePolicyIdentifier(schema, true);
-	PoliciesTool.insertPolicyNode(nodoFirma, namespaceDS, namespaceXAdES, schema, spi);
+            XAdESSchemas schema) throws PolicyException {
+        SignaturePolicyIdentifier spi = new SignaturePolicyIdentifier(schema, true);
+        PoliciesTool.insertPolicyNode(nodoFirma, namespaceDS, namespaceXAdES, schema, spi);
     }
 
 }

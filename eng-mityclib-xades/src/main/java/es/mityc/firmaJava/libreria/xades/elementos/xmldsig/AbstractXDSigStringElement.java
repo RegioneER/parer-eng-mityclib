@@ -32,9 +32,9 @@ public class AbstractXDSigStringElement extends AbstractXDsigElement {
     private String nameElement;
 
     public AbstractXDSigStringElement(String nameElement, String data) {
-	super();
-	this.nameElement = nameElement;
-	this.data = new XMLDataStringType(data);
+        super();
+        this.nameElement = nameElement;
+        this.data = new XMLDataStringType(data);
     }
 
     /**
@@ -42,8 +42,8 @@ public class AbstractXDSigStringElement extends AbstractXDsigElement {
      * @param schema
      */
     public AbstractXDSigStringElement(String nameElement) {
-	super();
-	this.nameElement = nameElement;
+        super();
+        this.nameElement = nameElement;
     }
 
     /**
@@ -51,14 +51,14 @@ public class AbstractXDSigStringElement extends AbstractXDsigElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	if (data == null) {
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir elemento " + nameElement);
-	}
-	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-		namespaceXDsig + ":" + nameElement);
-	data.addContent(res);
-	return res;
+        if (data == null) {
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir elemento " + nameElement);
+        }
+        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+                namespaceXDsig + ":" + nameElement);
+        data.addContent(res);
+        return res;
     }
 
     /**
@@ -67,8 +67,8 @@ public class AbstractXDSigStringElement extends AbstractXDsigElement {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig);
     }
 
     /**
@@ -76,15 +76,15 @@ public class AbstractXDSigStringElement extends AbstractXDsigElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof AbstractXDSigStringElement) {
-	    AbstractXDSigStringElement desc = (AbstractXDSigStringElement) obj;
-	    if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data))) {
-		return true;
-	    }
-	} else {
-	    return data.equals(obj);
-	}
-	return false;
+        if (obj instanceof AbstractXDSigStringElement) {
+            AbstractXDSigStringElement desc = (AbstractXDSigStringElement) obj;
+            if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data))) {
+                return true;
+            }
+        } else {
+            return data.equals(obj);
+        }
+        return false;
     }
 
     /**
@@ -92,24 +92,24 @@ public class AbstractXDSigStringElement extends AbstractXDsigElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, ConstantesXADES.SCHEMA_DSIG, nameElement);
-	data = new XMLDataStringType(null);
-	data.load(element);
+        checkElementName(element, ConstantesXADES.SCHEMA_DSIG, nameElement);
+        data = new XMLDataStringType(null);
+        data.load(element);
     }
 
     public void setValue(String value) {
-	if (data == null) {
-	    data = new XMLDataStringType(value);
-	} else {
-	    data.setValue(value);
-	}
+        if (data == null) {
+            data = new XMLDataStringType(value);
+        } else {
+            data.setValue(value);
+        }
     }
 
     public String getValue() {
-	if (data != null) {
-	    return data.getValue();
-	}
-	return null;
+        if (data != null) {
+            return data.getValue();
+        }
+        return null;
     }
 
     /**
@@ -117,7 +117,7 @@ public class AbstractXDSigStringElement extends AbstractXDsigElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG, nameElement);
+        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG, nameElement);
     }
 
 }

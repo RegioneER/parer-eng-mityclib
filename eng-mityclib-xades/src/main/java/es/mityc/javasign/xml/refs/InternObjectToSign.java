@@ -35,21 +35,21 @@ public class InternObjectToSign extends AbstractObjectToSign {
      * @param id Identidad del nodo a firmar
      */
     public InternObjectToSign(String id) {
-	this.id = id;
+        this.id = id;
     }
 
     /**
      * @return the id
      */
     public String getId() {
-	return id;
+        return id;
     }
 
     /**
      * @param id the id to set
      */
     public void setId(String id) {
-	this.id = id;
+        this.id = id;
     }
 
     /**
@@ -57,7 +57,7 @@ public class InternObjectToSign extends AbstractObjectToSign {
      */
     @Override
     public String getReferenceURI() {
-	return ConstantesXADES.ALMOHADILLA + getId();
+        return ConstantesXADES.ALMOHADILLA + getId();
     }
 
 }

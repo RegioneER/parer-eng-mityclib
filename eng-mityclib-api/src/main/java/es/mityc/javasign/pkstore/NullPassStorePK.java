@@ -39,6 +39,6 @@ public class NullPassStorePK implements IPassStoreKS {
      *      java.lang.String)
      */
     public char[] getPassword(final X509Certificate certificate, final String alias) {
-	return new char[0];
+        return new char[0];
     }
 }

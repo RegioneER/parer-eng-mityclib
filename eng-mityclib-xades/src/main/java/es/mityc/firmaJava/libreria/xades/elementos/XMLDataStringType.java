@@ -30,7 +30,7 @@ public class XMLDataStringType extends AbstractXMLElement {
     protected String value;
 
     public XMLDataStringType(String value) {
-	this.value = value;
+        this.value = value;
     }
 
     /**
@@ -38,10 +38,10 @@ public class XMLDataStringType extends AbstractXMLElement {
      */
     @Override
     public void addContent(Element element) throws InvalidInfoNodeException {
-	if (value == null)
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir nodo XMLDataStringType");
-	element.setTextContent(Utilidades.escapeXML(value));
+        if (value == null)
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir nodo XMLDataStringType");
+        element.setTextContent(Utilidades.escapeXML(value));
     }
 
     /**
@@ -49,16 +49,16 @@ public class XMLDataStringType extends AbstractXMLElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof XMLDataStringType) {
-	    XMLDataStringType xdst = (XMLDataStringType) obj;
-	    if (value.equals(xdst))
-		return true;
-	} else if (obj instanceof String) {
-	    String data = (String) obj;
-	    if (value.equals(data))
-		return true;
-	}
-	return false;
+        if (obj instanceof XMLDataStringType) {
+            XMLDataStringType xdst = (XMLDataStringType) obj;
+            if (value.equals(xdst))
+                return true;
+        } else if (obj instanceof String) {
+            String data = (String) obj;
+            if (value.equals(data))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -66,35 +66,35 @@ public class XMLDataStringType extends AbstractXMLElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	Node node = getFirstNonvoidNode(element);
-	if ((node != null) && (node.getNodeType() != Node.TEXT_NODE)) {
-	    throw new InvalidInfoNodeException(
-		    "Nodo xsd:string no contiene CDATA como primer valor");
-	}
+        Node node = getFirstNonvoidNode(element);
+        if ((node != null) && (node.getNodeType() != Node.TEXT_NODE)) {
+            throw new InvalidInfoNodeException(
+                    "Nodo xsd:string no contiene CDATA como primer valor");
+        }
 
-	if (node == null) {
-	    this.value = new String("");
-	} else {
-	    this.value = node.getNodeValue();
-	    if (this.value == null) {
-		throw new InvalidInfoNodeException("Contenido de valor de xsd:string vacío");
-	    }
-	    this.value = StringEscapeUtils.unescapeXml(this.value);
-	}
+        if (node == null) {
+            this.value = new String("");
+        } else {
+            this.value = node.getNodeValue();
+            if (this.value == null) {
+                throw new InvalidInfoNodeException("Contenido de valor de xsd:string vacío");
+            }
+            this.value = StringEscapeUtils.unescapeXml(this.value);
+        }
     }
 
     /**
      * @return the value
      */
     public String getValue() {
-	return value;
+        return value;
     }
 
     /**
      * @param value the value to set
      */
     public void setValue(String value) {
-	this.value = value;
+        this.value = value;
     }
 
 }

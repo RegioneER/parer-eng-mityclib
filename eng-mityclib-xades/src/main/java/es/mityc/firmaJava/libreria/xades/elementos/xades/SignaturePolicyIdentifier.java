@@ -32,11 +32,11 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      * @param schema
      */
     public SignaturePolicyIdentifier(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     public SignaturePolicyIdentifier(XAdESSchemas schema, boolean isImplied) {
-	super(schema, isImplied);
+        super(schema, isImplied);
     }
 
     /**
@@ -44,8 +44,8 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
     }
 
     /**
@@ -53,9 +53,9 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(),
-		ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(),
+                ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
+        super.load(element);
     }
 
     /**
@@ -64,8 +64,8 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig, namespaceXAdES);
     }
 
     /**
@@ -73,10 +73,10 @@ public class SignaturePolicyIdentifier extends SignaturePolicyIdentifierType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
-	super.addContent(res, namespaceXAdES, namespaceXDsig);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
+        super.addContent(res, namespaceXAdES, namespaceXDsig);
+        return res;
     }
 
 }

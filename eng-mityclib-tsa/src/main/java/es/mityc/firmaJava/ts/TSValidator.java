@@ -66,101 +66,101 @@ public class TSValidator {
      * @throws TSClienteError
      */
     public static TSValidacion validarSelloTiempo(final byte[] binarioaSellar,
-	    final byte[] sellodeTiempo) throws NoSuchAlgorithmException, TSPException, IOException,
-	    NoSuchProviderException, CertStoreException, TSClienteError {
+            final byte[] sellodeTiempo) throws NoSuchAlgorithmException, TSPException, IOException,
+            NoSuchProviderException, CertStoreException, TSClienteError {
 
-	// Set permitidos = new HashSet(Arrays.asList(TSPAlgoritmos.getValoresPermitidos()));
-	// si el algoritmo pasado no es permitido o es nulo se usa el algortimo por defecto
+        // Set permitidos = new HashSet(Arrays.asList(TSPAlgoritmos.getValoresPermitidos()));
+        // si el algoritmo pasado no es permitido o es nulo se usa el algortimo por defecto
 
-	TimeStampToken tst = null;
-	TSValidacion tsv = new TSValidacion();
+        TimeStampToken tst = null;
+        TSValidacion tsv = new TSValidacion();
 
-	try {
-	    tst = new TimeStampToken(new CMSSignedData(sellodeTiempo));
-	} catch (CMSException e) {
-	    // Intenta obtenerlo como una timestamResp
-	    try {
-		TimeStampResponse tsr = new TimeStampResponse(sellodeTiempo);
-		tst = tsr.getTimeStampToken();
-		if (tst == null) {
-		    throw new TSClienteError(I18n.getResource(ConstantesTSA.LIBRERIA_TSA_ERROR_2));
-		}
-	    } catch (TSPException ex) {
-		throw new TSClienteError(I18n.getResource(ConstantesTSA.LIBRERIA_TSA_ERROR_2));
-	    } catch (IOException ex) {
-		throw new TSClienteError(I18n.getResource(ConstantesTSA.LIBRERIA_TSA_ERROR_2));
-	    }
-	}
+        try {
+            tst = new TimeStampToken(new CMSSignedData(sellodeTiempo));
+        } catch (CMSException e) {
+            // Intenta obtenerlo como una timestamResp
+            try {
+                TimeStampResponse tsr = new TimeStampResponse(sellodeTiempo);
+                tst = tsr.getTimeStampToken();
+                if (tst == null) {
+                    throw new TSClienteError(I18n.getResource(ConstantesTSA.LIBRERIA_TSA_ERROR_2));
+                }
+            } catch (TSPException ex) {
+                throw new TSClienteError(I18n.getResource(ConstantesTSA.LIBRERIA_TSA_ERROR_2));
+            } catch (IOException ex) {
+                throw new TSClienteError(I18n.getResource(ConstantesTSA.LIBRERIA_TSA_ERROR_2));
+            }
+        }
 
-	tsv.setTst(tst);
-	TimeStampTokenInfo tokenInfo = tst.getTimeStampInfo();
+        tsv.setTst(tst);
+        TimeStampTokenInfo tokenInfo = tst.getTimeStampInfo();
 
-	MessageDigest resumen = TSPAlgoritmos
-		.getDigest(tokenInfo.getMessageImprintAlgOID().getId());
-	if (resumen == null) {
-	    tsv.setRespuesta(false);
-	    return tsv;
-	}
+        MessageDigest resumen = TSPAlgoritmos
+                .getDigest(tokenInfo.getMessageImprintAlgOID().getId());
+        if (resumen == null) {
+            tsv.setRespuesta(false);
+            return tsv;
+        }
 
-	resumen.update(binarioaSellar);
-	if (MessageDigest.isEqual(resumen.digest(),
-		tst.getTimeStampInfo().getMessageImprintDigest())) {
-	    // TimeStampTokenInfo tokenInfo = tst.getTimeStampInfo();
-	    SimpleDateFormat formato = new SimpleDateFormat(ConstantesTSA.FORMATO_FECHA);
-	    tsv.setFecha(formato.format(tokenInfo.getGenTime()));
-	    tsv.setFechaDate(tokenInfo.getGenTime());
+        resumen.update(binarioaSellar);
+        if (MessageDigest.isEqual(resumen.digest(),
+                tst.getTimeStampInfo().getMessageImprintDigest())) {
+            // TimeStampTokenInfo tokenInfo = tst.getTimeStampInfo();
+            SimpleDateFormat formato = new SimpleDateFormat(ConstantesTSA.FORMATO_FECHA);
+            tsv.setFecha(formato.format(tokenInfo.getGenTime()));
+            tsv.setFechaDate(tokenInfo.getGenTime());
 
-	    GenTimeAccuracy precision = tokenInfo.getGenTimeAccuracy();
-	    tsv.setPrecision(precision);
+            GenTimeAccuracy precision = tokenInfo.getGenTimeAccuracy();
+            tsv.setPrecision(precision);
 
-	    long accuLong = 0;
-	    if (precision != null) {
-		accuLong = (precision.getMicros() * 1L) + (precision.getMillis() * 1000L)
-			+ (precision.getSeconds() * 1000000L);
-	    }
-	    tsv.setPrecisionLong(accuLong);
+            long accuLong = 0;
+            if (precision != null) {
+                accuLong = (precision.getMicros() * 1L) + (precision.getMillis() * 1000L)
+                        + (precision.getSeconds() * 1000000L);
+            }
+            tsv.setPrecisionLong(accuLong);
 
-	    tsv.setSello(tokenInfo.getSerialNumber());
-	    tsv.setFirmaDigest(new String(Base64Coder.encode(tokenInfo.getMessageImprintDigest())));
-	    tsv.setRespuesta(true);
-	    tsv.setSelloAlg(tokenInfo.getMessageImprintAlgOID().getId());
+            tsv.setSello(tokenInfo.getSerialNumber());
+            tsv.setFirmaDigest(new String(Base64Coder.encode(tokenInfo.getMessageImprintDigest())));
+            tsv.setRespuesta(true);
+            tsv.setSelloAlg(tokenInfo.getMessageImprintAlgOID().getId());
 
-	    // Obtiene el nombre del firmante del sello
+            // Obtiene el nombre del firmante del sello
 
-	    // Intenta extraer informacion de los certificados firmantes contenidos en el token
-	    X500Principal signer = null;
-	    GeneralName gn = tokenInfo.getTsa();
-	    if (gn != null) {
-		// Si es del tipo X500 lo transforma
-		if (gn.getTagNo() == 4) {
-		    signer = new X500Principal(X509Name.getInstance(gn.getName()).getEncoded());
-		}
-	    }
-	    // si el token no indica el nombre del firmante, intenta extraerlo por el certificado
+            // Intenta extraer informacion de los certificados firmantes contenidos en el token
+            X500Principal signer = null;
+            GeneralName gn = tokenInfo.getTsa();
+            if (gn != null) {
+                // Si es del tipo X500 lo transforma
+                if (gn.getTagNo() == 4) {
+                    signer = new X500Principal(X509Name.getInstance(gn.getName()).getEncoded());
+                }
+            }
+            // si el token no indica el nombre del firmante, intenta extraerlo por el certificado
 
-	    // Refactor: If not present, extract from certificate using Bouncy Castle 1.50+ API
-	    if (signer == null) {
-		try {
-		    Store<X509CertificateHolder> certStore = tst.getCertificates();
-		    Collection<X509CertificateHolder> certHolders = certStore.getMatches(null);
-		    if (!certHolders.isEmpty()) {
-			X509CertificateHolder certHolder = certHolders.iterator().next();
-			X509Certificate cert = new JcaX509CertificateConverter().setProvider("BC")
-				.getCertificate(certHolder);
-			signer = cert.getSubjectX500Principal();
-		    }
-		} catch (Exception ex) {
-		    // Ignore and leave signer as null
-		}
-	    }
-	    // Refactor: end
+            // Refactor: If not present, extract from certificate using Bouncy Castle 1.50+ API
+            if (signer == null) {
+                try {
+                    Store<X509CertificateHolder> certStore = tst.getCertificates();
+                    Collection<X509CertificateHolder> certHolders = certStore.getMatches(null);
+                    if (!certHolders.isEmpty()) {
+                        X509CertificateHolder certHolder = certHolders.iterator().next();
+                        X509Certificate cert = new JcaX509CertificateConverter().setProvider("BC")
+                                .getCertificate(certHolder);
+                        signer = cert.getSubjectX500Principal();
+                    }
+                } catch (Exception ex) {
+                    // Ignore and leave signer as null
+                }
+            }
+            // Refactor: end
 
-	    tsv.setEmisor(signer);
+            tsv.setEmisor(signer);
 
-	} else {
-	    tsv.setRespuesta(false);
-	}
-	return tsv;
+        } else {
+            tsv.setRespuesta(false);
+        }
+        return tsv;
     }
 
 }

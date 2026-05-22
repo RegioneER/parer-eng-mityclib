@@ -34,14 +34,14 @@ public class BadFormedSignatureException extends XMLError {
      * @param msg El detalle mensaje
      */
     public BadFormedSignatureException(String msg) {
-	super(msg);
+        super(msg);
     }
 
     public BadFormedSignatureException(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
     public BadFormedSignatureException(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 }

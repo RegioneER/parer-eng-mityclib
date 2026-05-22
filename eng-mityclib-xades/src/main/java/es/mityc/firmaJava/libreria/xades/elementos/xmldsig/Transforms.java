@@ -30,14 +30,14 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 public class Transforms extends TransformsType {
 
     public Transforms() {
-	super();
+        super();
     }
 
     /**
      * @param list
      */
     public Transforms(ArrayList<Transform> list) {
-	super(list);
+        super(list);
     }
 
     /**
@@ -45,8 +45,8 @@ public class Transforms extends TransformsType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.TRANSFORMS);
-	super.load(element);
+        checkElementName(element, ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.TRANSFORMS);
+        super.load(element);
     }
 
     /**
@@ -54,8 +54,8 @@ public class Transforms extends TransformsType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
-		ConstantesXADES.TRANSFORMS);
+        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
+                ConstantesXADES.TRANSFORMS);
     }
 
     /**
@@ -64,8 +64,8 @@ public class Transforms extends TransformsType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig);
     }
 
     /**
@@ -73,10 +73,10 @@ public class Transforms extends TransformsType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-		namespaceXDsig + ":" + ConstantesXADES.TRANSFORMS);
-	super.addContent(res, namespaceXDsig);
-	return res;
+        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+                namespaceXDsig + ":" + ConstantesXADES.TRANSFORMS);
+        super.addContent(res, namespaceXDsig);
+        return res;
     }
 
 }

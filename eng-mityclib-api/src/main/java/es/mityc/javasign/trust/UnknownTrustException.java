@@ -33,7 +33,7 @@ public class UnknownTrustException extends TrustException {
      * </p>
      */
     public UnknownTrustException() {
-	super();
+        super();
     }
 
     /**
@@ -44,7 +44,7 @@ public class UnknownTrustException extends TrustException {
      * @param message Mensaje de error
      */
     public UnknownTrustException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -55,7 +55,7 @@ public class UnknownTrustException extends TrustException {
      * @param cause Excepcion que causa esta otra
      */
     public UnknownTrustException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -67,7 +67,7 @@ public class UnknownTrustException extends TrustException {
      * @param cause   Excepcion que causa esta otra
      */
     public UnknownTrustException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

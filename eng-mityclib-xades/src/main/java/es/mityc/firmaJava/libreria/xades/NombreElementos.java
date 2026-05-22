@@ -25,31 +25,31 @@ public class NombreElementos {
     private String nameFileX509Cert = null;
 
     public NombreElementos() {
-	// No hace nada
+        // No hace nada
     }
 
     public String getNameFileOCSPResp() {
-	return nameFileOCSPResp;
+        return nameFileOCSPResp;
     }
 
     public String getNameFileX509Cert() {
-	return nameFileX509Cert;
+        return nameFileX509Cert;
     }
 
     public void setNameFileOCSPResp(String name) {
-	this.nameFileOCSPResp = name;
+        this.nameFileOCSPResp = name;
     }
 
     public void setNameFileX509Cert(String name) {
-	this.nameFileX509Cert = name;
+        this.nameFileX509Cert = name;
     }
 
     public String getNameFileCRLResp() {
-	return nameFileCRLResp;
+        return nameFileCRLResp;
     }
 
     public void setNameFileCRLResp(String nameFileCRLResp) {
-	this.nameFileCRLResp = nameFileCRLResp;
+        this.nameFileCRLResp = nameFileCRLResp;
     }
 
 }

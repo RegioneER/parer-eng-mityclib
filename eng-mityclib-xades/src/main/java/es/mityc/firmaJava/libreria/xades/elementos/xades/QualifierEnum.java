@@ -25,7 +25,7 @@ public enum QualifierEnum {
     private String value;
 
     private QualifierEnum(String value) {
-	this.value = value;
+        this.value = value;
     }
 
     /**
@@ -33,17 +33,17 @@ public enum QualifierEnum {
      */
     @Override
     public String toString() {
-	return new String(value);
+        return new String(value);
     }
 
     public static QualifierEnum getQualifierEnum(String value) {
-	if (value == null)
-	    return null;
-	if (OIDAsURI.toString().equals(value))
-	    return OIDAsURI;
-	else if (OIDAsURN.toString().equals(value))
-	    return OIDAsURN;
-	return null;
+        if (value == null)
+            return null;
+        if (OIDAsURI.toString().equals(value))
+            return OIDAsURI;
+        else if (OIDAsURN.toString().equals(value))
+            return OIDAsURN;
+        return null;
     }
 
 }

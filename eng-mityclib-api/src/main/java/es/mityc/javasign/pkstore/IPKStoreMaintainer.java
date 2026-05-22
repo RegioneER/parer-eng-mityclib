@@ -82,7 +82,7 @@ public interface IPKStoreMaintainer {
      *                            privada y certificado
      */
     void importSignCert(PrivateKey pk, X509Certificate cert, char[] password)
-	    throws CertStoreException;
+            throws CertStoreException;
 
     /**
      * <p>

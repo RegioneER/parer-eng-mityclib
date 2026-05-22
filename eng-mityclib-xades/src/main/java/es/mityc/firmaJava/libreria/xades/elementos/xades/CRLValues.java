@@ -33,7 +33,7 @@ public class CRLValues extends CRLValuesType {
      * @param schema
      */
     public CRLValues(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -41,7 +41,7 @@ public class CRLValues extends CRLValuesType {
      * @param crls
      */
     public CRLValues(XAdESSchemas schema, ArrayList<EncapsulatedCRLValue> crls) {
-	super(schema, crls);
+        super(schema, crls);
     }
 
     /**
@@ -49,8 +49,8 @@ public class CRLValues extends CRLValuesType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_CRL_VALUES);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_CRL_VALUES);
+        super.load(element);
     }
 
     /**
@@ -58,8 +58,8 @@ public class CRLValues extends CRLValuesType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_CRL_VALUES);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_CRL_VALUES);
     }
 
     /**
@@ -68,8 +68,8 @@ public class CRLValues extends CRLValuesType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -77,10 +77,10 @@ public class CRLValues extends CRLValuesType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_CRL_VALUES);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_CRL_VALUES);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

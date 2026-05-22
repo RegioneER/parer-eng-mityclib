@@ -83,6 +83,6 @@ public interface ICertStatusRecoverer {
      *                             certificado
      */
     List<List<ICertStatus>> getCertChainStatus(List<X509Certificate> certs)
-	    throws CertStatusException;
+            throws CertStatusException;
 
 }

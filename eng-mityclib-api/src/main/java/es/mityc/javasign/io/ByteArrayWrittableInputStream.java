@@ -47,8 +47,8 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * @param wrt Escritor que se utilizara para rellenar el buffer
      */
     public ByteArrayWrittableInputStream(final IWriter wrt) {
-	bais = new ByteArrayInputStream(new byte[0]);
-	this.writer = wrt;
+        bais = new ByteArrayInputStream(new byte[0]);
+        this.writer = wrt;
     }
 
     /**
@@ -64,12 +64,12 @@ public class ByteArrayWrittableInputStream extends InputStream {
      */
     @Override
     public int read() throws IOException {
-	int data = bais.read();
-	if (data == -1) {
-	    updateBuffer();
-	    data = bais.read();
-	}
-	return data;
+        int data = bais.read();
+        if (data == -1) {
+            updateBuffer();
+            data = bais.read();
+        }
+        return data;
     }
 
     /**
@@ -81,9 +81,9 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * @throws IOException Lanzada si se produce un error al actualizar el buffer
      */
     private void updateBuffer() throws IOException {
-	flush();
-	bais = new ByteArrayInputStream(writer.toByteArray());
-	writer.reset();
+        flush();
+        bais = new ByteArrayInputStream(writer.toByteArray());
+        writer.reset();
     }
 
     /**
@@ -94,7 +94,7 @@ public class ByteArrayWrittableInputStream extends InputStream {
      * @throws IOException Lanzada si se produce un error al asegurar el contenido interno
      */
     public void flush() throws IOException {
-	writer.flush();
+        writer.flush();
     }
 
     /**
@@ -115,11 +115,11 @@ public class ByteArrayWrittableInputStream extends InputStream {
      */
     @Override
     public int available() throws IOException {
-	int i = bais.available();
-	if (i == 0) {
-	    i = writer.size();
-	}
-	return i;
+        int i = bais.available();
+        if (i == 0) {
+            i = writer.size();
+        }
+        return i;
     }
 
 }

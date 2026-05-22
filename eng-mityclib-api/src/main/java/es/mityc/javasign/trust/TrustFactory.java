@@ -104,7 +104,7 @@ public class TrustFactory {
      *
      */
     protected TrustFactory() {
-	loadConfig();
+        loadConfig();
     }
 
     /**
@@ -118,23 +118,23 @@ public class TrustFactory {
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
-	try {
-	    ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
-		public ClassLoader run() {
-		    ClassLoader classLoader = null;
-		    try {
-			classLoader = Thread.currentThread().getContextClassLoader();
-		    } catch (SecurityException ex) {
-		    }
-		    return classLoader;
-		}
-	    });
-	    if (cl != null) {
-		return cl;
-	    }
-	} catch (Exception ex) {
-	}
-	return TrustFactory.class.getClassLoader();
+        try {
+            ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+                public ClassLoader run() {
+                    ClassLoader classLoader = null;
+                    try {
+                        classLoader = Thread.currentThread().getContextClassLoader();
+                    } catch (SecurityException ex) {
+                    }
+                    return classLoader;
+                }
+            });
+            if (cl != null) {
+                return cl;
+            }
+        } catch (Exception ex) {
+        }
+        return TrustFactory.class.getClassLoader();
     }
 
     /**
@@ -144,34 +144,34 @@ public class TrustFactory {
      * </p>
      */
     private void loadConfig() {
-	ClassLoader cl = getClassLoader();
-	try {
-	    // cambia el orden del listado de recursos
-	    ArrayList<URL> resources = new ArrayList<URL>();
-	    Enumeration<URL> en = cl.getResources(TRUST_FILE_CONF);
-	    while (en.hasMoreElements()) {
-		resources.add(0, en.nextElement());
-	    }
-	    // carga cada conjunto de propiedades de atras hacia adelante para respetar el orden del
-	    // classpath
-	    Properties base = null;
-	    Iterator<URL> itResources = resources.iterator();
-	    while (itResources.hasNext()) {
-		URL url = itResources.next();
-		try {
-		    InputStream is = url.openStream();
-		    Properties properties = new Properties(base);
-		    properties.load(is);
-		    base = properties;
-		} catch (IOException ex) {
-		    LOG.error(
-			    I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_9, url, ex.getMessage()));
-		}
-	    }
-	    props = base;
-	} catch (IOException ex) {
-	    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_1, ex.getMessage()));
-	}
+        ClassLoader cl = getClassLoader();
+        try {
+            // cambia el orden del listado de recursos
+            ArrayList<URL> resources = new ArrayList<URL>();
+            Enumeration<URL> en = cl.getResources(TRUST_FILE_CONF);
+            while (en.hasMoreElements()) {
+                resources.add(0, en.nextElement());
+            }
+            // carga cada conjunto de propiedades de atras hacia adelante para respetar el orden del
+            // classpath
+            Properties base = null;
+            Iterator<URL> itResources = resources.iterator();
+            while (itResources.hasNext()) {
+                URL url = itResources.next();
+                try {
+                    InputStream is = url.openStream();
+                    Properties properties = new Properties(base);
+                    properties.load(is);
+                    base = properties;
+                } catch (IOException ex) {
+                    LOG.error(
+                            I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_9, url, ex.getMessage()));
+                }
+            }
+            props = base;
+        } catch (IOException ex) {
+            LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_1, ex.getMessage()));
+        }
     }
 
     /**
@@ -182,79 +182,79 @@ public class TrustFactory {
      * @return instancia de factoría de clases comprobadoras de confianza
      */
     public static TrustFactory getInstance() {
-	if (instance == null) {
-	    // obtiene la configuracion de TrustFactory por defecto
-	    try {
-		String classname = null;
-		// Comprueba si se ha indicado que se cambie la factoría
-		ClassLoader cl = getClassLoader();
-		InputStream is = cl.getResourceAsStream(TRUST_SERVICES_FILE_CONF);
-		if (is != null) {
-		    Properties rb = new Properties();
-		    try {
-			rb.load(is);
-			classname = rb.getProperty(TRUST_SERVICES_FACTORY_CLASS);
-		    } catch (IOException ex) {
-			LOG.warn(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_9,
-				TRUST_SERVICES_FACTORY_CLASS, ex.getMessage()));
-		    }
-		}
-		// Si se ha indicado una nueva factoría la intenta cargar
-		if (classname != null) {
-		    try {
-			Class<?> classFactory = null;
-			if (cl != null) {
-			    classFactory = cl.loadClass(classname);
-			} else {
-			    classFactory = Class.forName(classname);
-			}
-			if (classFactory != null) {
-			    Method method = classFactory.getDeclaredMethod(METHOD_NEW_INSTANCE);
-			    Class<?> returnType = method.getReturnType();
-			    if ((returnType != null)
-				    && (returnType.isAssignableFrom(TrustFactory.class))) {
-				instance = (TrustFactory) method.invoke(null);
-			    }
-			}
-		    } catch (IllegalAccessException ex) {
-			LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
-			if (LOG.isDebugEnabled()) {
-			    LOG.debug(STRING_EMPTY, ex);
-			}
-		    } catch (ClassNotFoundException ex) {
-			LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
-			if (LOG.isDebugEnabled()) {
-			    LOG.debug(STRING_EMPTY, ex);
-			}
-		    } catch (ClassCastException ex) {
-			LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
-			if (LOG.isDebugEnabled()) {
-			    LOG.debug(STRING_EMPTY, ex);
-			}
-		    } catch (NoSuchMethodException ex) {
-			LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
-			if (LOG.isDebugEnabled()) {
-			    LOG.debug(STRING_EMPTY, ex);
-			}
-		    } catch (IllegalArgumentException ex) {
-			LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
-			if (LOG.isDebugEnabled()) {
-			    LOG.debug(STRING_EMPTY, ex);
-			}
-		    } catch (InvocationTargetException ex) {
-			LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
-			if (LOG.isDebugEnabled()) {
-			    LOG.debug(STRING_EMPTY, ex);
-			}
-		    }
-		}
-	    } catch (MissingResourceException ex) {
-	    }
-	    if (instance == null) {
-		instance = newInstance();
-	    }
-	}
-	return instance;
+        if (instance == null) {
+            // obtiene la configuracion de TrustFactory por defecto
+            try {
+                String classname = null;
+                // Comprueba si se ha indicado que se cambie la factoría
+                ClassLoader cl = getClassLoader();
+                InputStream is = cl.getResourceAsStream(TRUST_SERVICES_FILE_CONF);
+                if (is != null) {
+                    Properties rb = new Properties();
+                    try {
+                        rb.load(is);
+                        classname = rb.getProperty(TRUST_SERVICES_FACTORY_CLASS);
+                    } catch (IOException ex) {
+                        LOG.warn(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_9,
+                                TRUST_SERVICES_FACTORY_CLASS, ex.getMessage()));
+                    }
+                }
+                // Si se ha indicado una nueva factoría la intenta cargar
+                if (classname != null) {
+                    try {
+                        Class<?> classFactory = null;
+                        if (cl != null) {
+                            classFactory = cl.loadClass(classname);
+                        } else {
+                            classFactory = Class.forName(classname);
+                        }
+                        if (classFactory != null) {
+                            Method method = classFactory.getDeclaredMethod(METHOD_NEW_INSTANCE);
+                            Class<?> returnType = method.getReturnType();
+                            if ((returnType != null)
+                                    && (returnType.isAssignableFrom(TrustFactory.class))) {
+                                instance = (TrustFactory) method.invoke(null);
+                            }
+                        }
+                    } catch (IllegalAccessException ex) {
+                        LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(STRING_EMPTY, ex);
+                        }
+                    } catch (ClassNotFoundException ex) {
+                        LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(STRING_EMPTY, ex);
+                        }
+                    } catch (ClassCastException ex) {
+                        LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(STRING_EMPTY, ex);
+                        }
+                    } catch (NoSuchMethodException ex) {
+                        LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(STRING_EMPTY, ex);
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(STRING_EMPTY, ex);
+                        }
+                    } catch (InvocationTargetException ex) {
+                        LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_8, classname));
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug(STRING_EMPTY, ex);
+                        }
+                    }
+                }
+            } catch (MissingResourceException ex) {
+            }
+            if (instance == null) {
+                instance = newInstance();
+            }
+        }
+        return instance;
     }
 
     /**
@@ -266,7 +266,7 @@ public class TrustFactory {
      * @return una instancia de esta factoría de clases comprobadoras de confianza
      */
     protected static TrustFactory newInstance() {
-	return new TrustFactory();
+        return new TrustFactory();
     }
 
     /**
@@ -277,7 +277,7 @@ public class TrustFactory {
      * @param factory Factoría que se quiere utilizar para generar los validadores de confianza
      */
     public static void setDefault(final TrustFactory factory) {
-	instance = factory;
+        instance = factory;
     }
 
     /**
@@ -291,11 +291,11 @@ public class TrustFactory {
      * @return Nombre de la clase que implementa la clase de validador de confianza
      */
     protected String getClassname(final String key) {
-	String classname = props.getProperty(key);
-	if (classname == null) {
-	    LOG.warn(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_6, key));
-	}
-	return classname;
+        String classname = props.getProperty(key);
+        if (classname == null) {
+            LOG.warn(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_6, key));
+        }
+        return classname;
     }
 
     /**
@@ -308,60 +308,60 @@ public class TrustFactory {
      *         asociado o no se puede instanciar.
      */
     public TrustAbstract getTruster(final String key) {
-	TrustAbstract truster = null;
-	if (instance != null) {
-	    String classname = getClassname(key);
-	    if ((classname != null)
-		    && (!TRUSTER_PROP_NO_AVALAIBLE.equals(classname.trim().toLowerCase()))) {
-		try {
-		    ClassLoader cl = getClassLoader();
-		    Class<?> classTruster = null;
-		    if (cl != null) {
-			classTruster = cl.loadClass(classname);
-		    } else {
-			classTruster = Class.forName(classname);
-		    }
-		    if (classTruster != null) {
-			Method method = classTruster.getMethod(METHOD_GET_INSTANCE);
-			Object obj = method.invoke(null);
-			if (obj instanceof TrustAbstract) {
-			    truster = (TrustAbstract) obj;
-			}
-		    }
-		} catch (IllegalAccessException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_3, key, classname));
-		    if (LOG.isDebugEnabled()) {
-			LOG.debug(STRING_EMPTY, ex);
-		    }
-		} catch (ClassNotFoundException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_4, key, classname));
-		    if (LOG.isDebugEnabled()) {
-			LOG.debug(STRING_EMPTY, ex);
-		    }
-		} catch (ClassCastException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_5, key, classname));
-		    if (LOG.isDebugEnabled()) {
-			LOG.debug(STRING_EMPTY, ex);
-		    }
-		} catch (NoSuchMethodException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_6, key, classname));
-		    if (LOG.isDebugEnabled()) {
-			LOG.debug(STRING_EMPTY, ex);
-		    }
-		} catch (IllegalArgumentException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_3, key, classname));
-		    if (LOG.isDebugEnabled()) {
-			LOG.debug(STRING_EMPTY, ex);
-		    }
-		} catch (InvocationTargetException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_2, key, classname));
-		    if (LOG.isDebugEnabled()) {
-			LOG.debug(STRING_EMPTY, ex);
-		    }
-		}
-	    }
-	}
-	return truster;
+        TrustAbstract truster = null;
+        if (instance != null) {
+            String classname = getClassname(key);
+            if ((classname != null)
+                    && (!TRUSTER_PROP_NO_AVALAIBLE.equals(classname.trim().toLowerCase()))) {
+                try {
+                    ClassLoader cl = getClassLoader();
+                    Class<?> classTruster = null;
+                    if (cl != null) {
+                        classTruster = cl.loadClass(classname);
+                    } else {
+                        classTruster = Class.forName(classname);
+                    }
+                    if (classTruster != null) {
+                        Method method = classTruster.getMethod(METHOD_GET_INSTANCE);
+                        Object obj = method.invoke(null);
+                        if (obj instanceof TrustAbstract) {
+                            truster = (TrustAbstract) obj;
+                        }
+                    }
+                } catch (IllegalAccessException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_3, key, classname));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug(STRING_EMPTY, ex);
+                    }
+                } catch (ClassNotFoundException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_4, key, classname));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug(STRING_EMPTY, ex);
+                    }
+                } catch (ClassCastException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_5, key, classname));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug(STRING_EMPTY, ex);
+                    }
+                } catch (NoSuchMethodException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_6, key, classname));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug(STRING_EMPTY, ex);
+                    }
+                } catch (IllegalArgumentException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_3, key, classname));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug(STRING_EMPTY, ex);
+                    }
+                } catch (InvocationTargetException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TRUST_2, key, classname));
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug(STRING_EMPTY, ex);
+                    }
+                }
+            }
+        }
+        return truster;
     }
 
 }

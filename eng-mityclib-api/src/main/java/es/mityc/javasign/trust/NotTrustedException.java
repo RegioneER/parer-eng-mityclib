@@ -33,7 +33,7 @@ public class NotTrustedException extends TrustException {
      * </p>
      */
     public NotTrustedException() {
-	super();
+        super();
     }
 
     /**
@@ -44,7 +44,7 @@ public class NotTrustedException extends TrustException {
      * @param message Mensaje de error
      */
     public NotTrustedException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -55,7 +55,7 @@ public class NotTrustedException extends TrustException {
      * @param cause Excepcion responsable de lanzar esta otra
      */
     public NotTrustedException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -67,7 +67,7 @@ public class NotTrustedException extends TrustException {
      * @param cause   Excepcion responsable de lanzar esta otra
      */
     public NotTrustedException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

@@ -26,11 +26,11 @@ public class X509IssuerName extends AbstractXDSigStringElement {
      * @param data
      */
     public X509IssuerName(String data) {
-	super(ConstantesXADES.X_509_ISSUER_NAME, data);
+        super(ConstantesXADES.X_509_ISSUER_NAME, data);
     }
 
     public X509IssuerName() {
-	super(ConstantesXADES.X_509_ISSUER_NAME);
+        super(ConstantesXADES.X_509_ISSUER_NAME);
     }
 
 }

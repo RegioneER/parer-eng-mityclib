@@ -59,23 +59,23 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * @return contraseña (PIN)
      */
     public char[] getPassword(final X509Certificate certificate, final String alias) {
-	pinDialog = new PINDialog(null);
-	processData(certificate, alias);
-	pinDialog.setTitle(getTitle());
-	pinDialog.setPINMessage(getPINMessage());
-	pinDialog.pack();
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	pinDialog.setLocation(screenSize.width / 2 - pinDialog.getWidth() / 2,
-		screenSize.height / 2 - pinDialog.getHeight() / 2);
-	pinDialog.setVisible(true);
+        pinDialog = new PINDialog(null);
+        processData(certificate, alias);
+        pinDialog.setTitle(getTitle());
+        pinDialog.setPINMessage(getPINMessage());
+        pinDialog.pack();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        pinDialog.setLocation(screenSize.width / 2 - pinDialog.getWidth() / 2,
+                screenSize.height / 2 - pinDialog.getHeight() / 2);
+        pinDialog.setVisible(true);
 
-	char[] pass = new char[0];
-	if (!pinDialog.isCancelado()) {
-	    pass = pinDialog.getPassword();
-	}
-	pinDialog.dispose();
+        char[] pass = new char[0];
+        if (!pinDialog.isCancelado()) {
+            pass = pinDialog.getPassword();
+        }
+        pinDialog.dispose();
 
-	return pass;
+        return pass;
     }
 
     /**
@@ -90,7 +90,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * @param icon Icono a mostrar.
      */
     public void setIcon(final ImageIcon icon) {
-	pinDialog.setIcon(icon);
+        pinDialog.setIcon(icon);
     }
 
     /**
@@ -101,7 +101,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * @param isVisible <code>false</code> para hacer el boton invisible
      */
     public void setCancelBtnVisible(final boolean isVisible) {
-	pinDialog.setCancelBtnVisible(isVisible);
+        pinDialog.setCancelBtnVisible(isVisible);
     }
 
     /**
@@ -129,7 +129,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * @param title Título de la ventana
      */
     public void setTitle(final String title) {
-	this.titleDialog = new String(title);
+        this.titleDialog = new String(title);
     }
 
     /**
@@ -140,7 +140,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * @return Título de la ventana
      */
     public String getTitle() {
-	return titleDialog;
+        return titleDialog;
     }
 
     /**
@@ -151,7 +151,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * @param message nuevo mensage
      */
     public void setPINMessage(final String message) {
-	this.pinMessage = new String(message);
+        this.pinMessage = new String(message);
     }
 
     /**
@@ -162,7 +162,7 @@ public class DefaultPassStoreKS implements IPassStoreKS {
      * @return mensaje de PIN
      */
     public String getPINMessage() {
-	return pinMessage;
+        return pinMessage;
     }
 
 }

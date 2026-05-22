@@ -36,7 +36,7 @@ public interface IPrivateData {
      *                               razon
      */
     public byte[] getDigest(String name, String baseURI, String algName)
-	    throws ResourceDataException;
+            throws ResourceDataException;
 
     /**
      * Indica si esta implementacion puede acceder a la informacion indicada para calcular su digest

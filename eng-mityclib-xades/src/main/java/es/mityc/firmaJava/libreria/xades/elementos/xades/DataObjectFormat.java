@@ -37,15 +37,15 @@ public class DataObjectFormat extends DataObjectFormatType {
      * @param mimeType
      */
     public DataObjectFormat(XAdESSchemas schema, URI reference, String description,
-	    String mimeType) {
-	super(schema, reference, description, mimeType);
+            String mimeType) {
+        super(schema, reference, description, mimeType);
     }
 
     /**
      * @param schema
      */
     public DataObjectFormat(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -53,9 +53,9 @@ public class DataObjectFormat extends DataObjectFormatType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_DATA_OBJECT_FORMAT);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_DATA_OBJECT_FORMAT);
+        super.load(element);
     }
 
     /**
@@ -63,8 +63,8 @@ public class DataObjectFormat extends DataObjectFormatType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_DATA_OBJECT_FORMAT);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_DATA_OBJECT_FORMAT);
     }
 
     /**
@@ -73,8 +73,8 @@ public class DataObjectFormat extends DataObjectFormatType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -82,10 +82,10 @@ public class DataObjectFormat extends DataObjectFormatType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_DATA_OBJECT_FORMAT);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_DATA_OBJECT_FORMAT);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

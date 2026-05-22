@@ -33,7 +33,7 @@ public class DictionaryUnknownException extends Exception {
      * </p>
      */
     public DictionaryUnknownException() {
-	super();
+        super();
     }
 
     /**
@@ -44,7 +44,7 @@ public class DictionaryUnknownException extends Exception {
      * @param message Mensaje de error
      */
     public DictionaryUnknownException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -55,7 +55,7 @@ public class DictionaryUnknownException extends Exception {
      * @param cause Causa de la excepcion
      */
     public DictionaryUnknownException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -67,7 +67,7 @@ public class DictionaryUnknownException extends Exception {
      * @param cause   Causa de la excepcion
      */
     public DictionaryUnknownException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

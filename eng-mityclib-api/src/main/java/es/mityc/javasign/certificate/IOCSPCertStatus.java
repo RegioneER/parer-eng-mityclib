@@ -29,10 +29,10 @@ public interface IOCSPCertStatus extends ICertStatus {
 
     /** Posibles tipos de identificacion del OCSP Responder. */
     enum TYPE_RESPONDER {
-	/** Por nombre: la cadena que identifica al OCSP responder mediante un nombre X500. */
-	BY_NAME,
-	/** Por clave: una cadena en base64 de la clave pública del OCSP responder. */
-	BY_KEY
+        /** Por nombre: la cadena que identifica al OCSP responder mediante un nombre X500. */
+        BY_NAME,
+        /** Por clave: una cadena en base64 de la clave pública del OCSP responder. */
+        BY_KEY
     }
 
     /**

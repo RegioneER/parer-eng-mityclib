@@ -30,7 +30,7 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 public class SigPolicyHash extends DigestAlgAndValueType {
 
     public SigPolicyHash(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -38,11 +38,11 @@ public class SigPolicyHash extends DigestAlgAndValueType {
      * @param value
      */
     public SigPolicyHash(XAdESSchemas schema, String method, String value) {
-	super(schema, method, value);
+        super(schema, method, value);
     }
 
     public SigPolicyHash(XAdESSchemas schema, DigestAlgAndValueType daaavt) {
-	super(schema, daaavt.getDigestMethod().getAlgorithm(), daaavt.getDigestValue().getValue());
+        super(schema, daaavt.getDigestMethod().getAlgorithm(), daaavt.getDigestValue().getValue());
     }
 
     /**
@@ -50,8 +50,8 @@ public class SigPolicyHash extends DigestAlgAndValueType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIG_POLICY_HASH);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIG_POLICY_HASH);
+        super.load(element);
     }
 
     /**
@@ -59,8 +59,8 @@ public class SigPolicyHash extends DigestAlgAndValueType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.SIG_POLICY_HASH);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.SIG_POLICY_HASH);
     }
 
     /**
@@ -69,8 +69,8 @@ public class SigPolicyHash extends DigestAlgAndValueType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig, namespaceXAdES);
     }
 
     /**
@@ -78,10 +78,10 @@ public class SigPolicyHash extends DigestAlgAndValueType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.SIG_POLICY_HASH);
-	super.addContent(res, namespaceXAdES, namespaceXDsig);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.SIG_POLICY_HASH);
+        super.addContent(res, namespaceXAdES, namespaceXDsig);
+        return res;
     }
 
 }

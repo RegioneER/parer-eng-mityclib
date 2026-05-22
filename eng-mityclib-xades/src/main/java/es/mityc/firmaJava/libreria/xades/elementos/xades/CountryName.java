@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 public class CountryName extends AbstractXadesStringElement {
 
     public CountryName(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_COUNTRY_NAME, data);
+        super(schema, ConstantesXADES.XADES_TAG_COUNTRY_NAME, data);
     }
 
     /**
@@ -32,7 +32,7 @@ public class CountryName extends AbstractXadesStringElement {
      * @param schema
      */
     public CountryName(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_COUNTRY_NAME);
+        super(schema, ConstantesXADES.XADES_TAG_COUNTRY_NAME);
     }
 
 }

@@ -122,37 +122,37 @@ public class I18nFactory {
      * Carga la configuracion basica de la factoría.
      */
     static {
-	// Busca el fichero i18n, si no lo encuentra recoge el fichero local.
-	Properties rb = null;
-	try {
-	    InputStream is = getClassLoader().getResourceAsStream(PATH_RES_I18N_PROPS);
-	    if (is != null) {
-		rb = new Properties();
-		rb.load(is);
-	    } else {
-		LOG.trace(NOTAVALAIBLE_FILE_I18N_PROPS);
-	    }
-	} catch (IOException ex) {
-	    LOG.trace(NOTAVALAIBLE_FILE_I18N_PROPS);
-	}
-	loadFactory(rb);
-	// Si no hay factoría propia carga el resto de valores
-	if ((factory == null) && (rb != null)) {
-	    // Carga el nombre de la clase del manager de internacionalizacion
-	    String classnameManager = rb.getProperty(CLASS_MANAGER);
-	    if (classnameManager != null) {
-		if (STRING_EMPTY.equals(classnameManager.trim())) {
-		    classnameManager = null;
-		} else {
-		    loadManager(classnameManager);
-		}
-	    }
-	    if (classManager == null) {
-		LOG.trace(NOT_I18N_MANAGER_CONFIGURATED);
-	    }
-	    // Carga el nombre de la localizacion
-	    loadLocale(rb);
-	}
+        // Busca el fichero i18n, si no lo encuentra recoge el fichero local.
+        Properties rb = null;
+        try {
+            InputStream is = getClassLoader().getResourceAsStream(PATH_RES_I18N_PROPS);
+            if (is != null) {
+                rb = new Properties();
+                rb.load(is);
+            } else {
+                LOG.trace(NOTAVALAIBLE_FILE_I18N_PROPS);
+            }
+        } catch (IOException ex) {
+            LOG.trace(NOTAVALAIBLE_FILE_I18N_PROPS);
+        }
+        loadFactory(rb);
+        // Si no hay factoría propia carga el resto de valores
+        if ((factory == null) && (rb != null)) {
+            // Carga el nombre de la clase del manager de internacionalizacion
+            String classnameManager = rb.getProperty(CLASS_MANAGER);
+            if (classnameManager != null) {
+                if (STRING_EMPTY.equals(classnameManager.trim())) {
+                    classnameManager = null;
+                } else {
+                    loadManager(classnameManager);
+                }
+            }
+            if (classManager == null) {
+                LOG.trace(NOT_I18N_MANAGER_CONFIGURATED);
+            }
+            // Carga el nombre de la localizacion
+            loadLocale(rb);
+        }
     }
 
     /**
@@ -174,23 +174,23 @@ public class I18nFactory {
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
-	try {
-	    ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
-		public ClassLoader run() {
-		    ClassLoader classLoader = null;
-		    try {
-			classLoader = Thread.currentThread().getContextClassLoader();
-		    } catch (SecurityException ex) {
-		    }
-		    return classLoader;
-		}
-	    });
-	    if (cl != null) {
-		return cl;
-	    }
-	} catch (Exception ex) {
-	}
-	return I18nFactory.class.getClassLoader();
+        try {
+            ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+                public ClassLoader run() {
+                    ClassLoader classLoader = null;
+                    try {
+                        classLoader = Thread.currentThread().getContextClassLoader();
+                    } catch (SecurityException ex) {
+                    }
+                    return classLoader;
+                }
+            });
+            if (cl != null) {
+                return cl;
+            }
+        } catch (Exception ex) {
+        }
+        return I18nFactory.class.getClassLoader();
     }
 
     /**
@@ -201,44 +201,44 @@ public class I18nFactory {
      * @param rb Properties que contiene las propiedades de configuracion
      */
     private static void loadFactory(final Properties rb) {
-	if (rb != null) {
-	    String classname = rb.getProperty(CLASS_FACTORY);
-	    if ((classname != null) && (!STRING_EMPTY.equals(classname.trim()))) {
-		try {
-		    ClassLoader cl = getClassLoader();
-		    Class<?> classFactory = null;
-		    if (cl != null) {
-			classFactory = cl.loadClass(classname);
-		    } else {
-			classFactory = Class.forName(classname);
-		    }
-		    if (classFactory != null) {
-			Method method = classFactory.getDeclaredMethod(METHOD_NEW_INSTANCE);
-			Class<?> returnType = method.getReturnType();
-			if ((returnType != null)
-				&& (returnType.isAssignableFrom(II18nFactory.class))) {
-			    factory = (II18nFactory) method.invoke(null);
-			}
-		    }
-		} catch (IllegalAccessException ex) {
-		    LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classname), ex);
-		} catch (ClassNotFoundException ex) {
-		    LOG.error(getFormatedMessage(ERROR_NOT_AVALAIBLE_CLASS, classname), ex);
-		} catch (ClassCastException ex) {
-		    LOG.error(getFormatedMessage(ERROR_CASTING_FACTORY, classname), ex);
-		} catch (SecurityException ex) {
-		    LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classname), ex);
-		} catch (NoSuchMethodException ex) {
-		    LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
-		} catch (IllegalArgumentException ex) {
-		    LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
-		} catch (InvocationTargetException ex) {
-		    LOG.error(getFormatedMessage(ERROR_INSTANTIATION_FACTORY, classname), ex);
-		}
-	    } else {
-		LOG.trace(ERROR_CONFIGURATION_FACTORY);
-	    }
-	}
+        if (rb != null) {
+            String classname = rb.getProperty(CLASS_FACTORY);
+            if ((classname != null) && (!STRING_EMPTY.equals(classname.trim()))) {
+                try {
+                    ClassLoader cl = getClassLoader();
+                    Class<?> classFactory = null;
+                    if (cl != null) {
+                        classFactory = cl.loadClass(classname);
+                    } else {
+                        classFactory = Class.forName(classname);
+                    }
+                    if (classFactory != null) {
+                        Method method = classFactory.getDeclaredMethod(METHOD_NEW_INSTANCE);
+                        Class<?> returnType = method.getReturnType();
+                        if ((returnType != null)
+                                && (returnType.isAssignableFrom(II18nFactory.class))) {
+                            factory = (II18nFactory) method.invoke(null);
+                        }
+                    }
+                } catch (IllegalAccessException ex) {
+                    LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classname), ex);
+                } catch (ClassNotFoundException ex) {
+                    LOG.error(getFormatedMessage(ERROR_NOT_AVALAIBLE_CLASS, classname), ex);
+                } catch (ClassCastException ex) {
+                    LOG.error(getFormatedMessage(ERROR_CASTING_FACTORY, classname), ex);
+                } catch (SecurityException ex) {
+                    LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classname), ex);
+                } catch (NoSuchMethodException ex) {
+                    LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
+                } catch (IllegalArgumentException ex) {
+                    LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
+                } catch (InvocationTargetException ex) {
+                    LOG.error(getFormatedMessage(ERROR_INSTANTIATION_FACTORY, classname), ex);
+                }
+            } else {
+                LOG.trace(ERROR_CONFIGURATION_FACTORY);
+            }
+        }
     }
 
     /**
@@ -249,29 +249,29 @@ public class I18nFactory {
      * @param classname Nombre de la clase
      */
     private static void loadManager(final String classname) {
-	try {
-	    ClassLoader cl = getClassLoader();
-	    Class<?> classTemp = null;
-	    if (cl != null) {
-		classTemp = cl.loadClass(classname);
-	    } else {
-		classTemp = Class.forName(classname);
-	    }
-	    if (classTemp != null) {
-		Class<? extends II18nManager> classI18n = classTemp.asSubclass(II18nManager.class);
-		classManager = classI18n.getConstructor((Class[]) null);
-	    }
-	} catch (ClassNotFoundException ex) {
-	    LOG.error(getFormatedMessage(ERROR_NOT_AVALAIBLE_CLASS, classname), ex);
-	} catch (ClassCastException ex) {
-	    LOG.error(getFormatedMessage(ERROR_CASTING_FACTORY, classname), ex);
-	} catch (SecurityException ex) {
-	    LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classname), ex);
-	} catch (NoSuchMethodException ex) {
-	    LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
-	} catch (IllegalArgumentException ex) {
-	    LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
-	}
+        try {
+            ClassLoader cl = getClassLoader();
+            Class<?> classTemp = null;
+            if (cl != null) {
+                classTemp = cl.loadClass(classname);
+            } else {
+                classTemp = Class.forName(classname);
+            }
+            if (classTemp != null) {
+                Class<? extends II18nManager> classI18n = classTemp.asSubclass(II18nManager.class);
+                classManager = classI18n.getConstructor((Class[]) null);
+            }
+        } catch (ClassNotFoundException ex) {
+            LOG.error(getFormatedMessage(ERROR_NOT_AVALAIBLE_CLASS, classname), ex);
+        } catch (ClassCastException ex) {
+            LOG.error(getFormatedMessage(ERROR_CASTING_FACTORY, classname), ex);
+        } catch (SecurityException ex) {
+            LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classname), ex);
+        } catch (NoSuchMethodException ex) {
+            LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
+        } catch (IllegalArgumentException ex) {
+            LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classname), ex);
+        }
     }
 
     /**
@@ -282,32 +282,32 @@ public class I18nFactory {
      * @param rb Propiedades donde se encuentra configurado el locale
      */
     private static void loadLocale(final Properties rb) {
-	if (rb != null) {
-	    String localeStr = rb.getProperty(LOCALE_DEFAULT);
-	    if ((localeStr != null) && (!STRING_EMPTY.equals(localeStr.trim()))) {
-		StringTokenizer st = new StringTokenizer(localeStr, STRING_SPACE);
-		switch (st.countTokens()) {
-		case 1:
-		    setLocale(new Locale(st.nextToken()));
-		    break;
-		case 2:
-		    setLocale(new Locale(st.nextToken(), st.nextToken()));
-		    break;
-		case 3:
-		    setLocale(new Locale(st.nextToken(), st.nextToken(), st.nextToken()));
-		    break;
-		default:
-		    LOG.warn(WARN_UNKNOWN_LOCALE);
-		    setLocale(null);
-		    break;
-		}
-	    } else {
-		setLocale(null);
-		LOG.trace(NOT_CONFIGURATED_LOCALE);
-	    }
-	} else {
-	    setLocale(null);
-	}
+        if (rb != null) {
+            String localeStr = rb.getProperty(LOCALE_DEFAULT);
+            if ((localeStr != null) && (!STRING_EMPTY.equals(localeStr.trim()))) {
+                StringTokenizer st = new StringTokenizer(localeStr, STRING_SPACE);
+                switch (st.countTokens()) {
+                case 1:
+                    setLocale(new Locale(st.nextToken()));
+                    break;
+                case 2:
+                    setLocale(new Locale(st.nextToken(), st.nextToken()));
+                    break;
+                case 3:
+                    setLocale(new Locale(st.nextToken(), st.nextToken(), st.nextToken()));
+                    break;
+                default:
+                    LOG.warn(WARN_UNKNOWN_LOCALE);
+                    setLocale(null);
+                    break;
+                }
+            } else {
+                setLocale(null);
+                LOG.trace(NOT_CONFIGURATED_LOCALE);
+            }
+        } else {
+            setLocale(null);
+        }
     }
 
     /**
@@ -321,7 +321,7 @@ public class I18nFactory {
      *         un manager del tipo Dumb si no se puede encontrar el diccionario.
      */
     public static II18nManager getI18nManager(final String dictionary) {
-	return getI18nManager(dictionary, locale);
+        return getI18nManager(dictionary, locale);
     }
 
     /**
@@ -337,21 +337,21 @@ public class I18nFactory {
      *         un manager del tipo Dumb si no se puede encontrar el diccionario.
      */
     public static II18nManager getI18nManager(final String dictionary,
-	    final Locale specificLocale) {
-	if (factory != null) {
-	    return factory.getI18nManager(dictionary, specificLocale);
-	}
-	// Si no hay factoria, sigue el fichero de configuracion para lanzar la clase manager
-	// configurada
-	synchronized (cache) {
-	    ManagerCached mc = cache.get(dictionary);
-	    if ((mc == null) || (!mc.isSameLocale(specificLocale))) {
-		mc = new ManagerCached(instantiateManager(dictionary, specificLocale),
-			specificLocale);
-		cache.put(dictionary, mc);
-	    }
-	    return mc.getI18nCached();
-	}
+            final Locale specificLocale) {
+        if (factory != null) {
+            return factory.getI18nManager(dictionary, specificLocale);
+        }
+        // Si no hay factoria, sigue el fichero de configuracion para lanzar la clase manager
+        // configurada
+        synchronized (cache) {
+            ManagerCached mc = cache.get(dictionary);
+            if ((mc == null) || (!mc.isSameLocale(specificLocale))) {
+                mc = new ManagerCached(instantiateManager(dictionary, specificLocale),
+                        specificLocale);
+                cache.put(dictionary, mc);
+            }
+            return mc.getI18nCached();
+        }
     }
 
     /**
@@ -371,40 +371,40 @@ public class I18nFactory {
      *         encontrar el manager (ver {@link I18nDumbManager}).
      */
     private static II18nManager instantiateManager(final String dictionary,
-	    final Locale specificLocale) {
-	II18nManager manager = null;
-	if (classManager != null) {
-	    try {
-		manager = classManager.newInstance();
-	    } catch (InstantiationException ex) {
-		LOG.error(getFormatedMessage(ERROR_INSTANTIATION_MANAGER, classManager), ex);
-		manager = new I18nDumbManager();
-	    } catch (IllegalAccessException ex) {
-		LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classManager), ex);
-		manager = new I18nDumbManager();
-	    } catch (ClassCastException ex) {
-		LOG.error(getFormatedMessage(ERROR_CASTING_MANAGER, classManager), ex);
-		manager = new I18nDumbManager();
-	    } catch (SecurityException ex) {
-		LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classManager), ex);
-		manager = new I18nDumbManager();
-	    } catch (IllegalArgumentException ex) {
-		LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classManager), ex);
-		manager = new I18nDumbManager();
-	    } catch (InvocationTargetException ex) {
-		LOG.error(getFormatedMessage(ERROR_INSTANTIATION_MANAGER, classManager), ex);
-		manager = new I18nDumbManager();
-	    }
-	} else {
-	    manager = new I18nDefaultManager();
-	}
-	// Inicializa el manager de internacionalizacion
-	try {
-	    manager.init(dictionary, specificLocale);
-	} catch (DictionaryUnknownException ex) {
-	    LOG.error(getFormatedMessage(ERROR_INIT_MANAGER, dictionary), ex);
-	}
-	return manager;
+            final Locale specificLocale) {
+        II18nManager manager = null;
+        if (classManager != null) {
+            try {
+                manager = classManager.newInstance();
+            } catch (InstantiationException ex) {
+                LOG.error(getFormatedMessage(ERROR_INSTANTIATION_MANAGER, classManager), ex);
+                manager = new I18nDumbManager();
+            } catch (IllegalAccessException ex) {
+                LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classManager), ex);
+                manager = new I18nDumbManager();
+            } catch (ClassCastException ex) {
+                LOG.error(getFormatedMessage(ERROR_CASTING_MANAGER, classManager), ex);
+                manager = new I18nDumbManager();
+            } catch (SecurityException ex) {
+                LOG.error(getFormatedMessage(ERROR_ACCESING_CLASS, classManager), ex);
+                manager = new I18nDumbManager();
+            } catch (IllegalArgumentException ex) {
+                LOG.error(getFormatedMessage(ERROR_IMPLEMENTED_CLASS, classManager), ex);
+                manager = new I18nDumbManager();
+            } catch (InvocationTargetException ex) {
+                LOG.error(getFormatedMessage(ERROR_INSTANTIATION_MANAGER, classManager), ex);
+                manager = new I18nDumbManager();
+            }
+        } else {
+            manager = new I18nDefaultManager();
+        }
+        // Inicializa el manager de internacionalizacion
+        try {
+            manager.init(dictionary, specificLocale);
+        } catch (DictionaryUnknownException ex) {
+            LOG.error(getFormatedMessage(ERROR_INIT_MANAGER, dictionary), ex);
+        }
+        return manager;
     }
 
     /**
@@ -413,9 +413,9 @@ public class I18nFactory {
      * @param newLocale Nuevo <code>Locale</code> que se aplicara al pedir nuevos diccionarios.
      */
     public static void setLocale(final Locale newLocale) {
-	synchronized (I18nFactory.class) {
-	    locale = newLocale;
-	}
+        synchronized (I18nFactory.class) {
+            locale = newLocale;
+        }
     }
 
     /**
@@ -429,7 +429,7 @@ public class I18nFactory {
      * @return Mensaje con los parametros incluidos
      */
     private static String getFormatedMessage(final String message, final Object... varargs) {
-	MessageFormat mf = new MessageFormat(message);
-	return mf.format(varargs, new StringBuffer(), null).toString();
+        MessageFormat mf = new MessageFormat(message);
+        return mf.format(varargs, new StringBuffer(), null).toString();
     }
 }

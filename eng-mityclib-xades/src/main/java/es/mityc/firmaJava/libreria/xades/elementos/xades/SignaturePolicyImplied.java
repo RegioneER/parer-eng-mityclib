@@ -32,7 +32,7 @@ public class SignaturePolicyImplied extends AbstractXADESElement {
      * @param schema
      */
     public SignaturePolicyImplied(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -40,9 +40,9 @@ public class SignaturePolicyImplied extends AbstractXADESElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_IMPLIED);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_IMPLIED);
+        return res;
     }
 
     /**
@@ -51,8 +51,8 @@ public class SignaturePolicyImplied extends AbstractXADESElement {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -60,10 +60,10 @@ public class SignaturePolicyImplied extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof SignaturePolicyImplied) {
-	    return true;
-	}
-	return false;
+        if (obj instanceof SignaturePolicyImplied) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -71,8 +71,8 @@ public class SignaturePolicyImplied extends AbstractXADESElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.SIGNATURE_POLICY_IMPLIED);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.SIGNATURE_POLICY_IMPLIED);
     }
 
     /**
@@ -80,7 +80,7 @@ public class SignaturePolicyImplied extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIGNATURE_POLICY_IMPLIED);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIGNATURE_POLICY_IMPLIED);
     }
 
 }

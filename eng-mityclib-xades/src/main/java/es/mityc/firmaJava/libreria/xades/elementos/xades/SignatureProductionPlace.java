@@ -31,25 +31,25 @@ public class SignatureProductionPlace extends SignatureProductionPlaceType {
      * @param schema
      */
     public SignatureProductionPlace(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     public SignatureProductionPlace(XAdESSchemas schema, String city, String state,
-	    String postalCode, String country) {
-	super(schema, city, state, postalCode, country);
+            String postalCode, String country) {
+        super(schema, city, state, postalCode, country);
     }
 
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_SIGNATURE_PRODUCTION_PLACE);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_SIGNATURE_PRODUCTION_PLACE);
+        super.load(element);
     }
 
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_SIGNATURE_PRODUCTION_PLACE);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_SIGNATURE_PRODUCTION_PLACE);
     }
 
     /**
@@ -58,8 +58,8 @@ public class SignatureProductionPlace extends SignatureProductionPlaceType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -67,10 +67,10 @@ public class SignatureProductionPlace extends SignatureProductionPlaceType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_SIGNATURE_PRODUCTION_PLACE);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_SIGNATURE_PRODUCTION_PLACE);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

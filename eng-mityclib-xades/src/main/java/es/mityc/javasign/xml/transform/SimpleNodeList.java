@@ -34,21 +34,21 @@ public class SimpleNodeList implements NodeList {
     private List<Node> list = new ArrayList<Node>();
 
     public void addNode(Node node) {
-	list.add(node);
+        list.add(node);
     }
 
     /**
      * @see org.w3c.dom.NodeList#getLength()
      */
     public int getLength() {
-	return list.size();
+        return list.size();
     }
 
     /**
      * @see org.w3c.dom.NodeList#item(int)
      */
     public Node item(int index) {
-	return list.get(index);
+        return list.get(index);
     }
 
 }

@@ -34,39 +34,39 @@ public class AuthenticatorProxyCredentials extends NTCredentials {
     protected PasswordAuthentication pa = null;
 
     public AuthenticatorProxyCredentials(String host, String domain) {
-	super("username", "password", host, domain);
+        super("username", "password", host, domain);
     }
 
     private void refreshAuthenticator() {
-	String proxyHost = System.getProperty("http.proxyHost");
-	int proxyPort = 80;
-	try {
-	    proxyPort = Integer.parseInt(System.getProperty("http.proxyPort"));
-	} catch (NumberFormatException ex) {
-	}
-	try {
-	    pa = Authenticator.requestPasswordAuthentication(proxyHost, null, proxyPort, "HTTP", "",
-		    "http", null, RequestorType.PROXY);
-	} catch (SecurityException ex) {
-	    pa = null;
-	}
+        String proxyHost = System.getProperty("http.proxyHost");
+        int proxyPort = 80;
+        try {
+            proxyPort = Integer.parseInt(System.getProperty("http.proxyPort"));
+        } catch (NumberFormatException ex) {
+        }
+        try {
+            pa = Authenticator.requestPasswordAuthentication(proxyHost, null, proxyPort, "HTTP", "",
+                    "http", null, RequestorType.PROXY);
+        } catch (SecurityException ex) {
+            pa = null;
+        }
     }
 
     @Override
     public String getUserName() {
-	refreshAuthenticator();
-	if (pa == null)
-	    return super.getUserName();
-	return pa.getUserName();
+        refreshAuthenticator();
+        if (pa == null)
+            return super.getUserName();
+        return pa.getUserName();
     }
 
     @Override
     public String getPassword() {
-	if (pa == null)
-	    refreshAuthenticator();
-	if (pa == null)
-	    return super.getPassword();
-	return new String(pa.getPassword());
+        if (pa == null)
+            refreshAuthenticator();
+        if (pa == null)
+            return super.getPassword();
+        return new String(pa.getPassword());
     }
 
 }

@@ -25,7 +25,7 @@ public class XMLDataIntegerType extends AbstractXMLElement {
     protected BigInteger value;
 
     public XMLDataIntegerType(BigInteger value) {
-	this.value = value;
+        this.value = value;
     }
 
     /**
@@ -33,10 +33,10 @@ public class XMLDataIntegerType extends AbstractXMLElement {
      */
     @Override
     public void addContent(Element element) throws InvalidInfoNodeException {
-	if (value == null)
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir nodo XMLDataStringType");
-	element.setTextContent(value.toString());
+        if (value == null)
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir nodo XMLDataStringType");
+        element.setTextContent(value.toString());
     }
 
     /**
@@ -44,16 +44,16 @@ public class XMLDataIntegerType extends AbstractXMLElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof XMLDataIntegerType) {
-	    XMLDataIntegerType xdst = (XMLDataIntegerType) obj;
-	    if (value.equals(xdst))
-		return true;
-	} else if (obj instanceof String) {
-	    String data = (String) obj;
-	    if (value.equals(data))
-		return true;
-	}
-	return false;
+        if (obj instanceof XMLDataIntegerType) {
+            XMLDataIntegerType xdst = (XMLDataIntegerType) obj;
+            if (value.equals(xdst))
+                return true;
+        } else if (obj instanceof String) {
+            String data = (String) obj;
+            if (value.equals(data))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -61,19 +61,19 @@ public class XMLDataIntegerType extends AbstractXMLElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	Node node = getFirstNonvoidNode(element);
-	if (node.getNodeType() != Node.TEXT_NODE)
-	    throw new InvalidInfoNodeException(
-		    "Nodo xsd:string no contiene CDATA como primer valor");
+        Node node = getFirstNonvoidNode(element);
+        if (node.getNodeType() != Node.TEXT_NODE)
+            throw new InvalidInfoNodeException(
+                    "Nodo xsd:string no contiene CDATA como primer valor");
 
-	try {
-	    String strvalue = node.getNodeValue();
-	    if (strvalue == null)
-		throw new InvalidInfoNodeException("Contenido de valor de xsd.string vacío");
-	    this.value = new BigInteger(strvalue);
-	} catch (NumberFormatException ex) {
-	    throw new InvalidInfoNodeException("Contenido de valor de xsd.integer no numérico");
-	}
+        try {
+            String strvalue = node.getNodeValue();
+            if (strvalue == null)
+                throw new InvalidInfoNodeException("Contenido de valor de xsd.string vacío");
+            this.value = new BigInteger(strvalue);
+        } catch (NumberFormatException ex) {
+            throw new InvalidInfoNodeException("Contenido de valor de xsd.integer no numérico");
+        }
 
     }
 
@@ -81,14 +81,14 @@ public class XMLDataIntegerType extends AbstractXMLElement {
      * @return the value
      */
     public BigInteger getValue() {
-	return value;
+        return value;
     }
 
     /**
      * @param value the value to set
      */
     public void setValue(BigInteger value) {
-	this.value = value;
+        this.value = value;
     }
 
 }

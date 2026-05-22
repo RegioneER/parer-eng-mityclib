@@ -31,8 +31,8 @@ public class ResolverPrivateData extends MITyCResourceResolver {
     private IPrivateData internalResolver;
 
     public ResolverPrivateData(IPrivateData internalResolver) {
-	super();
-	this.internalResolver = internalResolver;
+        super();
+        this.internalResolver = internalResolver;
     }
 
     /**
@@ -40,38 +40,38 @@ public class ResolverPrivateData extends MITyCResourceResolver {
      */
 
     public boolean engineIsPrivateData() {
-	return true;
+        return true;
     }
 
     @Override
     public XMLSignatureInput engineResolveURI(ResourceResolverContext context)
-	    throws ResourceResolverException {
-	if (internalResolver == null || context.attr == null) {
-	    throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
-	}
-	String algName = context.getProperties() != null
-		? (String) context.getProperties().get("digest.algorithm")
-		: null;
-	if (algName == null) {
-	    throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
-	}
-	try {
-	    String uriValue = context.attr.getValue();
-	    String baseURI = context.baseUri;
-	    byte[] data = internalResolver.getDigest(uriValue, baseURI, algName);
-	    return new XMLSignatureByteInput(data);
-	} catch (ResourceDataException ex) {
-	    throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
-	}
+            throws ResourceResolverException {
+        if (internalResolver == null || context.attr == null) {
+            throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
+        }
+        String algName = context.getProperties() != null
+                ? (String) context.getProperties().get("digest.algorithm")
+                : null;
+        if (algName == null) {
+            throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
+        }
+        try {
+            String uriValue = context.attr.getValue();
+            String baseURI = context.baseUri;
+            byte[] data = internalResolver.getDigest(uriValue, baseURI, algName);
+            return new XMLSignatureByteInput(data);
+        } catch (ResourceDataException ex) {
+            throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
+        }
     }
 
     @Override
     public boolean engineCanResolveURI(ResourceResolverContext context) {
-	if (internalResolver == null || context.attr == null) {
-	    return false;
-	}
-	String uriValue = context.attr.getValue();
-	String baseURI = context.baseUri;
-	return internalResolver.canDigest(uriValue, baseURI);
+        if (internalResolver == null || context.attr == null) {
+            return false;
+        }
+        String uriValue = context.attr.getValue();
+        String baseURI = context.baseUri;
+        return internalResolver.canDigest(uriValue, baseURI);
     }
 }

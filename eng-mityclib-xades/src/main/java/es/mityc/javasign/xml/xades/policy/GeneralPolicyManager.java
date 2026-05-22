@@ -74,7 +74,7 @@ public class GeneralPolicyManager implements IValidacionPolicy {
     private final static String GENERAL_ID = "self:policy/general";
 
     public GeneralPolicyManager() {
-	// TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
     }
 
     /*
@@ -83,7 +83,7 @@ public class GeneralPolicyManager implements IValidacionPolicy {
      * @see es.mityc.firmaJava.policy.IValidacionPolicy#getIdentidadPolicy()
      */
     public String getIdentidadPolicy() {
-	return GENERAL_ID;
+        return GENERAL_ID;
     }
 
     /*
@@ -93,226 +93,226 @@ public class GeneralPolicyManager implements IValidacionPolicy {
      * es.mityc.firmaJava.libreria.xades.ResultadoValidacion)
      */
     public PolicyResult validaPolicy(Element nodoFirma, ResultadoValidacion resultadoValidacion) {
-	PolicyResult pr = new PolicyResult();
-	pr.setResult(PolicyResult.StatusValidation.unknown);
+        PolicyResult pr = new PolicyResult();
+        pr.setResult(PolicyResult.StatusValidation.unknown);
 
-	try {
-	    SignaturePolicyIdentifier signaturePolicyIdentifier = extractInfo(nodoFirma,
-		    resultadoValidacion);
+        try {
+            SignaturePolicyIdentifier signaturePolicyIdentifier = extractInfo(nodoFirma,
+                    resultadoValidacion);
 
-	    // extrae la informacion de la politica
-	    if (!signaturePolicyIdentifier.isImplied()) {
-		SignaturePolicyId spi = signaturePolicyIdentifier.getSignaturePolicyId();
+            // extrae la informacion de la politica
+            if (!signaturePolicyIdentifier.isImplied()) {
+                SignaturePolicyId spi = signaturePolicyIdentifier.getSignaturePolicyId();
 
-		// extrae la informacion
-		pr.setPolicyID(spi.getSigPolicyId().getIdentifier().getUri());
-		if (spi.getSigPolicyId().getDescription() != null)
-		    pr.setDescription(spi.getSigPolicyId().getDescription().getValue());
-		if (spi.getSigPolicyId().getReferences() != null) {
-		    ArrayList<DocumentationReference> references = spi.getSigPolicyId()
-			    .getReferences().getList();
-		    if ((references != null) && (references.size() > 0)) {
-			ArrayList<URI> uris = new ArrayList<URI>(references.size());
-			Iterator<DocumentationReference> it = references.iterator();
-			while (it.hasNext()) {
-			    uris.add(it.next().getValue());
-			}
-			pr.setDocumentation(uris.toArray(new URI[0]));
-		    }
-		}
-		if (spi.getSigPolicyQualifiers() != null) {
-		    ArrayList<SigPolicyQualifier> list = spi.getSigPolicyQualifiers().getList();
-		    if ((list != null) && (list.size() > 0)) {
-			MessageDigest md = UtilidadFirmaElectronica.getMessageDigest(
-				spi.getSigPolicyHash().getDigestMethod().getAlgorithm());
-			String digestValue = spi.getSigPolicyHash().getDigestValue().getValue();
+                // extrae la informacion
+                pr.setPolicyID(spi.getSigPolicyId().getIdentifier().getUri());
+                if (spi.getSigPolicyId().getDescription() != null)
+                    pr.setDescription(spi.getSigPolicyId().getDescription().getValue());
+                if (spi.getSigPolicyId().getReferences() != null) {
+                    ArrayList<DocumentationReference> references = spi.getSigPolicyId()
+                            .getReferences().getList();
+                    if ((references != null) && (references.size() > 0)) {
+                        ArrayList<URI> uris = new ArrayList<URI>(references.size());
+                        Iterator<DocumentationReference> it = references.iterator();
+                        while (it.hasNext()) {
+                            uris.add(it.next().getValue());
+                        }
+                        pr.setDocumentation(uris.toArray(new URI[0]));
+                    }
+                }
+                if (spi.getSigPolicyQualifiers() != null) {
+                    ArrayList<SigPolicyQualifier> list = spi.getSigPolicyQualifiers().getList();
+                    if ((list != null) && (list.size() > 0)) {
+                        MessageDigest md = UtilidadFirmaElectronica.getMessageDigest(
+                                spi.getSigPolicyHash().getDigestMethod().getAlgorithm());
+                        String digestValue = spi.getSigPolicyHash().getDigestValue().getValue();
 
-			ArrayList<PolicyResult.DownloadPolicy> downloadbles = new ArrayList<PolicyResult.DownloadPolicy>();
-			ArrayList<String> notices = new ArrayList<String>();
-			Iterator<SigPolicyQualifier> it = list.iterator();
-			while (it.hasNext()) {
-			    SigPolicyQualifier spq = it.next();
-			    Object obj = spq.getQualifier();
-			    if (obj instanceof SPURI) {
-				downloadbles.add(checkIntegrity(pr, ((SPURI) obj).getValue(), spi,
-					resultadoValidacion.getBaseURI(), md, digestValue,
-					nodoFirma.getOwnerDocument()));
-			    } else if (obj instanceof SPUserNotice) {
-				StringBuffer notice = new StringBuffer("");
-				String expl = ((SPUserNotice) obj).getExplicitText();
-				if (expl != null)
-				    notice.append(expl).append(" ");
-				NoticeRef nr = ((SPUserNotice) obj).getNoticeRef();
-				if (nr != null) {
-				    notice.append("(").append(nr.getOrganization().getValue());
-				    Iterator<Int> itInt = nr.getNoticeNumbers().getInts()
-					    .iterator();
-				    if (itInt.hasNext())
-					notice.append(" ");
-				    while (itInt.hasNext()) {
-					notice.append(itInt.next().getValue().toString());
-					if (itInt.hasNext())
-					    notice.append(".");
-				    }
-				    notice.append(")");
-				}
-				notices.add(notice.toString());
-			    }
-			    // TODO: hacer algo con el contenido desconocido
-			}
-			if (downloadbles.size() > 0) {
-			    pr.setDownloable(
-				    downloadbles.toArray(new PolicyResult.DownloadPolicy[0]));
-			}
-			if (notices.size() > 0) {
-			    pr.setNotices(notices.toArray(new String[0]));
-			}
-		    }
-		}
+                        ArrayList<PolicyResult.DownloadPolicy> downloadbles = new ArrayList<PolicyResult.DownloadPolicy>();
+                        ArrayList<String> notices = new ArrayList<String>();
+                        Iterator<SigPolicyQualifier> it = list.iterator();
+                        while (it.hasNext()) {
+                            SigPolicyQualifier spq = it.next();
+                            Object obj = spq.getQualifier();
+                            if (obj instanceof SPURI) {
+                                downloadbles.add(checkIntegrity(pr, ((SPURI) obj).getValue(), spi,
+                                        resultadoValidacion.getBaseURI(), md, digestValue,
+                                        nodoFirma.getOwnerDocument()));
+                            } else if (obj instanceof SPUserNotice) {
+                                StringBuffer notice = new StringBuffer("");
+                                String expl = ((SPUserNotice) obj).getExplicitText();
+                                if (expl != null)
+                                    notice.append(expl).append(" ");
+                                NoticeRef nr = ((SPUserNotice) obj).getNoticeRef();
+                                if (nr != null) {
+                                    notice.append("(").append(nr.getOrganization().getValue());
+                                    Iterator<Int> itInt = nr.getNoticeNumbers().getInts()
+                                            .iterator();
+                                    if (itInt.hasNext())
+                                        notice.append(" ");
+                                    while (itInt.hasNext()) {
+                                        notice.append(itInt.next().getValue().toString());
+                                        if (itInt.hasNext())
+                                            notice.append(".");
+                                    }
+                                    notice.append(")");
+                                }
+                                notices.add(notice.toString());
+                            }
+                            // TODO: hacer algo con el contenido desconocido
+                        }
+                        if (downloadbles.size() > 0) {
+                            pr.setDownloable(
+                                    downloadbles.toArray(new PolicyResult.DownloadPolicy[0]));
+                        }
+                        if (notices.size() > 0) {
+                            pr.setNotices(notices.toArray(new String[0]));
+                        }
+                    }
+                }
 
-	    }
-	} catch (PolicyException ex) {
-	    pr.setResult(PolicyResult.StatusValidation.invalid);
-	    pr.setDescriptionResult(ex.getMessage());
-	}
+            }
+        } catch (PolicyException ex) {
+            pr.setResult(PolicyResult.StatusValidation.invalid);
+            pr.setDescriptionResult(ex.getMessage());
+        }
 
-	return pr;
+        return pr;
     }
 
     private DownloadPolicy checkIntegrity(PolicyResult pr, URI uri, SignaturePolicyId spi,
-	    URI baseUri, MessageDigest md, String digestValue, Document doc) {
-	PolicyResult.StatusValidation status = PolicyResult.StatusValidation.unknown;
+            URI baseUri, MessageDigest md, String digestValue, Document doc) {
+        PolicyResult.StatusValidation status = PolicyResult.StatusValidation.unknown;
 
-	if (md != null) {
-	    // Intenta recuperar el contenido
-	    URI descarga = uri;
-	    if ((!uri.isAbsolute()) && (baseUri != null))
-		descarga = baseUri.resolve(uri);
+        if (md != null) {
+            // Intenta recuperar el contenido
+            URI descarga = uri;
+            if ((!uri.isAbsolute()) && (baseUri != null))
+                descarga = baseUri.resolve(uri);
 
-	    if ("file".equals(descarga.getScheme())) {
-		byte[] data;
-		data = UtilidadFicheros.readFile(new File((descarga.getSchemeSpecificPart())));
-		if (data == null)
-		    logger.warn("No se puede obtener el contenido referenciado");
-		else {
-		    // Si hay transformadas intenta aplicarlas sobre un documento xml
-		    if (spi.getTransforms() != null) {
-			data = transform(data, spi.getTransforms(), doc);
-		    }
+            if ("file".equals(descarga.getScheme())) {
+                byte[] data;
+                data = UtilidadFicheros.readFile(new File((descarga.getSchemeSpecificPart())));
+                if (data == null)
+                    logger.warn("No se puede obtener el contenido referenciado");
+                else {
+                    // Si hay transformadas intenta aplicarlas sobre un documento xml
+                    if (spi.getTransforms() != null) {
+                        data = transform(data, spi.getTransforms(), doc);
+                    }
 
-		    // calcula el hash según el algoritmo
-		    md.update(data);
-		    byte[] resData = md.digest();
-		    String res = new String(Base64Coder.encode(resData));
-		    if (res.equals(digestValue))
-			status = PolicyResult.StatusValidation.valid;
-		    else
-			status = PolicyResult.StatusValidation.invalid;
-		}
-	    } else
-		logger.warn("No se puede obtener el contenido referenciado en: " + descarga);
-	} else
-	    logger.warn("Algoritmo desconocido");
-	return pr.newDownloadPolicy(uri, status);
+                    // calcula el hash según el algoritmo
+                    md.update(data);
+                    byte[] resData = md.digest();
+                    String res = new String(Base64Coder.encode(resData));
+                    if (res.equals(digestValue))
+                        status = PolicyResult.StatusValidation.valid;
+                    else
+                        status = PolicyResult.StatusValidation.invalid;
+                }
+            } else
+                logger.warn("No se puede obtener el contenido referenciado en: " + descarga);
+        } else
+            logger.warn("Algoritmo desconocido");
+        return pr.newDownloadPolicy(uri, status);
     }
 
     private byte[] transform(byte[] in, Transforms transforms, Document doc) {
-	org.apache.xml.security.transforms.Transforms t = new org.apache.xml.security.transforms.Transforms(
-		doc);
+        org.apache.xml.security.transforms.Transforms t = new org.apache.xml.security.transforms.Transforms(
+                doc);
 
-	ArrayList<Transform> list = transforms.getList();
-	if (list != null) {
-	    Iterator<Transform> it = list.iterator();
-	    while (it.hasNext()) {
-		Transform tr = it.next();
-		try {
-		    if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS
-			    .equals(tr.getAlgorithm())) {
-			t.addTransform(
-				org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS);
-		    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_WITH_COMMENTS
-			    .equals(tr.getAlgorithm())) {
-			t.addTransform(
-				org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_WITH_COMMENTS);
-		    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_OMIT_COMMENTS
-			    .equals(tr.getAlgorithm())) {
-			t.addTransform(
-				org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
-		    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_WITH_COMMENTS
-			    .equals(tr.getAlgorithm())) {
-			t.addTransform(
-				org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_WITH_COMMENTS);
-		    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_XPATH
-			    .equals(tr.getAlgorithm())) {
-			t.addTransform(
-				org.apache.xml.security.transforms.Transforms.TRANSFORM_XPATH,
-				tr.getExtraNodes());
-		    }
-		} catch (TransformationException ex) {
-		    logger.error("Error incluyendo transformada", ex);
-		    return in;
-		}
-	    }
-	} else
-	    return in;
+        ArrayList<Transform> list = transforms.getList();
+        if (list != null) {
+            Iterator<Transform> it = list.iterator();
+            while (it.hasNext()) {
+                Transform tr = it.next();
+                try {
+                    if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS
+                            .equals(tr.getAlgorithm())) {
+                        t.addTransform(
+                                org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS);
+                    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_WITH_COMMENTS
+                            .equals(tr.getAlgorithm())) {
+                        t.addTransform(
+                                org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_EXCL_WITH_COMMENTS);
+                    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_OMIT_COMMENTS
+                            .equals(tr.getAlgorithm())) {
+                        t.addTransform(
+                                org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_OMIT_COMMENTS);
+                    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_WITH_COMMENTS
+                            .equals(tr.getAlgorithm())) {
+                        t.addTransform(
+                                org.apache.xml.security.transforms.Transforms.TRANSFORM_C14N_WITH_COMMENTS);
+                    } else if (org.apache.xml.security.transforms.Transforms.TRANSFORM_XPATH
+                            .equals(tr.getAlgorithm())) {
+                        t.addTransform(
+                                org.apache.xml.security.transforms.Transforms.TRANSFORM_XPATH,
+                                tr.getExtraNodes());
+                    }
+                } catch (TransformationException ex) {
+                    logger.error("Error incluyendo transformada", ex);
+                    return in;
+                }
+            }
+        } else
+            return in;
 
-	ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	XMLSignatureInput xmlSignatureInput = new XMLSignatureByteInput(in);
-	try {
-	    XMLSignatureInput resultado = null;
-	    resultado = t.performTransforms(xmlSignatureInput);
-	    baos.write(resultado.getBytes());
-	} catch (TransformationException ex) {
-	    logger.error("Error calculando transformada de política", ex);
-	    return in;
-	} catch (CanonicalizationException ex) {
-	    logger.error("Error calculando transformada de política", ex);
-	    return in;
-	} catch (IOException ex) {
-	    logger.error("Error calculando transformada de política", ex);
-	    return in;
-	}
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        XMLSignatureInput xmlSignatureInput = new XMLSignatureByteInput(in);
+        try {
+            XMLSignatureInput resultado = null;
+            resultado = t.performTransforms(xmlSignatureInput);
+            baos.write(resultado.getBytes());
+        } catch (TransformationException ex) {
+            logger.error("Error calculando transformada de política", ex);
+            return in;
+        } catch (CanonicalizationException ex) {
+            logger.error("Error calculando transformada de política", ex);
+            return in;
+        } catch (IOException ex) {
+            logger.error("Error calculando transformada de política", ex);
+            return in;
+        }
 
-	return baos.toByteArray();
+        return baos.toByteArray();
     }
 
     private SignaturePolicyIdentifier extractInfo(Element nodoFirma,
-	    ResultadoValidacion resultadoValidacion) throws PolicyException {
-	XAdESSchemas schema = resultadoValidacion.getDatosFirma().getEsquema();
-	if (schema == null) {
-	    throw new PolicyException("Error obteniendo esquema de firma");
-	}
+            ResultadoValidacion resultadoValidacion) throws PolicyException {
+        XAdESSchemas schema = resultadoValidacion.getDatosFirma().getEsquema();
+        if (schema == null) {
+            throw new PolicyException("Error obteniendo esquema de firma");
+        }
 
-	String esquema = schema.getSchemaUri();
+        String esquema = schema.getSchemaUri();
 
-	// Nodo SignaturePolicyIdentifier
-	ArrayList<Element> signaturePolicyList = null;
-	try {
-	    signaturePolicyList = UtilidadTratarNodo.obtenerNodos(nodoFirma, 5,
-		    new NombreNodo(esquema, ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER));
-	} catch (FirmaXMLError e) {
-	    logger.error(e.getMessage(), e);
-	    throw new PolicyException("Error obteniendo el nodo de política: " + e.getMessage());
-	}
+        // Nodo SignaturePolicyIdentifier
+        ArrayList<Element> signaturePolicyList = null;
+        try {
+            signaturePolicyList = UtilidadTratarNodo.obtenerNodos(nodoFirma, 5,
+                    new NombreNodo(esquema, ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER));
+        } catch (FirmaXMLError e) {
+            logger.error(e.getMessage(), e);
+            throw new PolicyException("Error obteniendo el nodo de política: " + e.getMessage());
+        }
 
-	if (signaturePolicyList.size() != 1)
-	    throw new PolicyException(
-		    "Error obteniendo nodo de política (no hay nodo, o hay mas de uno)");
-	if (signaturePolicyList.get(0).getNodeType() != Node.ELEMENT_NODE)
-	    throw new PolicyException(
-		    "Error obteniendo nodo de política (no es del tipo elemento)");
+        if (signaturePolicyList.size() != 1)
+            throw new PolicyException(
+                    "Error obteniendo nodo de política (no hay nodo, o hay mas de uno)");
+        if (signaturePolicyList.get(0).getNodeType() != Node.ELEMENT_NODE)
+            throw new PolicyException(
+                    "Error obteniendo nodo de política (no es del tipo elemento)");
 
-	try {
-	    SignaturePolicyIdentifier signaturePolicyIdentifier = new SignaturePolicyIdentifier(
-		    schema);
-	    if (!signaturePolicyIdentifier.isThisNode(signaturePolicyList.get(0)))
-		throw new InvalidInfoNodeException("No se ha encontrado política");
-	    signaturePolicyIdentifier.load((Element) signaturePolicyList.get(0));
+        try {
+            SignaturePolicyIdentifier signaturePolicyIdentifier = new SignaturePolicyIdentifier(
+                    schema);
+            if (!signaturePolicyIdentifier.isThisNode(signaturePolicyList.get(0)))
+                throw new InvalidInfoNodeException("No se ha encontrado política");
+            signaturePolicyIdentifier.load((Element) signaturePolicyList.get(0));
 
-	    return signaturePolicyIdentifier;
-	} catch (InvalidInfoNodeException ex) {
-	    throw new PolicyException(ex.getMessage(), ex);
-	}
+            return signaturePolicyIdentifier;
+        } catch (InvalidInfoNodeException ex) {
+            throw new PolicyException(ex.getMessage(), ex);
+        }
     }
 
 }

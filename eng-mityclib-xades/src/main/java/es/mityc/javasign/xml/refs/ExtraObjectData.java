@@ -40,22 +40,22 @@ public class ExtraObjectData {
      * @param encoding Encoding del objeto (en formato URI)
      */
     public ExtraObjectData(String mimeType, URI encoding) {
-	super();
-	this.mimeType = mimeType;
-	this.encoding = encoding;
+        super();
+        this.mimeType = mimeType;
+        this.encoding = encoding;
     }
 
     /**
      * @return the mimeType
      */
     public String getMimeType() {
-	return mimeType;
+        return mimeType;
     }
 
     /**
      * @return the encoding
      */
     public URI getEncoding() {
-	return encoding;
+        return encoding;
     }
 }

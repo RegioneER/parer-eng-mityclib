@@ -30,8 +30,8 @@ public class TransformXPath2b extends Transform {
 
     /** Constructor. */
     public TransformXPath2b() {
-	super(TransformProxy.TRANSFORM_XPATH2FILTER, null);
-	setTransformData(data);
+        super(TransformProxy.TRANSFORM_XPATH2FILTER, null);
+        setTransformData(data);
     }
 
     /**
@@ -42,7 +42,7 @@ public class TransformXPath2b extends Transform {
      * @param path
      */
     public void addPath(String path) {
-	data.addPath(path);
+        data.addPath(path);
     }
 
 }

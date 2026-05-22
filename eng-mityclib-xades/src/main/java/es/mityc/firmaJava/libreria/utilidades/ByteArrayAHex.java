@@ -24,7 +24,7 @@ package es.mityc.firmaJava.libreria.utilidades;
 public class ByteArrayAHex {
 
     final private static char[] NIBBLE = {
-	    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', };
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', };
 
     /**
      * Devuelve la cadena en Hexadecimal
@@ -36,12 +36,12 @@ public class ByteArrayAHex {
      * @return
      */
     public static final String hexString(byte[] buf, int i, int longitud) {
-	StringBuffer sb = new StringBuffer();
-	for (int j = i; j < i + longitud; j++) {
-	    sb.append(NIBBLE[(buf[j] >>> 4) & 15]);
-	    sb.append(NIBBLE[buf[j] & 15]);
-	}
-	return String.valueOf(sb);
+        StringBuffer sb = new StringBuffer();
+        for (int j = i; j < i + longitud; j++) {
+            sb.append(NIBBLE[(buf[j] >>> 4) & 15]);
+            sb.append(NIBBLE[buf[j] & 15]);
+        }
+        return String.valueOf(sb);
     }
 
     /**
@@ -52,7 +52,7 @@ public class ByteArrayAHex {
      * @return
      */
     public static final String hexString(byte[] buf) {
-	return hexString(buf, 0, buf.length);
+        return hexString(buf, 0, buf.length);
     }
 
     /**
@@ -62,11 +62,11 @@ public class ByteArrayAHex {
      * @return
      */
     public static byte fromHexNibble(char n) {
-	if (n <= '9')
-	    return (byte) (n - '0');
-	if (n <= 'G')
-	    return (byte) (n - ('A' - 10));
-	return (byte) (n - ('a' - 10));
+        if (n <= '9')
+            return (byte) (n - '0');
+        if (n <= 'G')
+            return (byte) (n - ('A' - 10));
+        return (byte) (n - ('a' - 10));
     }
 
     /**
@@ -75,19 +75,19 @@ public class ByteArrayAHex {
      * @param hex
      */
     public static byte[] fromHexString(String hex) {
-	int l = (hex.length() + 1) >>> 1;
-	byte[] r = new byte[l];
-	int i = 0;
-	int j = 0;
-	if (hex.length() % 2 != 0) {
-	    // Número impar de caracteres: debe manejar medio byte primero.
-	    r[0] = fromHexNibble(hex.charAt(0));
-	    i = j = 1;
-	}
-	while (i < l)
-	    r[i++] = (byte) ((fromHexNibble(hex.charAt(j++)) << 4)
-		    | fromHexNibble(hex.charAt(j++)));
-	return r;
+        int l = (hex.length() + 1) >>> 1;
+        byte[] r = new byte[l];
+        int i = 0;
+        int j = 0;
+        if (hex.length() % 2 != 0) {
+            // Número impar de caracteres: debe manejar medio byte primero.
+            r[0] = fromHexNibble(hex.charAt(0));
+            i = j = 1;
+        }
+        while (i < l)
+            r[i++] = (byte) ((fromHexNibble(hex.charAt(j++)) << 4)
+                    | fromHexNibble(hex.charAt(j++)));
+        return r;
     }
 
     /**
@@ -95,31 +95,31 @@ public class ByteArrayAHex {
      */
     public static byte[] concatByteArrays(byte[] array1, byte[] array2) {
 
-	if (array1.length == 0)
-	    return array2;
-	else if (array2.length == 0)
-	    return array1;
-	else {
-	    int logitudFinal = array1.length + array2.length;
-	    byte[] arrayCombinado = new byte[logitudFinal];
-	    // añadir primer array
-	    // for(int i=0; i<array1.length; i++)
-	    // {
-	    // System.arraycopy(arrayCombinado, 0, array1, 0, array1.length);
-	    System.arraycopy(array1, 0, arrayCombinado, 0, array1.length);
-	    // arrayCombinado[i] = array1[i];
-	    // }
-	    // añadir segundo array
-	    // int b = 0;
-	    // for(int i=array1.length; i<logitudFinal; i++)
-	    // {
-	    // arrayCombinado[i] = array2[b];
-	    // b++;
-	    // }
-	    // System.arraycopy(arrayCombinado, array1.length, array2, 0, logitudFinal);
-	    System.arraycopy(array2, 0, arrayCombinado, array1.length, array2.length);
+        if (array1.length == 0)
+            return array2;
+        else if (array2.length == 0)
+            return array1;
+        else {
+            int logitudFinal = array1.length + array2.length;
+            byte[] arrayCombinado = new byte[logitudFinal];
+            // añadir primer array
+            // for(int i=0; i<array1.length; i++)
+            // {
+            // System.arraycopy(arrayCombinado, 0, array1, 0, array1.length);
+            System.arraycopy(array1, 0, arrayCombinado, 0, array1.length);
+            // arrayCombinado[i] = array1[i];
+            // }
+            // añadir segundo array
+            // int b = 0;
+            // for(int i=array1.length; i<logitudFinal; i++)
+            // {
+            // arrayCombinado[i] = array2[b];
+            // b++;
+            // }
+            // System.arraycopy(arrayCombinado, array1.length, array2, 0, logitudFinal);
+            System.arraycopy(array2, 0, arrayCombinado, array1.length, array2.length);
 
-	    return arrayCombinado;
-	}
+            return arrayCombinado;
+        }
     }
 }

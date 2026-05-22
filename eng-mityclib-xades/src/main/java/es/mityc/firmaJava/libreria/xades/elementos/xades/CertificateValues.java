@@ -34,7 +34,7 @@ public class CertificateValues extends CertificateValuesType {
      * @param schema
      */
     public CertificateValues(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -42,8 +42,8 @@ public class CertificateValues extends CertificateValuesType {
      * @param certificates
      */
     public CertificateValues(XAdESSchemas schema,
-	    ArrayList<EncapsulatedX509Certificate> certificates) {
-	super(schema, certificates);
+            ArrayList<EncapsulatedX509Certificate> certificates) {
+        super(schema, certificates);
     }
 
     /**
@@ -51,8 +51,8 @@ public class CertificateValues extends CertificateValuesType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERTIFICATE_VALUES);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.CERTIFICATE_VALUES);
+        super.load(element);
     }
 
     /**
@@ -60,8 +60,8 @@ public class CertificateValues extends CertificateValuesType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.CERTIFICATE_VALUES);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.CERTIFICATE_VALUES);
     }
 
     /**
@@ -70,8 +70,8 @@ public class CertificateValues extends CertificateValuesType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -79,10 +79,10 @@ public class CertificateValues extends CertificateValuesType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.CERTIFICATE_VALUES);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.CERTIFICATE_VALUES);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

@@ -32,19 +32,19 @@ public class SPUserNotice extends SPUserNoticeType implements IPolicyQualifier {
      * @param schema
      */
     public SPUserNotice(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_SP_USER_NOTICE);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_SP_USER_NOTICE);
+        super.load(element);
     }
 
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_SP_USER_NOTICE);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_SP_USER_NOTICE);
     }
 
     /**
@@ -53,8 +53,8 @@ public class SPUserNotice extends SPUserNoticeType implements IPolicyQualifier {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -62,31 +62,31 @@ public class SPUserNotice extends SPUserNoticeType implements IPolicyQualifier {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_SP_USER_NOTICE);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_SP_USER_NOTICE);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
     public Node createPolicyQualifierContent(Document doc) throws PolicyException {
-	Element el = null;
-	try {
-	    if (getNamespaceXAdES() != null)
-		el = createElement(doc, namespaceXAdES);
-	    else
-		throw new PolicyException("No se ha indicado qualifier para nodo SPUserNotice");
-	} catch (InvalidInfoNodeException ex) {
-	    throw new PolicyException(ex);
-	}
-	return el;
+        Element el = null;
+        try {
+            if (getNamespaceXAdES() != null)
+                el = createElement(doc, namespaceXAdES);
+            else
+                throw new PolicyException("No se ha indicado qualifier para nodo SPUserNotice");
+        } catch (InvalidInfoNodeException ex) {
+            throw new PolicyException(ex);
+        }
+        return el;
     }
 
     public void loadPolicyQualifierContent(Element element) throws PolicyException {
-	try {
-	    load(element);
-	} catch (InvalidInfoNodeException ex) {
-	    throw new PolicyException(ex);
-	}
+        try {
+            load(element);
+        } catch (InvalidInfoNodeException ex) {
+            throw new PolicyException(ex);
+        }
     }
 
 }

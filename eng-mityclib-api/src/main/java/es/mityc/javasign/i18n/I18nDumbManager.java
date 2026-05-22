@@ -58,11 +58,11 @@ public class I18nDumbManager implements II18nManager {
      * @throws DictionaryUnknownException No se lanza nunca
      */
     public void init(final String dictionary, final Locale locale)
-	    throws DictionaryUnknownException {
-	response = DUMB_MESSAGE + dictionary;
-	if (locale != null) {
-	    response = response + SPACE + locale;
-	}
+            throws DictionaryUnknownException {
+        response = DUMB_MESSAGE + dictionary;
+        if (locale != null) {
+            response = response + SPACE + locale;
+        }
     }
 
     /**
@@ -77,7 +77,7 @@ public class I18nDumbManager implements II18nManager {
      * @see es.mityc.javasign.i18n.II18nManager#getLocalMessage(java.lang.String)
      */
     public String getLocalMessage(final String message) {
-	return response + SPACE + message;
+        return response + SPACE + message;
     }
 
     /**
@@ -94,7 +94,7 @@ public class I18nDumbManager implements II18nManager {
      *      java.lang.Object[])
      */
     public String getLocalMessage(final String message, final Object... varargs) {
-	return response + SPACE + message;
+        return response + SPACE + message;
     }
 
 }

@@ -30,7 +30,7 @@ public class Int extends AbstractXadesIntegerElement {
      * @param data
      */
     public Int(XAdESSchemas schema, BigInteger data) {
-	super(schema, ConstantesXADES.XADES_TAG_INT, data);
+        super(schema, ConstantesXADES.XADES_TAG_INT, data);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Int extends AbstractXadesIntegerElement {
      * @param nameElement
      */
     public Int(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_INT);
+        super(schema, ConstantesXADES.XADES_TAG_INT);
     }
 
 }

@@ -123,50 +123,50 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      *
      */
     public OwnSSLProtocolSocketFactory(ISSLManager ssl) {
-	super();
-	this.sslManager = ssl;
+        super();
+        this.sslManager = ssl;
     }
 
     /**
      * Constructor for OwnSSLProtocolSocketFactory.
      */
     public OwnSSLProtocolSocketFactory() {
-	super();
+        super();
     }
 
     private SSLContext createSSLContext() throws IOException {
-	try {
-	    KeyManager[] keymanagers = null;
-	    TrustManager[] trustmanagers = null;
-	    if (sslManager != null) {
-		KeyManager km = sslManager.getKeyManager();
-		if (km != null) {
-		    keymanagers = new KeyManager[] {
-			    km };
-		}
-		TrustManager tm = sslManager.getTrustManager();
-		if (tm != null) {
-		    trustmanagers = new TrustManager[] {
-			    tm };
-		}
-	    }
-	    SSLContext sslcontext = SSLContext.getInstance("SSL");
-	    sslcontext.init(keymanagers, trustmanagers, null);
-	    return sslcontext;
-	} catch (NoSuchAlgorithmException ex) {
-	    LOG.error(ex.getMessage(), ex);
-	    throw new IOException(ex.getMessage());
-	} catch (KeyManagementException ex) {
-	    LOG.error(ex.getMessage(), ex);
-	    throw new IOException(ex.getMessage());
-	}
+        try {
+            KeyManager[] keymanagers = null;
+            TrustManager[] trustmanagers = null;
+            if (sslManager != null) {
+                KeyManager km = sslManager.getKeyManager();
+                if (km != null) {
+                    keymanagers = new KeyManager[] {
+                            km };
+                }
+                TrustManager tm = sslManager.getTrustManager();
+                if (tm != null) {
+                    trustmanagers = new TrustManager[] {
+                            tm };
+                }
+            }
+            SSLContext sslcontext = SSLContext.getInstance("SSL");
+            sslcontext.init(keymanagers, trustmanagers, null);
+            return sslcontext;
+        } catch (NoSuchAlgorithmException ex) {
+            LOG.error(ex.getMessage(), ex);
+            throw new IOException(ex.getMessage());
+        } catch (KeyManagementException ex) {
+            LOG.error(ex.getMessage(), ex);
+            throw new IOException(ex.getMessage());
+        }
     }
 
     private SSLContext getSSLContext() throws IOException {
-	if (this.sslcontext == null) {
-	    this.sslcontext = createSSLContext();
-	}
-	return this.sslcontext;
+        if (this.sslcontext == null) {
+            this.sslcontext = createSSLContext();
+        }
+        return this.sslcontext;
     }
 
     /**
@@ -190,61 +190,61 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      * @throws UnknownHostException if the IP address of the host cannot be determined
      */
     public Socket createSocket(final String host, final int port, final InetAddress localAddress,
-	    final int localPort, final HttpConnectionParams params)
-	    throws IOException, UnknownHostException, ConnectTimeoutException {
-	if (params == null) {
-	    throw new IllegalArgumentException("Parameters may not be null");
-	}
-	int timeout = params.getConnectionTimeout();
-	Socket socket = null;
+            final int localPort, final HttpConnectionParams params)
+            throws IOException, UnknownHostException, ConnectTimeoutException {
+        if (params == null) {
+            throw new IllegalArgumentException("Parameters may not be null");
+        }
+        int timeout = params.getConnectionTimeout();
+        Socket socket = null;
 
-	SocketFactory socketfactory = getSSLContext().getSocketFactory();
-	if (timeout == 0) {
-	    socket = socketfactory.createSocket(host, port, localAddress, localPort);
-	} else {
-	    socket = socketfactory.createSocket();
-	    SocketAddress localaddr = new InetSocketAddress(localAddress, localPort);
-	    SocketAddress remoteaddr = new InetSocketAddress(host, port);
-	    socket.bind(localaddr);
-	    socket.connect(remoteaddr, timeout);
-	}
-	verifyHostname((SSLSocket) socket);
-	return socket;
+        SocketFactory socketfactory = getSSLContext().getSocketFactory();
+        if (timeout == 0) {
+            socket = socketfactory.createSocket(host, port, localAddress, localPort);
+        } else {
+            socket = socketfactory.createSocket();
+            SocketAddress localaddr = new InetSocketAddress(localAddress, localPort);
+            SocketAddress remoteaddr = new InetSocketAddress(host, port);
+            socket.bind(localaddr);
+            socket.connect(remoteaddr, timeout);
+        }
+        verifyHostname((SSLSocket) socket);
+        return socket;
     }
 
     /**
      * @see SecureProtocolSocketFactory#createSocket(java.lang.String,int,java.net.InetAddress,int)
      */
     public Socket createSocket(String host, int port, InetAddress clientHost, int clientPort)
-	    throws IOException, UnknownHostException {
-	SSLSocketFactory sf = getSSLContext().getSocketFactory();
-	SSLSocket sslSocket = (SSLSocket) sf.createSocket(host, port, clientHost, clientPort);
-	verifyHostname(sslSocket);
+            throws IOException, UnknownHostException {
+        SSLSocketFactory sf = getSSLContext().getSocketFactory();
+        SSLSocket sslSocket = (SSLSocket) sf.createSocket(host, port, clientHost, clientPort);
+        verifyHostname(sslSocket);
 
-	return sslSocket;
+        return sslSocket;
     }
 
     /**
      * @see SecureProtocolSocketFactory#createSocket(java.lang.String,int)
      */
     public Socket createSocket(String host, int port) throws IOException, UnknownHostException {
-	SSLSocketFactory sf = getSSLContext().getSocketFactory();
-	SSLSocket sslSocket = (SSLSocket) sf.createSocket(host, port);
-	verifyHostname(sslSocket);
+        SSLSocketFactory sf = getSSLContext().getSocketFactory();
+        SSLSocket sslSocket = (SSLSocket) sf.createSocket(host, port);
+        verifyHostname(sslSocket);
 
-	return sslSocket;
+        return sslSocket;
     }
 
     /**
      * @see SecureProtocolSocketFactory#createSocket(java.net.Socket,java.lang.String,int,boolean)
      */
     public Socket createSocket(Socket socket, String host, int port, boolean autoClose)
-	    throws IOException, UnknownHostException {
-	SSLSocketFactory sf = getSSLContext().getSocketFactory();
-	SSLSocket sslSocket = (SSLSocket) sf.createSocket(socket, host, port, autoClose);
-	verifyHostname(sslSocket);
+            throws IOException, UnknownHostException {
+        SSLSocketFactory sf = getSSLContext().getSocketFactory();
+        SSLSocket sslSocket = (SSLSocket) sf.createSocket(socket, host, port, autoClose);
+        verifyHostname(sslSocket);
 
-	return sslSocket;
+        return sslSocket;
     }
 
     /**
@@ -260,64 +260,64 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      *                                       server host name.
      */
     private void verifyHostname(SSLSocket socket)
-	    throws SSLPeerUnverifiedException, UnknownHostException {
-	if (sslManager == null) {
-	    return;
-	}
-	ISSLErrorManager errorMng = sslManager.getSSLErrorManager();
-	if (errorMng == null) {
-	    return;
-	}
+            throws SSLPeerUnverifiedException, UnknownHostException {
+        if (sslManager == null) {
+            return;
+        }
+        ISSLErrorManager errorMng = sslManager.getSSLErrorManager();
+        if (errorMng == null) {
+            return;
+        }
 
-	SSLSession session = socket.getSession();
-	String hostname = session.getPeerHost();
-	try {
-	    InetAddress.getByName(hostname);
-	} catch (UnknownHostException uhe) {
-	    throw new UnknownHostException(
-		    "Could not resolve SSL sessions " + "server hostname: " + hostname);
-	}
+        SSLSession session = socket.getSession();
+        String hostname = session.getPeerHost();
+        try {
+            InetAddress.getByName(hostname);
+        } catch (UnknownHostException uhe) {
+            throw new UnknownHostException(
+                    "Could not resolve SSL sessions " + "server hostname: " + hostname);
+        }
 
-	X509Certificate[] certs = session.getPeerCertificateChain();
-	if (certs == null || certs.length == 0)
-	    throw new SSLPeerUnverifiedException("No server certificates found!");
+        X509Certificate[] certs = session.getPeerCertificateChain();
+        if (certs == null || certs.length == 0)
+            throw new SSLPeerUnverifiedException("No server certificates found!");
 
-	// get the servers DN in its string representation
-	String dn = certs[0].getSubjectDN().getName();
+        // get the servers DN in its string representation
+        String dn = certs[0].getSubjectDN().getName();
 
-	// might be useful to print out all certificates we receive from the
-	// server, in case one has to debug a problem with the installed certs.
-	if (LOG.isDebugEnabled()) {
-	    LOG.debug("Server certificate chain:");
-	    for (int i = 0; i < certs.length; i++) {
-		LOG.debug("X509Certificate[" + i + "]=" + certs[i]);
-	    }
-	}
-	// get the common name from the first cert
-	String cn = getCN(dn);
-	if (hostname.equalsIgnoreCase(cn)) {
-	    if (LOG.isDebugEnabled()) {
-		LOG.debug("Target hostname valid: " + cn);
-	    }
-	} else {
-	    try {
-		CertificateFactory cf = CertificateFactory.getInstance("X.509");
-		java.security.cert.X509Certificate servCert = (java.security.cert.X509Certificate) cf
-			.generateCertificate(new ByteArrayInputStream(certs[0].getEncoded()));
-		if (!errorMng.continueErrorPeer(hostname, servCert)) {
-		    throw new SSLPeerUnverifiedException("HTTPS hostname invalid: expected '"
-			    + hostname + "', received '" + cn + "'");
-		}
-	    } catch (CertificateException ex) {
-		LOG.error(ex.getMessage(), ex);
-		throw new SSLPeerUnverifiedException(
-			"Unexpected error checking HTTPS hostname: " + ex.getMessage());
-	    } catch (CertificateEncodingException ex) {
-		LOG.error(ex.getMessage(), ex);
-		throw new SSLPeerUnverifiedException(
-			"Unexpected error checking HTTPS hostname: " + ex.getMessage());
-	    }
-	}
+        // might be useful to print out all certificates we receive from the
+        // server, in case one has to debug a problem with the installed certs.
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Server certificate chain:");
+            for (int i = 0; i < certs.length; i++) {
+                LOG.debug("X509Certificate[" + i + "]=" + certs[i]);
+            }
+        }
+        // get the common name from the first cert
+        String cn = getCN(dn);
+        if (hostname.equalsIgnoreCase(cn)) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Target hostname valid: " + cn);
+            }
+        } else {
+            try {
+                CertificateFactory cf = CertificateFactory.getInstance("X.509");
+                java.security.cert.X509Certificate servCert = (java.security.cert.X509Certificate) cf
+                        .generateCertificate(new ByteArrayInputStream(certs[0].getEncoded()));
+                if (!errorMng.continueErrorPeer(hostname, servCert)) {
+                    throw new SSLPeerUnverifiedException("HTTPS hostname invalid: expected '"
+                            + hostname + "', received '" + cn + "'");
+                }
+            } catch (CertificateException ex) {
+                LOG.error(ex.getMessage(), ex);
+                throw new SSLPeerUnverifiedException(
+                        "Unexpected error checking HTTPS hostname: " + ex.getMessage());
+            } catch (CertificateEncodingException ex) {
+                LOG.error(ex.getMessage(), ex);
+                throw new SSLPeerUnverifiedException(
+                        "Unexpected error checking HTTPS hostname: " + ex.getMessage());
+            }
+        }
     }
 
     /**
@@ -330,25 +330,25 @@ public class OwnSSLProtocolSocketFactory implements SecureProtocolSocketFactory 
      * @return the value of the "Common Name" field.
      */
     private String getCN(String dn) {
-	X509Name name = new X509Name(dn);
-	Vector<?> vector = name.getValues(X509Name.CN);
-	if ((vector != null) && (vector.size() > 0)) {
-	    return (String) vector.get(0);
-	} else {
-	    return null;
-	}
+        X509Name name = new X509Name(dn);
+        Vector<?> vector = name.getValues(X509Name.CN);
+        if ((vector != null) && (vector.size() > 0)) {
+            return (String) vector.get(0);
+        } else {
+            return null;
+        }
     }
 
     public boolean equals(Object obj) {
-	if ((obj != null) && obj.getClass().equals(OwnSSLProtocolSocketFactory.class)) {
-	    return true;
-	} else {
-	    return false;
-	}
+        if ((obj != null) && obj.getClass().equals(OwnSSLProtocolSocketFactory.class)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int hashCode() {
-	return OwnSSLProtocolSocketFactory.class.hashCode();
+        return OwnSSLProtocolSocketFactory.class.hashCode();
     }
 
 }

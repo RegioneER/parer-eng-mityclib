@@ -60,13 +60,13 @@ public class I18nAddendumManager extends I18nDefaultManager {
      */
     @Override
     public void init(final String dictionary, final Locale specificLocale)
-	    throws DictionaryUnknownException {
-	super.init(dictionary, specificLocale);
-	// busca el fichero extra de recursos de idioma en la carpeta i18n/dictionaries
-	try {
-	    rbAdd = ResourceBundle.getBundle(BASE_PATH + dictionary + ADDENDUM_SUFIX, this.locale);
-	} catch (MissingResourceException ex) {
-	}
+            throws DictionaryUnknownException {
+        super.init(dictionary, specificLocale);
+        // busca el fichero extra de recursos de idioma en la carpeta i18n/dictionaries
+        try {
+            rbAdd = ResourceBundle.getBundle(BASE_PATH + dictionary + ADDENDUM_SUFIX, this.locale);
+        } catch (MissingResourceException ex) {
+        }
     }
 
     /**
@@ -84,12 +84,12 @@ public class I18nAddendumManager extends I18nDefaultManager {
      */
     @Override
     protected String findMessage(final String key) {
-	if (rbAdd != null) {
-	    try {
-		return rbAdd.getString(key);
-	    } catch (MissingResourceException ex) {
-	    }
-	}
-	return super.findMessage(key);
+        if (rbAdd != null) {
+            try {
+                return rbAdd.getString(key);
+            } catch (MissingResourceException ex) {
+            }
+        }
+        return super.findMessage(key);
     }
 }

@@ -28,29 +28,29 @@ import es.mityc.firmaJava.libreria.xades.errores.InvalidInfoNodeException;
 public class NoticeRef extends NoticeReferenceType {
 
     public NoticeRef(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     public NoticeRef(XAdESSchemas schema, String organization, int[] numbers) {
-	super(schema, organization, numbers);
+        super(schema, organization, numbers);
     }
 
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_NOTICE_REF);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_NOTICE_REF);
+        super.load(element);
     }
 
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_NOTICE_REF);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_NOTICE_REF);
     }
 
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -58,10 +58,10 @@ public class NoticeRef extends NoticeReferenceType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_NOTICE_REF);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_NOTICE_REF);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

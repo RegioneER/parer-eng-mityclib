@@ -27,6 +27,6 @@ import es.mityc.javasign.xml.xades.TransformProxy;
 public class TransformBase64 extends Transform {
     /** Constructor. */
     public TransformBase64() {
-	super(TransformProxy.TRANSFORM_BASE64_DECODE, null);
+        super(TransformProxy.TRANSFORM_BASE64_DECODE, null);
     }
 }

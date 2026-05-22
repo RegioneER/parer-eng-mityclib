@@ -31,47 +31,47 @@ public class RespYCerts {
     private String fileName = null;
 
     public RespYCerts() {
-	// No hace nada
+        // No hace nada
     }
 
     public String getIdCertificado() {
-	return idCertificado;
+        return idCertificado;
     }
 
     public void setIdCertificado(String idCertificado) {
-	this.idCertificado = idCertificado;
+        this.idCertificado = idCertificado;
     }
 
     public String getIdRespStatus() {
-	return idRespStatus;
+        return idRespStatus;
     }
 
     public void setIdRespStatus(String idRespStatus) {
-	this.idRespStatus = idRespStatus;
+        this.idRespStatus = idRespStatus;
     }
 
     public String getX509CertFile() {
-	return x509CertFile;
+        return x509CertFile;
     }
 
     public void setX509CertFile(String certFile) {
-	x509CertFile = certFile;
+        x509CertFile = certFile;
     }
 
     public ICertStatus getCertstatus() {
-	return certstatus;
+        return certstatus;
     }
 
     public void setCertstatus(ICertStatus certstatus) {
-	this.certstatus = certstatus;
+        this.certstatus = certstatus;
     }
 
     public void setFilename(String filename) {
-	this.fileName = filename;
+        this.fileName = filename;
     }
 
     public String getFilename() {
-	return fileName;
+        return fileName;
     }
 
     // public void loadCertFile(File certFile) {

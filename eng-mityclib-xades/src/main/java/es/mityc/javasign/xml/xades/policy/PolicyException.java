@@ -27,14 +27,14 @@ public class PolicyException extends Exception {
      * @param message
      */
     public PolicyException(String message) {
-	super(message);
+        super(message);
     }
 
     /**
      * @param cause
      */
     public PolicyException(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -42,7 +42,7 @@ public class PolicyException extends Exception {
      * @param cause
      */
     public PolicyException(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

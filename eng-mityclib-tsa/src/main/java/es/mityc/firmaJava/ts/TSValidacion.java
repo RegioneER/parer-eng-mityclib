@@ -63,7 +63,7 @@ public class TSValidacion {
      * @return Fecha extraía del sello, o <code>null</code> si no existe
      */
     public String getFecha() {
-	return fecha;
+        return fecha;
     }
 
     /**
@@ -74,7 +74,7 @@ public class TSValidacion {
      * @param fecha Fecha a almacenar
      */
     public void setFecha(final String fecha) {
-	this.fecha = fecha;
+        this.fecha = fecha;
     }
 
     /**
@@ -85,7 +85,7 @@ public class TSValidacion {
      * @return Fecha almacenada, o <code>null</code> si no existe
      */
     public Date getFechaDate() {
-	return fechaDate;
+        return fechaDate;
     }
 
     /**
@@ -96,7 +96,7 @@ public class TSValidacion {
      * @param fechaDate Fecha a almacenar
      */
     public void setFechaDate(final Date fechaDate) {
-	this.fechaDate = fechaDate;
+        this.fechaDate = fechaDate;
     }
 
     /**
@@ -107,7 +107,7 @@ public class TSValidacion {
      * @return Valor almacenado del emisor del sello, o <code>null</code> si no existe
      */
     public X500Principal getEmisor() {
-	return emisor;
+        return emisor;
     }
 
     /**
@@ -118,7 +118,7 @@ public class TSValidacion {
      * @param emisor Emisor X500 del sello de tiempo
      */
     public void setEmisor(final X500Principal emisor) {
-	this.emisor = emisor;
+        this.emisor = emisor;
     }
 
     /**
@@ -129,7 +129,7 @@ public class TSValidacion {
      * @return El valor de digest almacenado, o <code>null</code> si no existe
      */
     public String getFirmaDigest() {
-	return firmaDigest;
+        return firmaDigest;
     }
 
     /**
@@ -140,7 +140,7 @@ public class TSValidacion {
      * @param firmaDigest Valor de Digest extraído
      */
     public void setFirmaDigest(final String firmaDigest) {
-	this.firmaDigest = firmaDigest;
+        this.firmaDigest = firmaDigest;
     }
 
     /**
@@ -151,7 +151,7 @@ public class TSValidacion {
      * @return Precision almacenada, o <code>null</code> si no existe
      */
     public GenTimeAccuracy getPrecision() {
-	return precision;
+        return precision;
     }
 
     /**
@@ -161,7 +161,7 @@ public class TSValidacion {
      * @param precision Precision a almacenar
      */
     public void setPrecision(final GenTimeAccuracy precision) {
-	this.precision = precision;
+        this.precision = precision;
     }
 
     /**
@@ -172,7 +172,7 @@ public class TSValidacion {
      * @return Valor de la precision almacenada, o <code>0</code> si no existe
      */
     public long getPrecisionLong() {
-	return precisionLong;
+        return precisionLong;
     }
 
     /**
@@ -183,7 +183,7 @@ public class TSValidacion {
      * @param precisionLong Precision extraida del sello de tiempo
      */
     public void setPrecisionLong(final long precisionLong) {
-	this.precisionLong = precisionLong;
+        this.precisionLong = precisionLong;
     }
 
     /**
@@ -194,7 +194,7 @@ public class TSValidacion {
      * @return <code>true</code> si se corresponde
      */
     public boolean isRespuesta() {
-	return respuesta;
+        return respuesta;
     }
 
     /**
@@ -205,7 +205,7 @@ public class TSValidacion {
      * @param respuesta <code>true</code> si esta bien formada
      */
     public void setRespuesta(final boolean respuesta) {
-	this.respuesta = respuesta;
+        this.respuesta = respuesta;
     }
 
     /**
@@ -216,7 +216,7 @@ public class TSValidacion {
      * @return Valor del sello, o <code>null</code> si no existe
      */
     public BigInteger getSello() {
-	return sello;
+        return sello;
     }
 
     /**
@@ -227,7 +227,7 @@ public class TSValidacion {
      * @param sello Sello a almacenar
      */
     public void setSello(final BigInteger sello) {
-	this.sello = sello;
+        this.sello = sello;
     }
 
     /**
@@ -238,7 +238,7 @@ public class TSValidacion {
      * @return Nombre del algoritmo de Digest, o <code>null</code> si no existe
      */
     public String getSelloAlg() {
-	return selloAlg;
+        return selloAlg;
     }
 
     /**
@@ -249,7 +249,7 @@ public class TSValidacion {
      * @param selloAlg Nombre del algoritmo de Digest
      */
     public void setSelloAlg(final String selloAlg) {
-	this.selloAlg = selloAlg;
+        this.selloAlg = selloAlg;
     }
 
     /**
@@ -260,7 +260,7 @@ public class TSValidacion {
      * @return Valor de Digest, o <code>null</code> si no existe
      */
     public String getSelloDigest() {
-	return selloDigest;
+        return selloDigest;
     }
 
     /**
@@ -271,7 +271,7 @@ public class TSValidacion {
      * @param selloDigest Valor de Digest
      */
     public void setSelloDigest(final String selloDigest) {
-	this.selloDigest = selloDigest;
+        this.selloDigest = selloDigest;
     }
 
     /**
@@ -282,7 +282,7 @@ public class TSValidacion {
      * @return Tst extraído, o <code>null</code> si no existe
      */
     public TimeStampToken getTst() {
-	return tst;
+        return tst;
     }
 
     /**
@@ -293,6 +293,6 @@ public class TSValidacion {
      * @param tst Tst a almacenar
      */
     public void setTst(final TimeStampToken tst) {
-	this.tst = tst;
+        this.tst = tst;
     }
 }

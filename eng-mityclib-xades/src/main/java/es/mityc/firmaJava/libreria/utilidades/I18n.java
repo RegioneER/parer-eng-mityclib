@@ -28,7 +28,7 @@ import es.mityc.firmaJava.libreria.ConstantesXADES;
 public class I18n {
 
     private static Locale locale = new Locale(ConstantesXADES.DEFAULT_LOCALE,
-	    ConstantesXADES.DEFAULT_LOCALE.toUpperCase());
+            ConstantesXADES.DEFAULT_LOCALE.toUpperCase());
 
     /**
      * Obtiene el valor de una cadena definida para el idioma por defecto configurado
@@ -38,7 +38,7 @@ public class I18n {
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(String clave) {
-	return getResource(clave, locale);
+        return getResource(clave, locale);
     }
 
     /**
@@ -50,7 +50,7 @@ public class I18n {
      * @return cadena traducida para un determinado idioma
      */
     public static String getResource(String clave, Locale locale) {
-	return ResourceBundle.getBundle(ConstantesXADES.LOCALE_FILES, locale).getString(clave);
+        return ResourceBundle.getBundle(ConstantesXADES.LOCALE_FILES, locale).getString(clave);
     }
 
     /**
@@ -59,7 +59,7 @@ public class I18n {
      * @return Locale que se utiliza en ese momento
      */
     public static Locale getLocale() {
-	return locale;
+        return locale;
     }
 
     /**
@@ -80,7 +80,7 @@ public class I18n {
      * @param dialecto Dialecto del idioma
      */
     public static void setLocale(String pais, String dialecto) {
-	locale = new Locale(pais, dialecto);
+        locale = new Locale(pais, dialecto);
     }
 
 }

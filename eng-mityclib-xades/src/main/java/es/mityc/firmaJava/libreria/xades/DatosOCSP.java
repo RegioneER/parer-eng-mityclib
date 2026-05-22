@@ -59,87 +59,87 @@ public class DatosOCSP {
      *                          certificacion)
      */
     public DatosOCSP(ResponderID responderId, Date fechaConsulta, String certConsultado,
-	    OCSPResp respuestaOCSP, ConfianzaEnum esCertConfianza,
-	    X509Certificate[] certOCSPResponder) {
-	this.responderId = responderId;
-	updateResponderIDName(responderId);
-	this.fechaConsulta = fechaConsulta;
-	this.certConsultado = certConsultado;
-	this.respuestaOCSP = respuestaOCSP;
-	this.esCertConfianza = esCertConfianza;
-	this.esCertConfianza = esCertConfianza;
-	this.certOCSPResponder = certOCSPResponder;
+            OCSPResp respuestaOCSP, ConfianzaEnum esCertConfianza,
+            X509Certificate[] certOCSPResponder) {
+        this.responderId = responderId;
+        updateResponderIDName(responderId);
+        this.fechaConsulta = fechaConsulta;
+        this.certConsultado = certConsultado;
+        this.respuestaOCSP = respuestaOCSP;
+        this.esCertConfianza = esCertConfianza;
+        this.esCertConfianza = esCertConfianza;
+        this.certOCSPResponder = certOCSPResponder;
     }
 
     public ResponderID getResponderId() {
-	return responderId;
+        return responderId;
     }
 
     public void setResponderId(ResponderID responderId) {
-	this.responderId = responderId;
-	updateResponderIDName(responderId);
+        this.responderId = responderId;
+        updateResponderIDName(responderId);
     }
 
     private void updateResponderIDName(ResponderID responderId) {
-	if (responderId != null) {
-	    ASN1TaggedObject tagged = (ASN1TaggedObject) responderId.toASN1Primitive();
-	    switch (tagged.getTagNo()) {
-	    case 1:
-		X509Principal certX509Principal = new X509Principal(
-			X509Name.getInstance(tagged.getBaseObject()).toString());
-		X500Principal cerX500Principal = new X500Principal(certX509Principal.getEncoded());
-		responderIdName = cerX500Principal.getName();
-		break;
-	    case 2:
-		ASN1OctetString octect = (ASN1OctetString) tagged.getBaseObject();
-		responderIdName = new String(Base64Coder.encode(octect.getOctets()));
-		break;
-	    }
-	} else
-	    responderIdName = null;
+        if (responderId != null) {
+            ASN1TaggedObject tagged = (ASN1TaggedObject) responderId.toASN1Primitive();
+            switch (tagged.getTagNo()) {
+            case 1:
+                X509Principal certX509Principal = new X509Principal(
+                        X509Name.getInstance(tagged.getBaseObject()).toString());
+                X500Principal cerX500Principal = new X500Principal(certX509Principal.getEncoded());
+                responderIdName = cerX500Principal.getName();
+                break;
+            case 2:
+                ASN1OctetString octect = (ASN1OctetString) tagged.getBaseObject();
+                responderIdName = new String(Base64Coder.encode(octect.getOctets()));
+                break;
+            }
+        } else
+            responderIdName = null;
     }
 
     public String getResponderIdName() {
-	return responderIdName;
+        return responderIdName;
     }
 
     public String getCertConsultado() {
-	return certConsultado;
+        return certConsultado;
     }
 
     public void setCertConsultado(String certConsultado) {
-	this.certConsultado = certConsultado;
+        this.certConsultado = certConsultado;
     }
 
     public Date getFechaConsulta() {
-	return fechaConsulta;
+        return fechaConsulta;
     }
 
     public void setFechaConsulta(Date fechaConsulta) {
-	this.fechaConsulta = fechaConsulta;
+        this.fechaConsulta = fechaConsulta;
     }
 
     public OCSPResp getRespuestaOCSP() {
-	return respuestaOCSP;
+        return respuestaOCSP;
     }
 
     public void setRespuestaOCSP(OCSPResp respuestaOCSP) {
-	this.respuestaOCSP = respuestaOCSP;
+        this.respuestaOCSP = respuestaOCSP;
     }
 
     public ConfianzaEnum esCertConfianza() {
-	return esCertConfianza;
+        return esCertConfianza;
     }
 
     public void setEsCertConfianza(ConfianzaEnum esCertConfianza) {
-	this.esCertConfianza = esCertConfianza;
+        this.esCertConfianza = esCertConfianza;
     }
 
     public X509Certificate[] getCertOCSPResponder() {
-	return certOCSPResponder;
+        return certOCSPResponder;
     }
 
     public void setCertOCSPResponder(X509Certificate[] certOCSPResponder) {
-	this.certOCSPResponder = certOCSPResponder;
+        this.certOCSPResponder = certOCSPResponder;
     }
 }

@@ -33,7 +33,7 @@ public class FakedTrustException extends NotTrustedException {
      * </p>
      */
     public FakedTrustException() {
-	super();
+        super();
     }
 
     /**
@@ -44,7 +44,7 @@ public class FakedTrustException extends NotTrustedException {
      * @param message Mensaje de error
      */
     public FakedTrustException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -55,7 +55,7 @@ public class FakedTrustException extends NotTrustedException {
      * @param cause Excepcion responsable de lanzar esta otra
      */
     public FakedTrustException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -67,7 +67,7 @@ public class FakedTrustException extends NotTrustedException {
      * @param cause   Excepcion responsable de lanzar esta otra
      */
     public FakedTrustException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

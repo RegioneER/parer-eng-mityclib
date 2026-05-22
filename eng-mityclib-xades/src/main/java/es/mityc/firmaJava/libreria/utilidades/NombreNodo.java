@@ -27,37 +27,37 @@ public class NombreNodo {
     private String localname;
 
     public NombreNodo(String namespace, String localname) {
-	this.namespace = namespace;
-	this.localname = localname;
+        this.namespace = namespace;
+        this.localname = localname;
     }
 
     @Override
     public boolean equals(Object obj) {
-	if (obj != null) {
-	    if (obj instanceof NombreNodo) {
-		NombreNodo nodo = (NombreNodo) obj;
-		if (namespace == null) {
-		    if (nodo.namespace != null)
-			return false;
-		} else if (!namespace.equals(nodo.namespace))
-		    return false;
-		if (localname.equals(nodo.localname))
-		    return true;
-	    } else if (obj instanceof Element) {
-		Element el = (Element) obj;
-		if ((namespace == el.getNamespaceURI()) && (localname == el.getLocalName())) {
-		    return true;
-		}
-	    }
-	}
-	return false;
+        if (obj != null) {
+            if (obj instanceof NombreNodo) {
+                NombreNodo nodo = (NombreNodo) obj;
+                if (namespace == null) {
+                    if (nodo.namespace != null)
+                        return false;
+                } else if (!namespace.equals(nodo.namespace))
+                    return false;
+                if (localname.equals(nodo.localname))
+                    return true;
+            } else if (obj instanceof Element) {
+                Element el = (Element) obj;
+                if ((namespace == el.getNamespaceURI()) && (localname == el.getLocalName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public String getNamespace() {
-	return namespace;
+        return namespace;
     }
 
     public String getLocalname() {
-	return localname;
+        return localname;
     }
 }

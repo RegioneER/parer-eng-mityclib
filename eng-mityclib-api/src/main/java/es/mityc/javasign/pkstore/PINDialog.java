@@ -84,9 +84,9 @@ class PINDialog {
      * @param owner Frame padre del dialogo
      */
     public PINDialog(final Frame owner) {
-	dialog = new JDialog(owner, I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_TITLE),
-		true);
-	dialogInit();
+        dialog = new JDialog(owner, I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_TITLE),
+                true);
+        dialogInit();
     }
 
     /**
@@ -95,84 +95,84 @@ class PINDialog {
      * </p>
      */
     protected void dialogInit() {
-	try {
-	    JPanel distr = new JPanel();
-	    JButton aceptar = new JButton(
-		    I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_ACCEPT));
-	    cancelar = new JButton(I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_CANCEL));
+        try {
+            JPanel distr = new JPanel();
+            JButton aceptar = new JButton(
+                    I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_ACCEPT));
+            cancelar = new JButton(I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_CANCEL));
 
-	    aceptar.setActionCommand(STR_OK);
-	    cancelar.setActionCommand(STR_CLOSE);
+            aceptar.setActionCommand(STR_OK);
+            cancelar.setActionCommand(STR_CLOSE);
 
-	    pass = new JPasswordField(15);
-	    distr.setLayout(new GridBagLayout());
-	    dialog.setResizable(false);
+            pass = new JPasswordField(15);
+            distr.setLayout(new GridBagLayout());
+            dialog.setResizable(false);
 
-	    lblMessage = new JLabel(I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_PIN));
-	    lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
-	    lblMessage.setIcon(new ImageIcon(this.getClass().getResource(PIN_ICON)));
-	    lblMessage.setHorizontalTextPosition(JLabel.RIGHT);
-	    lblMessage.setIconTextGap(10);
+            lblMessage = new JLabel(I18N.getLocalMessage(ConstantsAPI.I18N_CERT_SMR_CARD_PIN));
+            lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+            lblMessage.setIcon(new ImageIcon(this.getClass().getResource(PIN_ICON)));
+            lblMessage.setHorizontalTextPosition(JLabel.RIGHT);
+            lblMessage.setIconTextGap(10);
 
-	    // Layout
-	    GridBagConstraints g = new GridBagConstraints();
-	    g.gridx = 0;
-	    g.gridy = 0;
-	    g.gridwidth = 4;
-	    g.insets = new Insets(10, 20, 5, 20);
-	    distr.add(lblMessage, g);
+            // Layout
+            GridBagConstraints g = new GridBagConstraints();
+            g.gridx = 0;
+            g.gridy = 0;
+            g.gridwidth = 4;
+            g.insets = new Insets(10, 20, 5, 20);
+            distr.add(lblMessage, g);
 
-	    g.gridx = 0;
-	    g.gridy = 1;
-	    g.gridwidth = 4;
-	    g.fill = GridBagConstraints.HORIZONTAL;
-	    g.weightx = 1.0;
-	    g.insets = new Insets(10, 35, 5, 35);
-	    distr.add(pass, g);
+            g.gridx = 0;
+            g.gridy = 1;
+            g.gridwidth = 4;
+            g.fill = GridBagConstraints.HORIZONTAL;
+            g.weightx = 1.0;
+            g.insets = new Insets(10, 35, 5, 35);
+            distr.add(pass, g);
 
-	    JPanel btnPanel = new JPanel();
-	    btnPanel.setLayout(new FlowLayout(SwingConstants.CENTER, 50, 5));
-	    btnPanel.add(aceptar);
-	    btnPanel.add(cancelar);
+            JPanel btnPanel = new JPanel();
+            btnPanel.setLayout(new FlowLayout(SwingConstants.CENTER, 50, 5));
+            btnPanel.add(aceptar);
+            btnPanel.add(cancelar);
 
-	    g = new GridBagConstraints();
-	    g.gridx = 0;
-	    g.gridy = 2;
-	    g.gridwidth = 4;
-	    g.anchor = GridBagConstraints.CENTER;
-	    g.insets = new Insets(15, 0, 15, 0);
-	    distr.add(btnPanel, g);
+            g = new GridBagConstraints();
+            g.gridx = 0;
+            g.gridy = 2;
+            g.gridwidth = 4;
+            g.anchor = GridBagConstraints.CENTER;
+            g.insets = new Insets(15, 0, 15, 0);
+            distr.add(btnPanel, g);
 
-	    distr.doLayout();
-	    dialog.add(distr);
-	    dialog.setResizable(false);
-	    dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-	    dialog.getRootPane().setDefaultButton(aceptar);
-	    dialog.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    dialog.setLocation(screenSize.width / 2 - dialog.getWidth() / 2,
-		    screenSize.height / 2 - dialog.getHeight() / 2);
+            distr.doLayout();
+            dialog.add(distr);
+            dialog.setResizable(false);
+            dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+            dialog.getRootPane().setDefaultButton(aceptar);
+            dialog.setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            dialog.setLocation(screenSize.width / 2 - dialog.getWidth() / 2,
+                    screenSize.height / 2 - dialog.getHeight() / 2);
 
-	    aceptar.addActionListener(new ActionListener() {
-		public void actionPerformed(final ActionEvent e) {
-		    if (e.getActionCommand().equals(STR_OK)) {
-			dialog.setVisible(false);
-		    }
-		}
-	    });
+            aceptar.addActionListener(new ActionListener() {
+                public void actionPerformed(final ActionEvent e) {
+                    if (e.getActionCommand().equals(STR_OK)) {
+                        dialog.setVisible(false);
+                    }
+                }
+            });
 
-	    cancelar.addActionListener(new ActionListener() {
-		public void actionPerformed(final ActionEvent e) {
-		    if (e.getActionCommand().equals(STR_CLOSE)) {
-			cancelado = true;
-			dialog.setVisible(false);
-		    }
-		}
-	    });
-	} catch (Exception e) {
-	    // Nunca se produce
-	    e.printStackTrace();
-	}
+            cancelar.addActionListener(new ActionListener() {
+                public void actionPerformed(final ActionEvent e) {
+                    if (e.getActionCommand().equals(STR_CLOSE)) {
+                        cancelado = true;
+                        dialog.setVisible(false);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            // Nunca se produce
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -183,7 +183,7 @@ class PINDialog {
      * @param newTitle Nuevo título
      */
     public void setTitle(final String newTitle) {
-	dialog.setTitle(new String(newTitle));
+        dialog.setTitle(new String(newTitle));
     }
 
     /**
@@ -194,7 +194,7 @@ class PINDialog {
      * @param newMessage Nuevo mensaje
      */
     public void setPINMessage(final String newMessage) {
-	lblMessage.setText(new String(newMessage));
+        lblMessage.setText(new String(newMessage));
     }
 
     /**
@@ -205,7 +205,7 @@ class PINDialog {
      * @param icon Icono a mostrar.
      */
     public void setIcon(final ImageIcon icon) {
-	lblMessage.setIcon(icon);
+        lblMessage.setIcon(icon);
     }
 
     /**
@@ -216,8 +216,8 @@ class PINDialog {
      * @param isVisible <code>false</code> para hacer el boton invisible
      */
     public void setCancelBtnVisible(final boolean isVisible) {
-	cancelar.setVisible(isVisible);
-	pack();
+        cancelar.setVisible(isVisible);
+        pack();
     }
 
     /**
@@ -226,7 +226,7 @@ class PINDialog {
      * </p>
      */
     public void pack() {
-	dialog.pack();
+        dialog.pack();
     }
 
     /**
@@ -237,11 +237,11 @@ class PINDialog {
      * @param flag si es <code>true</code> inicializa los valores introducidos previamente
      */
     public void setVisible(final boolean flag) {
-	if (flag) {
-	    cancelado = false;
-	    pass.setText("");
-	}
-	dialog.setVisible(flag);
+        if (flag) {
+            cancelado = false;
+            pass.setText("");
+        }
+        dialog.setVisible(flag);
     }
 
     /**
@@ -252,7 +252,7 @@ class PINDialog {
      * @return Contraseña
      */
     public char[] getPassword() {
-	return pass.getPassword();
+        return pass.getPassword();
     }
 
     /**
@@ -261,7 +261,7 @@ class PINDialog {
      * </p>
      */
     public void dispose() {
-	dialog.dispose();
+        dialog.dispose();
     }
 
     /**
@@ -272,7 +272,7 @@ class PINDialog {
      * @return <code>true</code> si el último intento se cancelo, <code>false</code> en otro caso
      */
     public boolean isCancelado() {
-	return cancelado;
+        return cancelado;
     }
 
     /**
@@ -283,11 +283,11 @@ class PINDialog {
      * @return el ancho del dialogo
      */
     public int getWidth() {
-	if (dialog != null) {
-	    return dialog.getWidth();
-	} else {
-	    return 0;
-	}
+        if (dialog != null) {
+            return dialog.getWidth();
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -298,11 +298,11 @@ class PINDialog {
      * @return el alto del dialogo
      */
     public int getHeight() {
-	if (dialog != null) {
-	    return dialog.getHeight();
-	} else {
-	    return 0;
-	}
+        if (dialog != null) {
+            return dialog.getHeight();
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -314,8 +314,8 @@ class PINDialog {
      * @param y Coordenada vertical expresada en pixels.
      */
     public void setLocation(final int x, final int y) {
-	if (dialog != null) {
-	    dialog.setLocation(x, y);
-	}
+        if (dialog != null) {
+            dialog.setLocation(x, y);
+        }
     }
 }

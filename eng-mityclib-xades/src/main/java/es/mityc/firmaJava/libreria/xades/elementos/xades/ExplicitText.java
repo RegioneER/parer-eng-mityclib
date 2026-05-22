@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 public class ExplicitText extends AbstractXadesStringElement {
 
     public ExplicitText(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_EXPLICIT_TEXT, data);
+        super(schema, ConstantesXADES.XADES_TAG_EXPLICIT_TEXT, data);
     }
 
     /**
@@ -32,7 +32,7 @@ public class ExplicitText extends AbstractXadesStringElement {
      * @param schema
      */
     public ExplicitText(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_EXPLICIT_TEXT);
+        super(schema, ConstantesXADES.XADES_TAG_EXPLICIT_TEXT);
     }
 
 }

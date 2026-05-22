@@ -42,66 +42,66 @@ public class DatosX509 {
      * @param issuer      Es el nombre del emisor del certificado
      */
     public DatosX509(String algMethod, String digestValue, BigInteger serial,
-	    X500Principal issuer) {
-	this.algMethod = algMethod;
-	this.digestValue = digestValue;
-	this.serial = serial;
-	this.issuer = issuer;
+            X500Principal issuer) {
+        this.algMethod = algMethod;
+        this.digestValue = digestValue;
+        this.serial = serial;
+        this.issuer = issuer;
     }
 
     /**
      * @return algMethod
      */
     public String getAlgMethod() {
-	return algMethod;
+        return algMethod;
     }
 
     /**
      * @param algMethod
      */
     public void setAlgMethod(String algMethod) {
-	this.algMethod = algMethod;
+        this.algMethod = algMethod;
     }
 
     /**
      * @return digestValue
      */
     public String getDigestValue() {
-	return digestValue;
+        return digestValue;
     }
 
     /**
      * @param digestValue
      */
     public void setDigestValue(String digestValue) {
-	this.digestValue = digestValue;
+        this.digestValue = digestValue;
     }
 
     /**
      * @return issuer
      */
     public X500Principal getIssuer() {
-	return issuer;
+        return issuer;
     }
 
     /**
      * @param issuer
      */
     public void setIssuer(X500Principal issuer) {
-	this.issuer = issuer;
+        this.issuer = issuer;
     }
 
     /**
      * @return serial
      */
     public BigInteger getSerial() {
-	return serial;
+        return serial;
     }
 
     /**
      * @param serial
      */
     public void setSerial(BigInteger serial) {
-	this.serial = serial;
+        this.serial = serial;
     }
 }

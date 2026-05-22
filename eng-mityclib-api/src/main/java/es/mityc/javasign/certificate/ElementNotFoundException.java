@@ -32,7 +32,7 @@ public class ElementNotFoundException extends SignMITyCException {
      * </p>
      */
     public ElementNotFoundException() {
-	super();
+        super();
     }
 
     /**
@@ -43,7 +43,7 @@ public class ElementNotFoundException extends SignMITyCException {
      * @param message Mensaje de error
      */
     public ElementNotFoundException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -54,7 +54,7 @@ public class ElementNotFoundException extends SignMITyCException {
      * @param cause Causa de la excepcion
      */
     public ElementNotFoundException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -66,7 +66,7 @@ public class ElementNotFoundException extends SignMITyCException {
      * @param cause   Causa de la excepcion
      */
     public ElementNotFoundException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

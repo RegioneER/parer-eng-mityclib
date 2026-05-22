@@ -47,7 +47,7 @@ public class NullStoreElements implements IStoreElements, IRecoverElements {
      *      es.mityc.firmaJava.certificates.status.ICertStatusElement)
      */
     public String[] storeCertAndStatus(X509Certificate certificate, ICertStatus certStatus) {
-	return new String[0];
+        return new String[0];
     }
 
     /**
@@ -55,8 +55,8 @@ public class NullStoreElements implements IStoreElements, IRecoverElements {
      *      java.lang.Class)
      */
     public <T> T getElement(Map<String, Object> props, Class<T> elementClass)
-	    throws ElementNotFoundException, UnknownElementClassException {
-	return null;
+            throws ElementNotFoundException, UnknownElementClassException {
+        return null;
     }
 
 }

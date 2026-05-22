@@ -37,19 +37,19 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
     private E data;
 
     public NTo1Link(E obj) {
-	data = obj;
+        data = obj;
     }
 
     @Override
     public boolean equals(Object obj) {
-	Object comp = obj;
-	if (obj instanceof NTo1Link) {
-	    comp = ((NTo1Link) obj).getData();
-	}
-	if ((comp != null) && (comp.equals(data))) {
-	    return true;
-	}
-	return false;
+        Object comp = obj;
+        if (obj instanceof NTo1Link) {
+            comp = ((NTo1Link) obj).getData();
+        }
+        if ((comp != null) && (comp.equals(data))) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -58,7 +58,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
      * @param obj dato que se enlaza, <code>null</code> si no hay ninguno
      */
     public void setData(E obj) {
-	data = obj;
+        data = obj;
     }
 
     /**
@@ -67,7 +67,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
      * @return
      */
     public E getData() {
-	return data;
+        return data;
     }
 
     /**
@@ -76,9 +76,9 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
      * @param node
      */
     public void addPrev(NTo1Link<E> node) {
-	if (prevs == null)
-	    prevs = new ArrayList<NTo1Link<E>>();
-	prevs.add(node);
+        if (prevs == null)
+            prevs = new ArrayList<NTo1Link<E>>();
+        prevs.add(node);
     }
 
     /**
@@ -87,9 +87,9 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
      * @return iterator a elementos que enlazan a este elemento, <code>null</code> si no hay ninguno
      */
     public Iterator<NTo1Link<E>> getPrevs() {
-	if (prevs != null)
-	    return prevs.iterator();
-	return null;
+        if (prevs != null)
+            return prevs.iterator();
+        return null;
     }
 
     /**
@@ -98,9 +98,9 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
      * @return
      */
     public int getNumPrevs() {
-	if (prevs != null)
-	    return prevs.size();
-	return 0;
+        if (prevs != null)
+            return prevs.size();
+        return 0;
     }
 
     /**
@@ -109,7 +109,7 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
      * @param node Siguiente elemento, <code>null</code> si no se quiere enlazar ningún elemento
      */
     public void setNext(NTo1Link<E> node) {
-	next = node;
+        next = node;
     }
 
     /**
@@ -118,11 +118,11 @@ public class NTo1Link<E> implements Iterable<NTo1Link<E>> {
      * @return
      */
     public NTo1Link<E> getNext() {
-	return next;
+        return next;
     }
 
     public Iterator<NTo1Link<E>> iterator() {
-	return new NTo1LinkIterator<E>(this);
+        return new NTo1LinkIterator<E>(this);
     }
 
 }

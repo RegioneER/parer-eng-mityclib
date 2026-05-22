@@ -35,27 +35,27 @@ public class IssuerSerial extends X509IssuerSerialType {
     protected String namespaceXAdES;
 
     public IssuerSerial(XAdESSchemas schema) {
-	super();
-	this.schema = schema;
+        super();
+        this.schema = schema;
     }
 
     public IssuerSerial(XAdESSchemas schema, String issuerName, BigInteger serialNumber) {
-	super(issuerName, serialNumber);
-	this.schema = schema;
+        super(issuerName, serialNumber);
+        this.schema = schema;
     }
 
     /**
      * @return the schema
      */
     public XAdESSchemas getSchema() {
-	return schema;
+        return schema;
     }
 
     /**
      * @param schema the schema to set
      */
     public void setSchema(XAdESSchemas schema) {
-	this.schema = schema;
+        this.schema = schema;
     }
 
     /**
@@ -65,9 +65,9 @@ public class IssuerSerial extends X509IssuerSerialType {
      *      java.lang.String)
      */
     protected Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	setNamespaceXAdES(namespaceXAdES);
-	return createElement(doc);
+            throws InvalidInfoNodeException {
+        setNamespaceXAdES(namespaceXAdES);
+        return createElement(doc);
     }
 
     /**
@@ -82,23 +82,23 @@ public class IssuerSerial extends X509IssuerSerialType {
      * @throws InvalidInfoNodeException
      */
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	setNamespaceXAdES(namespaceXAdES);
-	return super.createElement(doc, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        setNamespaceXAdES(namespaceXAdES);
+        return super.createElement(doc, namespaceXDsig);
     }
 
     /**
      * @return the namespaceXAdES
      */
     public String getNamespaceXAdES() {
-	return namespaceXAdES;
+        return namespaceXAdES;
     }
 
     /**
      * @param namespaceXAdES the namespaceXAdES to set
      */
     public void setNamespaceXAdES(String namespaceXAdES) {
-	this.namespaceXAdES = namespaceXAdES;
+        this.namespaceXAdES = namespaceXAdES;
     }
 
     /**
@@ -106,8 +106,8 @@ public class IssuerSerial extends X509IssuerSerialType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.ISSUER_SERIAL);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.ISSUER_SERIAL);
+        super.load(element);
     }
 
     /**
@@ -115,8 +115,8 @@ public class IssuerSerial extends X509IssuerSerialType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.ISSUER_SERIAL);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.ISSUER_SERIAL);
     }
 
     /**
@@ -124,10 +124,10 @@ public class IssuerSerial extends X509IssuerSerialType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.ISSUER_SERIAL);
-	addContent(res, namespaceXAdES, namespaceXDsig);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.ISSUER_SERIAL);
+        addContent(res, namespaceXAdES, namespaceXDsig);
+        return res;
     }
 
     /**
@@ -139,9 +139,9 @@ public class IssuerSerial extends X509IssuerSerialType {
      * @throws InvalidInfoNodeException
      */
     public void addContent(Element element, String namespaceXAdES, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	setNamespaceXAdES(namespaceXAdES);
-	super.addContent(element, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        setNamespaceXAdES(namespaceXAdES);
+        super.addContent(element, namespaceXDsig);
     }
 
 }

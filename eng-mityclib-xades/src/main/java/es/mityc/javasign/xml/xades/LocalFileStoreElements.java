@@ -81,101 +81,101 @@ public class LocalFileStoreElements implements IStoreElements, IRecoverElements 
     private final static String EXT_CRL = ".crl";
 
     private class OCSPResp extends AbstractCertStatus implements IOCSPCertStatus {
-	private byte[] data;
+        private byte[] data;
 
-	private OCSPResp(byte[] data) {
-	    this.data = data;
-	}
+        private OCSPResp(byte[] data) {
+            this.data = data;
+        }
 
-	public byte[] getEncoded() {
-	    return data;
-	}
+        public byte[] getEncoded() {
+            return data;
+        }
 
-	/**
-	 * @see es.mityc.javasign.certificate.IOCSPCertStatus#getResponderID()
-	 */
-	public String getResponderID() {
-	    // TODO: indicar que es una operacion no permitida
-	    throw new UnsupportedOperationException("Not implemented yet");
-	}
+        /**
+         * @see es.mityc.javasign.certificate.IOCSPCertStatus#getResponderID()
+         */
+        public String getResponderID() {
+            // TODO: indicar que es una operacion no permitida
+            throw new UnsupportedOperationException("Not implemented yet");
+        }
 
-	/**
-	 * @see es.mityc.javasign.certificate.IOCSPCertStatus#getResponderType()
-	 */
-	public TYPE_RESPONDER getResponderType() {
-	    // TODO: indicar que es una operacion no permitida
-	    throw new UnsupportedOperationException("Not implemented yet");
-	}
+        /**
+         * @see es.mityc.javasign.certificate.IOCSPCertStatus#getResponderType()
+         */
+        public TYPE_RESPONDER getResponderType() {
+            // TODO: indicar que es una operacion no permitida
+            throw new UnsupportedOperationException("Not implemented yet");
+        }
 
-	/**
-	 * @see es.mityc.javasign.certificate.IOCSPCertStatus#getResponseDate()
-	 */
-	public Date getResponseDate() {
-	    // TODO: indicar que es una operacion no permitida
-	    throw new UnsupportedOperationException("Not implemented yet");
-	}
+        /**
+         * @see es.mityc.javasign.certificate.IOCSPCertStatus#getResponseDate()
+         */
+        public Date getResponseDate() {
+            // TODO: indicar que es una operacion no permitida
+            throw new UnsupportedOperationException("Not implemented yet");
+        }
     }
 
     private URI base = null;
 
     private static ThreadLocal<Adler32> digester = new ThreadLocal<Adler32>() {
-	protected Adler32 initialValue() {
-	    return new Adler32();
-	}
+        protected Adler32 initialValue() {
+            return new Adler32();
+        }
     };
 
     public LocalFileStoreElements() {
-	init(null);
+        init(null);
     }
 
     public LocalFileStoreElements(String base) {
-	init(base);
+        init(base);
     }
 
     private URI getWorkdir() {
-	return new File(".").toURI();
+        return new File(".").toURI();
     }
 
     public void init(String base) {
-	if ((base == null) || (base.trim().length() == 0)) {
-	    this.base = getWorkdir();
-	} else {
-	    try {
-		this.base = URI.create(base);
-	    } catch (IllegalArgumentException ex) {
-		log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_5, ex.getMessage()));
-		this.base = getWorkdir();
-	    }
-	}
+        if ((base == null) || (base.trim().length() == 0)) {
+            this.base = getWorkdir();
+        } else {
+            try {
+                this.base = URI.create(base);
+            } catch (IllegalArgumentException ex) {
+                log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_5, ex.getMessage()));
+                this.base = getWorkdir();
+            }
+        }
     }
 
     private void saveData(File file, final byte[] data) {
-	FileOutputStream fos = null;
-	try {
-	    fos = new FileOutputStream(file);
-	    fos.write(data);
-	} catch (FileNotFoundException ex) {
-	    log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage(),
-		    file.getAbsolutePath()));
-	} catch (IOException ex) {
-	    log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage(),
-		    file.getAbsolutePath()));
-	} finally {
-	    if (fos != null) {
-		try {
-		    fos.flush();
-		    fos.close();
-		} catch (IOException ex) {
-		}
-	    }
-	}
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            fos.write(data);
+        } catch (FileNotFoundException ex) {
+            log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage(),
+                    file.getAbsolutePath()));
+        } catch (IOException ex) {
+            log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage(),
+                    file.getAbsolutePath()));
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.flush();
+                    fos.close();
+                } catch (IOException ex) {
+                }
+            }
+        }
     }
 
     private long digest(final byte[] data) {
-	Checksum digest = digester.get();
-	digest.reset();
-	digest.update(data, 0, data.length);
-	return digest.getValue();
+        Checksum digest = digester.get();
+        digest.reset();
+        digest.update(data, 0, data.length);
+        return digest.getValue();
     }
 
     /**
@@ -195,62 +195,62 @@ public class LocalFileStoreElements implements IStoreElements, IRecoverElements 
      *      es.mityc.firmaJava.certificates.status.ICertStatusElement)
      */
     public String[] storeCertAndStatus(X509Certificate certificate, ICertStatus certStatus) {
-	String[] names = new String[2];
-	File dir = new File(base);
-	if (!dir.exists()) {
-	    if (!dir.mkdirs()) {
-		return names;
-	    }
-	}
+        String[] names = new String[2];
+        File dir = new File(base);
+        if (!dir.exists()) {
+            if (!dir.mkdirs()) {
+                return names;
+            }
+        }
 
-	if (certificate != null) {
-	    try {
-		// Obtiene el identificador del certificado
-		byte[] data = certificate.getEncoded();
-		String nameCert = PREFIX_CERT + Long.toHexString(digest(data)) + EXT_CERT;
-		// Guarda el certificado
-		File certFile = new File(dir, nameCert);
-		saveData(certFile, data);
-		names[0] = certFile.getName();
-	    } catch (CertificateEncodingException ex) {
-		log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage()));
-	    }
-	}
+        if (certificate != null) {
+            try {
+                // Obtiene el identificador del certificado
+                byte[] data = certificate.getEncoded();
+                String nameCert = PREFIX_CERT + Long.toHexString(digest(data)) + EXT_CERT;
+                // Guarda el certificado
+                File certFile = new File(dir, nameCert);
+                saveData(certFile, data);
+                names[0] = certFile.getName();
+            } catch (CertificateEncodingException ex) {
+                log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage()));
+            }
+        }
 
-	if (certStatus != null) {
-	    if (certStatus instanceof IOCSPCertStatus) {
-		IOCSPCertStatus respOcsp = (IOCSPCertStatus) certStatus;
-		// if (respOcsp.getFilename() != null) {
-		// names[1] = respOcsp.getFilename();
-		// } else {
-		// Obtiene la respuesta OCSP
-		byte[] data = respOcsp.getEncoded();
-		String ocspName = PREFIX_OCSP + Long.toHexString(digest(data)) + EXT_OCSP;
-		// Guardamos la respuesta OCSP
-		File ocspFile = new File(dir, ocspName);
-		saveData(ocspFile, data);
-		names[1] = ocspFile.getName();
-		// }
-	    } else if (certStatus instanceof IX509CRLCertStatus) {
-		IX509CRLCertStatus respCRL = (IX509CRLCertStatus) certStatus;
-		// if (respCRL.getFilename() != null) {
-		// names[1] = respCRL.getFilename();
-		// } else {
-		// try {
-		// Obtiene la CRL
-		byte[] data = respCRL.getEncoded();
-		String crlName = PREFIX_CRL + Long.toHexString(digest(data)) + EXT_CRL;
-		// Guardamos la CRL
-		File crlFile = new File(dir, crlName);
-		saveData(crlFile, data);
-		names[1] = crlFile.getName();
-		// } catch (CRLException ex) {
-		// log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage()));
-		// }
-		// }
-	    }
-	}
-	return names;
+        if (certStatus != null) {
+            if (certStatus instanceof IOCSPCertStatus) {
+                IOCSPCertStatus respOcsp = (IOCSPCertStatus) certStatus;
+                // if (respOcsp.getFilename() != null) {
+                // names[1] = respOcsp.getFilename();
+                // } else {
+                // Obtiene la respuesta OCSP
+                byte[] data = respOcsp.getEncoded();
+                String ocspName = PREFIX_OCSP + Long.toHexString(digest(data)) + EXT_OCSP;
+                // Guardamos la respuesta OCSP
+                File ocspFile = new File(dir, ocspName);
+                saveData(ocspFile, data);
+                names[1] = ocspFile.getName();
+                // }
+            } else if (certStatus instanceof IX509CRLCertStatus) {
+                IX509CRLCertStatus respCRL = (IX509CRLCertStatus) certStatus;
+                // if (respCRL.getFilename() != null) {
+                // names[1] = respCRL.getFilename();
+                // } else {
+                // try {
+                // Obtiene la CRL
+                byte[] data = respCRL.getEncoded();
+                String crlName = PREFIX_CRL + Long.toHexString(digest(data)) + EXT_CRL;
+                // Guardamos la CRL
+                File crlFile = new File(dir, crlName);
+                saveData(crlFile, data);
+                names[1] = crlFile.getName();
+                // } catch (CRLException ex) {
+                // log.error(i18n.getLocalMessage(ConstantsXAdES.I18N_SIGN_6, ex.getMessage()));
+                // }
+                // }
+            }
+        }
+        return names;
     }
 
     /**
@@ -280,167 +280,167 @@ public class LocalFileStoreElements implements IStoreElements, IRecoverElements 
      */
     @SuppressWarnings("unchecked")
     public <T> T getElement(Map<String, Object> props, Class<T> elementClass)
-	    throws ElementNotFoundException, UnknownElementClassException {
-	if (X509Certificate.class.isAssignableFrom(elementClass)) {
-	    X509Certificate cert = getCertificate(props);
-	    if (cert != null) {
-		return (T) cert;
-	    } else {
-		throw new ElementNotFoundException();
-	    }
-	} else if (IOCSPCertStatus.class.isAssignableFrom(elementClass)) {
-	    IOCSPCertStatus ocsp = getOCSPResponse(props);
-	    if (ocsp != null) {
-		return (T) ocsp;
-	    } else {
-		throw new ElementNotFoundException();
-	    }
-	} else if (X509CRL.class.isAssignableFrom(elementClass)) {
-	    X509CRL crl = getCRL(props);
-	    if (crl != null) {
-		return (T) crl;
-	    } else {
-		throw new ElementNotFoundException();
-	    }
-	} else {
-	    throw new UnknownElementClassException();
-	}
+            throws ElementNotFoundException, UnknownElementClassException {
+        if (X509Certificate.class.isAssignableFrom(elementClass)) {
+            X509Certificate cert = getCertificate(props);
+            if (cert != null) {
+                return (T) cert;
+            } else {
+                throw new ElementNotFoundException();
+            }
+        } else if (IOCSPCertStatus.class.isAssignableFrom(elementClass)) {
+            IOCSPCertStatus ocsp = getOCSPResponse(props);
+            if (ocsp != null) {
+                return (T) ocsp;
+            } else {
+                throw new ElementNotFoundException();
+            }
+        } else if (X509CRL.class.isAssignableFrom(elementClass)) {
+            X509CRL crl = getCRL(props);
+            if (crl != null) {
+                return (T) crl;
+            } else {
+                throw new ElementNotFoundException();
+            }
+        } else {
+            throw new UnknownElementClassException();
+        }
     }
 
     private X509CRL getCRL(Map<String, Object> props) {
-	if (props != null) {
-	    Object uriObj = props.get(PROP_URI);
-	    if ((uriObj != null) && (uriObj instanceof String)) {
-		return getCRL((String) uriObj);
-	    }
-	}
-	return null;
+        if (props != null) {
+            Object uriObj = props.get(PROP_URI);
+            if ((uriObj != null) && (uriObj instanceof String)) {
+                return getCRL((String) uriObj);
+            }
+        }
+        return null;
     }
 
     private X509CRL getCRL(String uri) {
-	X509CRL crl = null;
-	File dir = new File(base);
-	try {
-	    FileInputStream fis = new FileInputStream(new File(dir, uri));
-	    try {
-		// Se obtiene el certificado en su formato del archivo de la URI
-		CertificateFactory cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
-		crl = (X509CRL) cf.generateCRL(fis);
-	    } catch (CertificateException ex) {
-	    } catch (CRLException ex) {
-	    } finally {
-		if (fis != null) {
-		    try {
-			fis.close();
-		    } catch (IOException e) {
-		    }
-		}
-	    }
-	} catch (FileNotFoundException e) {
-	}
-	return crl;
+        X509CRL crl = null;
+        File dir = new File(base);
+        try {
+            FileInputStream fis = new FileInputStream(new File(dir, uri));
+            try {
+                // Se obtiene el certificado en su formato del archivo de la URI
+                CertificateFactory cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
+                crl = (X509CRL) cf.generateCRL(fis);
+            } catch (CertificateException ex) {
+            } catch (CRLException ex) {
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+        }
+        return crl;
     }
 
     private IOCSPCertStatus getOCSPResponse(Map<String, Object> props) {
-	if (props != null) {
-	    Object uriObj = props.get(PROP_URI);
-	    if ((uriObj != null) && (uriObj instanceof String)) {
-		return getOCSPResponse((String) uriObj);
-	    }
-	    Object emissiondateObj = props.get(PROP_EMISSION_DATE);
-	    Object digestalgObj = props.get(PROP_DIGEST_ALGORITHM);
-	    Object digestvalueObj = props.get(PROP_DIGEST_VALUE);
-	    Object issuernameObj = props.get(PROP_ISSUER_NAME);
-	    Object issuerhashObj = props.get(PROP_ISSUER_HASH);
-	    if (((digestalgObj != null) && (digestalgObj instanceof String)
-		    && (digestvalueObj != null) && (digestvalueObj instanceof byte[]))
-		    && ((emissiondateObj != null) && (emissiondateObj instanceof Date)
-			    && (((issuernameObj != null)
-				    && (issuernameObj instanceof X500Principal))
-				    || ((issuerhashObj != null)
-					    && (issuerhashObj instanceof byte[]))))) {
-		OCSPResponderID issuer = null;
-		if (issuernameObj != null) {
-		    issuer = OCSPResponderID.getOCSPResponderID((X500Principal) issuernameObj);
-		} else if (issuerhashObj != null) {
-		    issuer = OCSPResponderID.getOCSPResponderID((byte[]) issuerhashObj);
-		}
-		return getOCSPResponse((String) digestalgObj, (byte[]) digestvalueObj, issuer,
-			(Date) emissiondateObj);
-	    }
-	}
-	return null;
+        if (props != null) {
+            Object uriObj = props.get(PROP_URI);
+            if ((uriObj != null) && (uriObj instanceof String)) {
+                return getOCSPResponse((String) uriObj);
+            }
+            Object emissiondateObj = props.get(PROP_EMISSION_DATE);
+            Object digestalgObj = props.get(PROP_DIGEST_ALGORITHM);
+            Object digestvalueObj = props.get(PROP_DIGEST_VALUE);
+            Object issuernameObj = props.get(PROP_ISSUER_NAME);
+            Object issuerhashObj = props.get(PROP_ISSUER_HASH);
+            if (((digestalgObj != null) && (digestalgObj instanceof String)
+                    && (digestvalueObj != null) && (digestvalueObj instanceof byte[]))
+                    && ((emissiondateObj != null) && (emissiondateObj instanceof Date)
+                            && (((issuernameObj != null)
+                                    && (issuernameObj instanceof X500Principal))
+                                    || ((issuerhashObj != null)
+                                            && (issuerhashObj instanceof byte[]))))) {
+                OCSPResponderID issuer = null;
+                if (issuernameObj != null) {
+                    issuer = OCSPResponderID.getOCSPResponderID((X500Principal) issuernameObj);
+                } else if (issuerhashObj != null) {
+                    issuer = OCSPResponderID.getOCSPResponderID((byte[]) issuerhashObj);
+                }
+                return getOCSPResponse((String) digestalgObj, (byte[]) digestvalueObj, issuer,
+                        (Date) emissiondateObj);
+            }
+        }
+        return null;
     }
 
     private IOCSPCertStatus getOCSPResponse(String uri) {
-	OCSPResp ocsp = null;
-	File file = new File(new File(base), uri);
-	if (file.exists()) {
-	    byte[] data = UtilidadFicheros.readFile(file);
-	    if (data != null) {
-		ocsp = new OCSPResp(data);
-	    }
-	}
-	return ocsp;
+        OCSPResp ocsp = null;
+        File file = new File(new File(base), uri);
+        if (file.exists()) {
+            byte[] data = UtilidadFicheros.readFile(file);
+            if (data != null) {
+                ocsp = new OCSPResp(data);
+            }
+        }
+        return ocsp;
     }
 
     private IOCSPCertStatus getOCSPResponse(String digestAlg, byte[] digestValue,
-	    OCSPResponderID issuer, Date emission) {
-	OCSPResp ocsp = null;
-	// TODO: implementar localizador de respuesta OCSP
-	// NOTA: desactivada esta seccion de codigo ya que no se implementa ningún sistema estable
-	// de búsqueda
-	// CertificateFinder cf = new CertificateFinder(base.toString());
-	// byte[] data = cf.searchOCSP(digestAlg, Base64.encode(digestValue), issuer, emission);
-	// if (data != null) {
-	// ocsp = new OCSPResp(data);
-	// }
-	return ocsp;
+            OCSPResponderID issuer, Date emission) {
+        OCSPResp ocsp = null;
+        // TODO: implementar localizador de respuesta OCSP
+        // NOTA: desactivada esta seccion de codigo ya que no se implementa ningún sistema estable
+        // de búsqueda
+        // CertificateFinder cf = new CertificateFinder(base.toString());
+        // byte[] data = cf.searchOCSP(digestAlg, Base64.encode(digestValue), issuer, emission);
+        // if (data != null) {
+        // ocsp = new OCSPResp(data);
+        // }
+        return ocsp;
     }
 
     private X509Certificate getCertificate(Map<String, Object> props) {
-	if (props != null) {
-	    Object uriObj = props.get(PROP_URI);
-	    if ((uriObj != null) && (uriObj instanceof String)) {
-		return getCertificate((String) uriObj);
-	    }
-	    Object issuernameObj = props.get(PROP_ISSUER_NAME);
-	    Object serialnumberObj = props.get(PROP_SERIAL_NUMBER);
-	    if ((issuernameObj != null) && (issuernameObj instanceof X500Principal)
-		    && (serialnumberObj != null) && (serialnumberObj instanceof BigInteger)) {
-		return getCertificate((X500Principal) issuernameObj, (BigInteger) serialnumberObj);
-	    }
-	}
-	return null;
+        if (props != null) {
+            Object uriObj = props.get(PROP_URI);
+            if ((uriObj != null) && (uriObj instanceof String)) {
+                return getCertificate((String) uriObj);
+            }
+            Object issuernameObj = props.get(PROP_ISSUER_NAME);
+            Object serialnumberObj = props.get(PROP_SERIAL_NUMBER);
+            if ((issuernameObj != null) && (issuernameObj instanceof X500Principal)
+                    && (serialnumberObj != null) && (serialnumberObj instanceof BigInteger)) {
+                return getCertificate((X500Principal) issuernameObj, (BigInteger) serialnumberObj);
+            }
+        }
+        return null;
     }
 
     private X509Certificate getCertificate(String uri) {
-	X509Certificate certificate = null;
-	File dir = new File(base);
-	try {
-	    FileInputStream fis = new FileInputStream(new File(dir, uri));
-	    try {
-		// Se obtiene el certificado en su formato del archivo de la URI
-		CertificateFactory cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
-		certificate = (X509Certificate) cf.generateCertificate(fis);
-	    } catch (CertificateException e1) {
-	    } finally {
-		if (fis != null) {
-		    try {
-			fis.close();
-		    } catch (IOException e) {
-		    }
-		}
-	    }
-	} catch (FileNotFoundException e) {
-	}
-	return certificate;
+        X509Certificate certificate = null;
+        File dir = new File(base);
+        try {
+            FileInputStream fis = new FileInputStream(new File(dir, uri));
+            try {
+                // Se obtiene el certificado en su formato del archivo de la URI
+                CertificateFactory cf = CertificateFactory.getInstance(ConstantesXADES.X_509);
+                certificate = (X509Certificate) cf.generateCertificate(fis);
+            } catch (CertificateException e1) {
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+        }
+        return certificate;
     }
 
     private X509Certificate getCertificate(X500Principal issuername, BigInteger serialnumber) {
-	X509Certificate certificate = null;
-	// TODO: implementar localizador de certificado
-	return certificate;
+        X509Certificate certificate = null;
+        // TODO: implementar localizador de certificado
+        return certificate;
     }
 
 }

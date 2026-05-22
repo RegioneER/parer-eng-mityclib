@@ -43,7 +43,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * @see es.mityc.javasign.certificate.ICertStatus#getCertificate()
      */
     public X509Certificate getCertificate() {
-	return certificate;
+        return certificate;
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * @see es.mityc.javasign.certificate.ICertStatus#getRevokedInfo()
      */
     public RevokedInfo getRevokedInfo() {
-	return (revokedInfo != null) ? (RevokedInfo) revokedInfo.clone() : null;
+        return (revokedInfo != null) ? (RevokedInfo) revokedInfo.clone() : null;
     }
 
     /**
@@ -84,7 +84,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * @see es.mityc.javasign.certificate.ICertStatus#getStatus()
      */
     public CERT_STATUS getStatus() {
-	return certStatus;
+        return certStatus;
     }
 
     /**
@@ -96,7 +96,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      *               {@link es.mityc.javasign.certificate.ICertStatus.CERT_STATUS}
      */
     protected void setCertStatus(final CERT_STATUS status) {
-	this.certStatus = status;
+        this.certStatus = status;
     }
 
     /**
@@ -107,7 +107,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * @param ri Informacion de revocacion
      */
     protected void setRevokedInfo(final RevokedInfo ri) {
-	this.revokedInfo = (RevokedInfo) ri.clone();
+        this.revokedInfo = (RevokedInfo) ri.clone();
     }
 
     /**
@@ -118,7 +118,7 @@ public abstract class AbstractCertStatus implements ICertStatus {
      * @param cert Certificado consultado
      */
     protected void setCertificate(final X509Certificate cert) {
-	this.certificate = cert;
+        this.certificate = cert;
     }
 
 }

@@ -35,7 +35,7 @@ public class TrustException extends SignMITyCException {
      * </p>
      */
     public TrustException() {
-	super();
+        super();
     }
 
     /**
@@ -46,7 +46,7 @@ public class TrustException extends SignMITyCException {
      * @param message Mensaje de error
      */
     public TrustException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TrustException extends SignMITyCException {
      * @param cause Excepcion que causa esta otra excepcion
      */
     public TrustException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -69,7 +69,7 @@ public class TrustException extends SignMITyCException {
      * @param cause   Excepcion que causa esta otra excepcion
      */
     public TrustException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

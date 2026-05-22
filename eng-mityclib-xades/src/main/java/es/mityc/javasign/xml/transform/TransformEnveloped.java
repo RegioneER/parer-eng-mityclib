@@ -27,6 +27,6 @@ import es.mityc.javasign.xml.xades.TransformProxy;
 public class TransformEnveloped extends Transform {
     /** Constructor. */
     public TransformEnveloped() {
-	super(TransformProxy.TRANSFORM_ENVELOPED_SIGNATURE, null);
+        super(TransformProxy.TRANSFORM_ENVELOPED_SIGNATURE, null);
     }
 }

@@ -36,7 +36,7 @@ public class CharWrittable implements IWriter {
      * </p>
      */
     public CharWrittable() {
-	caw = new CharArrayWriter();
+        caw = new CharArrayWriter();
     }
 
     /**
@@ -49,7 +49,7 @@ public class CharWrittable implements IWriter {
      * @param len cantidad de bytes a escribir
      */
     public void write(final char[] c, final int off, final int len) {
-	caw.write(c, off, len);
+        caw.write(c, off, len);
     }
 
     /**
@@ -62,7 +62,7 @@ public class CharWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#flush()
      */
     public void flush() throws IOException {
-	caw.flush();
+        caw.flush();
     }
 
     /**
@@ -73,7 +73,7 @@ public class CharWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#reset()
      */
     public void reset() {
-	caw.reset();
+        caw.reset();
     }
 
     /**
@@ -86,7 +86,7 @@ public class CharWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#size()
      */
     public int size() {
-	return caw.size();
+        return caw.size();
     }
 
     /**
@@ -99,6 +99,6 @@ public class CharWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#toByteArray()
      */
     public byte[] toByteArray() {
-	return caw.toString().getBytes();
+        return caw.toString().getBytes();
     }
 }

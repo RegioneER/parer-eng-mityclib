@@ -34,42 +34,42 @@ public class XAdESResourceResolverSpi extends MITyCResourceResolver {
     private IResourceData internalResolver;
 
     public XAdESResourceResolverSpi(IResourceData internalResolver) {
-	super();
-	this.internalResolver = internalResolver;
+        super();
+        this.internalResolver = internalResolver;
     }
 
     @Override
     public XMLSignatureInput engineResolveURI(ResourceResolverContext context)
-	    throws ResourceResolverException {
-	if (internalResolver == null || context.attr == null) {
-	    throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
-	}
-	try {
-	    String uriValue = context.attr.getValue();
-	    String baseURI = context.baseUri;
-	    Object dataAccess = internalResolver.getAccess(uriValue, baseURI);
-	    XMLSignatureInput xsi;
-	    if (dataAccess instanceof InputStream) {
-		xsi = new XMLSignatureStreamInput((InputStream) dataAccess);
-	    } else if (dataAccess instanceof byte[]) {
-		xsi = new XMLSignatureByteInput((byte[]) dataAccess);
-	    } else {
-		throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
-	    }
-	    return xsi;
-	} catch (ResourceDataException ex) {
-	    throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
-	}
+            throws ResourceResolverException {
+        if (internalResolver == null || context.attr == null) {
+            throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
+        }
+        try {
+            String uriValue = context.attr.getValue();
+            String baseURI = context.baseUri;
+            Object dataAccess = internalResolver.getAccess(uriValue, baseURI);
+            XMLSignatureInput xsi;
+            if (dataAccess instanceof InputStream) {
+                xsi = new XMLSignatureStreamInput((InputStream) dataAccess);
+            } else if (dataAccess instanceof byte[]) {
+                xsi = new XMLSignatureByteInput((byte[]) dataAccess);
+            } else {
+                throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
+            }
+            return xsi;
+        } catch (ResourceDataException ex) {
+            throw new ResourceResolverException("", context.attr.getBaseURI(), context.baseUri);
+        }
     }
 
     @Override
     public boolean engineCanResolveURI(ResourceResolverContext context) {
-	if (internalResolver == null || context.attr == null) {
-	    return false;
-	}
-	String uriValue = context.attr.getValue();
-	String baseURI = context.baseUri;
-	return internalResolver.canAccess(uriValue, baseURI);
+        if (internalResolver == null || context.attr == null) {
+            return false;
+        }
+        String uriValue = context.attr.getValue();
+        String baseURI = context.baseUri;
+        return internalResolver.canAccess(uriValue, baseURI);
     }
 
 }

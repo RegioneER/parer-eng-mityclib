@@ -32,8 +32,8 @@ public class ValidationResult {
      * Crea una nueva instancia de ValidationResult()
      */
     public ValidationResult() {
-	this.validado = false;
-	this.log = new ArrayList<String>();
+        this.validado = false;
+        this.log = new ArrayList<String>();
     }
 
     /**
@@ -42,7 +42,7 @@ public class ValidationResult {
      * @return
      */
     public ArrayList getLog() {
-	return log;
+        return log;
     }
 
     /**
@@ -51,7 +51,7 @@ public class ValidationResult {
      * @param log
      */
     public void setLog(ArrayList log) {
-	this.log = log;
+        this.log = log;
     }
 
     /**
@@ -60,7 +60,7 @@ public class ValidationResult {
      * @return
      */
     public boolean isValidate() {
-	return validado;
+        return validado;
     }
 
     /**
@@ -69,14 +69,14 @@ public class ValidationResult {
      * @param validado
      */
     public void setValidate(boolean validado) {
-	this.validado = validado;
+        this.validado = validado;
     }
 
     /**
      * Este metodo añade un nuevo log a la lista
      */
     public void addLog(String log) {
-	this.log.add(log);
+        this.log.add(log);
     }
 
     /**
@@ -85,13 +85,13 @@ public class ValidationResult {
      * @return
      */
     public String writeLog() {
-	StringBuffer log = new StringBuffer();
-	for (Iterator<String> it = this.log.iterator(); it.hasNext();) {
-	    String _log = it.next();
-	    log.append(_log);
-	    log.append(ConstantesXADES.NUEVA_LINEA);
-	}
-	return log.toString();
+        StringBuffer log = new StringBuffer();
+        for (Iterator<String> it = this.log.iterator(); it.hasNext();) {
+            String _log = it.next();
+            log.append(_log);
+            log.append(ConstantesXADES.NUEVA_LINEA);
+        }
+        return log.toString();
     }
 
 }

@@ -42,6 +42,6 @@ public interface IFirmaPolicy {
      * @throws lanza una excepcion si no puede escribir la policy.
      */
     public void writePolicyNode(Element signNode, String namespaceDS, String namespaceXAdES,
-	    XAdESSchemas schema) throws PolicyException;
+            XAdESSchemas schema) throws PolicyException;
 
 }

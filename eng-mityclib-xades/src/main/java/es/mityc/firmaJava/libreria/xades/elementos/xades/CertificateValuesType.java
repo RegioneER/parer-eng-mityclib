@@ -38,47 +38,47 @@ public class CertificateValuesType extends AbstractXADESElement {
      * @param schema
      */
     public CertificateValuesType(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     public CertificateValuesType(XAdESSchemas schema,
-	    ArrayList<EncapsulatedX509Certificate> certificates) {
-	super(schema);
-	this.certificates = certificates;
+            ArrayList<EncapsulatedX509Certificate> certificates) {
+        super(schema);
+        this.certificates = certificates;
     }
 
     public void addEncapsulatedX509Certificate(EncapsulatedX509Certificate certificate) {
-	if (certificates == null)
-	    certificates = new ArrayList<EncapsulatedX509Certificate>();
-	certificates.add(certificate);
+        if (certificates == null)
+            certificates = new ArrayList<EncapsulatedX509Certificate>();
+        certificates.add(certificate);
     }
 
     /**
      * @return the certificates
      */
     public ArrayList<EncapsulatedX509Certificate> getCertificates() {
-	return certificates;
+        return certificates;
     }
 
     /**
      * @param certificates the certificates to set
      */
     public void setCertificates(ArrayList<EncapsulatedX509Certificate> certificates) {
-	this.certificates = certificates;
+        this.certificates = certificates;
     }
 
     /**
      * @return the id
      */
     public String getId() {
-	return id;
+        return id;
     }
 
     /**
      * @param id the id to set
      */
     public void setId(String id) {
-	this.id = id;
+        this.id = id;
     }
 
     /**
@@ -90,16 +90,16 @@ public class CertificateValuesType extends AbstractXADESElement {
      *         caso
      */
     public EncapsulatedX509Certificate getEncapsulatedX509CertificateById(String id) {
-	if ((certificates != null) && (id != null)) {
-	    Iterator<EncapsulatedX509Certificate> it = certificates.iterator();
-	    while (it.hasNext()) {
-		EncapsulatedX509Certificate cert = it.next();
-		String idCert = cert.getId();
-		if (id.equals(idCert))
-		    return cert;
-	    }
-	}
-	return null;
+        if ((certificates != null) && (id != null)) {
+            Iterator<EncapsulatedX509Certificate> it = certificates.iterator();
+            while (it.hasNext()) {
+                EncapsulatedX509Certificate cert = it.next();
+                String idCert = cert.getId();
+                if (id.equals(idCert))
+                    return cert;
+            }
+        }
+        return null;
     }
 
     /**
@@ -107,24 +107,24 @@ public class CertificateValuesType extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof CertificateValuesType) {
-	    CertificateValuesType cvt = (CertificateValuesType) obj;
-	    ArrayList<EncapsulatedX509Certificate> comp = cvt.certificates;
-	    if (((certificates == null) || (certificates.isEmpty()))
-		    && ((comp == null) || (comp.isEmpty())))
-		return true;
-	    if (((certificates != null) && (comp != null))
-		    && (certificates.size() == comp.size())) {
-		Iterator<EncapsulatedX509Certificate> itThis = certificates.iterator();
-		Iterator<EncapsulatedX509Certificate> itComp = comp.iterator();
-		while (itThis.hasNext()) {
-		    if (!itThis.next().equals(itComp.next()))
-			return false;
-		}
-		return true;
-	    }
-	}
-	return false;
+        if (obj instanceof CertificateValuesType) {
+            CertificateValuesType cvt = (CertificateValuesType) obj;
+            ArrayList<EncapsulatedX509Certificate> comp = cvt.certificates;
+            if (((certificates == null) || (certificates.isEmpty()))
+                    && ((comp == null) || (comp.isEmpty())))
+                return true;
+            if (((certificates != null) && (comp != null))
+                    && (certificates.size() == comp.size())) {
+                Iterator<EncapsulatedX509Certificate> itThis = certificates.iterator();
+                Iterator<EncapsulatedX509Certificate> itComp = comp.iterator();
+                while (itThis.hasNext()) {
+                    if (!itThis.next().equals(itComp.next()))
+                        return false;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -132,26 +132,26 @@ public class CertificateValuesType extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	// Recupera los atributos
-	if (element.hasAttribute(ConstantesXADES.ID))
-	    this.id = element.getAttribute(ConstantesXADES.ID);
+        // Recupera los atributos
+        if (element.hasAttribute(ConstantesXADES.ID))
+            this.id = element.getAttribute(ConstantesXADES.ID);
 
-	NodeList nodos = element.getChildNodes();
-	ArrayList<EncapsulatedX509Certificate> temp = new ArrayList<EncapsulatedX509Certificate>(
-		nodos.getLength());
-	for (int i = 0; i < nodos.getLength(); i++) {
-	    Node nodo = nodos.item(i);
-	    if (isDecorationNode(nodo))
-		continue;
-	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
-		throw new InvalidInfoNodeException(
-			"Hijo de CertificateValuesType no es un elemento");
+        NodeList nodos = element.getChildNodes();
+        ArrayList<EncapsulatedX509Certificate> temp = new ArrayList<EncapsulatedX509Certificate>(
+                nodos.getLength());
+        for (int i = 0; i < nodos.getLength(); i++) {
+            Node nodo = nodos.item(i);
+            if (isDecorationNode(nodo))
+                continue;
+            if (nodo.getNodeType() != Node.ELEMENT_NODE)
+                throw new InvalidInfoNodeException(
+                        "Hijo de CertificateValuesType no es un elemento");
 
-	    EncapsulatedX509Certificate certificate = new EncapsulatedX509Certificate(schema);
-	    certificate.load((Element) nodo);
-	    temp.add(certificate);
-	}
-	certificates = temp;
+            EncapsulatedX509Certificate certificate = new EncapsulatedX509Certificate(schema);
+            certificate.load((Element) nodo);
+            temp.add(certificate);
+        }
+        certificates = temp;
     }
 
     /**
@@ -159,15 +159,15 @@ public class CertificateValuesType extends AbstractXADESElement {
      */
     @Override
     protected void addContent(Element element) throws InvalidInfoNodeException {
-	if (certificates != null) {
-	    Iterator<EncapsulatedX509Certificate> it = certificates.iterator();
-	    while (it.hasNext()) {
-		element.appendChild(
-			it.next().createElement(element.getOwnerDocument(), namespaceXAdES));
-	    }
-	}
-	if (id != null)
-	    element.setAttributeNS(null, ConstantesXADES.ID, id);
+        if (certificates != null) {
+            Iterator<EncapsulatedX509Certificate> it = certificates.iterator();
+            while (it.hasNext()) {
+                element.appendChild(
+                        it.next().createElement(element.getOwnerDocument(), namespaceXAdES));
+            }
+        }
+        if (id != null)
+            element.setAttributeNS(null, ConstantesXADES.ID, id);
     }
 
     /**
@@ -176,7 +176,7 @@ public class CertificateValuesType extends AbstractXADESElement {
      */
     @Override
     public void addContent(Element element, String namespaceXAdES) throws InvalidInfoNodeException {
-	super.addContent(element, namespaceXAdES);
+        super.addContent(element, namespaceXAdES);
     }
 
 }

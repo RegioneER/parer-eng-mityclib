@@ -36,7 +36,7 @@ public class ByteArrayWrittable implements IWriter {
      * </p>
      */
     public ByteArrayWrittable() {
-	baos = new ByteArrayOutputStream();
+        baos = new ByteArrayOutputStream();
     }
 
     /**
@@ -49,7 +49,7 @@ public class ByteArrayWrittable implements IWriter {
      * @param len Número de bytes a escribir
      */
     public void write(final byte[] b, final int off, final int len) {
-	baos.write(b, off, len);
+        baos.write(b, off, len);
     }
 
     /**
@@ -62,7 +62,7 @@ public class ByteArrayWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#flush()
      */
     public void flush() throws IOException {
-	baos.flush();
+        baos.flush();
     }
 
     /**
@@ -73,7 +73,7 @@ public class ByteArrayWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#reset()
      */
     public void reset() {
-	baos.reset();
+        baos.reset();
     }
 
     /**
@@ -86,7 +86,7 @@ public class ByteArrayWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#size()
      */
     public int size() {
-	return baos.size();
+        return baos.size();
     }
 
     /**
@@ -99,6 +99,6 @@ public class ByteArrayWrittable implements IWriter {
      * @see es.mityc.javasign.io.IWriter#toByteArray()
      */
     public byte[] toByteArray() {
-	return baos.toByteArray();
+        return baos.toByteArray();
     }
 }

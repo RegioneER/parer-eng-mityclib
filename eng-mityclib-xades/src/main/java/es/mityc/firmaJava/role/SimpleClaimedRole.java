@@ -25,11 +25,11 @@ public class SimpleClaimedRole implements IClaimedRole {
     private String text;
 
     public SimpleClaimedRole(String text) {
-	this.text = text;
+        this.text = text;
     }
 
     public Node createClaimedRoleContent(Document doc) {
-	return doc.createTextNode(text);
+        return doc.createTextNode(text);
     }
 
 }

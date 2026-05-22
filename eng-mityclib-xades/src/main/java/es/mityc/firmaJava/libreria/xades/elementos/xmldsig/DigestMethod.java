@@ -36,8 +36,8 @@ public class DigestMethod extends AbstractXDsigElement {
      * @param namespaceXDSig
      */
     public DigestMethod(String algorithm) {
-	super();
-	this.algorithm = algorithm;
+        super();
+        this.algorithm = algorithm;
     }
 
     /**
@@ -45,13 +45,13 @@ public class DigestMethod extends AbstractXDsigElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	if (algorithm == null)
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir elemento DigestMethod");
-	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-		namespaceXDsig + ":" + ConstantesXADES.DIGEST_METHOD);
-	res.setAttributeNS(null, ConstantesXADES.ALGORITHM, algorithm);
-	return res;
+        if (algorithm == null)
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir elemento DigestMethod");
+        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+                namespaceXDsig + ":" + ConstantesXADES.DIGEST_METHOD);
+        res.setAttributeNS(null, ConstantesXADES.ALGORITHM, algorithm);
+        return res;
     }
 
     /**
@@ -60,8 +60,8 @@ public class DigestMethod extends AbstractXDsigElement {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig);
     }
 
     /**
@@ -69,12 +69,12 @@ public class DigestMethod extends AbstractXDsigElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof DigestMethod) {
-	    DigestMethod method = (DigestMethod) obj;
-	    if (algorithm.equals(method.algorithm))
-		return true;
-	}
-	return false;
+        if (obj instanceof DigestMethod) {
+            DigestMethod method = (DigestMethod) obj;
+            if (algorithm.equals(method.algorithm))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -82,26 +82,26 @@ public class DigestMethod extends AbstractXDsigElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, ConstantesXADES.SCHEMA_DSIG,
-		ConstantesXADES.LIBRERIAXADES_DIGEST_METHOD);
-	if (!element.hasAttribute(ConstantesXADES.ALGORITHM))
-	    throw new InvalidInfoNodeException(
-		    "Atributo requerido no presente" + ConstantesXADES.ALGORITHM);
-	this.algorithm = element.getAttribute(ConstantesXADES.ALGORITHM);
+        checkElementName(element, ConstantesXADES.SCHEMA_DSIG,
+                ConstantesXADES.LIBRERIAXADES_DIGEST_METHOD);
+        if (!element.hasAttribute(ConstantesXADES.ALGORITHM))
+            throw new InvalidInfoNodeException(
+                    "Atributo requerido no presente" + ConstantesXADES.ALGORITHM);
+        this.algorithm = element.getAttribute(ConstantesXADES.ALGORITHM);
     }
 
     /**
      * @return the algorithm
      */
     public String getAlgorithm() {
-	return algorithm;
+        return algorithm;
     }
 
     /**
      * @param algorithm the algorithm to set
      */
     public void setAlgorithm(String algorithm) {
-	this.algorithm = algorithm;
+        this.algorithm = algorithm;
     }
 
     /**
@@ -109,8 +109,8 @@ public class DigestMethod extends AbstractXDsigElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
-		ConstantesXADES.LIBRERIAXADES_DIGEST_METHOD);
+        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
+                ConstantesXADES.LIBRERIAXADES_DIGEST_METHOD);
     }
 
 }

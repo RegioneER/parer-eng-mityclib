@@ -33,7 +33,7 @@ public class CRLRefs extends CRLRefsType {
      * @param schema
      */
     public CRLRefs(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -41,7 +41,7 @@ public class CRLRefs extends CRLRefsType {
      * @param crlRefs
      */
     public CRLRefs(XAdESSchemas schema, ArrayList<CRLRef> crlRefs) {
-	super(schema, crlRefs);
+        super(schema, crlRefs);
     }
 
     /**
@@ -49,8 +49,8 @@ public class CRLRefs extends CRLRefsType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_CRL_REFS);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_CRL_REFS);
+        super.load(element);
     }
 
     /**
@@ -58,14 +58,14 @@ public class CRLRefs extends CRLRefsType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_CRL_REFS);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_CRL_REFS);
     }
 
     @Override
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig, namespaceXAdES);
     }
 
     /**
@@ -73,10 +73,10 @@ public class CRLRefs extends CRLRefsType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_CRL_REFS);
-	super.addContent(res, namespaceXAdES, namespaceXDsig);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_CRL_REFS);
+        super.addContent(res, namespaceXAdES, namespaceXDsig);
+        return res;
     }
 
 }

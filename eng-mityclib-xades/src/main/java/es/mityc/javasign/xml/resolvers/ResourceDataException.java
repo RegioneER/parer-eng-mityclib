@@ -26,21 +26,21 @@ import es.mityc.javasign.xml.XmlException;
 public class ResourceDataException extends XmlException {
 
     public ResourceDataException() {
-	super();
+        super();
     }
 
     /**
      * @param message
      */
     public ResourceDataException(String message) {
-	super(message);
+        super(message);
     }
 
     /**
      * @param cause
      */
     public ResourceDataException(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -48,7 +48,7 @@ public class ResourceDataException extends XmlException {
      * @param cause
      */
     public ResourceDataException(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

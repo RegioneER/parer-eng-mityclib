@@ -32,7 +32,7 @@ public class SignaturePolicyId extends SignaturePolicyIdType {
      * @param schema
      */
     public SignaturePolicyId(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -40,8 +40,8 @@ public class SignaturePolicyId extends SignaturePolicyIdType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIGNATURE_POLICY_ID);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIGNATURE_POLICY_ID);
+        super.load(element);
     }
 
     /**
@@ -49,8 +49,8 @@ public class SignaturePolicyId extends SignaturePolicyIdType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.SIGNATURE_POLICY_ID);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.SIGNATURE_POLICY_ID);
     }
 
     /**
@@ -59,8 +59,8 @@ public class SignaturePolicyId extends SignaturePolicyIdType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig, namespaceXAdES);
     }
 
     /**
@@ -68,10 +68,10 @@ public class SignaturePolicyId extends SignaturePolicyIdType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_ID);
-	super.addContent(res, namespaceXAdES, namespaceXDsig);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.SIGNATURE_POLICY_ID);
+        super.addContent(res, namespaceXAdES, namespaceXDsig);
+        return res;
     }
 
 }

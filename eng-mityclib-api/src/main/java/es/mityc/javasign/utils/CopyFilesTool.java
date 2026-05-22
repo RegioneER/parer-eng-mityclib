@@ -189,7 +189,7 @@ public class CopyFilesTool {
 
     /** Tipos de CRC admitidos para el calculo de integridad. */
     public enum CrcIntegrityEnum {
-	ADLER32, SHA2
+        ADLER32, SHA2
     };
 
     /**
@@ -205,39 +205,39 @@ public class CopyFilesTool {
      * @version 1.0
      */
     private abstract class CRCInfo {
-	/**
-	 * <p>
-	 * Procesa la cadena indicada para obtener el valor CRC que se espera.
-	 * </p>
-	 *
-	 * @param value Cadena que tiene el valor CRC esperado
-	 *
-	 * @throws CopyFileException Lanzada si la cadena no se ajusta al CRC que admite esta clase
-	 */
-	protected abstract void processValue(String value) throws CopyFileException;
+        /**
+         * <p>
+         * Procesa la cadena indicada para obtener el valor CRC que se espera.
+         * </p>
+         *
+         * @param value Cadena que tiene el valor CRC esperado
+         *
+         * @throws CopyFileException Lanzada si la cadena no se ajusta al CRC que admite esta clase
+         */
+        protected abstract void processValue(String value) throws CopyFileException;
 
-	/**
-	 * <p>
-	 * Devuelve el tipo de CRC implementado.
-	 * </p>
-	 *
-	 * @return tipo del enumerado {@link CrcIntegrityEnum} que implementa
-	 */
-	protected abstract CrcIntegrityEnum getCrcType();
+        /**
+         * <p>
+         * Devuelve el tipo de CRC implementado.
+         * </p>
+         *
+         * @return tipo del enumerado {@link CrcIntegrityEnum} que implementa
+         */
+        protected abstract CrcIntegrityEnum getCrcType();
 
-	/**
-	 * <p>
-	 * Chequea que el fichero indicado tenga el crc esperado.
-	 * </p>
-	 *
-	 * @param file Fichero que se quiere comprobar
-	 *
-	 * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code>
-	 *         en otro caso
-	 *
-	 * @throws CopyFileException Lanzada si no ha podido calcular el crc del fichero
-	 */
-	public abstract boolean checkFile(File file) throws CopyFileException;
+        /**
+         * <p>
+         * Chequea que el fichero indicado tenga el crc esperado.
+         * </p>
+         *
+         * @param file Fichero que se quiere comprobar
+         *
+         * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code>
+         *         en otro caso
+         *
+         * @throws CopyFileException Lanzada si no ha podido calcular el crc del fichero
+         */
+        public abstract boolean checkFile(File file) throws CopyFileException;
     }
 
     /**
@@ -250,91 +250,92 @@ public class CopyFilesTool {
      * @version 1.0
      */
     private class Adler32Info extends CRCInfo {
-	/** CRC esperado. */
-	private long crc;
+        /** CRC esperado. */
+        private long crc;
 
-	/**
-	 * <p>
-	 * Procesa la cadena indicada recuperando el valor numérico Int32 que señala un CRC Adler32.
-	 * </p>
-	 *
-	 * @param value Cadena que tiene el valor CRC esperado en forma de número int32
-	 *
-	 * @throws CopyFileException Lanzada si la cadena no se ajusta al CRC que admite esta clase
-	 *
-	 * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#processValue(java.lang.String)
-	 */
-	@Override
-	public void processValue(final String value) throws CopyFileException {
-	    try {
-		crc = Long.parseLong(value);
-	    } catch (NumberFormatException ex) {
-		LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5), ex);
-		throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5));
-	    }
-	}
+        /**
+         * <p>
+         * Procesa la cadena indicada recuperando el valor numérico Int32 que señala un CRC Adler32.
+         * </p>
+         *
+         * @param value Cadena que tiene el valor CRC esperado en forma de número int32
+         *
+         * @throws CopyFileException Lanzada si la cadena no se ajusta al CRC que admite esta clase
+         *
+         * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#processValue(java.lang.String)
+         */
+        @Override
+        public void processValue(final String value) throws CopyFileException {
+            try {
+                crc = Long.parseLong(value);
+            } catch (NumberFormatException ex) {
+                LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5), ex);
+                throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5));
+            }
+        }
 
-	/**
-	 * <p>
-	 * Devuelve el tipo Adler32.
-	 * </p>
-	 *
-	 * @return CrcIntegrityEnum.ADLER32
-	 *
-	 * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#getCrcType()
-	 */
-	@Override
-	public CrcIntegrityEnum getCrcType() {
-	    return CrcIntegrityEnum.ADLER32;
-	}
+        /**
+         * <p>
+         * Devuelve el tipo Adler32.
+         * </p>
+         *
+         * @return CrcIntegrityEnum.ADLER32
+         *
+         * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#getCrcType()
+         */
+        @Override
+        public CrcIntegrityEnum getCrcType() {
+            return CrcIntegrityEnum.ADLER32;
+        }
 
-	/**
-	 * <p>
-	 * Devuelve el crc esperado.
-	 * </p>
-	 *
-	 * @return crc esperado
-	 */
-	public long getCrcValue() {
-	    return crc;
-	}
+        /**
+         * <p>
+         * Devuelve el crc esperado.
+         * </p>
+         *
+         * @return crc esperado
+         */
+        public long getCrcValue() {
+            return crc;
+        }
 
-	/**
-	 * <p>
-	 * Chequea que el fichero indicado tenga el crc Adler32 esperado.
-	 * </p>
-	 *
-	 * @param file Fichero que se quiere comprobar
-	 *
-	 * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code>
-	 *         en otro caso
-	 *
-	 * @throws CopyFileException Lanzada si no ha podido calcular el crc del fichero
-	 *
-	 * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#checkFile(java.io.File)
-	 */
-	@Override
-	public boolean checkFile(final File file) throws CopyFileException {
-	    try(InputStream in = new BufferedInputStream(new FileInputStream(file), BUFFER_IN_SIZE);) {
-		Adler32 crcAdler = new Adler32();
-		byte[] buffer = new byte[BUFFER_OUT_SIZE];
-		int readed = in.read(buffer);
-		while (readed > 0) {
-		    crcAdler.update(buffer, 0, readed);
-		    readed = in.read(buffer);
-		}
-		if (LOG.isTraceEnabled()) {
-		    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_13,
-			    crcAdler.getValue(), getCrcValue()));
-		}
-		if (crcAdler.getValue() != getCrcValue()) {
-		    return false;
-		}
-		return true;
-	    } catch (IOException ex) {
-		throw new CopyFileException(ex);
-	    }
-	}
+        /**
+         * <p>
+         * Chequea que el fichero indicado tenga el crc Adler32 esperado.
+         * </p>
+         *
+         * @param file Fichero que se quiere comprobar
+         *
+         * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code>
+         *         en otro caso
+         *
+         * @throws CopyFileException Lanzada si no ha podido calcular el crc del fichero
+         *
+         * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#checkFile(java.io.File)
+         */
+        @Override
+        public boolean checkFile(final File file) throws CopyFileException {
+            try (InputStream in = new BufferedInputStream(new FileInputStream(file),
+                    BUFFER_IN_SIZE);) {
+                Adler32 crcAdler = new Adler32();
+                byte[] buffer = new byte[BUFFER_OUT_SIZE];
+                int readed = in.read(buffer);
+                while (readed > 0) {
+                    crcAdler.update(buffer, 0, readed);
+                    readed = in.read(buffer);
+                }
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_13,
+                            crcAdler.getValue(), getCrcValue()));
+                }
+                if (crcAdler.getValue() != getCrcValue()) {
+                    return false;
+                }
+                return true;
+            } catch (IOException ex) {
+                throw new CopyFileException(ex);
+            }
+        }
     }
 
     /**
@@ -347,92 +348,92 @@ public class CopyFilesTool {
      * @version 1.0
      */
     private class SHA2Info extends CRCInfo {
-	/** CRC esperado. */
-	private String crc;
+        /** CRC esperado. */
+        private String crc;
 
-	/**
-	 * <p>
-	 * Procesa la cadena indicada recuperando el valor numérico Int32 que señala un CRC Adler32.
-	 * </p>
-	 *
-	 * @param value Cadena que tiene el valor CRC esperado en forma de número int32
-	 *
-	 * @throws CopyFileException Lanzada si la cadena no se ajusta al CRC que admite esta clase
-	 *
-	 * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#processValue(java.lang.String)
-	 */
-	@Override
-	public void processValue(final String value) throws CopyFileException {
-	    // TODOLARGO: eliminar los leadings zeros
-	    crc = new String(value);
-	}
+        /**
+         * <p>
+         * Procesa la cadena indicada recuperando el valor numérico Int32 que señala un CRC Adler32.
+         * </p>
+         *
+         * @param value Cadena que tiene el valor CRC esperado en forma de número int32
+         *
+         * @throws CopyFileException Lanzada si la cadena no se ajusta al CRC que admite esta clase
+         *
+         * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#processValue(java.lang.String)
+         */
+        @Override
+        public void processValue(final String value) throws CopyFileException {
+            // TODOLARGO: eliminar los leadings zeros
+            crc = new String(value);
+        }
 
-	/**
-	 * <p>
-	 * Devuelve el tipo SHA-2.
-	 * </p>
-	 *
-	 * @return CrcIntegrityEnum.SHA2
-	 *
-	 * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#getCrcType()
-	 */
-	@Override
-	public CrcIntegrityEnum getCrcType() {
-	    return CrcIntegrityEnum.SHA2;
-	}
+        /**
+         * <p>
+         * Devuelve el tipo SHA-2.
+         * </p>
+         *
+         * @return CrcIntegrityEnum.SHA2
+         *
+         * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#getCrcType()
+         */
+        @Override
+        public CrcIntegrityEnum getCrcType() {
+            return CrcIntegrityEnum.SHA2;
+        }
 
-	/**
-	 * <p>
-	 * Devuelve el crc esperado.
-	 * </p>
-	 *
-	 * @return crc esperado
-	 */
-	public String getCrcValue() {
-	    return crc;
-	}
+        /**
+         * <p>
+         * Devuelve el crc esperado.
+         * </p>
+         *
+         * @return crc esperado
+         */
+        public String getCrcValue() {
+            return crc;
+        }
 
-	/**
-	 * <p>
-	 * Chequea que el fichero indicado tenga el crc SHA-2 esperado.
-	 * </p>
-	 *
-	 * @param file Fichero que se quiere comprobar
-	 *
-	 * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code>
-	 *         en otro caso
-	 *
-	 * @throws CopyFileException Lanzada si no ha podido calcular el crc del fichero
-	 *
-	 * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#checkFile(java.io.File)
-	 */
-	@Override
-	public boolean checkFile(final File file) throws CopyFileException {
-	    try(InputStream entrada = new BufferedInputStream(new FileInputStream(file),
-			BUFFER_IN_SIZE);) {
-		MessageDigest md = MessageDigest.getInstance(DIGEST_SHA_256);
-		byte[] buffer = new byte[BUFFER_OUT_SIZE];
-		int readed = entrada.read(buffer);
-		while (readed > 0) {
-		    md.update(buffer, 0, readed);
-		    readed = entrada.read(buffer);
-		}
-		String crcRes = toHexString(md.digest());
-		if (LOG.isTraceEnabled()) {
-		    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_13, crcRes,
-			    getCrcValue()));
-		}
+        /**
+         * <p>
+         * Chequea que el fichero indicado tenga el crc SHA-2 esperado.
+         * </p>
+         *
+         * @param file Fichero que se quiere comprobar
+         *
+         * @return <code>true</code> si el fichero se ajusta al valor esperado, <code>false</code>
+         *         en otro caso
+         *
+         * @throws CopyFileException Lanzada si no ha podido calcular el crc del fichero
+         *
+         * @see es.mityc.javasign.utils.CopyFilesTool.CRCInfo#checkFile(java.io.File)
+         */
+        @Override
+        public boolean checkFile(final File file) throws CopyFileException {
+            try (InputStream entrada = new BufferedInputStream(new FileInputStream(file),
+                    BUFFER_IN_SIZE);) {
+                MessageDigest md = MessageDigest.getInstance(DIGEST_SHA_256);
+                byte[] buffer = new byte[BUFFER_OUT_SIZE];
+                int readed = entrada.read(buffer);
+                while (readed > 0) {
+                    md.update(buffer, 0, readed);
+                    readed = entrada.read(buffer);
+                }
+                String crcRes = toHexString(md.digest());
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_13, crcRes,
+                            getCrcValue()));
+                }
 
-		if (!crcRes.equalsIgnoreCase(getCrcValue())) {
-		    return false;
-		}
-		return true;
-	    } catch (IOException ex) {
-		throw new CopyFileException(ex);
-	    } catch (NoSuchAlgorithmException ex) {
-		throw new CopyFileException(ex);
-	    }
-	}
+                if (!crcRes.equalsIgnoreCase(getCrcValue())) {
+                    return false;
+                }
+                return true;
+            } catch (IOException ex) {
+                throw new CopyFileException(ex);
+            } catch (NoSuchAlgorithmException ex) {
+                throw new CopyFileException(ex);
+            }
+        }
     }
 
     /**
@@ -445,7 +446,7 @@ public class CopyFilesTool {
      *                       puede copiar
      */
     public CopyFilesTool(final String fileProperties) {
-	this(fileProperties, getClassLoader());
+        this(fileProperties, getClassLoader());
     }
 
     /**
@@ -460,8 +461,8 @@ public class CopyFilesTool {
      *                       a los recursos allí indexados
      */
     public CopyFilesTool(final String fileProperties, final ClassLoader cl) {
-	this.internalClassLoader = cl;
-	loadProperties(fileProperties);
+        this.internalClassLoader = cl;
+        loadProperties(fileProperties);
     }
 
     /**
@@ -472,38 +473,38 @@ public class CopyFilesTool {
      * @param fileProperties nombre del recurso que contiene las propiedades
      */
     private void loadProperties(final String fileProperties) {
-	try {
-	    // cambia el orden del listado de recursos
-	    ArrayList<URL> resources = new ArrayList<URL>();
-	    Enumeration<URL> en = internalClassLoader.getResources(fileProperties);
-	    while (en.hasMoreElements()) {
-		resources.add(0, en.nextElement());
-	    }
-	    if (LOG.isTraceEnabled()) {
-		LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_17, resources.size(),
-			fileProperties));
-	    }
-	    // carga cada conjunto de propiedades de atras hacia adelante para respetar el orden del
-	    // classpath
-	    Properties base = null;
-	    Iterator<URL> itResources = resources.iterator();
-	    while (itResources.hasNext()) {
-		URL url = itResources.next();
-		try {
-		    InputStream is = url.openStream();
-		    Properties properties = new Properties(base);
-		    properties.load(is);
-		    base = properties;
-		} catch (IOException ex) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_1, url,
-			    ex.getMessage()));
-		}
-	    }
-	    props = base;
-	} catch (IOException ex) {
-	    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_1, fileProperties,
-		    ex.getMessage()));
-	}
+        try {
+            // cambia el orden del listado de recursos
+            ArrayList<URL> resources = new ArrayList<URL>();
+            Enumeration<URL> en = internalClassLoader.getResources(fileProperties);
+            while (en.hasMoreElements()) {
+                resources.add(0, en.nextElement());
+            }
+            if (LOG.isTraceEnabled()) {
+                LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_17, resources.size(),
+                        fileProperties));
+            }
+            // carga cada conjunto de propiedades de atras hacia adelante para respetar el orden del
+            // classpath
+            Properties base = null;
+            Iterator<URL> itResources = resources.iterator();
+            while (itResources.hasNext()) {
+                URL url = itResources.next();
+                try {
+                    InputStream is = url.openStream();
+                    Properties properties = new Properties(base);
+                    properties.load(is);
+                    base = properties;
+                } catch (IOException ex) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_1, url,
+                            ex.getMessage()));
+                }
+            }
+            props = base;
+        } catch (IOException ex) {
+            LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_1, fileProperties,
+                    ex.getMessage()));
+        }
     }
 
     /**
@@ -517,23 +518,23 @@ public class CopyFilesTool {
      * @return ClassLoader
      */
     private static ClassLoader getClassLoader() {
-	try {
-	    ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
-		public ClassLoader run() {
-		    ClassLoader classLoader = null;
-		    try {
-			classLoader = Thread.currentThread().getContextClassLoader();
-		    } catch (SecurityException ex) {
-		    }
-		    return classLoader;
-		}
-	    });
-	    if (cl != null) {
-		return cl;
-	    }
-	} catch (Exception ex) {
-	}
-	return TrustFactory.class.getClassLoader();
+        try {
+            ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+                public ClassLoader run() {
+                    ClassLoader classLoader = null;
+                    try {
+                        classLoader = Thread.currentThread().getContextClassLoader();
+                    } catch (SecurityException ex) {
+                    }
+                    return classLoader;
+                }
+            });
+            if (cl != null) {
+                return cl;
+            }
+        } catch (Exception ex) {
+        }
+        return TrustFactory.class.getClassLoader();
     }
 
     /**
@@ -558,18 +559,18 @@ public class CopyFilesTool {
      * @return Propiedad que se haya encontrado mas completa
      */
     private String getKeyOS(final String so, final String version, final String arch,
-	    final String addendum) {
-	String res = addStrings(so, version, arch, addendum);
-	if (!hasProp(res)) {
-	    res = addStrings(so, arch, addendum);
-	    if (!hasProp(res)) {
-		res = addStrings(so, version, addendum);
-		if (!hasProp(res)) {
-		    res = addStrings(so + addendum);
-		}
-	    }
-	}
-	return res;
+            final String addendum) {
+        String res = addStrings(so, version, arch, addendum);
+        if (!hasProp(res)) {
+            res = addStrings(so, arch, addendum);
+            if (!hasProp(res)) {
+                res = addStrings(so, version, addendum);
+                if (!hasProp(res)) {
+                    res = addStrings(so + addendum);
+                }
+            }
+        }
+        return res;
     }
 
     /**
@@ -582,13 +583,13 @@ public class CopyFilesTool {
      * @return las cadenas concatenadas, cambiando las cadenas nulificadas por cadenas vacías
      */
     private String addStrings(String... varargs) {
-	StringBuffer sb = new StringBuffer("");
-	for (String phrase : varargs) {
-	    if (phrase != null) {
-		sb.append(phrase);
-	    }
-	}
-	return sb.toString();
+        StringBuffer sb = new StringBuffer("");
+        for (String phrase : varargs) {
+            if (phrase != null) {
+                sb.append(phrase);
+            }
+        }
+        return sb.toString();
     }
 
     /**
@@ -619,40 +620,40 @@ public class CopyFilesTool {
      *                           recurso
      */
     public String copyFilesOS(final String dir, final String addendum,
-	    final boolean updateLibraryPath) throws CopyFileException {
-	String key;
-	OS so = OSTool.getSO();
-	if (LOG.isTraceEnabled()) {
-	    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_14, so.toString()));
-	}
-	if (so.isWindows()) {
-	    key = getKeyOS(STR_OS_NAME_WIN, so.getVersion(), (so.is64bits()) ? STR_OS_64BITS : null,
-		    (addendum != null) ? "." + addendum : null);
-	} else if (so.isLinux()) {
-	    key = getKeyOS(STR_OS_NAME_LIN, so.getVersion(), (so.is64bits()) ? STR_OS_64BITS : null,
-		    (addendum != null) ? "." + addendum : null);
-	} else if (so.isMacOsX()) {
-	    key = getKeyOS(STR_OS_NAME_MACOSX, so.getVersion(),
-		    (so.is64bits()) ? STR_OS_64BITS : null,
-		    (addendum != null) ? "." + addendum : null);
-	} else {
-	    throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_2));
-	}
+            final boolean updateLibraryPath) throws CopyFileException {
+        String key;
+        OS so = OSTool.getSO();
+        if (LOG.isTraceEnabled()) {
+            LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_14, so.toString()));
+        }
+        if (so.isWindows()) {
+            key = getKeyOS(STR_OS_NAME_WIN, so.getVersion(), (so.is64bits()) ? STR_OS_64BITS : null,
+                    (addendum != null) ? "." + addendum : null);
+        } else if (so.isLinux()) {
+            key = getKeyOS(STR_OS_NAME_LIN, so.getVersion(), (so.is64bits()) ? STR_OS_64BITS : null,
+                    (addendum != null) ? "." + addendum : null);
+        } else if (so.isMacOsX()) {
+            key = getKeyOS(STR_OS_NAME_MACOSX, so.getVersion(),
+                    (so.is64bits()) ? STR_OS_64BITS : null,
+                    (addendum != null) ? "." + addendum : null);
+        } else {
+            throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_2));
+        }
 
-	// si no se ha indicado directorio busca uno entre los disponibles del path
-	String newDir = (dir != null) ? dir : new File(OSTool.getTempDir()).getAbsolutePath();
-	if (updateLibraryPath) {
-	    if (LOG.isTraceEnabled()) {
-		LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_16, newDir));
-	    }
-	    updateLibraryPath(newDir);
-	}
+        // si no se ha indicado directorio busca uno entre los disponibles del path
+        String newDir = (dir != null) ? dir : new File(OSTool.getTempDir()).getAbsolutePath();
+        if (updateLibraryPath) {
+            if (LOG.isTraceEnabled()) {
+                LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_16, newDir));
+            }
+            updateLibraryPath(newDir);
+        }
 
-	if (LOG.isTraceEnabled()) {
-	    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_10, key, newDir));
-	}
-	copyFiles(newDir, key);
-	return newDir;
+        if (LOG.isTraceEnabled()) {
+            LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_10, key, newDir));
+        }
+        copyFiles(newDir, key);
+        return newDir;
     }
 
     /**
@@ -666,10 +667,10 @@ public class CopyFilesTool {
      *         en otro caso
      */
     private boolean hasProp(final String prop) {
-	if ((props != null) && (prop != null)) {
-	    return (props.getProperty(prop) != null);
-	}
-	return false;
+        if ((props != null) && (prop != null)) {
+            return (props.getProperty(prop) != null);
+        }
+        return false;
     }
 
     /**
@@ -684,23 +685,23 @@ public class CopyFilesTool {
      * @param path Nueva ruta a incluir
      */
     public void updateLibraryPath(final String path) {
-	String libPath = System.getProperty(ConstantsAPI.SYSTEM_PROPERTY_LIBRARY_PATH);
-	File fileDir = new File(path);
-	if (!libPath.contains(fileDir.getAbsolutePath())) {
-	    libPath = fileDir.getAbsolutePath() + File.pathSeparator + libPath;
-	    System.setProperty(ConstantsAPI.SYSTEM_PROPERTY_LIBRARY_PATH, libPath);
-	    try {
-		Field fieldSysPath = ClassLoader.class.getDeclaredField(FIELD_SYS_PATHS);
-		fieldSysPath.setAccessible(true);
-		if (fieldSysPath != null) {
-		    fieldSysPath.set(System.class.getClassLoader(), null);
-		}
-	    } catch (NoSuchFieldException ex) {
-		LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_3), ex);
-	    } catch (IllegalAccessException ex) {
-		LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_3), ex);
-	    }
-	}
+        String libPath = System.getProperty(ConstantsAPI.SYSTEM_PROPERTY_LIBRARY_PATH);
+        File fileDir = new File(path);
+        if (!libPath.contains(fileDir.getAbsolutePath())) {
+            libPath = fileDir.getAbsolutePath() + File.pathSeparator + libPath;
+            System.setProperty(ConstantsAPI.SYSTEM_PROPERTY_LIBRARY_PATH, libPath);
+            try {
+                Field fieldSysPath = ClassLoader.class.getDeclaredField(FIELD_SYS_PATHS);
+                fieldSysPath.setAccessible(true);
+                if (fieldSysPath != null) {
+                    fieldSysPath.set(System.class.getClassLoader(), null);
+                }
+            } catch (NoSuchFieldException ex) {
+                LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_3), ex);
+            } catch (IllegalAccessException ex) {
+                LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_3), ex);
+            }
+        }
     }
 
     /**
@@ -716,52 +717,52 @@ public class CopyFilesTool {
      *                           recurso
      */
     public void copyFiles(final String dir, final String clave) throws CopyFileException {
-	if (props != null) {
-	    try {
-		String conjunto = props.getProperty(clave);
-		if (LOG.isTraceEnabled()) {
-		    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_15, conjunto));
-		}
-		if (conjunto == null) {
-		    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
-		    throw new CopyFileException(
-			    I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
-		}
-		StringTokenizer st = new StringTokenizer(conjunto, STR_FILE_SEPARATOR);
-		boolean hasMore = st.hasMoreTokens();
-		while (hasMore) {
-		    // Recupera los datos relacionados con ese fichero. AppPerfect: falsos
-		    // positivos, las expresiones no
-		    // son constantes
-		    String fichero = st.nextToken();
-		    hasMore = st.hasMoreTokens();
-		    if (fichero == null) {
-			continue;
-		    }
-		    String nombreFichero = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_NAME);
-		    String resname = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_RES);
-		    CRCInfo crcInfo = getCRC(fichero);
-		    try {
-			long size = Long.parseLong(
-				props.getProperty(STR_FILE_DOT + fichero + STR_DOT_SIZE));
-			copyRes(dir, nombreFichero, resname, crcInfo, size);
-		    } catch (NumberFormatException e) {
-			LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4,
-				STR_FILE_DOT + fichero + STR_DOT_SIZE));
-			throw new CopyFileException(
-				I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4,
-					STR_FILE_DOT + fichero + STR_DOT_SIZE));
-		    }
-		}
-	    } catch (MissingResourceException ex) {
-		LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
-		throw new CopyFileException(
-			I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
-	    }
-	} else {
-	    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_6));
-	    throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_6));
-	}
+        if (props != null) {
+            try {
+                String conjunto = props.getProperty(clave);
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_15, conjunto));
+                }
+                if (conjunto == null) {
+                    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
+                    throw new CopyFileException(
+                            I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
+                }
+                StringTokenizer st = new StringTokenizer(conjunto, STR_FILE_SEPARATOR);
+                boolean hasMore = st.hasMoreTokens();
+                while (hasMore) {
+                    // Recupera los datos relacionados con ese fichero. AppPerfect: falsos
+                    // positivos, las expresiones no
+                    // son constantes
+                    String fichero = st.nextToken();
+                    hasMore = st.hasMoreTokens();
+                    if (fichero == null) {
+                        continue;
+                    }
+                    String nombreFichero = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_NAME);
+                    String resname = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_RES);
+                    CRCInfo crcInfo = getCRC(fichero);
+                    try {
+                        long size = Long.parseLong(
+                                props.getProperty(STR_FILE_DOT + fichero + STR_DOT_SIZE));
+                        copyRes(dir, nombreFichero, resname, crcInfo, size);
+                    } catch (NumberFormatException e) {
+                        LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4,
+                                STR_FILE_DOT + fichero + STR_DOT_SIZE));
+                        throw new CopyFileException(
+                                I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4,
+                                        STR_FILE_DOT + fichero + STR_DOT_SIZE));
+                    }
+                }
+            } catch (MissingResourceException ex) {
+                LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
+                throw new CopyFileException(
+                        I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4, clave));
+            }
+        } else {
+            LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_6));
+            throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_6));
+        }
     }
 
     /**
@@ -776,30 +777,30 @@ public class CopyFilesTool {
      * @throws CopyFileException Si no hay ningun CRC disponible o esta mal configurado
      */
     private CRCInfo getCRC(final String fichero) throws CopyFileException {
-	String value;
-	// intenta obtener el valor adler32
-	try {
-	    value = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_ADLER32);
-	    if (value == null) {
-		throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5));
-	    }
-	    Adler32Info crc = new Adler32Info();
-	    crc.processValue(value);
-	    return crc;
-	} catch (MissingResourceException ex) {
-	}
-	// intenta obtener el valor sha2
-	try {
-	    value = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_SHA2);
-	    if (value == null) {
-		throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5));
-	    }
-	    SHA2Info crc = new SHA2Info();
-	    crc.processValue(value);
-	    return crc;
-	} catch (MissingResourceException ex) {
-	}
-	throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4));
+        String value;
+        // intenta obtener el valor adler32
+        try {
+            value = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_ADLER32);
+            if (value == null) {
+                throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5));
+            }
+            Adler32Info crc = new Adler32Info();
+            crc.processValue(value);
+            return crc;
+        } catch (MissingResourceException ex) {
+        }
+        // intenta obtener el valor sha2
+        try {
+            value = props.getProperty(STR_FILE_DOT + fichero + STR_DOT_SHA2);
+            if (value == null) {
+                throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_5));
+            }
+            SHA2Info crc = new SHA2Info();
+            crc.processValue(value);
+            return crc;
+        } catch (MissingResourceException ex) {
+        }
+        throw new CopyFileException(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_4));
     }
 
     /**
@@ -822,54 +823,54 @@ public class CopyFilesTool {
      *                           problemas de acceso al sistema de ficheros o de recursos
      */
     private void copyRes(final String dir, final String fichero, final String resname,
-	    final CRCInfo crcValue, final long size) throws CopyFileException {
-	InputStream entrada = null;
-	OutputStream salida = null;
-	try {
-	    File dirFile = new File(dir);
-	    if (!dirFile.exists()) {
-		LOG.warn(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_21, dir));
-		dirFile.mkdirs();
-	    }
-	    File file = new File(dir, fichero);
-	    if ((!file.exists()) || (!checkIntegrityFile(file, crcValue, size))) {
-		if (LOG.isTraceEnabled()) {
-		    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_11,
-			    file.getAbsolutePath()));
-		}
-		entrada = new BufferedInputStream(internalClassLoader.getResourceAsStream(resname),
-			BUFFER_IN_SIZE);
-		salida = new BufferedOutputStream(new FileOutputStream(file));
-		byte[] buffer = new byte[BUFFER_OUT_SIZE];
-		int readed = entrada.read(buffer);
-		while (readed > 0) {
-		    salida.write(buffer, 0, readed);
-		    readed = entrada.read(buffer);
-		}
-		salida.flush();
-	    }
-	} catch (FileNotFoundException ex) {
-	    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_7), ex);
-	    throw new CopyFileException(ex);
-	} catch (IOException ex) {
-	    LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_8, fichero, dir), ex);
-	    throw new CopyFileException(ex);
-	} finally {
-	    if (entrada != null) {
-		try {
-		    entrada.close();
-		} catch (IOException e) {
-		    LOG.error(e.getMessage());
-		}
-	    }
-	    if (salida != null) {
-		try {
-		    salida.close();
-		} catch (IOException e) {
-		    LOG.error(e.getMessage());
-		}
-	    }
-	}
+            final CRCInfo crcValue, final long size) throws CopyFileException {
+        InputStream entrada = null;
+        OutputStream salida = null;
+        try {
+            File dirFile = new File(dir);
+            if (!dirFile.exists()) {
+                LOG.warn(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_21, dir));
+                dirFile.mkdirs();
+            }
+            File file = new File(dir, fichero);
+            if ((!file.exists()) || (!checkIntegrityFile(file, crcValue, size))) {
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_11,
+                            file.getAbsolutePath()));
+                }
+                entrada = new BufferedInputStream(internalClassLoader.getResourceAsStream(resname),
+                        BUFFER_IN_SIZE);
+                salida = new BufferedOutputStream(new FileOutputStream(file));
+                byte[] buffer = new byte[BUFFER_OUT_SIZE];
+                int readed = entrada.read(buffer);
+                while (readed > 0) {
+                    salida.write(buffer, 0, readed);
+                    readed = entrada.read(buffer);
+                }
+                salida.flush();
+            }
+        } catch (FileNotFoundException ex) {
+            LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_7), ex);
+            throw new CopyFileException(ex);
+        } catch (IOException ex) {
+            LOG.error(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_8, fichero, dir), ex);
+            throw new CopyFileException(ex);
+        } finally {
+            if (entrada != null) {
+                try {
+                    entrada.close();
+                } catch (IOException e) {
+                    LOG.error(e.getMessage());
+                }
+            }
+            if (salida != null) {
+                try {
+                    salida.close();
+                } catch (IOException e) {
+                    LOG.error(e.getMessage());
+                }
+            }
+        }
     }
 
     /**
@@ -894,19 +895,19 @@ public class CopyFilesTool {
      * @throws CopyFileException Lanzada si no se puede calcular el CRC que se espera
      */
     private boolean checkIntegrityFile(final File file, final CRCInfo crcValue, final long size)
-	    throws IOException, CopyFileException {
-	if (LOG.isTraceEnabled()) {
-	    LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_12, file.getAbsolutePath()));
-	}
-	if (!file.exists()) {
-	    return false;
-	}
-	// Primero comprueba el tamaño
-	if (file.length() != size) {
-	    return false;
-	}
-	// después comprueba el crc
-	return crcValue.checkFile(file);
+            throws IOException, CopyFileException {
+        if (LOG.isTraceEnabled()) {
+            LOG.trace(I18N.getLocalMessage(ConstantsAPI.I18N_TOOLS_CP_12, file.getAbsolutePath()));
+        }
+        if (!file.exists()) {
+            return false;
+        }
+        // Primero comprueba el tamaño
+        if (file.length() != size) {
+            return false;
+        }
+        // después comprueba el crc
+        return crcValue.checkFile(file);
     }
 
     /**
@@ -919,11 +920,11 @@ public class CopyFilesTool {
      * @return cadena de texto hexadecimal
      */
     private String toHexString(final byte[] data) {
-	StringBuffer sb = new StringBuffer();
-	int pos = data.length;
-	while (pos > 0) {
-	    sb.append(Integer.toHexString(data[--pos]));
-	}
-	return sb.toString();
+        StringBuffer sb = new StringBuffer();
+        int pos = data.length;
+        while (pos > 0) {
+            sb.append(Integer.toHexString(data[--pos]));
+        }
+        return sb.toString();
     }
 }

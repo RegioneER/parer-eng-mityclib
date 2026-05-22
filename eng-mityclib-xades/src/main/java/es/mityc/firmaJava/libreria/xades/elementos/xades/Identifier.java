@@ -35,7 +35,7 @@ public class Identifier extends IdentifierType {
      * @param schema
      */
     public Identifier(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -44,11 +44,11 @@ public class Identifier extends IdentifierType {
      * @param uri
      */
     public Identifier(XAdESSchemas schema, URI uri) {
-	super(schema, uri, null);
+        super(schema, uri, null);
     }
 
     public Identifier(XAdESSchemas schema, URI uri, QualifierEnum qualifier) {
-	super(schema, uri, qualifier);
+        super(schema, uri, qualifier);
     }
 
     /**
@@ -56,8 +56,8 @@ public class Identifier extends IdentifierType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.IDENTIFIER);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.IDENTIFIER);
+        super.load(element);
     }
 
     /**
@@ -65,10 +65,10 @@ public class Identifier extends IdentifierType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.IDENTIFIER);
-	super.addContent(res);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.IDENTIFIER);
+        super.addContent(res);
+        return res;
     }
 
     /**
@@ -77,8 +77,8 @@ public class Identifier extends IdentifierType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
 }

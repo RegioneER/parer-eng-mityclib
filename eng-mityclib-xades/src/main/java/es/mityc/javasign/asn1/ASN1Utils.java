@@ -64,31 +64,31 @@ public class ASN1Utils {
      * @return objeto con los datos del responder, <code>null</code> si no se ha podido formar
      */
     public static OCSPResponderID getResponderID(ResponderID responder) {
-	OCSPResponderID result = null;
-	ASN1TaggedObject tagged = (ASN1TaggedObject) responder.toASN1Primitive();
-	switch (tagged.getTagNo()) {
-	case 1:
-	    try {
-		X509Name name = X509Name.getInstance(tagged.getBaseObject());
-		result = OCSPResponderID.getOCSPResponderID(new X500Principal(name.getEncoded()));
-	    } catch (IllegalArgumentException ex) {
-		LOG.error(I18N.getLocalMessage(ConstantsXAdES.I18N_UTILS_1, ex.getMessage()));
-		if (LOG.isDebugEnabled()) {
-		    LOG.debug("", ex);
-		}
-	    } catch (IOException ex) {
-		LOG.error(I18N.getLocalMessage(ConstantsXAdES.I18N_UTILS_1, ex.getMessage()));
-		if (LOG.isDebugEnabled()) {
-		    LOG.debug("", ex);
-		}
-	    }
-	    break;
-	case 2:
-	    ASN1OctetString octect = (ASN1OctetString) tagged.getBaseObject();
-	    result = OCSPResponderID.getOCSPResponderID(octect.getOctets());
-	    break;
-	}
-	return result;
+        OCSPResponderID result = null;
+        ASN1TaggedObject tagged = (ASN1TaggedObject) responder.toASN1Primitive();
+        switch (tagged.getTagNo()) {
+        case 1:
+            try {
+                X509Name name = X509Name.getInstance(tagged.getBaseObject());
+                result = OCSPResponderID.getOCSPResponderID(new X500Principal(name.getEncoded()));
+            } catch (IllegalArgumentException ex) {
+                LOG.error(I18N.getLocalMessage(ConstantsXAdES.I18N_UTILS_1, ex.getMessage()));
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("", ex);
+                }
+            } catch (IOException ex) {
+                LOG.error(I18N.getLocalMessage(ConstantsXAdES.I18N_UTILS_1, ex.getMessage()));
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("", ex);
+                }
+            }
+            break;
+        case 2:
+            ASN1OctetString octect = (ASN1OctetString) tagged.getBaseObject();
+            result = OCSPResponderID.getOCSPResponderID(octect.getOctets());
+            break;
+        }
+        return result;
     }
 
 }

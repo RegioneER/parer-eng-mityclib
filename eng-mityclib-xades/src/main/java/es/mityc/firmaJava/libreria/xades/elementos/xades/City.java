@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 public class City extends AbstractXadesStringElement {
 
     public City(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_CITY, data);
+        super(schema, ConstantesXADES.XADES_TAG_CITY, data);
     }
 
     /**
@@ -32,7 +32,7 @@ public class City extends AbstractXadesStringElement {
      * @param schema
      */
     public City(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_CITY);
+        super(schema, ConstantesXADES.XADES_TAG_CITY);
     }
 
 }

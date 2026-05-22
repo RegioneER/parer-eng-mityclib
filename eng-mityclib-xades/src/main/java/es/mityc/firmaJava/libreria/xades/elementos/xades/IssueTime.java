@@ -30,7 +30,7 @@ public class IssueTime extends AbstractXadesDateElement {
      * @param data
      */
     public IssueTime(XAdESSchemas schema, Date data) {
-	super(schema, ConstantesXADES.XADES_TAG_ISSUE_TIME, data);
+        super(schema, ConstantesXADES.XADES_TAG_ISSUE_TIME, data);
     }
 
     /**
@@ -38,7 +38,7 @@ public class IssueTime extends AbstractXadesDateElement {
      * @param nameElement
      */
     public IssueTime(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_ISSUE_TIME);
+        super(schema, ConstantesXADES.XADES_TAG_ISSUE_TIME);
     }
 
 }

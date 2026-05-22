@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 public class Organization extends AbstractXadesStringElement {
 
     public Organization(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_ORGANIZATION, data);
+        super(schema, ConstantesXADES.XADES_TAG_ORGANIZATION, data);
     }
 
     /**
@@ -32,7 +32,7 @@ public class Organization extends AbstractXadesStringElement {
      * @param schema
      */
     public Organization(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_ORGANIZATION);
+        super(schema, ConstantesXADES.XADES_TAG_ORGANIZATION);
     }
 
 }

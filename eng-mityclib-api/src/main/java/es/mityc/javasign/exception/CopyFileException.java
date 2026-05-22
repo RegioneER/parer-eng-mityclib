@@ -33,7 +33,7 @@ public class CopyFileException extends SignMITyCException {
      * </p>
      */
     public CopyFileException() {
-	super();
+        super();
     }
 
     /**
@@ -44,7 +44,7 @@ public class CopyFileException extends SignMITyCException {
      * @param message Mensaje de error
      */
     public CopyFileException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -55,7 +55,7 @@ public class CopyFileException extends SignMITyCException {
      * @param cause Causa de la excepcion
      */
     public CopyFileException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -67,7 +67,7 @@ public class CopyFileException extends SignMITyCException {
      * @param cause   Causa de la excepcion
      */
     public CopyFileException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

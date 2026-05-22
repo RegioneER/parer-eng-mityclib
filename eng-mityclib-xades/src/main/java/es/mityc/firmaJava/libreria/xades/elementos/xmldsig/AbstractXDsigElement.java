@@ -31,7 +31,7 @@ public abstract class AbstractXDsigElement extends AbstractXMLElement {
     protected String namespaceXDsig;
 
     protected AbstractXDsigElement() {
-	super();
+        super();
     }
 
     /**
@@ -45,9 +45,9 @@ public abstract class AbstractXDsigElement extends AbstractXMLElement {
      * @throws InvalidInfoNodeException
      */
     protected Element createElement(Document doc, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	setNamespaceXDsig(namespaceXDsig);
-	return createElement(doc);
+            throws InvalidInfoNodeException {
+        setNamespaceXDsig(namespaceXDsig);
+        return createElement(doc);
     }
 
     /**
@@ -60,23 +60,23 @@ public abstract class AbstractXDsigElement extends AbstractXMLElement {
      * @throws InvalidInfoNodeException
      */
     protected void addContent(Element element, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	setNamespaceXDsig(namespaceXDsig);
-	addContent(element);
+            throws InvalidInfoNodeException {
+        setNamespaceXDsig(namespaceXDsig);
+        addContent(element);
     }
 
     /**
      * @return the namespaceXDsig
      */
     public String getNamespaceXDsig() {
-	return namespaceXDsig;
+        return namespaceXDsig;
     }
 
     /**
      * @param namespaceXDsig the namespaceXDsig to set
      */
     public void setNamespaceXDsig(String namespaceXDsig) {
-	this.namespaceXDsig = namespaceXDsig;
+        this.namespaceXDsig = namespaceXDsig;
     }
 
 }

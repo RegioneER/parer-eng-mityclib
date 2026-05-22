@@ -43,24 +43,24 @@ public class XPathTransformData implements ITransformData {
      * @param path
      */
     public void addPath(String path) {
-	paths.add(path);
+        paths.add(path);
     }
 
     /**
      * @see es.mityc.javasign.xml.transform.ITransformData#getExtraData(org.w3c.dom.Document))
      */
     public NodeList getExtraData(Document doc) {
-	SimpleNodeList nl = null;
-	if (paths.size() > 0) {
-	    nl = new SimpleNodeList();
-	    for (String path : paths) {
-		Element pathElement = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG, "ds:XPath");
-		pathElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ds",
-			ConstantesXADES.SCHEMA_DSIG);
-		pathElement.setTextContent(path);
-		nl.addNode(pathElement);
-	    }
-	}
-	return nl;
+        SimpleNodeList nl = null;
+        if (paths.size() > 0) {
+            nl = new SimpleNodeList();
+            for (String path : paths) {
+                Element pathElement = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG, "ds:XPath");
+                pathElement.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:ds",
+                        ConstantesXADES.SCHEMA_DSIG);
+                pathElement.setTextContent(path);
+                nl.addNode(pathElement);
+            }
+        }
+        return nl;
     }
 }

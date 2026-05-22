@@ -31,7 +31,7 @@ public class XMLDataURIType extends AbstractXMLElement {
     protected URI value;
 
     public XMLDataURIType(URI value) {
-	this.value = value;
+        this.value = value;
     }
 
     /**
@@ -39,11 +39,11 @@ public class XMLDataURIType extends AbstractXMLElement {
      */
     @Override
     public void addContent(Element element) throws InvalidInfoNodeException {
-	if (value == null)
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir nodo XMLDataURIType");
+        if (value == null)
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir nodo XMLDataURIType");
 
-	element.setTextContent(value.toString());
+        element.setTextContent(value.toString());
     }
 
     /**
@@ -51,14 +51,14 @@ public class XMLDataURIType extends AbstractXMLElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof XMLDataURIType) {
-	    if (value.equals(((XMLDataURIType) obj).value))
-		return true;
-	} else if (obj instanceof URI) {
-	    if (value.equals(obj))
-		return true;
-	}
-	return false;
+        if (obj instanceof XMLDataURIType) {
+            if (value.equals(((XMLDataURIType) obj).value))
+                return true;
+        } else if (obj instanceof URI) {
+            if (value.equals(obj))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -66,40 +66,40 @@ public class XMLDataURIType extends AbstractXMLElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	Node node = getFirstNonvoidNode(element);
-	if (node.getNodeType() != Node.TEXT_NODE)
-	    throw new InvalidInfoNodeException(
-		    "Nodo xsd:anyURI no contiene CDATA como primer valor");
+        Node node = getFirstNonvoidNode(element);
+        if (node.getNodeType() != Node.TEXT_NODE)
+            throw new InvalidInfoNodeException(
+                    "Nodo xsd:anyURI no contiene CDATA como primer valor");
 
-	URI uri;
+        URI uri;
 
-	String data = node.getNodeValue();
-	if (data == null)
-	    throw new InvalidInfoNodeException("No hay URI en nodo xsd:anyURI");
+        String data = node.getNodeValue();
+        if (data == null)
+            throw new InvalidInfoNodeException("No hay URI en nodo xsd:anyURI");
 
-	try {
-	    // FIX: Cambia los espacios por %20 para evitar problemas con la clase URI
-	    data = data.replace(" ", "%20");
-	    uri = new URI(data);
-	} catch (URISyntaxException ex) {
-	    throw new InvalidInfoNodeException("URI malformada en nodo xsd:anyURI", ex);
-	}
+        try {
+            // FIX: Cambia los espacios por %20 para evitar problemas con la clase URI
+            data = data.replace(" ", "%20");
+            uri = new URI(data);
+        } catch (URISyntaxException ex) {
+            throw new InvalidInfoNodeException("URI malformada en nodo xsd:anyURI", ex);
+        }
 
-	this.value = uri;
+        this.value = uri;
     }
 
     /**
      * @return the value
      */
     public URI getValue() {
-	return value;
+        return value;
     }
 
     /**
      * @param value the value to set
      */
     public void setValue(URI value) {
-	this.value = value;
+        this.value = value;
     }
 
 }

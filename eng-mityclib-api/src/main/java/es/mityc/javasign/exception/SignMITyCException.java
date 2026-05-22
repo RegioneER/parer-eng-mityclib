@@ -33,7 +33,7 @@ public class SignMITyCException extends Exception {
      * </p>
      */
     public SignMITyCException() {
-	super();
+        super();
     }
 
     /**
@@ -44,7 +44,7 @@ public class SignMITyCException extends Exception {
      * @param message Mensaje de error
      */
     public SignMITyCException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -55,7 +55,7 @@ public class SignMITyCException extends Exception {
      * @param cause Causa de la excepcion
      */
     public SignMITyCException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -67,7 +67,7 @@ public class SignMITyCException extends Exception {
      * @param cause   Causa de la excepcion
      */
     public SignMITyCException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

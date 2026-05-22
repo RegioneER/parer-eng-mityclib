@@ -57,46 +57,46 @@ public class PoliciesTool {
      *                         algún problema al insertar el nodo
      */
     public static void insertPolicyNode(Element signNode, String namespaceDS, String namespaceXAdES,
-	    XAdESSchemas schema, SignaturePolicyIdentifier spi) throws PolicyException {
-	// Buscar el nodo SignedSignatureProperties para añadirle la política
-	NodeList list = signNode.getElementsByTagNameNS(schema.getSchemaUri(),
-		ConstantesXADES.SIGNED_SIGNATURE_PROPERTIES);
-	if ((list.getLength() != 1) || (list.item(0).getNodeType() != Node.ELEMENT_NODE)) {
-	    throw new PolicyException(
-		    "No hay nodo SignedSignatureProperties claro al que aplicar la política");
-	}
-	// Crea el nodo de política
-	Element policy;
-	try {
-	    policy = spi.createElement(signNode.getOwnerDocument(), namespaceDS, namespaceXAdES);
-	} catch (InvalidInfoNodeException ex) {
-	    throw new PolicyException("Error en la creacion de la política:" + ex.getMessage(), ex);
-	}
+            XAdESSchemas schema, SignaturePolicyIdentifier spi) throws PolicyException {
+        // Buscar el nodo SignedSignatureProperties para añadirle la política
+        NodeList list = signNode.getElementsByTagNameNS(schema.getSchemaUri(),
+                ConstantesXADES.SIGNED_SIGNATURE_PROPERTIES);
+        if ((list.getLength() != 1) || (list.item(0).getNodeType() != Node.ELEMENT_NODE)) {
+            throw new PolicyException(
+                    "No hay nodo SignedSignatureProperties claro al que aplicar la política");
+        }
+        // Crea el nodo de política
+        Element policy;
+        try {
+            policy = spi.createElement(signNode.getOwnerDocument(), namespaceDS, namespaceXAdES);
+        } catch (InvalidInfoNodeException ex) {
+            throw new PolicyException("Error en la creacion de la política:" + ex.getMessage(), ex);
+        }
 
-	NombreNodo SIGNING_TIME = new NombreNodo(schema.getSchemaUri(),
-		ConstantesXADES.SIGNING_TIME);
-	NombreNodo SIGNING_CERTIFICATE = new NombreNodo(schema.getSchemaUri(),
-		ConstantesXADES.SIGNING_CERTIFICATE);
-	NombreNodo SIGNATURE_POLICY_IDENTIFIER = new NombreNodo(schema.getSchemaUri(),
-		ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
-	// busca la posicion donde poner el nodo
-	Element signedSignatureProperties = (Element) list.item(0);
-	Node node = signedSignatureProperties.getFirstChild();
-	while (node != null) {
-	    if (node.getNodeType() != Node.ELEMENT_NODE)
-		throw new PolicyException("Error en el formato de SignedSignatureProperties");
-	    NombreNodo nombre = new NombreNodo(node.getNamespaceURI(), node.getLocalName());
-	    if ((!nombre.equals(SIGNING_TIME)) && (!nombre.equals(SIGNING_CERTIFICATE)))
-		break;
-	    node = node.getNextSibling();
-	}
-	// Si existe un nodo policy, lo sustituyes
-	if ((node != null) && (SIGNATURE_POLICY_IDENTIFIER
-		.equals(new NombreNodo(node.getNamespaceURI(), node.getLocalName())))) {
-	    signedSignatureProperties.replaceChild(policy, node);
-	} else {
-	    signedSignatureProperties.insertBefore(policy, node);
-	}
+        NombreNodo SIGNING_TIME = new NombreNodo(schema.getSchemaUri(),
+                ConstantesXADES.SIGNING_TIME);
+        NombreNodo SIGNING_CERTIFICATE = new NombreNodo(schema.getSchemaUri(),
+                ConstantesXADES.SIGNING_CERTIFICATE);
+        NombreNodo SIGNATURE_POLICY_IDENTIFIER = new NombreNodo(schema.getSchemaUri(),
+                ConstantesXADES.SIGNATURE_POLICY_IDENTIFIER);
+        // busca la posicion donde poner el nodo
+        Element signedSignatureProperties = (Element) list.item(0);
+        Node node = signedSignatureProperties.getFirstChild();
+        while (node != null) {
+            if (node.getNodeType() != Node.ELEMENT_NODE)
+                throw new PolicyException("Error en el formato de SignedSignatureProperties");
+            NombreNodo nombre = new NombreNodo(node.getNamespaceURI(), node.getLocalName());
+            if ((!nombre.equals(SIGNING_TIME)) && (!nombre.equals(SIGNING_CERTIFICATE)))
+                break;
+            node = node.getNextSibling();
+        }
+        // Si existe un nodo policy, lo sustituyes
+        if ((node != null) && (SIGNATURE_POLICY_IDENTIFIER
+                .equals(new NombreNodo(node.getNamespaceURI(), node.getLocalName())))) {
+            signedSignatureProperties.replaceChild(policy, node);
+        } else {
+            signedSignatureProperties.insertBefore(policy, node);
+        }
     }
 
 }

@@ -37,7 +37,7 @@ public interface IValidacionPolicy {
      * @return devuelve el resultado de la validacion de la policy
      */
     public PolicyResult validaPolicy(Element nodoFirma,
-	    final ResultadoValidacion resultadoValidacion);
+            final ResultadoValidacion resultadoValidacion);
 
     /**
      * Devuelve una cadena que sirve para identificar la policy

@@ -29,7 +29,7 @@ public class MimeType extends AbstractXadesStringElement {
      * @param data
      */
     public MimeType(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_MIME_TYPE, data);
+        super(schema, ConstantesXADES.XADES_TAG_MIME_TYPE, data);
     }
 
     /**
@@ -37,7 +37,7 @@ public class MimeType extends AbstractXadesStringElement {
      * @param nameElement
      */
     public MimeType(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_MIME_TYPE);
+        super(schema, ConstantesXADES.XADES_TAG_MIME_TYPE);
     }
 
 }

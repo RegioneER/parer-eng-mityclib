@@ -64,35 +64,35 @@ public class DatosNodosFirmados {
     }
 
     public DatosNodosFirmados(ObjectIdentifier oi, String desc, String mimeType, URI encoding) {
-	this.oi = oi;
-	this.desc = desc;
-	this.mimeType = mimeType;
-	this.encoding = encoding;
+        this.oi = oi;
+        this.desc = desc;
+        this.mimeType = mimeType;
+        this.encoding = encoding;
     }
 
     public void setReference(ReferenceProxy ref) {
-	this.reference = ref;
-	// si la referencia señala a un nodo ds:object intenta obtener sus datos de mimetype y
-	// encoding
-	if ((ref != null) && (!isExternalData())) {
-	    Element el = UtilidadTratarNodo.getElementById(ref.getElement().getOwnerDocument(),
-		    getId());
-	    NombreNodo nn = new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT);
-	    if (nn.equals(el)) {
-		setMimeType(el.getAttribute(ConstantesXADES.XADES_TAG_MIME_TYPE));
-		String data = el.getAttribute(ConstantesXADES.XADES_TAG_ENCODING);
-		if (data != null) {
-		    try {
-			// FIX: Cambia los espacios por %20 para evitar problemas con la clase URI
-			data = data.replace(" ", "%20");
-			setEncoding(new URI(data));
-		    } catch (URISyntaxException ex) {
-			LOGGER.warn(I18N.getLocalMessage(ConstantsXAdES.I18N_VALIDATE_9,
-				ex.getMessage()));
-		    }
-		}
-	    }
-	}
+        this.reference = ref;
+        // si la referencia señala a un nodo ds:object intenta obtener sus datos de mimetype y
+        // encoding
+        if ((ref != null) && (!isExternalData())) {
+            Element el = UtilidadTratarNodo.getElementById(ref.getElement().getOwnerDocument(),
+                    getId());
+            NombreNodo nn = new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT);
+            if (nn.equals(el)) {
+                setMimeType(el.getAttribute(ConstantesXADES.XADES_TAG_MIME_TYPE));
+                String data = el.getAttribute(ConstantesXADES.XADES_TAG_ENCODING);
+                if (data != null) {
+                    try {
+                        // FIX: Cambia los espacios por %20 para evitar problemas con la clase URI
+                        data = data.replace(" ", "%20");
+                        setEncoding(new URI(data));
+                    } catch (URISyntaxException ex) {
+                        LOGGER.warn(I18N.getLocalMessage(ConstantsXAdES.I18N_VALIDATE_9,
+                                ex.getMessage()));
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -104,15 +104,15 @@ public class DatosNodosFirmados {
      * @return id del nodo
      */
     public String getId() {
-	// TODO: Si la URI es xpointer u otro obtener correctamente la Id
-	String uri = getURI();
-	return (uri != null)
-		? ((uri.startsWith("#"))
-			? ((uri.startsWith(XPOINTER_ID))
-				? uri.substring(XPOINTER_ID.length(), uri.length() - 2)
-				: uri.substring(1))
-			: uri)
-		: null;
+        // TODO: Si la URI es xpointer u otro obtener correctamente la Id
+        String uri = getURI();
+        return (uri != null)
+                ? ((uri.startsWith("#"))
+                        ? ((uri.startsWith(XPOINTER_ID))
+                                ? uri.substring(XPOINTER_ID.length(), uri.length() - 2)
+                                : uri.substring(1))
+                        : uri)
+                : null;
     }
 
     /**
@@ -123,7 +123,7 @@ public class DatosNodosFirmados {
      * @return id del nodo reference
      */
     public String getIdReference() {
-	return (reference != null) ? reference.getID() : null;
+        return (reference != null) ? reference.getID() : null;
     }
 
     /**
@@ -134,39 +134,39 @@ public class DatosNodosFirmados {
      * @return Element
      */
     public Element getElementReference() {
-	return (reference != null) ? reference.getElement() : null;
+        return (reference != null) ? reference.getElement() : null;
     }
 
     public ObjectIdentifier getObjectIdentifier() {
-	return oi;
+        return oi;
     }
 
     public void setObjectIdentifier(ObjectIdentifier oi) {
-	this.oi = oi;
+        this.oi = oi;
     }
 
     public String getDescription() {
-	return desc;
+        return desc;
     }
 
     public void setDescription(String desc) {
-	this.desc = desc;
+        this.desc = desc;
     }
 
     public String getMimeType() {
-	return mimeType;
+        return mimeType;
     }
 
     public void setMimeType(String mimeType) {
-	this.mimeType = mimeType;
+        this.mimeType = mimeType;
     }
 
     public URI getEncoding() {
-	return encoding;
+        return encoding;
     }
 
     public void setEncoding(URI encoding) {
-	this.encoding = encoding;
+        this.encoding = encoding;
     }
 
     /**
@@ -177,11 +177,11 @@ public class DatosNodosFirmados {
      * @return URI
      */
     public String getURI() {
-	if (reference != null) {
-	    String uri = reference.getURI();
-	    return (XPOINTER_ROOT.equals(uri)) ? "" : uri;
-	}
-	return null;
+        if (reference != null) {
+            String uri = reference.getURI();
+            return (XPOINTER_ROOT.equals(uri)) ? "" : uri;
+        }
+        return null;
     }
 
     /**
@@ -192,7 +192,7 @@ public class DatosNodosFirmados {
      * @return
      */
     public List<TransformProxy> getTransforms() {
-	return (reference != null) ? reference.getTransforms() : new ArrayList<TransformProxy>();
+        return (reference != null) ? reference.getTransforms() : new ArrayList<TransformProxy>();
     }
 
     /**
@@ -209,17 +209,17 @@ public class DatosNodosFirmados {
      *         canonicalizacion
      */
     public boolean canBeModifiedByTransforms() {
-	boolean modified = false;
-	List<TransformProxy> trans = getTransforms();
-	for (TransformProxy transform : trans) {
-	    String uri = transform.getURI();
-	    if ((!TransformProxy.isCanonicalization(transform))
-		    && (!uri.equals(TransformProxy.TRANSFORM_ENVELOPED_SIGNATURE))) {
-		modified = true;
-		break;
-	    }
-	}
-	return modified;
+        boolean modified = false;
+        List<TransformProxy> trans = getTransforms();
+        for (TransformProxy transform : trans) {
+            String uri = transform.getURI();
+            if ((!TransformProxy.isCanonicalization(transform))
+                    && (!uri.equals(TransformProxy.TRANSFORM_ENVELOPED_SIGNATURE))) {
+                modified = true;
+                break;
+            }
+        }
+        return modified;
     }
 
     /**
@@ -230,7 +230,7 @@ public class DatosNodosFirmados {
      * @return contenido del nodo en bytes
      */
     public byte[] getNodoFirmadoBytes() {
-	return reference.getBytes();
+        return reference.getBytes();
     }
 
     /**
@@ -243,7 +243,7 @@ public class DatosNodosFirmados {
      * @throws IOException lanzada si ocurre algún error durante la escritura del contenido
      */
     public void writeBytesToStream(OutputStream os) throws IOException {
-	reference.writeToStream(os);
+        reference.writeToStream(os);
     }
 
     /**
@@ -257,30 +257,30 @@ public class DatosNodosFirmados {
      * @return <code>true</code> si es un nodo con informacion de firma
      */
     public boolean isSignInternal() {
-	boolean res = false;
-	if (!isExternalData()) {
-	    if (reference != null) {
-		String id = getId();
-		if (id != null) {
-		    Element el = UtilidadTratarNodo
-			    .getElementById(reference.getElement().getOwnerDocument(), id);
-		    if (el != null) {
-			Element signature = (Element) reference.getElement().getParentNode()
-				.getParentNode();
-			if (UtilidadTratarNodo.isChildNode(el, signature)) {
-			    // Es un nodo interno a la firma, comprueba si es un nodo ds:object
-			    // dentro de la firma
-			    res = !UtilidadTratarNodo.isChildNode(el,
-				    new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT),
-				    signature);
-			} else {
-			    res = false;
-			}
-		    }
-		}
-	    }
-	}
-	return res;
+        boolean res = false;
+        if (!isExternalData()) {
+            if (reference != null) {
+                String id = getId();
+                if (id != null) {
+                    Element el = UtilidadTratarNodo
+                            .getElementById(reference.getElement().getOwnerDocument(), id);
+                    if (el != null) {
+                        Element signature = (Element) reference.getElement().getParentNode()
+                                .getParentNode();
+                        if (UtilidadTratarNodo.isChildNode(el, signature)) {
+                            // Es un nodo interno a la firma, comprueba si es un nodo ds:object
+                            // dentro de la firma
+                            res = !UtilidadTratarNodo.isChildNode(el,
+                                    new NombreNodo(ConstantesXADES.XML_NS, ConstantesXADES.OBJECT),
+                                    signature);
+                        } else {
+                            res = false;
+                        }
+                    }
+                }
+            }
+        }
+        return res;
     }
 
     /**
@@ -292,14 +292,14 @@ public class DatosNodosFirmados {
      * @return <code>true</code> si los datos son externos al xml que contiene la firma
      */
     public boolean isExternalData() {
-	boolean res = false;
-	if (reference != null) {
-	    String uri = reference.getURI();
-	    if ((uri != null) && (!"".equals(uri)) && (!uri.startsWith("#"))) {
-		res = true;
-	    }
-	}
-	return res;
+        boolean res = false;
+        if (reference != null) {
+            String uri = reference.getURI();
+            if ((uri != null) && (!"".equals(uri)) && (!uri.startsWith("#"))) {
+                res = true;
+            }
+        }
+        return res;
     }
 
 }

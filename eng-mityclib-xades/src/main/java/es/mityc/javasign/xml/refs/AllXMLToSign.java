@@ -31,7 +31,7 @@ public class AllXMLToSign extends AbstractObjectToSign {
      * Constructor.
      */
     public AllXMLToSign() {
-	// addTransform(new TransformEnveloped());
+        // addTransform(new TransformEnveloped());
     }
 
     /**
@@ -39,7 +39,7 @@ public class AllXMLToSign extends AbstractObjectToSign {
      */
     @Override
     public String getReferenceURI() {
-	return ConstantesXADES.CADENA_VACIA;
+        return ConstantesXADES.CADENA_VACIA;
     }
 
 }

@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 public class PostalCode extends AbstractXadesStringElement {
 
     public PostalCode(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_POSTAL_CODE, data);
+        super(schema, ConstantesXADES.XADES_TAG_POSTAL_CODE, data);
     }
 
     /**
@@ -32,7 +32,7 @@ public class PostalCode extends AbstractXadesStringElement {
      * @param schema
      */
     public PostalCode(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_POSTAL_CODE);
+        super(schema, ConstantesXADES.XADES_TAG_POSTAL_CODE);
     }
 
 }

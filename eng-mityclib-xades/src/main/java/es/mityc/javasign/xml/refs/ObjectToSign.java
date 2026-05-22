@@ -44,51 +44,51 @@ public class ObjectToSign {
      * @param encoding     .- Codificacion en la firma del objeto descrito
      */
     public ObjectToSign(AbstractObjectToSign objectToSign, String desc, ObjectIdentifier id,
-	    String mimeType, URI encoding) {
-	this.objectToSign = objectToSign;
-	this.description = desc;
-	this.objectIdentifier = id;
-	this.extraData = new ExtraObjectData(mimeType, encoding);
+            String mimeType, URI encoding) {
+        this.objectToSign = objectToSign;
+        this.description = desc;
+        this.objectIdentifier = id;
+        this.extraData = new ExtraObjectData(mimeType, encoding);
     }
 
     public void setObjectToSign(AbstractObjectToSign objectToSign) {
-	this.objectToSign = objectToSign;
+        this.objectToSign = objectToSign;
     }
 
     public AbstractObjectToSign getObjectToSign() {
-	return this.objectToSign;
+        return this.objectToSign;
     }
 
     public String getDescription() {
-	return description;
+        return description;
     }
 
     public void setDescription(String descripcion) {
-	this.description = descripcion;
+        this.description = descripcion;
     }
 
     public ObjectIdentifier getObjectIdentifier() {
-	return objectIdentifier;
+        return objectIdentifier;
     }
 
     public void setObjectIdentifier(ObjectIdentifier identificador) {
-	this.objectIdentifier = identificador;
+        this.objectIdentifier = identificador;
     }
 
     public String getMimeType() {
-	return extraData.getMimeType();
+        return extraData.getMimeType();
     }
 
     public URI getEncoding() {
-	return extraData.getEncoding();
+        return extraData.getEncoding();
     }
 
     public String getId() {
-	return id;
+        return id;
     }
 
     public void setId(String id) {
-	this.id = id;
+        this.id = id;
     }
 
 }

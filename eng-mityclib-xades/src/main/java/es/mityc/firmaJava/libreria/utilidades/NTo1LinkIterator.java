@@ -28,23 +28,23 @@ public class NTo1LinkIterator<E> implements Iterator<NTo1Link<E>> {
     private NTo1Link<E> nextNode;
 
     NTo1LinkIterator(NTo1Link<E> first) {
-	nextNode = first;
+        nextNode = first;
     }
 
     public boolean hasNext() {
-	return (nextNode != null);
+        return (nextNode != null);
     }
 
     public NTo1Link<E> next() {
-	if (nextNode == null)
-	    throw new NoSuchElementException();
-	NTo1Link<E> node = nextNode;
-	nextNode = nextNode.getNext();
-	return node;
+        if (nextNode == null)
+            throw new NoSuchElementException();
+        NTo1Link<E> node = nextNode;
+        nextNode = nextNode.getNext();
+        return node;
     }
 
     public void remove() {
-	throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
 }

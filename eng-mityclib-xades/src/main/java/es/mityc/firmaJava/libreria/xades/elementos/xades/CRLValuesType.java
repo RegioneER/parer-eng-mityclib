@@ -36,37 +36,37 @@ public class CRLValuesType extends AbstractXADESElement {
      * @param schema
      */
     public CRLValuesType(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     public CRLValuesType(XAdESSchemas schema, ArrayList<EncapsulatedCRLValue> crls) {
-	super(schema);
-	this.crls = crls;
+        super(schema);
+        this.crls = crls;
     }
 
     public void addEncapsulatedCRLValue(EncapsulatedCRLValue crl) {
-	if (crls == null)
-	    crls = new ArrayList<EncapsulatedCRLValue>();
-	crls.add(crl);
+        if (crls == null)
+            crls = new ArrayList<EncapsulatedCRLValue>();
+        crls.add(crl);
     }
 
     /**
      * @return the certificates
      */
     public ArrayList<EncapsulatedCRLValue> getEncapsulatedCRLValues() {
-	return crls;
+        return crls;
     }
 
     /**
      * @param certificates the certificates to set
      */
     public void setEncapsulatedCRLValues(ArrayList<EncapsulatedCRLValue> crls) {
-	this.crls = crls;
+        this.crls = crls;
     }
 
     public void addCRL(X509CRL crl, String id) throws InvalidInfoNodeException {
-	EncapsulatedCRLValue ecv = new EncapsulatedCRLValue(schema, id, crl);
-	addEncapsulatedCRLValue(ecv);
+        EncapsulatedCRLValue ecv = new EncapsulatedCRLValue(schema, id, crl);
+        addEncapsulatedCRLValue(ecv);
     }
 
     /**
@@ -74,22 +74,22 @@ public class CRLValuesType extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof CertificateValuesType) {
-	    CRLValuesType cvt = (CRLValuesType) obj;
-	    ArrayList<EncapsulatedCRLValue> comp = cvt.crls;
-	    if (((crls == null) || (crls.isEmpty())) && ((comp == null) || (comp.isEmpty())))
-		return true;
-	    if (((crls != null) && (comp != null)) && (crls.size() == comp.size())) {
-		Iterator<EncapsulatedCRLValue> itThis = crls.iterator();
-		Iterator<EncapsulatedCRLValue> itComp = comp.iterator();
-		while (itThis.hasNext()) {
-		    if (!itThis.next().equals(itComp.next()))
-			return false;
-		}
-		return true;
-	    }
-	}
-	return false;
+        if (obj instanceof CertificateValuesType) {
+            CRLValuesType cvt = (CRLValuesType) obj;
+            ArrayList<EncapsulatedCRLValue> comp = cvt.crls;
+            if (((crls == null) || (crls.isEmpty())) && ((comp == null) || (comp.isEmpty())))
+                return true;
+            if (((crls != null) && (comp != null)) && (crls.size() == comp.size())) {
+                Iterator<EncapsulatedCRLValue> itThis = crls.iterator();
+                Iterator<EncapsulatedCRLValue> itComp = comp.iterator();
+                while (itThis.hasNext()) {
+                    if (!itThis.next().equals(itComp.next()))
+                        return false;
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -97,27 +97,27 @@ public class CRLValuesType extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	NodeList nodos = element.getChildNodes();
+        NodeList nodos = element.getChildNodes();
 
-	ArrayList<EncapsulatedCRLValue> temp = new ArrayList<EncapsulatedCRLValue>(
-		nodos.getLength());
-	for (int i = 0; i < nodos.getLength(); i++) {
-	    Node nodo = nodos.item(i);
-	    if (isDecorationNode(nodo))
-		continue;
+        ArrayList<EncapsulatedCRLValue> temp = new ArrayList<EncapsulatedCRLValue>(
+                nodos.getLength());
+        for (int i = 0; i < nodos.getLength(); i++) {
+            Node nodo = nodos.item(i);
+            if (isDecorationNode(nodo))
+                continue;
 
-	    if (nodo.getNodeType() != Node.ELEMENT_NODE)
-		throw new InvalidInfoNodeException("Hijo de CRLValuesType no es un elemento");
+            if (nodo.getNodeType() != Node.ELEMENT_NODE)
+                throw new InvalidInfoNodeException("Hijo de CRLValuesType no es un elemento");
 
-	    EncapsulatedCRLValue crl = new EncapsulatedCRLValue(schema);
-	    crl.load((Element) nodo);
-	    temp.add(crl);
-	}
+            EncapsulatedCRLValue crl = new EncapsulatedCRLValue(schema);
+            crl.load((Element) nodo);
+            temp.add(crl);
+        }
 
-	if (temp.size() == 0)
-	    throw new InvalidInfoNodeException("CRLValuesType debe tener al menos un hijo");
+        if (temp.size() == 0)
+            throw new InvalidInfoNodeException("CRLValuesType debe tener al menos un hijo");
 
-	crls = temp;
+        crls = temp;
     }
 
     /**
@@ -125,13 +125,13 @@ public class CRLValuesType extends AbstractXADESElement {
      */
     @Override
     protected void addContent(Element element) throws InvalidInfoNodeException {
-	if ((crls == null) || (crls.size() == 0))
-	    throw new InvalidInfoNodeException("CRLValuesType debe tener al menos un hijo");
-	Iterator<EncapsulatedCRLValue> it = crls.iterator();
-	while (it.hasNext()) {
-	    element.appendChild(
-		    it.next().createElement(element.getOwnerDocument(), namespaceXAdES));
-	}
+        if ((crls == null) || (crls.size() == 0))
+            throw new InvalidInfoNodeException("CRLValuesType debe tener al menos un hijo");
+        Iterator<EncapsulatedCRLValue> it = crls.iterator();
+        while (it.hasNext()) {
+            element.appendChild(
+                    it.next().createElement(element.getOwnerDocument(), namespaceXAdES));
+        }
     }
 
     /**
@@ -140,7 +140,7 @@ public class CRLValuesType extends AbstractXADESElement {
      */
     @Override
     public void addContent(Element element, String namespaceXAdES) throws InvalidInfoNodeException {
-	super.addContent(element, namespaceXAdES);
+        super.addContent(element, namespaceXAdES);
     }
 
 }

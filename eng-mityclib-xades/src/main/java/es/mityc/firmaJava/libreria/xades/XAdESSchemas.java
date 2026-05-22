@@ -33,38 +33,38 @@ public enum XAdESSchemas implements Comparable<XAdESSchemas> {
     private String uri;
 
     private XAdESSchemas(String name, String uri) {
-	this.name = name;
-	this.uri = uri;
+        this.name = name;
+        this.uri = uri;
     }
 
     public String getSchemaVersion() {
-	return name;
+        return name;
     }
 
     @Override
     public String toString() {
-	return name;
+        return name;
     }
 
     public String getSchemaUri() {
-	return uri;
+        return uri;
     }
 
     public static XAdESSchemas getXAdESSchema(String esquemaUri) {
-	XAdESSchemas resultado = null;
-	if (esquemaUri != null) {
-	    if (XAdES_111.uri.equals(esquemaUri)) {
-		resultado = XAdES_111;
-	    } else if (XAdES_122.uri.equals(esquemaUri)) {
-		resultado = XAdES_122;
-	    } else if (XAdES_131.uri.equals(esquemaUri)) {
-		resultado = XAdES_131;
-	    } else if (XAdES_132.uri.equals(esquemaUri)) {
-		resultado = XAdES_132;
-	    } else if (XAdES_141.uri.equals(esquemaUri)) {
-		resultado = XAdES_141;
-	    }
-	}
-	return resultado;
+        XAdESSchemas resultado = null;
+        if (esquemaUri != null) {
+            if (XAdES_111.uri.equals(esquemaUri)) {
+                resultado = XAdES_111;
+            } else if (XAdES_122.uri.equals(esquemaUri)) {
+                resultado = XAdES_122;
+            } else if (XAdES_131.uri.equals(esquemaUri)) {
+                resultado = XAdES_131;
+            } else if (XAdES_132.uri.equals(esquemaUri)) {
+                resultado = XAdES_132;
+            } else if (XAdES_141.uri.equals(esquemaUri)) {
+                resultado = XAdES_141;
+            }
+        }
+        return resultado;
     }
 }

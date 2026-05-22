@@ -28,12 +28,12 @@ public interface ICertStatus {
 
     /** Posibles estados de los certificados. */
     enum CERT_STATUS {
-	/** Desconocido: no se conoce el estado del certificado. */
-	unknown,
-	/** Valido: el estado del certificado es valido. */
-	valid,
-	/** Revocado: el certificado se encuentra revocado. */
-	revoked;
+        /** Desconocido: no se conoce el estado del certificado. */
+        unknown,
+        /** Valido: el estado del certificado es valido. */
+        valid,
+        /** Revocado: el certificado se encuentra revocado. */
+        revoked;
     }
 
     /**

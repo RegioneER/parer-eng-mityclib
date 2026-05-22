@@ -42,7 +42,7 @@ public abstract class AbstractXMLElement {
      * @throws InvalidInfoNodeException
      */
     protected void addContent(Element element) throws InvalidInfoNodeException {
-	throw new UnsupportedOperationException("invalid operation");
+        throw new UnsupportedOperationException("invalid operation");
     }
 
     /**
@@ -52,7 +52,7 @@ public abstract class AbstractXMLElement {
      * @param doc Documento donde se agregara el elemento
      */
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	throw new UnsupportedOperationException("invalid operation");
+        throw new UnsupportedOperationException("invalid operation");
     }
 
     /**
@@ -84,11 +84,11 @@ public abstract class AbstractXMLElement {
      * @throws InvalidInfoNodeException Se lanza cuando no se cumple lo esperado
      */
     protected void checkElementName(Element element, String namespaceURI, String name)
-	    throws InvalidInfoNodeException {
-	if (!isElementName(element, namespaceURI, name))
-	    throw new InvalidInfoNodeException("Elemento esperado (".concat(namespaceURI)
-		    .concat(":").concat(name).concat(" Elemento obtenido ")
-		    + element.getNamespaceURI() + ":".concat(element.getLocalName()));
+            throws InvalidInfoNodeException {
+        if (!isElementName(element, namespaceURI, name))
+            throw new InvalidInfoNodeException("Elemento esperado (".concat(namespaceURI)
+                    .concat(":").concat(name).concat(" Elemento obtenido ")
+                    + element.getNamespaceURI() + ":".concat(element.getLocalName()));
     }
 
     /**
@@ -101,10 +101,10 @@ public abstract class AbstractXMLElement {
      * @return
      */
     protected boolean isElementName(Element element, String namespaceURI, String name) {
-	if ((element != null) && (new NombreNodo(namespaceURI, name)
-		.equals(new NombreNodo(element.getNamespaceURI(), element.getLocalName()))))
-	    return true;
-	return false;
+        if ((element != null) && (new NombreNodo(namespaceURI, name)
+                .equals(new NombreNodo(element.getNamespaceURI(), element.getLocalName()))))
+            return true;
+        return false;
     }
 
     /**
@@ -115,7 +115,7 @@ public abstract class AbstractXMLElement {
      * @return
      */
     protected boolean isThisNode(Node node) {
-	throw new UnsupportedOperationException("invalid operation");
+        throw new UnsupportedOperationException("invalid operation");
     }
 
     /**
@@ -126,59 +126,59 @@ public abstract class AbstractXMLElement {
      * @return <code>null<code> si el nodo indicado no es un Element
      */
     protected Element nodeToElement(Node node) {
-	Element element = null;
-	if (node != null) {
-	    if (node.getNodeType() == Node.ELEMENT_NODE)
-		element = (Element) node;
-	}
-	return element;
+        Element element = null;
+        if (node != null) {
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+                element = (Element) node;
+        }
+        return element;
     }
 
     protected static boolean isDecorationNode(Node node) {
-	if (node != null) {
-	    switch (node.getNodeType()) {
-	    case Node.TEXT_NODE:
-		String text = node.getNodeValue().trim();
-		text = text.replaceAll("/n", ConstantesXADES.CADENA_VACIA);
-		text = text.replaceAll("/r", ConstantesXADES.CADENA_VACIA);
-		text = text.replaceAll(ConstantesXADES.ESPACIO, ConstantesXADES.CADENA_VACIA);
-		if (text.equals(ConstantesXADES.CADENA_VACIA))
-		    return true;
-		else
-		    return false;
-	    case Node.COMMENT_NODE:
-		return true;
-	    case Node.ELEMENT_NODE:
-	    default:
-		return false;
-	    }
-	}
-	return true;
+        if (node != null) {
+            switch (node.getNodeType()) {
+            case Node.TEXT_NODE:
+                String text = node.getNodeValue().trim();
+                text = text.replaceAll("/n", ConstantesXADES.CADENA_VACIA);
+                text = text.replaceAll("/r", ConstantesXADES.CADENA_VACIA);
+                text = text.replaceAll(ConstantesXADES.ESPACIO, ConstantesXADES.CADENA_VACIA);
+                if (text.equals(ConstantesXADES.CADENA_VACIA))
+                    return true;
+                else
+                    return false;
+            case Node.COMMENT_NODE:
+                return true;
+            case Node.ELEMENT_NODE:
+            default:
+                return false;
+            }
+        }
+        return true;
     }
 
     protected static Node getFirstNonvoidNode(Node node) {
-	Node child = node.getFirstChild();
+        Node child = node.getFirstChild();
 
-	while ((child != null) && (isDecorationNode(child))) {
-	    child = child.getNextSibling();
-	}
-	return child;
+        while ((child != null) && (isDecorationNode(child))) {
+            child = child.getNextSibling();
+        }
+        return child;
     }
 
     protected static Node getNextNonvoidNode(Node node) {
-	Node child = node.getNextSibling();
+        Node child = node.getNextSibling();
 
-	while ((child != null) && (isDecorationNode(child))) {
-	    child = child.getNextSibling();
-	}
-	return child;
+        while ((child != null) && (isDecorationNode(child))) {
+            child = child.getNextSibling();
+        }
+        return child;
     }
 
     protected static boolean compare(Object obj1, Object obj2) {
-	if ((obj1 == null) && (obj2 == null))
-	    return true;
-	if (obj1 != null)
-	    return (obj1.equals(obj2));
-	return false;
+        if ((obj1 == null) && (obj2 == null))
+            return true;
+        if (obj1 != null)
+            return (obj1.equals(obj2));
+        return false;
     }
 }

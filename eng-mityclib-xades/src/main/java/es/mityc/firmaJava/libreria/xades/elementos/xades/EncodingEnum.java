@@ -42,41 +42,41 @@ public enum EncodingEnum {
     private URI uri;
 
     private EncodingEnum(String uri) {
-	try {
-	    this.uri = new URI(uri);
-	} catch (URISyntaxException ex) {
-	    Logger logger = LoggerFactory.getLogger(EncodingEnum.class);
-	    logger.error("Error creando enumerado de encoding", ex);
-	}
+        try {
+            this.uri = new URI(uri);
+        } catch (URISyntaxException ex) {
+            Logger logger = LoggerFactory.getLogger(EncodingEnum.class);
+            logger.error("Error creando enumerado de encoding", ex);
+        }
     }
 
     public URI getEncodingUri() {
-	return uri;
+        return uri;
     }
 
     public static EncodingEnum getEncoding(String uri) {
-	try {
-	    if ((uri == null) || ("".equals(uri.trim())))
-		return DER_ENCODED;
-	    URI temp = new URI(uri);
-	    if (temp.equals(DER_ENCODED.uri))
-		return DER_ENCODED;
-	    else if (temp.equals(BER_ENCODED.uri))
-		return BER_ENCODED;
-	    else if (temp.equals(CER_ENCODED.uri))
-		return CER_ENCODED;
-	    else if (temp.equals(PER_ENCODED.uri))
-		return PER_ENCODED;
-	    else if (temp.equals(DER131_ENCODED.uri))
-		return DER131_ENCODED;
-	    else if (temp.equals(XER_ENCODED.uri))
-		return XER_ENCODED;
-	} catch (URISyntaxException ex) {
-	    if (logger.isDebugEnabled())
-		logger.debug("Encoding indicado no es una URI", ex);
-	    return null;
-	}
-	return null;
+        try {
+            if ((uri == null) || ("".equals(uri.trim())))
+                return DER_ENCODED;
+            URI temp = new URI(uri);
+            if (temp.equals(DER_ENCODED.uri))
+                return DER_ENCODED;
+            else if (temp.equals(BER_ENCODED.uri))
+                return BER_ENCODED;
+            else if (temp.equals(CER_ENCODED.uri))
+                return CER_ENCODED;
+            else if (temp.equals(PER_ENCODED.uri))
+                return PER_ENCODED;
+            else if (temp.equals(DER131_ENCODED.uri))
+                return DER131_ENCODED;
+            else if (temp.equals(XER_ENCODED.uri))
+                return XER_ENCODED;
+        } catch (URISyntaxException ex) {
+            if (logger.isDebugEnabled())
+                logger.debug("Encoding indicado no es una URI", ex);
+            return null;
+        }
+        return null;
     }
 
 }

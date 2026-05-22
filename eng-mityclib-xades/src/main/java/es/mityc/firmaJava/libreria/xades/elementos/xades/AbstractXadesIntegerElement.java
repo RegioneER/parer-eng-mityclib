@@ -29,9 +29,9 @@ public abstract class AbstractXadesIntegerElement extends AbstractXADESElement {
     private String nameElement;
 
     public AbstractXadesIntegerElement(XAdESSchemas schema, String nameElement, BigInteger data) {
-	super(schema);
-	this.nameElement = nameElement;
-	this.data = new XMLDataIntegerType(data);
+        super(schema);
+        this.nameElement = nameElement;
+        this.data = new XMLDataIntegerType(data);
     }
 
     /**
@@ -40,8 +40,8 @@ public abstract class AbstractXadesIntegerElement extends AbstractXADESElement {
      * @param schema
      */
     public AbstractXadesIntegerElement(XAdESSchemas schema, String nameElement) {
-	super(schema);
-	this.nameElement = nameElement;
+        super(schema);
+        this.nameElement = nameElement;
     }
 
     /**
@@ -49,13 +49,13 @@ public abstract class AbstractXadesIntegerElement extends AbstractXADESElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	if (data == null)
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir elemento " + nameElement);
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + nameElement);
-	data.addContent(res);
-	return res;
+        if (data == null)
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir elemento " + nameElement);
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + nameElement);
+        data.addContent(res);
+        return res;
     }
 
     /**
@@ -64,8 +64,8 @@ public abstract class AbstractXadesIntegerElement extends AbstractXADESElement {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -73,13 +73,13 @@ public abstract class AbstractXadesIntegerElement extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof AbstractXadesIntegerElement) {
-	    AbstractXadesIntegerElement desc = (AbstractXadesIntegerElement) obj;
-	    if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data)))
-		return true;
-	} else
-	    return data.equals(obj);
-	return false;
+        if (obj instanceof AbstractXadesIntegerElement) {
+            AbstractXadesIntegerElement desc = (AbstractXadesIntegerElement) obj;
+            if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data)))
+                return true;
+        } else
+            return data.equals(obj);
+        return false;
     }
 
     /**
@@ -87,22 +87,22 @@ public abstract class AbstractXadesIntegerElement extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), nameElement);
-	data = new XMLDataIntegerType(null);
-	data.load(element);
+        checkElementName(element, schema.getSchemaUri(), nameElement);
+        data = new XMLDataIntegerType(null);
+        data.load(element);
     }
 
     public void setValue(BigInteger value) {
-	if (data == null)
-	    data = new XMLDataIntegerType(value);
-	else
-	    data.setValue(value);
+        if (data == null)
+            data = new XMLDataIntegerType(value);
+        else
+            data.setValue(value);
     }
 
     public BigInteger getValue() {
-	if (data != null)
-	    return data.getValue();
-	return null;
+        if (data != null)
+            return data.getValue();
+        return null;
     }
 
     /**
@@ -110,6 +110,6 @@ public abstract class AbstractXadesIntegerElement extends AbstractXADESElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(), nameElement);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(), nameElement);
     }
 }

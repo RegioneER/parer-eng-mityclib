@@ -27,11 +27,11 @@ public class PolicyException extends FirmaXMLError {
     }
 
     public PolicyException(String msg) {
-	super(msg);
+        super(msg);
     }
 
     public PolicyException(Exception e) {
-	super(e);
+        super(e);
     }
 
     /**
@@ -39,14 +39,14 @@ public class PolicyException extends FirmaXMLError {
      * @param cause
      */
     public PolicyException(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
     /**
      * @param cause
      */
     public PolicyException(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
 }

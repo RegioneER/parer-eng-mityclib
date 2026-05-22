@@ -47,8 +47,8 @@ public class TransformXSLT extends Transform implements ITransformData {
      * </p>
      */
     public TransformXSLT() {
-	super(TransformProxy.TRANSFORM_XSLT, null);
-	setTransformData(this);
+        super(TransformProxy.TRANSFORM_XSLT, null);
+        setTransformData(this);
     }
 
     /**
@@ -56,16 +56,16 @@ public class TransformXSLT extends Transform implements ITransformData {
      */
     @Override
     public NodeList getExtraData(Document doc) {
-	SimpleNodeList nl = null;
-	if ((stylesheet != null)) {
-	    try {
-		Node node = doc.importNode(stylesheet, true);
-		nl = new SimpleNodeList();
-		nl.addNode(node);
-	    } catch (DOMException ex) {
-	    }
-	}
-	return nl;
+        SimpleNodeList nl = null;
+        if ((stylesheet != null)) {
+            try {
+                Node node = doc.importNode(stylesheet, true);
+                nl = new SimpleNodeList();
+                nl.addNode(node);
+            } catch (DOMException ex) {
+            }
+        }
+        return nl;
     }
 
     /**
@@ -78,15 +78,15 @@ public class TransformXSLT extends Transform implements ITransformData {
      * @throws IllegalArgumentException si el elemento no se corresponde con una hoja de estilo
      */
     public void setStyleSheet(Element stylesheet) throws IllegalArgumentException {
-	if (!"http://www.w3.org/1999/XSL/Transform".equals(stylesheet.getNamespaceURI())) {
-	    throw new IllegalArgumentException(
-		    I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_8, stylesheet.getNamespaceURI()));
-	}
-	if (!"stylesheet".equals(stylesheet.getLocalName())) {
-	    throw new IllegalArgumentException(
-		    I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_9, stylesheet.getLocalName()));
-	}
-	this.stylesheet = stylesheet;
+        if (!"http://www.w3.org/1999/XSL/Transform".equals(stylesheet.getNamespaceURI())) {
+            throw new IllegalArgumentException(
+                    I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_8, stylesheet.getNamespaceURI()));
+        }
+        if (!"stylesheet".equals(stylesheet.getLocalName())) {
+            throw new IllegalArgumentException(
+                    I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_9, stylesheet.getLocalName()));
+        }
+        this.stylesheet = stylesheet;
     }
 
 }

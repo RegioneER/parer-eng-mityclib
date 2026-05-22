@@ -34,17 +34,17 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
     private String nameElement;
 
     public AbstractXDsigIntegerElement(String nameElement, BigInteger data) {
-	super();
-	this.nameElement = nameElement;
-	this.data = new XMLDataIntegerType(data);
+        super();
+        this.nameElement = nameElement;
+        this.data = new XMLDataIntegerType(data);
     }
 
     /**
      * @param nameElement
      */
     public AbstractXDsigIntegerElement(String nameElement) {
-	super();
-	this.nameElement = nameElement;
+        super();
+        this.nameElement = nameElement;
     }
 
     /**
@@ -52,14 +52,14 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	if (data == null) {
-	    throw new InvalidInfoNodeException(
-		    "Informacion insuficiente para escribir elemento " + nameElement);
-	}
-	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-		namespaceXDsig + ":" + nameElement);
-	data.addContent(res);
-	return res;
+        if (data == null) {
+            throw new InvalidInfoNodeException(
+                    "Informacion insuficiente para escribir elemento " + nameElement);
+        }
+        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+                namespaceXDsig + ":" + nameElement);
+        data.addContent(res);
+        return res;
     }
 
     /**
@@ -68,8 +68,8 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig);
     }
 
     /**
@@ -77,15 +77,15 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof AbstractXDsigIntegerElement) {
-	    AbstractXDsigIntegerElement desc = (AbstractXDsigIntegerElement) obj;
-	    if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data))) {
-		return true;
-	    }
-	} else {
-	    return data.equals(obj);
-	}
-	return false;
+        if (obj instanceof AbstractXDsigIntegerElement) {
+            AbstractXDsigIntegerElement desc = (AbstractXDsigIntegerElement) obj;
+            if ((nameElement.equals(desc.nameElement)) && (data.equals(desc.data))) {
+                return true;
+            }
+        } else {
+            return data.equals(obj);
+        }
+        return false;
     }
 
     /**
@@ -93,24 +93,24 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, ConstantesXADES.SCHEMA_DSIG, nameElement);
-	data = new XMLDataIntegerType(null);
-	data.load(element);
+        checkElementName(element, ConstantesXADES.SCHEMA_DSIG, nameElement);
+        data = new XMLDataIntegerType(null);
+        data.load(element);
     }
 
     public void setValue(BigInteger value) {
-	if (data == null) {
-	    data = new XMLDataIntegerType(value);
-	} else {
-	    data.setValue(value);
-	}
+        if (data == null) {
+            data = new XMLDataIntegerType(value);
+        } else {
+            data.setValue(value);
+        }
     }
 
     public BigInteger getValue() {
-	if (data != null) {
-	    return data.getValue();
-	}
-	return null;
+        if (data != null) {
+            return data.getValue();
+        }
+        return null;
     }
 
     /**
@@ -118,6 +118,6 @@ public class AbstractXDsigIntegerElement extends AbstractXDsigElement {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG, nameElement);
+        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG, nameElement);
     }
 }

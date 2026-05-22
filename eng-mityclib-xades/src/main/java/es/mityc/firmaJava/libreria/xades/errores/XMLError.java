@@ -37,15 +37,15 @@ public class XMLError extends Exception {
      * @param msg El detalle mensaje
      */
     public XMLError(String msg) {
-	super(msg);
+        super(msg);
     }
 
     public XMLError(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
     public XMLError(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
 }

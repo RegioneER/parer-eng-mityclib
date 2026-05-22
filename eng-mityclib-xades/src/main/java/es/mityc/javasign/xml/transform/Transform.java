@@ -42,8 +42,8 @@ public class Transform {
      *                  informacion extra para la transformada
      */
     public Transform(String alg, ITransformData extraData) {
-	this.algorithm = alg;
-	this.data = extraData;
+        this.algorithm = alg;
+        this.data = extraData;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Transform {
      * @param extraData
      */
     protected void setTransformData(ITransformData extraData) {
-	this.data = extraData;
+        this.data = extraData;
     }
 
     /**
@@ -65,7 +65,7 @@ public class Transform {
      * @return the algorithm
      */
     public String getAlgorithm() {
-	return algorithm;
+        return algorithm;
     }
 
     /**
@@ -78,11 +78,11 @@ public class Transform {
      * @return listado de nodos
      */
     public NodeList getExtraData(Document doc) {
-	NodeList nl = null;
-	if (data != null) {
-	    nl = data.getExtraData(doc);
-	}
-	return nl;
+        NodeList nl = null;
+        if (data != null) {
+            nl = data.getExtraData(doc);
+        }
+        return nl;
     }
 
 }

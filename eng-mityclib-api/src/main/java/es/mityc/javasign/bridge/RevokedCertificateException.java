@@ -33,7 +33,7 @@ public class RevokedCertificateException extends InvalidCertificateException {
      * </p>
      */
     public RevokedCertificateException() {
-	super();
+        super();
     }
 
     /**
@@ -44,7 +44,7 @@ public class RevokedCertificateException extends InvalidCertificateException {
      * @param message Mensaje de error
      */
     public RevokedCertificateException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -55,7 +55,7 @@ public class RevokedCertificateException extends InvalidCertificateException {
      * @param cause Causa de la excepcion
      */
     public RevokedCertificateException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -67,7 +67,7 @@ public class RevokedCertificateException extends InvalidCertificateException {
      * @param cause   Causa de la excepcion
      */
     public RevokedCertificateException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

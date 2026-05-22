@@ -32,8 +32,8 @@ public class PKCS12Error extends Exception {
      * @param causa causa del error
      */
     public PKCS12Error(String causa) {
-	super(causa);
-	log.error(causa);
+        super(causa);
+        log.error(causa);
     }
 
     /**
@@ -42,12 +42,12 @@ public class PKCS12Error extends Exception {
      * @param e excepcion
      */
     public PKCS12Error(Exception e) {
-	log.error(e.getMessage());
+        log.error(e.getMessage());
     }
 
     @Override
     public String toString() {
-	return super.toString();
+        return super.toString();
     }
 
 }

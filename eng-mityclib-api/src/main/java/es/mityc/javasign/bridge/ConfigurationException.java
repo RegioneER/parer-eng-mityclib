@@ -31,7 +31,7 @@ public class ConfigurationException extends Exception {
      * </p>
      */
     public ConfigurationException() {
-	super();
+        super();
     }
 
     /**
@@ -42,7 +42,7 @@ public class ConfigurationException extends Exception {
      * @param message Mensaje de error
      */
     public ConfigurationException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -53,7 +53,7 @@ public class ConfigurationException extends Exception {
      * @param cause Causa de la excepcion
      */
     public ConfigurationException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -65,7 +65,7 @@ public class ConfigurationException extends Exception {
      * @param cause   Causa de la excepcion
      */
     public ConfigurationException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

@@ -25,16 +25,16 @@ public class AddXadesException extends Exception {
     }
 
     public AddXadesException(String message) {
-	super(message);
+        super(message);
     }
 
     public AddXadesException(Throwable cause) {
-	super(cause);
+        super(cause);
 
     }
 
     public AddXadesException(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

@@ -36,7 +36,7 @@ public class SigPolicyId extends ObjectIdentifierType {
      * @param uri
      */
     public SigPolicyId(XAdESSchemas schema, URI uri, String description) {
-	super(schema, uri, description);
+        super(schema, uri, description);
     }
 
     /**
@@ -44,7 +44,7 @@ public class SigPolicyId extends ObjectIdentifierType {
      * @param schema
      */
     public SigPolicyId(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -52,8 +52,8 @@ public class SigPolicyId extends ObjectIdentifierType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIG_POLICY_ID);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.SIG_POLICY_ID);
+        super.load(element);
     }
 
     /**
@@ -61,8 +61,8 @@ public class SigPolicyId extends ObjectIdentifierType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.SIG_POLICY_ID);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.SIG_POLICY_ID);
     }
 
     /**
@@ -71,8 +71,8 @@ public class SigPolicyId extends ObjectIdentifierType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -80,10 +80,10 @@ public class SigPolicyId extends ObjectIdentifierType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.SIG_POLICY_ID);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.SIG_POLICY_ID);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

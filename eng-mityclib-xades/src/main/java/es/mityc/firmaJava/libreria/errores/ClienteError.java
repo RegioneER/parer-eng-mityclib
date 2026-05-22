@@ -38,8 +38,8 @@ public class ClienteError extends Exception {
      * @param msg Detalle del mensaje
      */
     public ClienteError(String msg) {
-	super(msg);
-	this.mensaje = msg;
+        super(msg);
+        this.mensaje = msg;
     }
 
     /**
@@ -48,13 +48,13 @@ public class ClienteError extends Exception {
      * @param msg Excepcion a propagar
      */
     public ClienteError(Throwable msg) {
-	super(msg);
-	this.mensaje = msg.getMessage();
+        super(msg);
+        this.mensaje = msg.getMessage();
     }
 
     public ClienteError(String msg, Throwable th) {
-	super(msg, th);
-	this.mensaje = msg;
+        super(msg, th);
+        this.mensaje = msg;
     }
 
     /**
@@ -63,6 +63,6 @@ public class ClienteError extends Exception {
      * @return mensaje Obtiene el mensaje
      */
     public String getMessage() {
-	return mensaje;
+        return mensaje;
     }
 }

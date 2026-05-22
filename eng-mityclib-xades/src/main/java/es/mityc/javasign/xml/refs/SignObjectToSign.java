@@ -38,7 +38,7 @@ public class SignObjectToSign extends InternObjectToSign {
      * @param id identidad que tiene la firma contrafirmada
      */
     public SignObjectToSign(String id) {
-	super(id);
+        super(id);
     }
 
     /**
@@ -46,7 +46,7 @@ public class SignObjectToSign extends InternObjectToSign {
      */
     @Override
     public String getType() {
-	return ConstantesXADES.SCHEMA_COUNTER_SIGNATURE;
+        return ConstantesXADES.SCHEMA_COUNTER_SIGNATURE;
     }
 
 }

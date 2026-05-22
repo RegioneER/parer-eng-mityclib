@@ -30,7 +30,7 @@ public class TSClienteError extends Exception {
      * <p>
      */
     public TSClienteError() {
-	super();
+        super();
     }
 
     /**
@@ -41,7 +41,7 @@ public class TSClienteError extends Exception {
      * @param mensaje Valor del mensaje
      */
     public TSClienteError(String mensaje) {
-	super(mensaje);
+        super(mensaje);
     }
 
     /**
@@ -52,7 +52,7 @@ public class TSClienteError extends Exception {
      * @param causa Excepcion original
      */
     public TSClienteError(Throwable causa) {
-	super(causa);
+        super(causa);
     }
 
     /**
@@ -64,7 +64,7 @@ public class TSClienteError extends Exception {
      * @param causa   Excepcion original
      */
     public TSClienteError(String mensaje, Throwable causa) {
-	super(mensaje, causa);
+        super(mensaje, causa);
     }
 
     /**
@@ -75,6 +75,6 @@ public class TSClienteError extends Exception {
      * @return "Nombre de la clase":"Mensaje de la excepcion"
      */
     public String toString() {
-	return super.toString();
+        return super.toString();
     }
 }

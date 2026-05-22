@@ -43,8 +43,8 @@ class ManagerCached {
      * @param i18nLocale Locale del manager
      */
     public ManagerCached(final II18nManager manager, final Locale i18nLocale) {
-	this.managerCached = manager;
-	this.localeCached = i18nLocale;
+        this.managerCached = manager;
+        this.localeCached = i18nLocale;
     }
 
     /**
@@ -57,13 +57,13 @@ class ManagerCached {
      * @return <code>true</code> si es el mismo locale, <code>false</code> en otro caso
      */
     public boolean isSameLocale(final Locale otherLocale) {
-	if (otherLocale == null) {
-	    if (this.localeCached == null) {
-		return true;
-	    }
-	    return false;
-	}
-	return otherLocale.equals(this.localeCached);
+        if (otherLocale == null) {
+            if (this.localeCached == null) {
+                return true;
+            }
+            return false;
+        }
+        return otherLocale.equals(this.localeCached);
     }
 
     /**
@@ -74,6 +74,6 @@ class ManagerCached {
      * @return internacionalizador
      */
     public II18nManager getI18nCached() {
-	return managerCached;
+        return managerCached;
     }
 }

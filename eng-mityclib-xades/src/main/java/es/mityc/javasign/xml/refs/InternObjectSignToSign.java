@@ -41,30 +41,30 @@ public class InternObjectSignToSign extends AbstractObjectToSign {
     }
 
     public InternObjectSignToSign(String encoding, String mimeType) {
-	this.encoding = encoding;
-	this.mimeType = mimeType;
+        this.encoding = encoding;
+        this.mimeType = mimeType;
     }
 
     public void setData(Element data) {
-	this.data = data;
+        this.data = data;
     }
 
     public Element getData() {
-	return data;
+        return data;
     }
 
     /**
      * @return the encoding
      */
     public String getEncoding() {
-	return encoding;
+        return encoding;
     }
 
     /**
      * @return the mimeType
      */
     public String getMimeType() {
-	return mimeType;
+        return mimeType;
     }
 
     /**
@@ -72,7 +72,7 @@ public class InternObjectSignToSign extends AbstractObjectToSign {
      */
     @Override
     public String getReferenceURI() {
-	return id;
+        return id;
     }
 
     /**
@@ -80,25 +80,25 @@ public class InternObjectSignToSign extends AbstractObjectToSign {
      */
     @Override
     public List<ObjectContainer> getObjects(Document doc) {
-	List<ObjectContainer> list = super.getObjects(doc);
+        List<ObjectContainer> list = super.getObjects(doc);
 
-	ObjectContainer container = new ObjectContainer(doc);
-	// Es muy importante añadir el nodo antes de generar el nuevo Id para evitar colisiones (ids
-	// repetidos)
-	container.appendChild(doc.adoptNode(getData().cloneNode(true)));
+        ObjectContainer container = new ObjectContainer(doc);
+        // Es muy importante añadir el nodo antes de generar el nuevo Id para evitar colisiones (ids
+        // repetidos)
+        container.appendChild(doc.adoptNode(getData().cloneNode(true)));
 
-	id = UtilidadTratarNodo.newID(doc, "Object-ID-");
-	container.setId(id);
-	if (getEncoding() != null) {
-	    container.setEncoding(getEncoding());
-	}
-	if (getMimeType() != null) {
-	    container.setMimeType(getMimeType());
-	}
-	id = ConstantesXADES.ALMOHADILLA + id;
+        id = UtilidadTratarNodo.newID(doc, "Object-ID-");
+        container.setId(id);
+        if (getEncoding() != null) {
+            container.setEncoding(getEncoding());
+        }
+        if (getMimeType() != null) {
+            container.setMimeType(getMimeType());
+        }
+        id = ConstantesXADES.ALMOHADILLA + id;
 
-	list.add(container);
-	return list;
+        list.add(container);
+        return list;
     }
 
 }

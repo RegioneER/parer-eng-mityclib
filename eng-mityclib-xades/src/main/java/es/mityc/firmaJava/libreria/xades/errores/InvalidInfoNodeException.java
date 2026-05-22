@@ -23,8 +23,8 @@ package es.mityc.firmaJava.libreria.xades.errores;
 public class InvalidInfoNodeException extends XMLError {
 
     public InvalidInfoNodeException() {
-	super();
-	// TODO Auto-generated constructor stub
+        super();
+        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -32,22 +32,22 @@ public class InvalidInfoNodeException extends XMLError {
      * @param cause
      */
     public InvalidInfoNodeException(String message, Throwable cause) {
-	super(message, cause);
-	// TODO Auto-generated constructor stub
+        super(message, cause);
+        // TODO Auto-generated constructor stub
     }
 
     /**
      * @param msg
      */
     public InvalidInfoNodeException(String msg) {
-	super(msg);
+        super(msg);
     }
 
     /**
      * @param cause
      */
     public InvalidInfoNodeException(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
 }

@@ -34,7 +34,7 @@ public class InvalidCertificateException extends Exception {
      * </p>
      */
     public InvalidCertificateException() {
-	super();
+        super();
     }
 
     /**
@@ -45,7 +45,7 @@ public class InvalidCertificateException extends Exception {
      * @param message Mensaje de error
      */
     public InvalidCertificateException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -56,7 +56,7 @@ public class InvalidCertificateException extends Exception {
      * @param cause Causa de la excepcion
      */
     public InvalidCertificateException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -68,7 +68,7 @@ public class InvalidCertificateException extends Exception {
      * @param cause   Causa de la excepcion
      */
     public InvalidCertificateException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

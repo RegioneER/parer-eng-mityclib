@@ -32,14 +32,14 @@ public class Transform extends TransformType {
      * @param algorithm
      */
     public Transform(String algorithm) {
-	super(algorithm);
+        super(algorithm);
     }
 
     /**
      * @param namespaceXDSig
      */
     public Transform() {
-	super();
+        super();
     }
 
     /**
@@ -47,8 +47,8 @@ public class Transform extends TransformType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.TRANSFORM);
-	super.load(element);
+        checkElementName(element, ConstantesXADES.SCHEMA_DSIG, ConstantesXADES.TRANSFORM);
+        super.load(element);
     }
 
     /**
@@ -56,8 +56,8 @@ public class Transform extends TransformType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
-		ConstantesXADES.TRANSFORM);
+        return isElementName(nodeToElement(node), ConstantesXADES.SCHEMA_DSIG,
+                ConstantesXADES.TRANSFORM);
     }
 
     /**
@@ -65,10 +65,10 @@ public class Transform extends TransformType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
-		namespaceXDsig + ":" + ConstantesXADES.TRANSFORM);
-	super.addContent(res, namespaceXDsig);
-	return res;
+        Element res = doc.createElementNS(ConstantesXADES.SCHEMA_DSIG,
+                namespaceXDsig + ":" + ConstantesXADES.TRANSFORM);
+        super.addContent(res, namespaceXDsig);
+        return res;
     }
 
     /**
@@ -77,8 +77,8 @@ public class Transform extends TransformType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXDsig);
     }
 
 }

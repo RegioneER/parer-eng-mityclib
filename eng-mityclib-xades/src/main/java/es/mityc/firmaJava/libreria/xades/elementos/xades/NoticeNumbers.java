@@ -33,7 +33,7 @@ public class NoticeNumbers extends IntegerListType {
      * @param schema
      */
     public NoticeNumbers(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     /**
@@ -41,11 +41,11 @@ public class NoticeNumbers extends IntegerListType {
      * @param ints
      */
     public NoticeNumbers(XAdESSchemas schema, ArrayList<Int> ints) {
-	super(schema, ints);
+        super(schema, ints);
     }
 
     public NoticeNumbers(XAdESSchemas schema, int[] ints) {
-	super(schema, ints);
+        super(schema, ints);
     }
 
     /**
@@ -53,8 +53,8 @@ public class NoticeNumbers extends IntegerListType {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_NOTICE_NUMBERS);
-	super.load(element);
+        checkElementName(element, schema.getSchemaUri(), ConstantesXADES.XADES_TAG_NOTICE_NUMBERS);
+        super.load(element);
     }
 
     /**
@@ -62,8 +62,8 @@ public class NoticeNumbers extends IntegerListType {
      */
     @Override
     public boolean isThisNode(Node node) {
-	return isElementName(nodeToElement(node), schema.getSchemaUri(),
-		ConstantesXADES.XADES_TAG_NOTICE_NUMBERS);
+        return isElementName(nodeToElement(node), schema.getSchemaUri(),
+                ConstantesXADES.XADES_TAG_NOTICE_NUMBERS);
     }
 
     /**
@@ -72,8 +72,8 @@ public class NoticeNumbers extends IntegerListType {
      */
     @Override
     public Element createElement(Document doc, String namespaceXAdES)
-	    throws InvalidInfoNodeException {
-	return super.createElement(doc, namespaceXAdES);
+            throws InvalidInfoNodeException {
+        return super.createElement(doc, namespaceXAdES);
     }
 
     /**
@@ -81,10 +81,10 @@ public class NoticeNumbers extends IntegerListType {
      */
     @Override
     protected Element createElement(Document doc) throws InvalidInfoNodeException {
-	Element res = doc.createElementNS(schema.getSchemaUri(),
-		namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_NOTICE_NUMBERS);
-	super.addContent(res, namespaceXAdES);
-	return res;
+        Element res = doc.createElementNS(schema.getSchemaUri(),
+                namespaceXAdES + ":" + ConstantesXADES.XADES_TAG_NOTICE_NUMBERS);
+        super.addContent(res, namespaceXAdES);
+        return res;
     }
 
 }

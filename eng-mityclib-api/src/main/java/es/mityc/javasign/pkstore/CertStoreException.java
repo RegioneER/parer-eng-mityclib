@@ -35,7 +35,7 @@ public class CertStoreException extends SignMITyCException {
      * </p>
      */
     public CertStoreException() {
-	super();
+        super();
     }
 
     /**
@@ -46,7 +46,7 @@ public class CertStoreException extends SignMITyCException {
      * @param message Mensaje de error
      */
     public CertStoreException(final String message) {
-	super(message);
+        super(message);
     }
 
     /**
@@ -57,7 +57,7 @@ public class CertStoreException extends SignMITyCException {
      * @param cause Causa de la excepcion
      */
     public CertStoreException(final Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
     /**
@@ -69,7 +69,7 @@ public class CertStoreException extends SignMITyCException {
      * @param cause   Causa de la excepcion
      */
     public CertStoreException(final String message, final Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
 
 }

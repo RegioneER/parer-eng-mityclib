@@ -28,7 +28,7 @@ public class Issuer extends AbstractXadesStringElement {
      * @param data
      */
     public Issuer(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_ISSUER, data);
+        super(schema, ConstantesXADES.XADES_TAG_ISSUER, data);
     }
 
     /**
@@ -36,7 +36,7 @@ public class Issuer extends AbstractXadesStringElement {
      * @param nameElement
      */
     public Issuer(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_ISSUER);
+        super(schema, ConstantesXADES.XADES_TAG_ISSUER);
     }
 
 }

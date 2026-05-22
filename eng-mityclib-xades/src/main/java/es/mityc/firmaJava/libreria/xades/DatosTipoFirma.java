@@ -37,32 +37,32 @@ public class DatosTipoFirma {
      */
     public DatosTipoFirma(EnumFormatoFirma tipoXAdES, boolean esXAdES_EPES, boolean esXAdES_A) {
 
-	this.tipoXAdES = tipoXAdES;
-	this.esXAdES_EPES = esXAdES_EPES;
-	this.esXAdES_A = esXAdES_A;
+        this.tipoXAdES = tipoXAdES;
+        this.esXAdES_EPES = esXAdES_EPES;
+        this.esXAdES_A = esXAdES_A;
     }
 
     public EnumFormatoFirma getTipoXAdES() {
-	return tipoXAdES;
+        return tipoXAdES;
     }
 
     public void setTipoXAdES(EnumFormatoFirma tipoXAdES) {
-	this.tipoXAdES = tipoXAdES;
+        this.tipoXAdES = tipoXAdES;
     }
 
     public boolean esXAdES_EPES() {
-	return esXAdES_EPES;
+        return esXAdES_EPES;
     }
 
     public void setEsXAdES_EPES(boolean esXAdES_EPES) {
-	this.esXAdES_EPES = esXAdES_EPES;
+        this.esXAdES_EPES = esXAdES_EPES;
     }
 
     public boolean esXAdES_A() {
-	return esXAdES_A;
+        return esXAdES_A;
     }
 
     public void setEsXAdES_A(boolean esXAdES_A) {
-	this.esXAdES_A = esXAdES_A;
+        this.esXAdES_A = esXAdES_A;
     }
 }

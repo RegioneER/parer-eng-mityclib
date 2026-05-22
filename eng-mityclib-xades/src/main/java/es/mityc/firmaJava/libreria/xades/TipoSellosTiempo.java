@@ -33,10 +33,10 @@ public enum TipoSellosTiempo {
     private String name;
 
     private TipoSellosTiempo(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getTipoSello() {
-	return name;
+        return name;
     }
 }

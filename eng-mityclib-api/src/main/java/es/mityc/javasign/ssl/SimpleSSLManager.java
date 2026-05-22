@@ -43,8 +43,8 @@ public class SimpleSSLManager implements ISSLManager {
      * @param keyManager   gestionador de la autenticacion
      */
     public SimpleSSLManager(TrustManager trustManager, KeyManager keyManager) {
-	this.truster = trustManager;
-	this.keyer = keyManager;
+        this.truster = trustManager;
+        this.keyer = keyManager;
     }
 
     /**
@@ -55,7 +55,7 @@ public class SimpleSSLManager implements ISSLManager {
      * @param errorMng Manager de errores
      */
     public void setSSLErrorManager(final ISSLErrorManager errorMng) {
-	this.errorManager = errorMng;
+        this.errorManager = errorMng;
     }
 
     /**
@@ -68,7 +68,7 @@ public class SimpleSSLManager implements ISSLManager {
      * @see es.mityc.javasign.ssl.ISSLManager#getSSLErrorManager()
      */
     public ISSLErrorManager getSSLErrorManager() {
-	return errorManager;
+        return errorManager;
     }
 
     /**
@@ -81,7 +81,7 @@ public class SimpleSSLManager implements ISSLManager {
      * @see es.mityc.javasign.ssl.ISSLManager#getKeyManager()
      */
     public KeyManager getKeyManager() {
-	return keyer;
+        return keyer;
     }
 
     /**
@@ -94,7 +94,7 @@ public class SimpleSSLManager implements ISSLManager {
      * @see es.mityc.javasign.ssl.ISSLManager#getTrustManager()
      */
     public TrustManager getTrustManager() {
-	return truster;
+        return truster;
     }
 
 }

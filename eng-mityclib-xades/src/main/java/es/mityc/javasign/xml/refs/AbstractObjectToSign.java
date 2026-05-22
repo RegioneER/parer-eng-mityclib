@@ -43,22 +43,22 @@ public abstract class AbstractObjectToSign {
      * @param t transformada
      */
     public void addTransform(Transform t) {
-	// evita que se añada una transformada que ya esta incluida que no aporte nada nuevo
-	if (t != null) {
-	    boolean mustadd = true;
-	    String alg = t.getAlgorithm();
-	    if ((alg != null) && (Transforms.TRANSFORM_ENVELOPED_SIGNATURE.equals(alg))) {
-		for (Transform trans : transforms) {
-		    if (alg.equals(trans.getAlgorithm())) {
-			mustadd = false;
-			break;
-		    }
-		}
-	    }
-	    if (mustadd) {
-		transforms.add(t);
-	    }
-	}
+        // evita que se añada una transformada que ya esta incluida que no aporte nada nuevo
+        if (t != null) {
+            boolean mustadd = true;
+            String alg = t.getAlgorithm();
+            if ((alg != null) && (Transforms.TRANSFORM_ENVELOPED_SIGNATURE.equals(alg))) {
+                for (Transform trans : transforms) {
+                    if (alg.equals(trans.getAlgorithm())) {
+                        mustadd = false;
+                        break;
+                    }
+                }
+            }
+            if (mustadd) {
+                transforms.add(t);
+            }
+        }
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract class AbstractObjectToSign {
      */
     @SuppressWarnings("unchecked")
     public List<Transform> getTransforms() {
-	return (List<Transform>) transforms.clone();
+        return (List<Transform>) transforms.clone();
     }
 
     /**
@@ -94,7 +94,7 @@ public abstract class AbstractObjectToSign {
      * @return devuelve <code>null</code>
      */
     public String getType() {
-	return null;
+        return null;
     }
 
     /**
@@ -111,7 +111,7 @@ public abstract class AbstractObjectToSign {
      * @return devuelve una lista vacía
      */
     public List<ObjectContainer> getObjects(Document doc) {
-	return new ArrayList<ObjectContainer>();
+        return new ArrayList<ObjectContainer>();
     }
 
     /**
@@ -125,7 +125,7 @@ public abstract class AbstractObjectToSign {
      * @return devuelve <code>null</code>
      */
     public MITyCResourceResolver getResolver() {
-	return null;
+        return null;
     }
 
 }

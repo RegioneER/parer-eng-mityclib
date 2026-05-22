@@ -45,51 +45,51 @@ public class DatosCRL {
      * @param esCertConfianza .- Booleano que indica si la CRL es considerada de confianza
      */
     public DatosCRL(String issuer, Date fechaEmision, Date fechaCaducidad, X509CRL x509CRL,
-	    ConfianzaEnum esCertConfianza) {
-	this.issuer = issuer;
-	this.fechaEmision = fechaEmision;
-	this.fechaCaducidad = fechaCaducidad;
-	this.x509CRL = x509CRL;
-	this.esCertConfianza = esCertConfianza;
+            ConfianzaEnum esCertConfianza) {
+        this.issuer = issuer;
+        this.fechaEmision = fechaEmision;
+        this.fechaCaducidad = fechaCaducidad;
+        this.x509CRL = x509CRL;
+        this.esCertConfianza = esCertConfianza;
     }
 
     public String getIssuer() {
-	return issuer;
+        return issuer;
     }
 
     public void setIssuer(String issuer) {
-	this.issuer = issuer;
+        this.issuer = issuer;
     }
 
     public Date getFechaEmision() {
-	return fechaEmision;
+        return fechaEmision;
     }
 
     public void setFechaEmision(Date fechaEmision) {
-	this.fechaEmision = fechaEmision;
+        this.fechaEmision = fechaEmision;
     }
 
     public Date getFechaCaducidad() {
-	return fechaCaducidad;
+        return fechaCaducidad;
     }
 
     public void setFechaCaducidad(Date fechaCaducidad) {
-	this.fechaCaducidad = fechaCaducidad;
+        this.fechaCaducidad = fechaCaducidad;
     }
 
     public X509CRL getX509CRL() {
-	return x509CRL;
+        return x509CRL;
     }
 
     public void setX509CRL(X509CRL x509crl) {
-	x509CRL = x509crl;
+        x509CRL = x509crl;
     }
 
     public ConfianzaEnum esCertConfianza() {
-	return esCertConfianza;
+        return esCertConfianza;
     }
 
     public void setEsCertConfianza(ConfianzaEnum esCertConfianza) {
-	this.esCertConfianza = esCertConfianza;
+        this.esCertConfianza = esCertConfianza;
     }
 }

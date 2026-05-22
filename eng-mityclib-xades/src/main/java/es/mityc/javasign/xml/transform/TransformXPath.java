@@ -31,8 +31,8 @@ public class TransformXPath extends Transform {
 
     /** Constructor. */
     public TransformXPath() {
-	super(TransformProxy.TRANSFORM_XPATH, null);
-	setTransformData(data);
+        super(TransformProxy.TRANSFORM_XPATH, null);
+        setTransformData(data);
     }
 
     /**
@@ -43,6 +43,6 @@ public class TransformXPath extends Transform {
      * @param path
      */
     public void addPath(String path) {
-	data.addPath(path);
+        data.addPath(path);
     }
 }

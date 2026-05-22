@@ -60,7 +60,7 @@ public class DecoderInputStream extends FilterInputStream {
      * @param dec Decodificador que se utilizara para convertir los datos
      */
     public DecoderInputStream(InputStream in, IDecoder dec) {
-	this(in, dec, DEFAULT_BUFFER_SIZE);
+        this(in, dec, DEFAULT_BUFFER_SIZE);
     }
 
     /**
@@ -73,14 +73,14 @@ public class DecoderInputStream extends FilterInputStream {
      * @param size Tamaño del buffer interno de lectura que se le pasara al decodificador
      */
     public DecoderInputStream(InputStream in, IDecoder dec, final int size) {
-	super(in);
-	if (in == null || dec == null) {
-	    throw new NullPointerException();
-	} else if (size <= 0) {
-	    throw new IllegalArgumentException("buffer size <= 0");
-	}
-	this.decoder = dec;
-	buf = new byte[size];
+        super(in);
+        if (in == null || dec == null) {
+            throw new NullPointerException();
+        } else if (size <= 0) {
+            throw new IllegalArgumentException("buffer size <= 0");
+        }
+        this.decoder = dec;
+        buf = new byte[size];
     }
 
     /**
@@ -91,9 +91,9 @@ public class DecoderInputStream extends FilterInputStream {
      * @throws IOException launched with Stream closed
      */
     private void ensureOpen() throws IOException {
-	if (closed) {
-	    throw new IOException("Stream closed");
-	}
+        if (closed) {
+            throw new IOException("Stream closed");
+        }
     }
 
     /** Buffer para leer un único byte. */
@@ -110,8 +110,8 @@ public class DecoderInputStream extends FilterInputStream {
      * @exception IOException if an I/O error has occurred
      */
     public int read() throws IOException {
-	ensureOpen();
-	return read(singleByteBuf, 0, 1) == -1 ? -1 : singleByteBuf[0] & MASK_BYTE;
+        ensureOpen();
+        return read(singleByteBuf, 0, 1) == -1 ? -1 : singleByteBuf[0] & MASK_BYTE;
     }
 
     /**
@@ -131,30 +131,30 @@ public class DecoderInputStream extends FilterInputStream {
      *                        </ul>
      */
     public int read(byte[] b, final int off, final int len) throws IOException {
-	ensureOpen();
-	if ((off | len | (off + len) | (b.length - (off + len))) < 0) {
-	    throw new IndexOutOfBoundsException();
-	} else if (len == 0) {
-	    return 0;
-	}
-	int n;
-	int tries = 0;
-	while ((n = decoder.decode(b, off, len)) == 0) {
-	    if (decoder.needsInput()) {
-		if (fill() == -1) {
-		    if (decoder.isIncomplete()) {
-			throw new EOFException("Decoder has buffer not depleted");
-		    }
-		    reachEOF = true;
-		    return -1;
-		}
-	    }
-	    tries++;
-	    if (tries > MAX_TRIES) {
-		break;
-	    }
-	}
-	return n;
+        ensureOpen();
+        if ((off | len | (off + len) | (b.length - (off + len))) < 0) {
+            throw new IndexOutOfBoundsException();
+        } else if (len == 0) {
+            return 0;
+        }
+        int n;
+        int tries = 0;
+        while ((n = decoder.decode(b, off, len)) == 0) {
+            if (decoder.needsInput()) {
+                if (fill() == -1) {
+                    if (decoder.isIncomplete()) {
+                        throw new EOFException("Decoder has buffer not depleted");
+                    }
+                    reachEOF = true;
+                    return -1;
+                }
+            }
+            tries++;
+            if (tries > MAX_TRIES) {
+                break;
+            }
+        }
+        return n;
     }
 
     /**
@@ -187,25 +187,25 @@ public class DecoderInputStream extends FilterInputStream {
      * @exception IOException if an I/O error has occurred
      */
     public long skip(final long n) throws IOException {
-	if (n < 0) {
-	    throw new IllegalArgumentException("negative skip length");
-	}
-	ensureOpen();
-	int max = (int) Math.min(n, Integer.MAX_VALUE);
-	int total = 0;
-	while (total < max) {
-	    int len = max - total;
-	    if (len > tempBuffer.length) {
-		len = tempBuffer.length;
-	    }
-	    len = read(tempBuffer, 0, len);
-	    if (len == -1) {
-		reachEOF = true;
-		break;
-	    }
-	    total += len;
-	}
-	return total;
+        if (n < 0) {
+            throw new IllegalArgumentException("negative skip length");
+        }
+        ensureOpen();
+        int max = (int) Math.min(n, Integer.MAX_VALUE);
+        int total = 0;
+        while (total < max) {
+            int len = max - total;
+            if (len > tempBuffer.length) {
+                len = tempBuffer.length;
+            }
+            len = read(tempBuffer, 0, len);
+            if (len == -1) {
+                reachEOF = true;
+                break;
+            }
+            total += len;
+        }
+        return total;
     }
 
     /**
@@ -214,10 +214,10 @@ public class DecoderInputStream extends FilterInputStream {
      * @exception IOException if an I/O error has occurred
      */
     public void close() throws IOException {
-	if (!closed) {
-	    in.close();
-	    closed = true;
-	}
+        if (!closed) {
+            in.close();
+            closed = true;
+        }
     }
 
     /**
@@ -228,12 +228,12 @@ public class DecoderInputStream extends FilterInputStream {
      * @exception IOException if an I/O error has occurred
      */
     protected int fill() throws IOException {
-	ensureOpen();
-	lenBuffer = in.read(buf, 0, buf.length);
-	if (lenBuffer > -1) {
-	    decoder.addInput(buf, 0, lenBuffer);
-	}
-	return lenBuffer;
+        ensureOpen();
+        lenBuffer = in.read(buf, 0, buf.length);
+        if (lenBuffer > -1) {
+            decoder.addInput(buf, 0, lenBuffer);
+        }
+        return lenBuffer;
     }
 
     /**
@@ -248,7 +248,7 @@ public class DecoderInputStream extends FilterInputStream {
      * @see java.io.InputStream#reset()
      */
     public boolean markSupported() {
-	return false;
+        return false;
     }
 
     /**
@@ -279,6 +279,6 @@ public class DecoderInputStream extends FilterInputStream {
      * @see java.io.IOException
      */
     public synchronized void reset() throws IOException {
-	throw new IOException("mark/reset not supported");
+        throw new IOException("mark/reset not supported");
     }
 }

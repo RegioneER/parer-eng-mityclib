@@ -40,8 +40,8 @@ public class RevokedInfo {
      * @param date   Fecha de la revocacion
      */
     public RevokedInfo(Object reason, Date date) {
-	this.revokedReason = reason;
-	this.revokedDate = date;
+        this.revokedReason = reason;
+        this.revokedDate = date;
     }
 
     /**
@@ -52,7 +52,7 @@ public class RevokedInfo {
      * @return Object que indica el motivo de revocacion
      */
     public Object getRevokedReason() {
-	return revokedReason;
+        return revokedReason;
     }
 
     /**
@@ -63,7 +63,7 @@ public class RevokedInfo {
      * @return fecha de revocacion
      */
     public Date getRevokedDate() {
-	return revokedDate;
+        return revokedDate;
     }
 
     /**
@@ -77,8 +77,8 @@ public class RevokedInfo {
      */
     @Override
     public Object clone() {
-	Date date = (revokedDate != null) ? (Date) revokedDate.clone() : null;
-	return new RevokedInfo(revokedReason, date);
+        Date date = (revokedDate != null) ? (Date) revokedDate.clone() : null;
+        return new RevokedInfo(revokedReason, date);
     }
 
 }

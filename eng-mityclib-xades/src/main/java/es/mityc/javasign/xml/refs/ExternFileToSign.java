@@ -31,22 +31,22 @@ public class ExternFileToSign extends AbstractObjectToSign {
     private String base;
 
     public ExternFileToSign(File file, String baseUri) {
-	this.file = file;
-	this.base = baseUri;
+        this.file = file;
+        this.base = baseUri;
     }
 
     /**
      * @return the file
      */
     public File getFile() {
-	return file;
+        return file;
     }
 
     /**
      * @param file the file to set
      */
     public void setFile(File file) {
-	this.file = file;
+        this.file = file;
     }
 
     /**
@@ -54,6 +54,6 @@ public class ExternFileToSign extends AbstractObjectToSign {
      */
     @Override
     public String getReferenceURI() {
-	return UtilidadFicheros.relativizeRute(base, file);
+        return UtilidadFicheros.relativizeRute(base, file);
     }
 }

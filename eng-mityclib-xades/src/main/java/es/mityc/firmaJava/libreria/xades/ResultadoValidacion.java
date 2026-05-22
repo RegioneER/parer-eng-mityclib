@@ -56,12 +56,12 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * firma String certRevokedMsg .- Causa de invalidez de un certificado
      */
     public ResultadoValidacion() {
-	this.validado = false;
-	this.resultado = ResultadoEnum.UNKNOWN;
-	this.log = ConstantesXADES.CADENA_VACIA;
-	this.nivelValido = ConstantesXADES.CADENA_VACIA;
-	this.firmados = new ArrayList<String>();
-	this.contrafirmadoPor = new ArrayList<ResultadoValidacion>();
+        this.validado = false;
+        this.resultado = ResultadoEnum.UNKNOWN;
+        this.log = ConstantesXADES.CADENA_VACIA;
+        this.nivelValido = ConstantesXADES.CADENA_VACIA;
+        this.firmados = new ArrayList<String>();
+        this.contrafirmadoPor = new ArrayList<ResultadoValidacion>();
 
     }
 
@@ -70,7 +70,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public String getLog() {
-	return log;
+        return log;
     }
 
     /**
@@ -78,7 +78,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param log
      */
     public void setLog(String log) {
-	this.log = this.log.length() == 0 ? log : this.log + " - " + log;
+        this.log = this.log.length() == 0 ? log : this.log + " - " + log;
     }
 
     /**
@@ -86,7 +86,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public boolean isValidate() {
-	return validado;
+        return validado;
     }
 
     /**
@@ -94,23 +94,23 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param validado
      */
     public void setValidate(boolean validado) {
-	this.validado = validado;
+        this.validado = validado;
     }
 
     public ResultadoEnum getResultado() {
-	return resultado;
+        return resultado;
     }
 
     public void setResultado(ResultadoEnum resultado) {
-	this.resultado = resultado;
+        this.resultado = resultado;
     }
 
     public Document getDoc() {
-	return doc;
+        return doc;
     }
 
     public void setDoc(Document doc) {
-	this.doc = doc;
+        this.doc = doc;
     }
 
     /**
@@ -118,7 +118,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public String getNivelValido() {
-	return nivelValido;
+        return nivelValido;
     }
 
     /**
@@ -126,7 +126,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param log
      */
     public void setNivelValido(String nivelValido) {
-	this.nivelValido = nivelValido;
+        this.nivelValido = nivelValido;
     }
 
     /**
@@ -134,7 +134,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return
      */
     public DatosFirma getDatosFirma() {
-	return datosFirma;
+        return datosFirma;
     }
 
     /**
@@ -142,7 +142,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param datosFirma
      */
     public void setDatosFirma(DatosFirma datosFirma) {
-	this.datosFirma = datosFirma;
+        this.datosFirma = datosFirma;
     }
 
     /**
@@ -151,7 +151,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return EnumNivel
      */
     public EnumFormatoFirma getEnumNivel() {
-	return EnumNivel;
+        return EnumNivel;
     }
 
     /**
@@ -160,7 +160,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param enumNivel
      */
     public void setEnumNivel(EnumFormatoFirma enumNivel) {
-	EnumNivel = enumNivel;
+        EnumNivel = enumNivel;
     }
 
     /**
@@ -169,7 +169,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return URI
      */
     public URI getBaseURI() {
-	return baseURI;
+        return baseURI;
     }
 
     /**
@@ -178,7 +178,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param URI
      */
     public void setBaseURI(URI baseURI) {
-	this.baseURI = baseURI;
+        this.baseURI = baseURI;
     }
 
     /**
@@ -187,14 +187,14 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return ArrayList<String> .- ArrayList de URIs
      */
     public ArrayList<String> getFirmados() {
-	return firmados;
+        return firmados;
     }
 
     /**
      * Establece la lista de nodos (externos a la firma) firmados
      */
     public void setFirmados(ArrayList<String> firmados) {
-	this.firmados = firmados;
+        this.firmados = firmados;
     }
 
     /**
@@ -203,7 +203,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return ArrayList<ResultadoValidacion>
      */
     public ArrayList<ResultadoValidacion> getContrafirmadoPor() {
-	return contrafirmadoPor;
+        return contrafirmadoPor;
     }
 
     /**
@@ -212,7 +212,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param ArrayList<ResultadoValidacion>
      */
     public void setContrafirmadoPor(ArrayList<ResultadoValidacion> contrafirmadoPor) {
-	this.contrafirmadoPor = contrafirmadoPor;
+        this.contrafirmadoPor = contrafirmadoPor;
     }
 
     /**
@@ -222,8 +222,8 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param ResultadoValidacion
      */
     public void addContrafirmadoPor(ResultadoValidacion contrafirmadoPor) {
-	if (contrafirmadoPor != null)
-	    this.contrafirmadoPor.add(contrafirmadoPor);
+        if (contrafirmadoPor != null)
+            this.contrafirmadoPor.add(contrafirmadoPor);
     }
 
     /**
@@ -232,7 +232,7 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @return Estado del certificado de firma, o <code>null</code> si no se ha obtenido.
      */
     public ICertStatus getCertStatus() {
-	return certStatus;
+        return certStatus;
     }
 
     /**
@@ -241,14 +241,14 @@ public class ResultadoValidacion { // implements ConstantesXADES
      * @param certStatus Estado del certificado firmante, <code>null</code> si no se ha obtenido
      */
     public void setCertStatus(ICertStatus certStatus) {
-	this.certStatus = certStatus;
+        this.certStatus = certStatus;
     }
 
     public XMLSignature getXmlSignature() {
-	return xmlSignature;
+        return xmlSignature;
     }
 
     public void setXmlSignature(XMLSignature xmlSignature) {
-	this.xmlSignature = xmlSignature;
+        this.xmlSignature = xmlSignature;
     }
 }

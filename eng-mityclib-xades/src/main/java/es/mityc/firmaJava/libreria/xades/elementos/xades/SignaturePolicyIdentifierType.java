@@ -34,15 +34,15 @@ public class SignaturePolicyIdentifierType extends AbstractXADESElement {
      * @param schema
      */
     public SignaturePolicyIdentifierType(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     public SignaturePolicyIdentifierType(XAdESSchemas schema, boolean isImplied) {
-	super(schema);
-	if (isImplied)
-	    signaturePolicyImplied = new SignaturePolicyImplied(schema);
-	else
-	    signaturePolicyId = new SignaturePolicyId(schema);
+        super(schema);
+        if (isImplied)
+            signaturePolicyImplied = new SignaturePolicyImplied(schema);
+        else
+            signaturePolicyId = new SignaturePolicyId(schema);
     }
 
     /**
@@ -51,8 +51,8 @@ public class SignaturePolicyIdentifierType extends AbstractXADESElement {
      */
     @Override
     public void addContent(Element element, String namespaceXAdES, String namespaceXDsig)
-	    throws InvalidInfoNodeException {
-	super.addContent(element, namespaceXAdES, namespaceXDsig);
+            throws InvalidInfoNodeException {
+        super.addContent(element, namespaceXAdES, namespaceXDsig);
     }
 
     /**
@@ -60,16 +60,16 @@ public class SignaturePolicyIdentifierType extends AbstractXADESElement {
      */
     @Override
     protected void addContent(Element element) throws InvalidInfoNodeException {
-	if (isImplied()) {
-	    element.appendChild(signaturePolicyImplied.createElement(element.getOwnerDocument(),
-		    namespaceXAdES));
-	} else {
-	    if (signaturePolicyId == null)
-		throw new InvalidInfoNodeException(
-			"Informacion insuficiente para escribir nodo SignaturePolicyId");
-	    element.appendChild(signaturePolicyId.createElement(element.getOwnerDocument(),
-		    namespaceXDsig, namespaceXAdES));
-	}
+        if (isImplied()) {
+            element.appendChild(signaturePolicyImplied.createElement(element.getOwnerDocument(),
+                    namespaceXAdES));
+        } else {
+            if (signaturePolicyId == null)
+                throw new InvalidInfoNodeException(
+                        "Informacion insuficiente para escribir nodo SignaturePolicyId");
+            element.appendChild(signaturePolicyId.createElement(element.getOwnerDocument(),
+                    namespaceXDsig, namespaceXAdES));
+        }
     }
 
     /**
@@ -77,19 +77,19 @@ public class SignaturePolicyIdentifierType extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof SignaturePolicyIdentifierType) {
-	    SignaturePolicyIdentifierType spit = (SignaturePolicyIdentifierType) obj;
-	    if (isImplied()) {
-		if (spit.isImplied())
-		    return true;
-	    } else {
-		if ((signaturePolicyId == null) || (spit.isImplied()))
-		    return false;
-		else if (signaturePolicyId.equals(spit.signaturePolicyId))
-		    return true;
-	    }
-	}
-	return false;
+        if (obj instanceof SignaturePolicyIdentifierType) {
+            SignaturePolicyIdentifierType spit = (SignaturePolicyIdentifierType) obj;
+            if (isImplied()) {
+                if (spit.isImplied())
+                    return true;
+            } else {
+                if ((signaturePolicyId == null) || (spit.isImplied()))
+                    return false;
+                else if (signaturePolicyId.equals(spit.signaturePolicyId))
+                    return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -97,55 +97,55 @@ public class SignaturePolicyIdentifierType extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	// Nodo SignaturePolicyImplied o SignaturePolicyId
-	Node node = getFirstNonvoidNode(element);
-	SignaturePolicyImplied spi = new SignaturePolicyImplied(schema);
-	if (spi.isThisNode(node)) {
-	    spi.load((Element) node);
-	    signaturePolicyImplied = spi;
-	} else {
-	    SignaturePolicyId spid = new SignaturePolicyId(schema);
-	    spid.load((Element) node);
-	    signaturePolicyId = spid;
-	}
-	if (UtilidadTratarNodo.getNextElementSibling(node, true) != null)
-	    throw new InvalidInfoNodeException(
-		    "Nodo SignaturePolicyIdentifierType debe tener un único hijo");
+        // Nodo SignaturePolicyImplied o SignaturePolicyId
+        Node node = getFirstNonvoidNode(element);
+        SignaturePolicyImplied spi = new SignaturePolicyImplied(schema);
+        if (spi.isThisNode(node)) {
+            spi.load((Element) node);
+            signaturePolicyImplied = spi;
+        } else {
+            SignaturePolicyId spid = new SignaturePolicyId(schema);
+            spid.load((Element) node);
+            signaturePolicyId = spid;
+        }
+        if (UtilidadTratarNodo.getNextElementSibling(node, true) != null)
+            throw new InvalidInfoNodeException(
+                    "Nodo SignaturePolicyIdentifierType debe tener un único hijo");
     }
 
     /**
      * @return the signaturePolicyImplied
      */
     public SignaturePolicyImplied getSignaturePolicyImplied() {
-	return signaturePolicyImplied;
+        return signaturePolicyImplied;
     }
 
     /**
      * @param signaturePolicyImplied the signaturePolicyImplied to set
      */
     public void setSignaturePolicyImplied() {
-	this.signaturePolicyImplied = new SignaturePolicyImplied(schema);
-	this.signaturePolicyId = null;
+        this.signaturePolicyImplied = new SignaturePolicyImplied(schema);
+        this.signaturePolicyId = null;
     }
 
     /**
      * @return the signaturePolicyId
      */
     public SignaturePolicyId getSignaturePolicyId() {
-	return signaturePolicyId;
+        return signaturePolicyId;
     }
 
     /**
      * @param signaturePolicyId the signaturePolicyId to set
      */
     public void setSignaturePolicyId(SignaturePolicyId signaturePolicyId) {
-	this.signaturePolicyId = signaturePolicyId;
-	this.signaturePolicyId = null;
+        this.signaturePolicyId = signaturePolicyId;
+        this.signaturePolicyId = null;
     }
 
     public boolean isImplied() {
-	if (signaturePolicyImplied != null)
-	    return true;
-	return false;
+        if (signaturePolicyImplied != null)
+            return true;
+        return false;
     }
 }

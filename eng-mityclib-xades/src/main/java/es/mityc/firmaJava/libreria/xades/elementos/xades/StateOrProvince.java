@@ -23,7 +23,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 public class StateOrProvince extends AbstractXadesStringElement {
 
     public StateOrProvince(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.XADES_TAG_STATE_OR_PROVINCE, data);
+        super(schema, ConstantesXADES.XADES_TAG_STATE_OR_PROVINCE, data);
     }
 
     /**
@@ -32,7 +32,7 @@ public class StateOrProvince extends AbstractXadesStringElement {
      * @param schema
      */
     public StateOrProvince(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_STATE_OR_PROVINCE);
+        super(schema, ConstantesXADES.XADES_TAG_STATE_OR_PROVINCE);
     }
 
 }

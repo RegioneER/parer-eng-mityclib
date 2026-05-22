@@ -48,15 +48,15 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
     private IPrivateData digester;
 
     public UnknownExternObjectToSign(String name, IPrivateData privateDataDigester) {
-	this.name = name;
-	this.digester = privateDataDigester;
+        this.name = name;
+        this.digester = privateDataDigester;
     }
 
     /**
      * @return the name
      */
     public String getName() {
-	return name;
+        return name;
     }
 
     /**
@@ -64,7 +64,7 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      * @return
      */
     public IPrivateData getDigester() {
-	return digester;
+        return digester;
     }
 
     /**
@@ -72,7 +72,7 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      */
     @Override
     public void addTransform(Transform t) {
-	throw new IllegalArgumentException(I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_10));
+        throw new IllegalArgumentException(I18N.getLocalMessage(ConstantsXAdES.I18N_SIGN_10));
     }
 
     /**
@@ -80,7 +80,7 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      */
     @Override
     public String getReferenceURI() {
-	return name;
+        return name;
     }
 
     /**
@@ -88,6 +88,6 @@ public class UnknownExternObjectToSign extends AbstractObjectToSign {
      */
     @Override
     public MITyCResourceResolver getResolver() {
-	return new ResolverPrivateData(getDigester());
+        return new ResolverPrivateData(getDigester());
     }
 }

@@ -41,9 +41,9 @@ public class TSPAlgoritmos {
      * @return Lista de algoritmos
      */
     public static Set<String> getPermitidos() {
-	Set<String> permitidos = new HashSet<String>(Arrays.asList(getValoresPermitidos()));
+        Set<String> permitidos = new HashSet<String>(Arrays.asList(getValoresPermitidos()));
 
-	return permitidos;
+        return permitidos;
     }
 
     /**
@@ -56,21 +56,21 @@ public class TSPAlgoritmos {
      * @return Nopmbre del algoritmo, o el OID proveído en caso de no poder ser resuelto
      */
     public static String getAlgName(final String oid) {
-	if (TSPAlgorithms.SHA1.equals(oid)) {
-	    return ConstantesTSA.SHA1;
-	} else if (TSPAlgorithms.SHA256.equals(oid)) {
-	    return ConstantesTSA.SHA2;
-	} else if (TSPAlgorithms.SHA224.equals(oid)) {
-	    return ConstantesTSA.SHA224;
-	} else if (TSPAlgorithms.SHA256.equals(oid)) {
-	    return ConstantesTSA.SHA256;
-	} else if (TSPAlgorithms.SHA384.equals(oid)) {
-	    return ConstantesTSA.SHA384;
-	} else if (TSPAlgorithms.SHA512.equals(oid)) {
-	    return ConstantesTSA.SHA512;
-	}
+        if (TSPAlgorithms.SHA1.equals(oid)) {
+            return ConstantesTSA.SHA1;
+        } else if (TSPAlgorithms.SHA256.equals(oid)) {
+            return ConstantesTSA.SHA2;
+        } else if (TSPAlgorithms.SHA224.equals(oid)) {
+            return ConstantesTSA.SHA224;
+        } else if (TSPAlgorithms.SHA256.equals(oid)) {
+            return ConstantesTSA.SHA256;
+        } else if (TSPAlgorithms.SHA384.equals(oid)) {
+            return ConstantesTSA.SHA384;
+        } else if (TSPAlgorithms.SHA512.equals(oid)) {
+            return ConstantesTSA.SHA512;
+        }
 
-	return oid;
+        return oid;
     }
 
     /**
@@ -83,25 +83,25 @@ public class TSPAlgoritmos {
      * @return El OID del algoritmo, o <code>null</code> si no pudo resolverse
      */
     public static String getOID(final String algoritmo) {
-	Set<String> permitidos = new HashSet<String>(Arrays.asList(getValoresPermitidos()));
+        Set<String> permitidos = new HashSet<String>(Arrays.asList(getValoresPermitidos()));
 
-	if (permitidos.contains(algoritmo)) {
-	    if (ConstantesTSA.SHA1.equals(algoritmo)) {
-		return TSPAlgorithms.SHA1.getId();
-	    } else if (ConstantesTSA.SHA2.equals(algoritmo)) {
-		return TSPAlgorithms.SHA256.getId();
-	    } else if (ConstantesTSA.SHA224.equals(algoritmo)) {
-		return TSPAlgorithms.SHA224.getId();
-	    } else if (ConstantesTSA.SHA256.equals(algoritmo)) {
-		return TSPAlgorithms.SHA256.getId();
-	    } else if (ConstantesTSA.SHA384.equals(algoritmo)) {
-		return TSPAlgorithms.SHA384.getId();
-	    } else if (ConstantesTSA.SHA512.equals(algoritmo)) {
-		return TSPAlgorithms.SHA512.getId();
-	    }
-	}
+        if (permitidos.contains(algoritmo)) {
+            if (ConstantesTSA.SHA1.equals(algoritmo)) {
+                return TSPAlgorithms.SHA1.getId();
+            } else if (ConstantesTSA.SHA2.equals(algoritmo)) {
+                return TSPAlgorithms.SHA256.getId();
+            } else if (ConstantesTSA.SHA224.equals(algoritmo)) {
+                return TSPAlgorithms.SHA224.getId();
+            } else if (ConstantesTSA.SHA256.equals(algoritmo)) {
+                return TSPAlgorithms.SHA256.getId();
+            } else if (ConstantesTSA.SHA384.equals(algoritmo)) {
+                return TSPAlgorithms.SHA384.getId();
+            } else if (ConstantesTSA.SHA512.equals(algoritmo)) {
+                return TSPAlgorithms.SHA512.getId();
+            }
+        }
 
-	return null;
+        return null;
     }
 
     /**
@@ -111,14 +111,14 @@ public class TSPAlgoritmos {
      */
     private static HashMap<String, String> algoritmosVSoids = null;
     static {
-	algoritmosVSoids = new HashMap<String, String>();
+        algoritmosVSoids = new HashMap<String, String>();
 
-	algoritmosVSoids.put(TSPAlgorithms.SHA1.getId(), ConstantesTSA.SHA1);
-	algoritmosVSoids.put(TSPAlgorithms.SHA224.getId(), ConstantesTSA.SHA224);
-	algoritmosVSoids.put(TSPAlgorithms.SHA256.getId(), ConstantesTSA.SHA256);
-	algoritmosVSoids.put(TSPAlgorithms.SHA384.getId(), ConstantesTSA.SHA384);
-	algoritmosVSoids.put(TSPAlgorithms.SHA512.getId(), ConstantesTSA.SHA512);
-	algoritmosVSoids.put(TSPAlgorithms.MD5.getId(), ConstantesTSA.MD5);
+        algoritmosVSoids.put(TSPAlgorithms.SHA1.getId(), ConstantesTSA.SHA1);
+        algoritmosVSoids.put(TSPAlgorithms.SHA224.getId(), ConstantesTSA.SHA224);
+        algoritmosVSoids.put(TSPAlgorithms.SHA256.getId(), ConstantesTSA.SHA256);
+        algoritmosVSoids.put(TSPAlgorithms.SHA384.getId(), ConstantesTSA.SHA384);
+        algoritmosVSoids.put(TSPAlgorithms.SHA512.getId(), ConstantesTSA.SHA512);
+        algoritmosVSoids.put(TSPAlgorithms.MD5.getId(), ConstantesTSA.MD5);
     }
 
     /**
@@ -130,16 +130,16 @@ public class TSPAlgoritmos {
      *         de digest asociado al OID indicado.
      */
     public static MessageDigest getDigest(final String oid) {
-	String algName = algoritmosVSoids.get(oid);
-	if (algName == null) {
-	    return null;
-	}
-	try {
-	    MessageDigest md = MessageDigest.getInstance(algName);
-	    return md;
-	} catch (NoSuchAlgorithmException e) {
-	    return null;
-	}
+        String algName = algoritmosVSoids.get(oid);
+        if (algName == null) {
+            return null;
+        }
+        try {
+            MessageDigest md = MessageDigest.getInstance(algName);
+            return md;
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
     }
 
     /**
@@ -150,14 +150,14 @@ public class TSPAlgoritmos {
      * @return Array de Strings con os valores permitidos
      */
     public static String[] getValoresPermitidos() {
-	String[] valoresPermitidos = new String[6];
-	valoresPermitidos[0] = ConstantesTSA.SHA1;
-	valoresPermitidos[1] = ConstantesTSA.SHA2;
-	valoresPermitidos[2] = ConstantesTSA.SHA224;
-	valoresPermitidos[3] = ConstantesTSA.SHA256;
-	valoresPermitidos[4] = ConstantesTSA.SHA384;
-	valoresPermitidos[5] = ConstantesTSA.SHA512;
+        String[] valoresPermitidos = new String[6];
+        valoresPermitidos[0] = ConstantesTSA.SHA1;
+        valoresPermitidos[1] = ConstantesTSA.SHA2;
+        valoresPermitidos[2] = ConstantesTSA.SHA224;
+        valoresPermitidos[3] = ConstantesTSA.SHA256;
+        valoresPermitidos[4] = ConstantesTSA.SHA384;
+        valoresPermitidos[5] = ConstantesTSA.SHA512;
 
-	return valoresPermitidos;
+        return valoresPermitidos;
     }
 }

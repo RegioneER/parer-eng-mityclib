@@ -32,27 +32,27 @@ public class CertIDType extends AbstractXADESElement {
     private IssuerSerial issuerSerial;
 
     public CertIDType(XAdESSchemas schema) {
-	super(schema);
+        super(schema);
     }
 
     public CertIDType(XAdESSchemas schema, CertDigest digest, IssuerSerial issuerSerial) {
-	super(schema);
-	this.digest = digest;
-	this.issuerSerial = issuerSerial;
+        super(schema);
+        this.digest = digest;
+        this.issuerSerial = issuerSerial;
     }
 
     public CertIDType(XAdESSchemas schema, String digestMethod, String digestValue,
-	    String issuerName, BigInteger serialNumber) {
-	super(schema);
-	this.digest = new CertDigest(schema, digestMethod, digestValue);
-	this.issuerSerial = new IssuerSerial(schema, issuerName, serialNumber);
+            String issuerName, BigInteger serialNumber) {
+        super(schema);
+        this.digest = new CertDigest(schema, digestMethod, digestValue);
+        this.issuerSerial = new IssuerSerial(schema, issuerName, serialNumber);
     }
 
     public CertIDType(XAdESSchemas schema, String digestMethod, byte[] digestValue,
-	    String issuerName, BigInteger serialNumber) throws InvalidInfoNodeException {
-	super(schema);
-	this.digest = new CertDigest(schema, digestMethod, digestValue);
-	this.issuerSerial = new IssuerSerial(schema, issuerName, serialNumber);
+            String issuerName, BigInteger serialNumber) throws InvalidInfoNodeException {
+        super(schema);
+        this.digest = new CertDigest(schema, digestMethod, digestValue);
+        this.issuerSerial = new IssuerSerial(schema, issuerName, serialNumber);
     }
 
     /**
@@ -60,17 +60,17 @@ public class CertIDType extends AbstractXADESElement {
      */
     @Override
     public boolean equals(Object obj) {
-	if (obj instanceof CertIDType) {
-	    CertIDType cit = (CertIDType) obj;
-	    if ((digest == null) || (issuerSerial == null)) {
-		return false;
-	    }
-	    if (!digest.equals(cit.digest))
-		return false;
-	    if (issuerSerial.equals(cit.issuerSerial))
-		return true;
-	}
-	return false;
+        if (obj instanceof CertIDType) {
+            CertIDType cit = (CertIDType) obj;
+            if ((digest == null) || (issuerSerial == null)) {
+                return false;
+            }
+            if (!digest.equals(cit.digest))
+                return false;
+            if (issuerSerial.equals(cit.issuerSerial))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -78,53 +78,53 @@ public class CertIDType extends AbstractXADESElement {
      */
     @Override
     public void load(Element element) throws InvalidInfoNodeException {
-	// TODO: tener en cuenta el namespace XAdES del elemento cargado
+        // TODO: tener en cuenta el namespace XAdES del elemento cargado
 
-	Node node = getFirstNonvoidNode(element);
+        Node node = getFirstNonvoidNode(element);
 
-	CertDigest digest = new CertDigest(getSchema());
-	if (!digest.isThisNode(node)) {
-	    throw new InvalidInfoNodeException("Se esperaba nodo CertDigest en CertIDType");
-	}
-	digest.load((Element) node);
+        CertDigest digest = new CertDigest(getSchema());
+        if (!digest.isThisNode(node)) {
+            throw new InvalidInfoNodeException("Se esperaba nodo CertDigest en CertIDType");
+        }
+        digest.load((Element) node);
 
-	node = getNextNonvoidNode(node);
-	IssuerSerial issuerSerial = new IssuerSerial(getSchema());
-	if (!issuerSerial.isThisNode(node)) {
-	    throw new InvalidInfoNodeException("Se esperaba nodo IssuerSerial en CertIDType");
-	}
-	issuerSerial.load((Element) node);
+        node = getNextNonvoidNode(node);
+        IssuerSerial issuerSerial = new IssuerSerial(getSchema());
+        if (!issuerSerial.isThisNode(node)) {
+            throw new InvalidInfoNodeException("Se esperaba nodo IssuerSerial en CertIDType");
+        }
+        issuerSerial.load((Element) node);
 
-	this.digest = digest;
-	this.issuerSerial = issuerSerial;
+        this.digest = digest;
+        this.issuerSerial = issuerSerial;
     }
 
     public void setDigest(CertDigest digest) {
-	this.digest = digest;
+        this.digest = digest;
     }
 
     public void setDigest(String digestMethod, String digestValue) {
-	this.digest = new CertDigest(schema, digestMethod, digestValue);
+        this.digest = new CertDigest(schema, digestMethod, digestValue);
     }
 
     public void setDigest(String digestMethod, byte[] digestValue) throws InvalidInfoNodeException {
-	this.digest = new CertDigest(schema, digestMethod, digestValue);
+        this.digest = new CertDigest(schema, digestMethod, digestValue);
     }
 
     public CertDigest getCertDigest() {
-	return this.digest;
+        return this.digest;
     }
 
     public void setIssuerSerial(String issuerName, BigInteger serialNumber) {
-	this.issuerSerial = new IssuerSerial(schema, issuerName, serialNumber);
+        this.issuerSerial = new IssuerSerial(schema, issuerName, serialNumber);
     }
 
     public void setIssuerSerial(IssuerSerial issuerSerial) {
-	this.issuerSerial = issuerSerial;
+        this.issuerSerial = issuerSerial;
     }
 
     public IssuerSerial getIssuerSerial() {
-	return this.issuerSerial;
+        return this.issuerSerial;
     }
 
 }

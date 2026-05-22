@@ -31,7 +31,7 @@ public class Encoding extends AbstractXadesURIElement {
      * @param data
      */
     public Encoding(XAdESSchemas schema, URI data) {
-	super(schema, ConstantesXADES.XADES_TAG_ENCODING, data);
+        super(schema, ConstantesXADES.XADES_TAG_ENCODING, data);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Encoding extends AbstractXadesURIElement {
      * @param nameElement
      */
     public Encoding(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.XADES_TAG_ENCODING);
+        super(schema, ConstantesXADES.XADES_TAG_ENCODING);
     }
 
 }

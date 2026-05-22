@@ -28,11 +28,11 @@ public class X509SerialNumber extends AbstractXDsigIntegerElement {
      * @param data
      */
     public X509SerialNumber(BigInteger data) {
-	super(ConstantesXADES.X_509_SERIAL_NUMBER, data);
+        super(ConstantesXADES.X_509_SERIAL_NUMBER, data);
     }
 
     public X509SerialNumber() {
-	super(ConstantesXADES.X_509_SERIAL_NUMBER);
+        super(ConstantesXADES.X_509_SERIAL_NUMBER);
     }
 
 }

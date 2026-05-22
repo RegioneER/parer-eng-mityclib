@@ -24,7 +24,7 @@ import es.mityc.firmaJava.libreria.xades.XAdESSchemas;
 public class Description extends AbstractXadesStringElement {
 
     public Description(XAdESSchemas schema, String data) {
-	super(schema, ConstantesXADES.DESCRIPTION, data);
+        super(schema, ConstantesXADES.DESCRIPTION, data);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Description extends AbstractXadesStringElement {
      * @param schema
      */
     public Description(XAdESSchemas schema) {
-	super(schema, ConstantesXADES.DESCRIPTION);
+        super(schema, ConstantesXADES.DESCRIPTION);
     }
 
 }
